@@ -1,0 +1,142 @@
+{
+ "trial": 4,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "flat45x30",
+   "a_mm": -88.81688941372737,
+   "b_mm": -195.5852539506615,
+   "yaw_deg": 48.723538850327806
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 4.62,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.28,
+   "DESCEND"
+  ],
+  [
+   1.82,
+   "CLOSE"
+  ],
+  [
+   2.52,
+   "RELEASE"
+  ],
+  [
+   3.12,
+   "RETURN"
+  ],
+  [
+   4.62,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -90.0,
+    "b": -195.5,
+    "theta": 137.62630238332594,
+    "width": 33.5,
+    "std": 0.0
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.56,
+   "name": "freeze",
+   "data": {
+    "est": "(-90.0, -195.5, 137.67842597792205)"
+   }
+  },
+  {
+   "t": 1.28,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.82,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.52,
+   "name": "close_done",
+   "data": {
+    "gripper": 4.217698543388079e-05,
+    "held": false,
+    "err_meas": 1.1312339880192483
+   }
+  },
+  {
+   "t": 2.52,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.52,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.12,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 4.62,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 36.0,
+  "reject_wide": 0.0,
+  "reject_other": 29.0,
+  "n_ok_dets": 13.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "flat45x30": 13.93
+  },
+  "longest_lift_s": {
+   "flat45x30": 0.0
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "flat45x30.a",
+  "flat45x30.b",
+  "flat45x30.z",
+  "flat45x30.yaw"
+ ],
+ "wall_s": 18.71,
+ "renders": 138,
+ "render_wall_s": 9.23
+}

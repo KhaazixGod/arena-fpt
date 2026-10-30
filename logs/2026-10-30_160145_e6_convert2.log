@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/home/pread/Projects/dir1_tools/arena/to_lerobot.py", line 15, in <module>
+    from lerobot.datasets.lerobot_dataset import LeRobotDataset
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/datasets/__init__.py", line 23, in <module>
+    from .aggregate import aggregate_datasets
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/datasets/aggregate.py", line 32, in <module>
+    from .dataset_metadata import LeRobotDatasetMetadata
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/datasets/dataset_metadata.py", line 37, in <module>
+    from .depth_utils import MM_PER_METRE
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/datasets/depth_utils.py", line 41, in <module>
+    from .pyav_utils import write_u16_plane
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/datasets/pyav_utils.py", line 73, in <module>
+    def _get_codec_options_by_name(vcodec: str) -> dict[str, av.option.Option]:
+                                                             ^^^^^^^^^
+AttributeError: module 'av' has no attribute 'option'

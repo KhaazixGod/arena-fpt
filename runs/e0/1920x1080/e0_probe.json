@@ -1,0 +1,70 @@
+{
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "args": {
+    "out": "runs/e0/1920x1080",
+    "width": 1920,
+    "height": 1080,
+    "physics_hz": 240.0,
+    "steps": 600,
+    "frames": 120,
+    "enable_ext": ""
+  },
+  "vram_mib_before_app": 960,
+  "app_start_s": 17.9,
+  "isaacsim": "6.0.0.1",
+  "numpy_in_isaac_python": "2.3.1",
+  "vram_mib_after_app": 2623,
+  "extensions": {
+    "isaacsim.asset.gen.conveyor": {
+      "enabled_at_start": false,
+      "enabled_now": false
+    },
+    "isaacsim.ros2.bridge": {
+      "enabled_at_start": false,
+      "enabled_now": false
+    },
+    "omni.replicator.core": {
+      "enabled_at_start": true,
+      "enabled_now": true
+    },
+    "isaacsim.sensors.camera": {
+      "enabled_at_start": true,
+      "enabled_now": true
+    },
+    "omni.physx": {
+      "enabled_at_start": true,
+      "enabled_now": true
+    },
+    "isaacsim.core.api": {
+      "enabled_at_start": true,
+      "enabled_now": true
+    }
+  },
+  "frame": {
+    "shape": [
+      1080,
+      1920,
+      4
+    ],
+    "dtype": "uint8",
+    "orchestrator_step_plus_readback_ms": {
+      "p50": 149.3,
+      "p95": 155.5,
+      "n": 120
+    },
+    "mean_pixel": [
+      127.2,
+      126.7,
+      126.7
+    ]
+  },
+  "vram_mib_after_render": 3467,
+  "physics_direct": {
+    "physx_simulation_interface": true,
+    "simulate_fetch_ms_per_step": 0.655,
+    "note": "simulate()/fetch_results() called directly while the timeline is playing; may not be the lockstep path (to confirm in E2)"
+  },
+  "cube_z_after_30_updates": 0.02,
+  "vram_mib_peak_seen": 3596
+}

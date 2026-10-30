@@ -1,0 +1,24 @@
+#usda 1.0
+(
+    "arena: official so101_new_calib.urdf sha256 3a65d2d3, converted 2026-10-29"
+    customLayerData = {
+        string creator = "URDF USD Converter v0.1.2"
+    }
+    defaultPrim = "so101_new_calib"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "so101_new_calib" (
+    prepend apiSchemas = ["GeomModelAPI"]
+    assetInfo = {
+        string name = "so101_new_calib"
+    }
+    kind = "component"
+    prepend payload = @./Payload/Contents.usda@
+)
+{
+    float3[] extentsHint = [(-0.030982872, -0.055462565, -0.0024002623), (0.39863437, 0.05546275, 0.2657224), (3.4028235e38, 3.4028235e38, 3.4028235e38), (-3.4028235e38, -3.4028235e38, -3.4028235e38), (3.4028235e38, 3.4028235e38, 3.4028235e38), (-3.4028235e38, -3.4028235e38, -3.4028235e38), (-0.030982872, -0.055462565, -0.0024002623), (0.39863437, 0.05546275, 0.2657224)]
+}
+

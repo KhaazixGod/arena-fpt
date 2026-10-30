@@ -1,0 +1,142 @@
+{
+ "trial": 21,
+ "kind": "belt",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cyl35",
+   "a_mm": -190.0,
+   "b_mm": -151.1043829479758,
+   "yaw_deg": 102.6925865408043
+  }
+ ],
+ "speed_mm_s": 38.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 4.7,
+ "phases": [
+  [
+   0.38,
+   "APPROACH"
+  ],
+  [
+   1.36,
+   "DESCEND"
+  ],
+  [
+   1.9,
+   "CLOSE"
+  ],
+  [
+   2.6,
+   "RELEASE"
+  ],
+  [
+   3.2,
+   "RETURN"
+  ],
+  [
+   4.7,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.38,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -197.22027338935968,
+    "b": -149.0,
+    "theta": 77.81371096909263,
+    "width": 36.0,
+    "std": 0.25226408102176306
+   }
+  },
+  {
+   "t": 0.38,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.72,
+   "name": "freeze",
+   "data": {
+    "est": "(-196.90566343236145, -149.0, 77.78848025462355)"
+   }
+  },
+  {
+   "t": 1.36,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.9,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.6,
+   "name": "close_done",
+   "data": {
+    "gripper": -2.8401704600288338e-06,
+    "held": false,
+    "err_meas": 3.7029668362851376
+   }
+  },
+  {
+   "t": 2.6,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.6,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.2,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 4.7,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 38.0,
+  "reject_wide": 0.0,
+  "reject_other": 30.0,
+  "n_ok_dets": 11.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cyl35": 7.07
+  },
+  "longest_lift_s": {
+   "cyl35": 0.0
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cyl35.a",
+  "cyl35.b",
+  "cyl35.z",
+  "cyl35.yaw"
+ ],
+ "wall_s": 20.36,
+ "renders": 141,
+ "render_wall_s": 10.35
+}

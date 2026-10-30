@@ -1,0 +1,175 @@
+{
+ "trial": 8,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "bar50x25",
+   "a_mm": -52.200612280141925,
+   "b_mm": -170.39508495320138,
+   "yaw_deg": 124.75305788489493
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "picked_hold_complete",
+ "finished": true,
+ "t_end_s": 8.22,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.24,
+   "DESCEND"
+  ],
+  [
+   1.78,
+   "CLOSE"
+  ],
+  [
+   2.48,
+   "LIFT"
+  ],
+  [
+   3.08,
+   "MOVE_HOLD"
+  ],
+  [
+   4.08,
+   "HOLD"
+  ],
+  [
+   6.08,
+   "RELEASE"
+  ],
+  [
+   6.7,
+   "RETURN"
+  ],
+  [
+   8.22,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -53.5,
+    "b": -170.0,
+    "theta": 34.91844874800528,
+    "width": 28.25,
+    "std": 0.8498365855987975
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.72,
+   "name": "freeze",
+   "data": {
+    "est": "(-53.75, -169.25, 34.96105695643236)"
+   }
+  },
+  {
+   "t": 1.24,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.78,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.48,
+   "name": "close_done",
+   "data": {
+    "gripper": 23.580152619135728,
+    "held": true,
+    "err_meas": 0.03743758867928228
+   }
+  },
+  {
+   "t": 2.48,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 3.08,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 4.08,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 4.08,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 6.08,
+   "name": "hold_done",
+   "data": {
+    "gripper": 16.667788511829123,
+    "lost": false
+   }
+  },
+  {
+   "t": 6.08,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 6.7,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 8.22,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 35.0,
+  "reject_wide": 0.0,
+  "reject_other": 22.0,
+  "n_ok_dets": 18.0
+ },
+ "gt": {
+  "success": true,
+  "success_t": 4.74,
+  "success_obj": "bar50x25",
+  "max_lift_mm": {
+   "bar50x25": 47.28
+  },
+  "longest_lift_s": {
+   "bar50x25": 3.44
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "bar50x25.a",
+  "bar50x25.b",
+  "bar50x25.z",
+  "bar50x25.yaw"
+ ],
+ "wall_s": 32.97,
+ "renders": 246,
+ "render_wall_s": 16.98
+}

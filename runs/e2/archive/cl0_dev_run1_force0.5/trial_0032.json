@@ -1,0 +1,115 @@
+{
+ "trial": 32,
+ "kind": "belt",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cube35",
+   "a_mm": -190.0,
+   "b_mm": -228.7871224652183,
+   "yaw_deg": 92.68856058849096
+  }
+ ],
+ "speed_mm_s": 38.0,
+ "outcome": "ik_fail",
+ "finished": true,
+ "t_end_s": 3.82,
+ "phases": [
+  [
+   0.3,
+   "APPROACH"
+  ],
+  [
+   1.7,
+   "RELEASE"
+  ],
+  [
+   2.32,
+   "RETURN"
+  ],
+  [
+   3.82,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.3,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -192.22027338935968,
+    "b": -230.0,
+    "theta": 96.50099222443949,
+    "width": 38.5,
+    "std": 0.245379901537903
+   }
+  },
+  {
+   "t": 0.3,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.82,
+   "name": "freeze",
+   "data": {
+    "est": "(-192.20613139613022, -229.75, 97.41257549569862)"
+   }
+  },
+  {
+   "t": 1.7,
+   "name": "abort",
+   "data": {
+    "reason": "ik_fail"
+   }
+  },
+  {
+   "t": 1.7,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 2.32,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 3.82,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 49.0,
+  "reject_wide": 0.0,
+  "reject_other": 41.0,
+  "n_ok_dets": 16.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cube35": 0.0
+  },
+  "longest_lift_s": {
+   "cube35": 0.0
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cube35.a",
+  "cube35.b",
+  "cube35.z",
+  "cube35.yaw"
+ ],
+ "wall_s": 17.33,
+ "renders": 114,
+ "render_wall_s": 8.58
+}

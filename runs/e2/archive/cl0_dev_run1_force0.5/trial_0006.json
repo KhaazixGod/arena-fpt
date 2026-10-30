@@ -1,0 +1,108 @@
+{
+ "trial": 6,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cube35",
+   "a_mm": 59.49695924606718,
+   "b_mm": -164.31967364444455,
+   "yaw_deg": 136.1951280867487
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "ik_fail",
+ "finished": true,
+ "t_end_s": 3.6,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.5,
+   "RELEASE"
+  ],
+  [
+   2.1,
+   "RETURN"
+  ],
+  [
+   3.6,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": 61.5,
+    "b": -164.0,
+    "theta": 90.0,
+    "width": 51.5,
+    "std": 0.0
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 1.5,
+   "name": "abort",
+   "data": {
+    "reason": "ik_fail"
+   }
+  },
+  {
+   "t": 1.5,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 2.1,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 3.6,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 43.0,
+  "reject_wide": 0.0,
+  "reject_other": 0.0,
+  "n_ok_dets": 43.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cube35": 0.0
+  },
+  "longest_lift_s": {
+   "cube35": 0.0
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cube35.a",
+  "cube35.b",
+  "cube35.z",
+  "cube35.yaw"
+ ],
+ "wall_s": 15.61,
+ "renders": 108,
+ "render_wall_s": 7.09
+}

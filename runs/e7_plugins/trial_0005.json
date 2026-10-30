@@ -1,0 +1,132 @@
+{
+ "trial_id": 5,
+ "method": "arena.methods.examples.blob:make_method",
+ "cell": "dev_C0",
+ "arrangement_id": "dev_C0_001",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl28",
+   "a_mm": -150.0,
+   "b_mm": -146.9,
+   "yaw_deg": 145.8
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "timing",
+  "target": "cyl28",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl28": 0.0
+   },
+   "max_lift_target_mm": 0.0,
+   "select_err_mm": 6.9,
+   "estimate_err_mm": 6.7
+  }
+ },
+ "outcome": "late",
+ "finished": true,
+ "t_end_s": 3.24,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.12,
+   "RELEASE"
+  ],
+  [
+   1.74,
+   "RETURN"
+  ],
+  [
+   3.24,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -156.589034740126,
+    "b": -144.99853489321353,
+    "theta": 78.26608914025421,
+    "width": 29.946113753140786,
+    "std": 0.28224352264517377
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.46,
+   "name": "freeze",
+   "data": {
+    "est": "(-156.39933391802538, -144.98495797729248, 72.45351626862333)"
+   }
+  },
+  {
+   "t": 1.12,
+   "name": "abort",
+   "data": {
+    "reason": "late: v\u1eadt s\u1eafp ra kh\u1ecfi v\u00f9ng v\u1edbi t\u1edbi tr\u01b0\u1edbc khi nh\u1ea5c xong"
+   }
+  },
+  {
+   "t": 1.12,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 1.74,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 3.24,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 31.0,
+  "reject_wide": 5.0,
+  "reject_other": 6.0,
+  "n_ok_dets": 10.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl28.a",
+  "cyl28.b",
+  "cyl28.z",
+  "cyl28.yaw"
+ ],
+ "ms_step_p50": 0.6380819831974804,
+ "ms_step_p95": 14.989764406345785,
+ "n_steps": 163,
+ "wall_s": 13.99,
+ "method_exception": null,
+ "renders": 97,
+ "render_wall_s": 6.96
+}

@@ -1,0 +1,142 @@
+{
+ "trial": 14,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "bar50x25",
+   "a_mm": -12.784905283762924,
+   "b_mm": -153.85064643165492,
+   "yaw_deg": 57.90199567586658
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 4.8,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.42,
+   "DESCEND"
+  ],
+  [
+   1.96,
+   "CLOSE"
+  ],
+  [
+   2.66,
+   "RELEASE"
+  ],
+  [
+   3.28,
+   "RETURN"
+  ],
+  [
+   4.8,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -13.0,
+    "b": -152.5,
+    "theta": 148.01780348566382,
+    "width": 27.5,
+    "std": 0.23570226039551584
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.96,
+   "name": "freeze",
+   "data": {
+    "est": "(-13.0, -152.25, 148.0919475979386)"
+   }
+  },
+  {
+   "t": 1.42,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.96,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.66,
+   "name": "close_done",
+   "data": {
+    "gripper": 6.002861621920178e-05,
+    "held": false,
+    "err_meas": 0.8341513656015018
+   }
+  },
+  {
+   "t": 2.66,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.66,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.28,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 4.8,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 40.0,
+  "reject_wide": 0.0,
+  "reject_other": 22.0,
+  "n_ok_dets": 25.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "bar50x25": 88.96
+  },
+  "longest_lift_s": {
+   "bar50x25": 0.24
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "bar50x25.a",
+  "bar50x25.b",
+  "bar50x25.z",
+  "bar50x25.yaw"
+ ],
+ "wall_s": 20.43,
+ "renders": 144,
+ "render_wall_s": 10.29
+}

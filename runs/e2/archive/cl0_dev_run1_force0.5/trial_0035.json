@@ -1,0 +1,142 @@
+{
+ "trial": 35,
+ "kind": "belt",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cyl28",
+   "a_mm": -190.0,
+   "b_mm": -153.08163511898957,
+   "yaw_deg": 105.90744189129934
+  }
+ ],
+ "speed_mm_s": 38.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 4.74,
+ "phases": [
+  [
+   0.38,
+   "APPROACH"
+  ],
+  [
+   1.4,
+   "DESCEND"
+  ],
+  [
+   1.94,
+   "CLOSE"
+  ],
+  [
+   2.64,
+   "RELEASE"
+  ],
+  [
+   3.24,
+   "RETURN"
+  ],
+  [
+   4.74,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.38,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -202.07723027566192,
+    "b": -150.5,
+    "theta": 78.60446566967086,
+    "width": 30.0,
+    "std": 0.4072654364409652
+   }
+  },
+  {
+   "t": 0.38,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.72,
+   "name": "freeze",
+   "data": {
+    "est": "(-200.90566343236145, -150.5, 78.52292471854076)"
+   }
+  },
+  {
+   "t": 1.4,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.94,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.64,
+   "name": "close_done",
+   "data": {
+    "gripper": -3.616328319628275e-06,
+    "held": false,
+    "err_meas": 0.03373656305982835
+   }
+  },
+  {
+   "t": 2.64,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.64,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.24,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 4.74,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 40.0,
+  "reject_wide": 0.0,
+  "reject_other": 33.0,
+  "n_ok_dets": 11.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cyl28": 4.72
+  },
+  "longest_lift_s": {
+   "cyl28": 0.0
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cyl28.a",
+  "cyl28.b",
+  "cyl28.z",
+  "cyl28.yaw"
+ ],
+ "wall_s": 19.62,
+ "renders": 142,
+ "render_wall_s": 9.71
+}

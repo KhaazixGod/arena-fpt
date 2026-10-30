@@ -1,0 +1,142 @@
+{
+ "trial": 12,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cube35",
+   "a_mm": -74.86521284990488,
+   "b_mm": -220.61461880576613,
+   "yaw_deg": 56.23387916732849
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 9.32,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   5.98,
+   "DESCEND"
+  ],
+  [
+   6.52,
+   "CLOSE"
+  ],
+  [
+   7.22,
+   "RELEASE"
+  ],
+  [
+   7.82,
+   "RETURN"
+  ],
+  [
+   9.32,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -76.5,
+    "b": -220.5,
+    "theta": 90.0,
+    "width": 49.0,
+    "std": 0.0
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.66,
+   "name": "freeze",
+   "data": {
+    "est": "(-76.5, -220.5, 90.0)"
+   }
+  },
+  {
+   "t": 5.98,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 6.52,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 7.22,
+   "name": "close_done",
+   "data": {
+    "gripper": 8.026039582437699e-06,
+    "held": false,
+    "err_meas": 1.0156912006038803
+   }
+  },
+  {
+   "t": 7.22,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 7.22,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 7.82,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 9.32,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 177.0,
+  "reject_wide": 0.0,
+  "reject_other": 169.0,
+  "n_ok_dets": 16.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cube35": 86.49
+  },
+  "longest_lift_s": {
+   "cube35": 0.22
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cube35.a",
+  "cube35.b",
+  "cube35.z",
+  "cube35.yaw"
+ ],
+ "wall_s": 42.82,
+ "renders": 279,
+ "render_wall_s": 19.27
+}

@@ -1,0 +1,175 @@
+{
+ "trial": 3,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cyl28",
+   "a_mm": -33.85838857064638,
+   "b_mm": -153.35216902390277,
+   "yaw_deg": 14.854842375118888
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "picked_hold_complete",
+ "finished": true,
+ "t_end_s": 9.52,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   2.54,
+   "DESCEND"
+  ],
+  [
+   3.08,
+   "CLOSE"
+  ],
+  [
+   3.8,
+   "LIFT"
+  ],
+  [
+   4.4,
+   "MOVE_HOLD"
+  ],
+  [
+   5.4,
+   "HOLD"
+  ],
+  [
+   7.4,
+   "RELEASE"
+  ],
+  [
+   8.02,
+   "RETURN"
+  ],
+  [
+   9.52,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -36.5,
+    "b": -150.5,
+    "theta": 90.0,
+    "width": 31.25,
+    "std": 0.23570226039551584
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.66,
+   "name": "freeze",
+   "data": {
+    "est": "(-36.5, -150.5, 90.0)"
+   }
+  },
+  {
+   "t": 2.54,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 3.08,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 3.8,
+   "name": "close_done",
+   "data": {
+    "gripper": 32.66135171075238,
+    "held": true,
+    "err_meas": 0.377717659367
+   }
+  },
+  {
+   "t": 3.8,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 4.4,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 5.4,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 5.4,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 7.4,
+   "name": "hold_done",
+   "data": {
+    "gripper": 18.705726025327312,
+    "lost": false
+   }
+  },
+  {
+   "t": 7.4,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 8.02,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 9.52,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 74.0,
+  "reject_wide": 0.0,
+  "reject_other": 63.0,
+  "n_ok_dets": 16.0
+ },
+ "gt": {
+  "success": true,
+  "success_t": 6.72,
+  "success_obj": "cyl28",
+  "max_lift_mm": {
+   "cyl28": 28.0
+  },
+  "longest_lift_s": {
+   "cyl28": 2.72
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cyl28.a",
+  "cyl28.b",
+  "cyl28.z",
+  "cyl28.yaw"
+ ],
+ "wall_s": 41.08,
+ "renders": 285,
+ "render_wall_s": 20.6
+}

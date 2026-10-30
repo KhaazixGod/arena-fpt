@@ -1,0 +1,183 @@
+{
+ "trial": 1,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cyl35",
+   "a_mm": 38.45506729447902,
+   "b_mm": -207.66561229315298,
+   "yaw_deg": 145.73165655993162
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "dropped_in_hold",
+ "finished": true,
+ "t_end_s": 8.48,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.52,
+   "DESCEND"
+  ],
+  [
+   2.06,
+   "CLOSE"
+  ],
+  [
+   2.78,
+   "LIFT"
+  ],
+  [
+   3.38,
+   "MOVE_HOLD"
+  ],
+  [
+   4.38,
+   "HOLD"
+  ],
+  [
+   6.38,
+   "RELEASE"
+  ],
+  [
+   6.98,
+   "RETURN"
+  ],
+  [
+   8.48,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": 40.5,
+    "b": -208.5,
+    "theta": 90.0,
+    "width": 36.25,
+    "std": 0.0
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 1.14,
+   "name": "freeze",
+   "data": {
+    "est": "(40.0, -208.5, 90.0)"
+   }
+  },
+  {
+   "t": 1.52,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 2.06,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.78,
+   "name": "close_done",
+   "data": {
+    "gripper": 32.373771252696145,
+    "held": true,
+    "err_meas": 0.00797777592254671
+   }
+  },
+  {
+   "t": 2.78,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 3.22,
+   "name": "lost_object",
+   "data": {
+    "gripper": 0.12402330510478908,
+    "phase": "LIFT"
+   }
+  },
+  {
+   "t": 3.38,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 4.38,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 4.38,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 6.38,
+   "name": "hold_done",
+   "data": {
+    "gripper": -5.168644040442029e-06,
+    "lost": true
+   }
+  },
+  {
+   "t": 6.38,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 6.98,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 8.48,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 43.0,
+  "reject_wide": 0.0,
+  "reject_other": 30.0,
+  "n_ok_dets": 30.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cyl35": 7.52
+  },
+  "longest_lift_s": {
+   "cyl35": 0.0
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cyl35.a",
+  "cyl35.b",
+  "cyl35.z",
+  "cyl35.yaw"
+ ],
+ "wall_s": 61.43,
+ "renders": 254,
+ "render_wall_s": 23.92
+}

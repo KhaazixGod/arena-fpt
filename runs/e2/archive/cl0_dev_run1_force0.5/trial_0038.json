@@ -1,0 +1,142 @@
+{
+ "trial": 38,
+ "kind": "belt",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cube35",
+   "a_mm": -190.0,
+   "b_mm": -227.63488927999055,
+   "yaw_deg": 5.702036293748172
+  }
+ ],
+ "speed_mm_s": 38.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 5.9,
+ "phases": [
+  [
+   0.34,
+   "APPROACH"
+  ],
+  [
+   2.14,
+   "DESCEND"
+  ],
+  [
+   2.68,
+   "CLOSE"
+  ],
+  [
+   3.4,
+   "RELEASE"
+  ],
+  [
+   4.0,
+   "RETURN"
+  ],
+  [
+   5.9,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.34,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -192.22027338935968,
+    "b": -228.5,
+    "theta": 98.34191025550554,
+    "width": 37.0,
+    "std": 0.21121340550301365
+   }
+  },
+  {
+   "t": 0.34,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.84,
+   "name": "freeze",
+   "data": {
+    "est": "(-192.30589741424583, -228.5, 98.57682463565969)"
+   }
+  },
+  {
+   "t": 2.14,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 2.68,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 3.4,
+   "name": "close_done",
+   "data": {
+    "gripper": 1.34591446044784e-05,
+    "held": false,
+    "err_meas": 0.7329231289637558
+   }
+  },
+  {
+   "t": 3.4,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 3.4,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 4.0,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 5.9,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 62.0,
+  "reject_wide": 0.0,
+  "reject_other": 54.0,
+  "n_ok_dets": 16.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cube35": 181.09
+  },
+  "longest_lift_s": {
+   "cube35": 0.22
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cube35.a",
+  "cube35.b",
+  "cube35.z",
+  "cube35.yaw"
+ ],
+ "wall_s": 24.53,
+ "renders": 177,
+ "render_wall_s": 12.34
+}

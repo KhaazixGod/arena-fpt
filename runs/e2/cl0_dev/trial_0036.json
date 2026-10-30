@@ -1,0 +1,175 @@
+{
+ "trial": 36,
+ "kind": "belt",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "flat45x30",
+   "a_mm": -190.0,
+   "b_mm": -144.95957531494594,
+   "yaw_deg": 94.37484917630923
+  }
+ ],
+ "speed_mm_s": 38.0,
+ "outcome": "picked_hold_complete",
+ "finished": true,
+ "t_end_s": 8.16,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.18,
+   "DESCEND"
+  ],
+  [
+   1.72,
+   "CLOSE"
+  ],
+  [
+   2.42,
+   "LIFT"
+  ],
+  [
+   3.02,
+   "MOVE_HOLD"
+  ],
+  [
+   4.04,
+   "HOLD"
+  ],
+  [
+   6.04,
+   "RELEASE"
+  ],
+  [
+   6.66,
+   "RETURN"
+  ],
+  [
+   8.16,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -191.0,
+    "b": -144.0,
+    "theta": 7.550829228949094,
+    "width": 39.5,
+    "std": 0.23570226039551584
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.5,
+   "name": "freeze",
+   "data": {
+    "est": "(-191.30361698505635, -144.0, 8.04485779000105)"
+   }
+  },
+  {
+   "t": 1.18,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.72,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.42,
+   "name": "close_done",
+   "data": {
+    "gripper": 20.0292893965867,
+    "held": true,
+    "err_meas": 0.01905943146337386
+   }
+  },
+  {
+   "t": 2.42,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 3.02,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 4.04,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 4.04,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 6.04,
+   "name": "hold_done",
+   "data": {
+    "gripper": 20.034880061653926,
+    "lost": false
+   }
+  },
+  {
+   "t": 6.04,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 6.66,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 8.16,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 33.0,
+  "reject_wide": 0.0,
+  "reject_other": 25.0,
+  "n_ok_dets": 11.0
+ },
+ "gt": {
+  "success": true,
+  "success_t": 4.62,
+  "success_obj": "flat45x30",
+  "max_lift_mm": {
+   "flat45x30": 50.86
+  },
+  "longest_lift_s": {
+   "flat45x30": 3.5
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "flat45x30.a",
+  "flat45x30.b",
+  "flat45x30.z",
+  "flat45x30.yaw"
+ ],
+ "wall_s": 34.4,
+ "renders": 244,
+ "render_wall_s": 17.84
+}

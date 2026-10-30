@@ -1,0 +1,175 @@
+{
+ "trial": 9,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cyl28",
+   "a_mm": -67.43103825843961,
+   "b_mm": -194.34608840770338,
+   "yaw_deg": 10.18038889500916
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "picked_hold_complete",
+ "finished": true,
+ "t_end_s": 9.16,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.32,
+   "DESCEND"
+  ],
+  [
+   1.86,
+   "CLOSE"
+  ],
+  [
+   2.56,
+   "LIFT"
+  ],
+  [
+   3.16,
+   "MOVE_HOLD"
+  ],
+  [
+   5.04,
+   "HOLD"
+  ],
+  [
+   7.04,
+   "RELEASE"
+  ],
+  [
+   7.66,
+   "RETURN"
+  ],
+  [
+   9.16,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -71.5,
+    "b": -194.5,
+    "theta": 97.40150333044127,
+    "width": 29.5,
+    "std": 0.0
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.58,
+   "name": "freeze",
+   "data": {
+    "est": "(-71.5, -194.5, 96.32684791068682)"
+   }
+  },
+  {
+   "t": 1.32,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.86,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.56,
+   "name": "close_done",
+   "data": {
+    "gripper": 30.866739686435892,
+    "held": true,
+    "err_meas": 0.20619865937087437
+   }
+  },
+  {
+   "t": 2.56,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 3.16,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 5.04,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 5.04,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 7.04,
+   "name": "hold_done",
+   "data": {
+    "gripper": 31.694324214167644,
+    "lost": false
+   }
+  },
+  {
+   "t": 7.04,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 7.66,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 9.16,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 37.0,
+  "reject_wide": 0.0,
+  "reject_other": 31.0,
+  "n_ok_dets": 13.0
+ },
+ "gt": {
+  "success": true,
+  "success_t": 4.74,
+  "success_obj": "cyl28",
+  "max_lift_mm": {
+   "cyl28": 58.86
+  },
+  "longest_lift_s": {
+   "cyl28": 4.42
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cyl28.a",
+  "cyl28.b",
+  "cyl28.z",
+  "cyl28.yaw"
+ ],
+ "wall_s": 37.42,
+ "renders": 274,
+ "render_wall_s": 18.89
+}

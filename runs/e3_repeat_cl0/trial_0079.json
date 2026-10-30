@@ -1,0 +1,187 @@
+{
+ "trial_id": 79,
+ "method": "CL0",
+ "cell": "dev_C0",
+ "arrangement_id": "dev_C0_020",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 1,
+ "placements": [
+  {
+   "name": "cube35",
+   "a_mm": -150.0,
+   "b_mm": -171.1,
+   "yaw_deg": 175.1
+  }
+ ],
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "cube35",
+  "t_success_s": 4.66,
+  "t_detect_s": 0.18,
+  "t_lift_s": 2.44,
+  "details": {
+   "moved_others_mm": {}
+  }
+ },
+ "outcome": "picked_hold_complete",
+ "finished": true,
+ "t_end_s": 8.16,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.2,
+   "DESCEND"
+  ],
+  [
+   1.74,
+   "CLOSE"
+  ],
+  [
+   2.44,
+   "LIFT"
+  ],
+  [
+   3.04,
+   "MOVE_HOLD"
+  ],
+  [
+   4.04,
+   "HOLD"
+  ],
+  [
+   6.04,
+   "RELEASE"
+  ],
+  [
+   6.66,
+   "RETURN"
+  ],
+  [
+   8.16,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -151.5,
+    "b": -170.5,
+    "theta": 84.53277334000076,
+    "width": 37.0,
+    "std": 0.0
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.54,
+   "name": "freeze",
+   "data": {
+    "est": "(-152.13458342124235, -170.5, 83.00757413876387)"
+   }
+  },
+  {
+   "t": 1.2,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.74,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.44,
+   "name": "close_done",
+   "data": {
+    "gripper": 24.589668549305095,
+    "held": true,
+    "err_meas": 0.015371973060434602
+   }
+  },
+  {
+   "t": 2.44,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 3.04,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 4.04,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 4.04,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 6.04,
+   "name": "hold_done",
+   "data": {
+    "gripper": 23.939633236732103,
+    "lost": false
+   }
+  },
+  {
+   "t": 6.04,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 6.66,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 8.16,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 34.0,
+  "reject_wide": 0.0,
+  "reject_other": 27.0,
+  "n_ok_dets": 12.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.66,
+ "gt_success_obj": "cube35",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cube35.a",
+  "cube35.b",
+  "cube35.z",
+  "cube35.yaw"
+ ],
+ "ms_step_p50": 0.6433720118366182,
+ "ms_step_p95": 27.98152804607525,
+ "n_steps": 409,
+ "wall_s": 35.37,
+ "method_exception": null,
+ "renders": 244,
+ "render_wall_s": 18.16
+}

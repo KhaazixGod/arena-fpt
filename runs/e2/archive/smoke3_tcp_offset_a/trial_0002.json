@@ -1,0 +1,142 @@
+{
+ "trial": 2,
+ "kind": "static",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "bar50x25",
+   "a_mm": -72.95545048440584,
+   "b_mm": -130.96971060429604,
+   "yaw_deg": 6.498597497265428
+  }
+ ],
+ "speed_mm_s": 0.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 4.86,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.26,
+   "DESCEND"
+  ],
+  [
+   1.8,
+   "CLOSE"
+  ],
+  [
+   2.5,
+   "RELEASE"
+  ],
+  [
+   3.1,
+   "RETURN"
+  ],
+  [
+   4.86,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -74.5,
+    "b": -129.5,
+    "theta": 95.60677568365658,
+    "width": 29.5,
+    "std": 1.0540925533894598
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.44,
+   "name": "freeze",
+   "data": {
+    "est": "(-73.5, -129.5, 95.22875459134325)"
+   }
+  },
+  {
+   "t": 1.26,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.8,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.5,
+   "name": "close_done",
+   "data": {
+    "gripper": 7.089482626166831e-05,
+    "held": false,
+    "err_meas": 0.3355774210412564
+   }
+  },
+  {
+   "t": 2.5,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.5,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.1,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 4.86,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 35.0,
+  "reject_wide": 0.0,
+  "reject_other": 28.0,
+  "n_ok_dets": 9.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "bar50x25": 5.93
+  },
+  "longest_lift_s": {
+   "bar50x25": 0.0
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "bar50x25.a",
+  "bar50x25.b",
+  "bar50x25.z",
+  "bar50x25.yaw"
+ ],
+ "wall_s": 19.72,
+ "renders": 145,
+ "render_wall_s": 9.93
+}

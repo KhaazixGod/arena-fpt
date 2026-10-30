@@ -1,0 +1,142 @@
+{
+ "trial": 33,
+ "kind": "belt",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cyl35",
+   "a_mm": -190.0,
+   "b_mm": -134.55098544737893,
+   "yaw_deg": 45.804452037583296
+  }
+ ],
+ "speed_mm_s": 38.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 4.66,
+ "phases": [
+  [
+   0.34,
+   "APPROACH"
+  ],
+  [
+   1.3,
+   "DESCEND"
+  ],
+  [
+   1.84,
+   "CLOSE"
+  ],
+  [
+   2.54,
+   "RELEASE"
+  ],
+  [
+   3.14,
+   "RETURN"
+  ],
+  [
+   4.66,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.34,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -196.72027338935968,
+    "b": -132.5,
+    "theta": 73.12422143075328,
+    "width": 36.0,
+    "std": 0.31649116610062916
+   }
+  },
+  {
+   "t": 0.34,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.64,
+   "name": "freeze",
+   "data": {
+    "est": "(-196.38618653445064, -132.75, 72.36660721281908)"
+   }
+  },
+  {
+   "t": 1.3,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 1.84,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.54,
+   "name": "close_done",
+   "data": {
+    "gripper": 4.145250281210751e-06,
+    "held": false,
+    "err_meas": 0.12080646117493533
+   }
+  },
+  {
+   "t": 2.54,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.54,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.14,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 4.66,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 37.0,
+  "reject_wide": 0.0,
+  "reject_other": 29.0,
+  "n_ok_dets": 10.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cyl35": 86.28
+  },
+  "longest_lift_s": {
+   "cyl35": 0.2
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cyl35.a",
+  "cyl35.b",
+  "cyl35.z",
+  "cyl35.yaw"
+ ],
+ "wall_s": 19.77,
+ "renders": 139,
+ "render_wall_s": 10.13
+}

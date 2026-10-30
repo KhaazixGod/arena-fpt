@@ -1,0 +1,72 @@
+{
+ "engine": "isaac",
+ "isaacsim": "6.0.0.1",
+ "date": "2026-10-29T17:06:34+07:00",
+ "argv": [
+  "/home/pread/Projects/dir1_tools/arena/arena/run_arena.py",
+  "--methods",
+  "CL0,NOOP,ORACLE",
+  "--cells",
+  "dev_C0",
+  "--speeds",
+  "L0,L0.25",
+  "--n",
+  "2",
+  "--out",
+  "runs/e3_smoke",
+  "--video",
+  "--report"
+ ],
+ "arena_sha256": "05b61b2864a445cf3bc2d7c43c49d9aa483ef03190e9a363e2daa899934137b5",
+ "cl0_code_sha256": "006af1c9686621e93249f7b2d17cf3e5cfd60ee96862213e13d000ddce63ab12",
+ "arena_toml_sha256": "84497cab7c9bf00b6df50d07186d62fa00791e2baf8695acd54c5fd6ab9043ad",
+ "scene_toml_sha256": "197916d01c06bdee9d6de580ac1a53a06721ad1a1d5e3b69f004840d3415fb75",
+ "usd_sha256": "b3c6b01c5eeebc9cde74a6161e521aff36d6c305b84deda1aba4aa09c7bf91de",
+ "calib_sha256": "f3ecd21aba23aaed9d9d4483fc3f7442e08c683f033752b08a3c49143f4f2f06",
+ "background_sha256": "c9b7b8cad034c0ad35efadd215aca53f2aa587dfd7bbdee826d7c600cc8b87cf",
+ "sheets_sha256": {
+  "dev_C0": "1dc55c63d36536dbb72593af900d4a586ed491191574361d593e17b8bb9eb251"
+ },
+ "gpu": "NVIDIA GeForce RTX 3070 Ti, 595.99.02",
+ "methods": {
+  "CL0": {
+   "spec": "CL0",
+   "privileged": false,
+   "doc": "CL-0 baseline (cl0 package, unchanged)"
+  },
+  "NOOP": {
+   "spec": "NOOP",
+   "privileged": false,
+   "doc": "does nothing for executor.trial_timeout_s (lower bound)"
+  },
+  "ORACLE": {
+   "spec": "ORACLE",
+   "privileged": true,
+   "doc": "CL-0 controller + ground-truth perception (upper bound)"
+  }
+ },
+ "speeds": [
+  {
+   "token": "L0",
+   "L": 0.0,
+   "mm_s": 0.0
+  },
+  {
+   "token": "L0.25",
+   "L": 0.25,
+   "mm_s": 37.5
+  }
+ ],
+ "tau_s": 0.4,
+ "w_mm": 60.0,
+ "objects": "INTERIM primitives (arena/arena/objects.py), not the E5 object set",
+ "depth": false,
+ "manual": {
+  "demos": null,
+  "train_steps": null,
+  "gpu_hours": null,
+  "tuning_hours": null
+ },
+ "vram_peak_mib_seen": 3083,
+ "render_wall_s_per_frame": 0.07483251056636635
+}

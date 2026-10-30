@@ -1,0 +1,142 @@
+{
+ "trial": 20,
+ "kind": "belt",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "cube35",
+   "a_mm": -190.0,
+   "b_mm": -196.81276081318995,
+   "yaw_deg": 110.14127525621858
+  }
+ ],
+ "speed_mm_s": 38.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 5.16,
+ "phases": [
+  [
+   0.44,
+   "APPROACH"
+  ],
+  [
+   1.56,
+   "DESCEND"
+  ],
+  [
+   2.1,
+   "CLOSE"
+  ],
+  [
+   2.82,
+   "RELEASE"
+  ],
+  [
+   3.42,
+   "RETURN"
+  ],
+  [
+   5.16,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.44,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -192.59420686570178,
+    "b": -196.0,
+    "theta": 101.75314856055985,
+    "width": 40.5,
+    "std": 0.25953591937156295
+   }
+  },
+  {
+   "t": 0.44,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.82,
+   "name": "freeze",
+   "data": {
+    "est": "(-192.10636537801463, -196.0, 102.84256971467407)"
+   }
+  },
+  {
+   "t": 1.56,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 2.1,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.82,
+   "name": "close_done",
+   "data": {
+    "gripper": 4.9162406175120374e-05,
+    "held": false,
+    "err_meas": 0.7198300841813873
+   }
+  },
+  {
+   "t": 2.82,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.82,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.42,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 5.16,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 44.0,
+  "reject_wide": 0.0,
+  "reject_other": 36.0,
+  "n_ok_dets": 13.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "cube35": 25.71
+  },
+  "longest_lift_s": {
+   "cube35": 0.02
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "cube35.a",
+  "cube35.b",
+  "cube35.z",
+  "cube35.yaw"
+ ],
+ "wall_s": 21.33,
+ "renders": 154,
+ "render_wall_s": 10.78
+}

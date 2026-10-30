@@ -1,0 +1,142 @@
+{
+ "trial": 28,
+ "kind": "belt",
+ "seed": 1,
+ "placements": [
+  {
+   "name": "bar50x25",
+   "a_mm": -190.0,
+   "b_mm": -160.0660829234593,
+   "yaw_deg": 60.20133538433755
+  }
+ ],
+ "speed_mm_s": 38.0,
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 4.82,
+ "phases": [
+  [
+   0.44,
+   "APPROACH"
+  ],
+  [
+   1.46,
+   "DESCEND"
+  ],
+  [
+   2.0,
+   "CLOSE"
+  ],
+  [
+   2.7,
+   "RELEASE"
+  ],
+  [
+   3.32,
+   "RETURN"
+  ],
+  [
+   4.82,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.44,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -192.81571610771465,
+    "b": -160.0,
+    "theta": 146.86422433341374,
+    "width": 37.25,
+    "std": 0.19741879312314448
+   }
+  },
+  {
+   "t": 0.44,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.78,
+   "name": "freeze",
+   "data": {
+    "est": "(-192.53642051633506, -160.5, 147.00265423522018)"
+   }
+  },
+  {
+   "t": 1.46,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 2.0,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.7,
+   "name": "close_done",
+   "data": {
+    "gripper": 0.0001531675594454188,
+    "held": false,
+    "err_meas": 0.05974195773421869
+   }
+  },
+  {
+   "t": 2.7,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.7,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.32,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 4.82,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 41.0,
+  "reject_wide": 0.0,
+  "reject_other": 33.0,
+  "n_ok_dets": 11.0
+ },
+ "gt": {
+  "success": false,
+  "success_t": null,
+  "success_obj": null,
+  "max_lift_mm": {
+   "bar50x25": 38.13
+  },
+  "longest_lift_s": {
+   "bar50x25": 0.1
+  }
+ },
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "grip_pos",
+  "bar50x25.a",
+  "bar50x25.b",
+  "bar50x25.z",
+  "bar50x25.yaw"
+ ],
+ "wall_s": 19.67,
+ "renders": 144,
+ "render_wall_s": 9.89
+}

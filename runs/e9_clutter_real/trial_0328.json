@@ -1,0 +1,145 @@
+{
+ "trial_id": 328,
+ "method": "CL0",
+ "cell": "dev_C3",
+ "arrangement_id": "dev_C3_005",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 1,
+ "placements": [
+  {
+   "name": "cyl22",
+   "a_mm": 11.200000000000003,
+   "b_mm": -200.7,
+   "yaw_deg": 259.2
+  },
+  {
+   "name": "l23",
+   "a_mm": -33.699999999999996,
+   "b_mm": -190.3,
+   "yaw_deg": 344.6
+  },
+  {
+   "name": "box21",
+   "a_mm": -87.5,
+   "b_mm": -205.4,
+   "yaw_deg": 227.5
+  },
+  {
+   "name": "box25",
+   "a_mm": -122.7,
+   "b_mm": -179.0,
+   "yaw_deg": 184.2
+  },
+  {
+   "name": "cyl26",
+   "a_mm": 42.7,
+   "b_mm": -193.0,
+   "yaw_deg": 97.9
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "seg_miss",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl22": 0.0,
+    "l23": 5.6,
+    "box21": 0.1,
+    "box25": 0.2,
+    "cyl26": 0.0
+   }
+  }
+ },
+ "outcome": "no_target",
+ "finished": true,
+ "t_end_s": 22.12,
+ "phases": [
+  [
+   20.02,
+   "RELEASE"
+  ],
+  [
+   20.62,
+   "RETURN"
+  ],
+  [
+   22.12,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 20.02,
+   "name": "abort",
+   "data": {
+    "reason": "no_target"
+   }
+  },
+  {
+   "t": 20.02,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 20.62,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 22.12,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 598.0,
+  "reject_wide": 0.0,
+  "reject_other": 598.0,
+  "n_ok_dets": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "box25.a",
+  "box25.b",
+  "box25.z",
+  "box25.yaw",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw"
+ ],
+ "ms_step_p50": 25.792790998821147,
+ "ms_step_p95": 26.8641948045115,
+ "n_steps": 1107,
+ "wall_s": 114.02,
+ "method_exception": null,
+ "renders": 663,
+ "render_wall_s": 46.14
+}

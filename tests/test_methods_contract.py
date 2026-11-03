@@ -82,9 +82,10 @@ def test_oracle_detector_geometry(arena_cfg):
     d = {round(x.a_mm): x for x in res.dets}
     assert set(d) == {10, -60, -150}                     # outside the window (a = 500) and the lifted one are not seen
     bar = d[10]
-    assert math.isclose(bar.theta_deg, (120 + 90 - 90) % 180, abs_tol=0.01) and bar.width_mm == 25.0 and bar.ok   # calibrated phi = 89.998
+    phi = det.phi                                                    # the calibrated belt direction, not exactly 90
+    assert math.isclose(bar.theta_deg, (120 + 90 - phi) % 180, abs_tol=1e-6) and bar.width_mm == 25.0 and bar.ok
     radial = math.degrees(math.atan2(-60.0 - 0.0, 170.0 - 38.8))                     # round object: closing axis tangential to the pan circle
-    assert d[-60].reject == "arm" and math.isclose(d[-60].theta_deg, (radial + 90.0 - 90.0) % 180.0, abs_tol=0.05)
+    assert d[-60].reject == "arm" and math.isclose(d[-60].theta_deg, (radial + 90.0 - phi) % 180.0, abs_tol=0.05)
     assert d[-150].reject == "wide"
 
 
@@ -137,3 +138,20 @@ def test_pixel_grasp_adapter_maps_pixels_to_the_belt(arena_cfg):
     assert min(g.theta_deg, 180.0 - g.theta_deg) < 1.0 and g.ok
     m = resolve("arena.methods.examples.blob:make_method").factory(ctx)
     assert check_contract(m) == []
+
+
+@needs_calib
+@pytest.mark.skipif(not os.path.exists(os.path.join(ARENA, "third_party", "ggcnn_weights", "ggcnn_weights_cornell")), reason="needs GG-CNN weights")
+def test_ggcnn_detector_on_synthetic_depth(arena_cfg):
+    """Our re-declared network loads the published state dict exactly, and proposes a grasp on a block on a flat belt, not on the empty belt."""
+    from arena.methods.ggcnn import GGCNNDetector, belt_window_px
+    ctx = _ctx(arena_cfg)
+    det = GGCNNDetector(ctx.calib, belt_window_px(ctx), min_q=0.1)
+    empty = np.full((720, 1280), 512.4, np.float32)
+    assert det(None, empty) == []
+    d = empty.copy()
+    uc, vc = 640, 360
+    d[vc - 30:vc + 30, uc - 22:uc + 22] = 487.4                  # 25 mm tall block, 33 x 24 mm
+    gs = det(None, d)
+    assert gs, "no grasp proposed on the block"
+    assert abs(gs[0].u - uc) < 35 and abs(gs[0].v - vc) < 45

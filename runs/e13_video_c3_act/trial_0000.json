@@ -1,0 +1,125 @@
+{
+ "trial_id": 0,
+ "method": "REMOTE:ACT_J0",
+ "cell": "dev_C3",
+ "arrangement_id": "dev_C3_001",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box21",
+   "a_mm": -202.9,
+   "b_mm": -206.8,
+   "yaw_deg": 340.4
+  },
+  {
+   "name": "cyl26",
+   "a_mm": -241.7,
+   "b_mm": -218.0,
+   "yaw_deg": 60.2
+  },
+  {
+   "name": "l23",
+   "a_mm": -150.0,
+   "b_mm": -200.5,
+   "yaw_deg": 351.0
+  },
+  {
+   "name": "cyl22",
+   "a_mm": -272.7,
+   "b_mm": -215.6,
+   "yaw_deg": 20.1
+  },
+  {
+   "name": "mug24",
+   "a_mm": -308.3,
+   "b_mm": -205.1,
+   "yaw_deg": 149.8
+  }
+ ],
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "l23",
+  "t_success_s": 4.9,
+  "t_detect_s": null,
+  "t_lift_s": 2.7,
+  "details": {
+   "moved_others_mm": {
+    "box21": 0.0,
+    "cyl26": 0.0,
+    "cyl22": 0.0,
+    "mug24": 0.0
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT",
+   "data": {
+    "ckpt": "runs/act_j0_s1000/checkpoints/last/pretrained_model"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": true,
+ "gt_success_t": 4.88,
+ "gt_success_obj": "l23",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw"
+ ],
+ "ms_step_p50": 5.447205970995128,
+ "ms_step_p95": 16.439430008176714,
+ "n_steps": 1001,
+ "wall_s": 272.23,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 98.75
+}

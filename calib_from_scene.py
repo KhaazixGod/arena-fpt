@@ -17,7 +17,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--out", default="runs/calib"); ap.add_argument("--config", default="configs/arena.toml")
 ap.add_argument("--belt-speed", type=float, default=60.0); ap.add_argument("--runs", type=int, default=3)
 ap.add_argument("--static-s", type=float, default=1.5); ap.add_argument("--duration-s", type=float, default=6.0)
-ap.add_argument("--bg-frames", type=int, default=12)
+ap.add_argument("--bg-frames", type=int, default=12); ap.add_argument("--scene-file", default="")
 ap.add_argument("--noise-px", type=float, default=0.0); ap.add_argument("--noise-mm", type=float, default=0.0); ap.add_argument("--seed", type=int, default=0)
 args = ap.parse_args()
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -41,13 +41,14 @@ from cl0.system import file_sha256
 
 cfg = load_config(args.config if os.path.isabs(args.config) else os.path.join(HERE, args.config))
 cfg.belt.mm_per_step = 1.0                                     # raw pulse counts (like `calibrate belt`: counts_only)
-sc = S.load_scene_cfg(); b = sc["belt"]
+sc = S.load_scene_cfg(args.scene_file or None); b = sc["belt"]
 world = IsaacWorld(app, [CALIB_PLATE], sc)
 plat = IsaacPlatform(world, cfg)
 size = (cfg.camera.width, cfg.camera.height)
 phi_true, mm_true, lat_true = float(b["dir_deg"]), float(b["counter_mm_per_step_true"]), float(sc["camera"]["latency_true_s"])
 u, v = unit(phi_true), perp(phi_true)
 cb = float(b["center_b_mm"]); ca = float(b["center_a_mm"])
+wa = sc["camera"].get("window_a_mm", [ca - 220.0, ca + 220.0])      # CL-0's window along the belt: must lie inside the camera view
 ctx_done = {}
 
 
@@ -69,7 +70,7 @@ ref = np.mean([world.render_bgr().astype(np.float32) for _ in range(5)], axis=0)
 cv2.imwrite(os.path.join(OUT, "empty_belt_home.png"), ref)
 
 # ---------------------------------------------------------------- 1. homography from known plate positions
-A = [-200.0, -120.0, -40.0, 40.0, 120.0, 200.0]; Bo = [-90.0, -30.0, 30.0, 90.0]
+A = [float(x) for x in np.linspace(wa[0] + 20.0, wa[1] - 20.0, 6)]; Bo = [-90.0, -30.0, 30.0, 90.0]
 px, xy, used = [], [], []
 for a_ in A:
     for bo in Bo:
@@ -89,7 +90,7 @@ lat_assumed = cfg.camera.latency_s
 runs = []
 for r in range(args.runs):
     bo = (-60.0, 0.0, 60.0, 30.0, -30.0)[r % 5]
-    plat.reset_trial([{"name": "calib_plate", "a_mm": -230.0, "b_mm": cb + bo, "yaw_deg": 0.0}])
+    plat.reset_trial([{"name": "calib_plate", "a_mm": wa[0] + 10.0, "b_mm": cb + bo, "yaw_deg": 0.0}])
     tr, uvs, t_start, started = [], [], 0.0, False
     n_ticks = int((args.static_s + args.duration_s) * cfg.executor.control_hz)
     for _ in range(n_ticks):
@@ -129,7 +130,7 @@ print(f"camera latency {lat * 1e3:.1f} ms (true {lat_true * 1e3:.0f} ms, CL-0 be
 # ---------------------------------------------------------------- 3. independent check: 12 new positions, pixel -> W with the FITTED homography vs GT
 errs, hold = [], []
 for i in range(12):
-    a_ = float(rng.uniform(-210, 210)); b_ = float(rng.uniform(cb - 95, cb + 95)); yaw = float(rng.uniform(0, 90))
+    a_ = float(rng.uniform(wa[0] + 15.0, wa[1] - 15.0)); b_ = float(rng.uniform(cb - 95, cb + 95)); yaw = float(rng.uniform(0, 90))
     xy_gt, img = settle_and_grab({"name": "calib_plate", "a_mm": a_, "b_mm": b_, "yaw_deg": yaw})
     m = ct.find_marker(img, ref)
     if m is None: continue
@@ -138,7 +139,7 @@ for i in range(12):
 print(f"hold-out check: {len(errs)} points, mean {np.mean(errs):.3f} mm, max {np.max(errs):.3f} mm", flush=True)
 
 # ---------------------------------------------------------------- 4. background: empty belt, arm at HOME  (cl0.calibrate.cmd_background, simulated)
-ar = (ca - 220.0, ca + 220.0); br = (cb - b["width_mm"] / 2 - 15.0, cb + b["width_mm"] / 2 + 15.0)      # same window as cl0.sim.harness: belt + 15 mm, +-220 mm along the belt
+ar = (float(wa[0]), float(wa[1])); br = (cb - b["width_mm"] / 2 - 15.0, cb + b["width_mm"] / 2 + 15.0)      # belt + 15 mm across (as cl0.sim.harness), camera.window_a_mm along the belt
 win = auto_window(calib, cfg.perception.res_mm, 10.0, ar, br)
 rect = Rectifier(calib, win)
 plat.reset_trial([])

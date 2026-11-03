@@ -63,3 +63,12 @@ def test_within_run_repetitions():
     res = compute(rows + extra, "CL0")
     w = res["within_reps"]["CL0"]
     assert w["groups"] == 40 and w["all_same_success"] == 39
+
+
+def test_repetitions_do_not_inflate_n():
+    rows = [r for r in _rows() if r["valid"] == "1"]
+    extra = [dict(r, rep="1", trial_id=str(int(r["trial_id"]) + 10000)) for r in rows]
+    a, b = compute(rows, "CL0"), compute(rows + extra, "CL0")
+    for ga, gb in zip(a["groups"], b["groups"]):
+        assert (ga["n"], ga["k"], ga["wilson"]) == (gb["n"], gb["k"], gb["wilson"]) and gb["n_trials"] == 2 * ga["n_trials"]
+        assert ga.get("paired_vs_ref") == gb.get("paired_vs_ref")

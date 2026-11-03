@@ -51,20 +51,35 @@ def key_pair(r):
     return (r["cell"], r["arrangement_id"], r.get("L") or "", r.get("rep") or "0")
 
 
+def collapse_reps(rs):
+    """One statistical unit per arrangement: repetitions (--reps) of the same arrangement are NOT independent trials, so they must not inflate n in Wilson / McNemar.
+    Majority vote; a tie counts as failure and is reported (n_ties)."""
+    by = defaultdict(list)
+    for r in rs:
+        by[r["arrangement_id"]].append(r)
+    out = {}
+    for aid, v in by.items():
+        k, kc = sum(int(x["success"]) for x in v), sum(int(x.get("clean") or 0) for x in v)
+        out[aid] = {"success": int(2 * k > len(v)), "clean": int(2 * kc > len(v)), "tie": 2 * k == len(v)}
+    return out
+
+
 def compute(rows, ref="CL0", repeat_rows=None) -> dict:
     valid = [r for r in rows if r.get("valid") == "1"]
     groups = defaultdict(list)
     for r in valid:
         groups[key_group(r)].append(r)
     res = {"groups": [], "causes": [], "bounds": {}, "repeat": None, "n_rows": len(rows), "n_invalid": len(rows) - len(valid)}
-    ref_by = {key_pair(r): r for r in valid if r["method"] == ref}
+    units = {key: collapse_reps(rs) for key, rs in groups.items()}
     for (m, c, L), rs in sorted(groups.items()):
-        n = len(rs); k = sum(int(r["success"]) for r in rs); kc = sum(int(r.get("clean") or 0) for r in rs)
+        u = units[(m, c, L)]
+        n = len(u); k = sum(x["success"] for x in u.values()); kc = sum(x["clean"] for x in u.values())
         lo, hi = wilson(k, n); clo, chi = wilson(kc, n)
-        g = {"method": m, "cell": c, "L": L, "n": n, "k": k, "sr": k / n if n else None, "wilson": [lo, hi], "k_clean": kc, "sr_clean": kc / n if n else None,
-             "wilson_clean": [clo, chi]}
-        if m != ref and ref_by:
-            pairs = [(int(ref_by[key_pair(r)]["success"]), int(r["success"]), r["arrangement_id"]) for r in rs if key_pair(r) in ref_by]
+        g = {"method": m, "cell": c, "L": L, "n": n, "n_trials": len(rs), "n_ties": sum(x["tie"] for x in u.values()), "k": k, "sr": k / n if n else None, "wilson": [lo, hi],
+             "k_clean": kc, "sr_clean": kc / n if n else None, "wilson_clean": [clo, chi]}
+        ru = units.get((ref, c, L))
+        if m != ref and ru:
+            pairs = [(ru[aid]["success"], x["success"], aid) for aid, x in u.items() if aid in ru]
             if pairs:
                 b = sum(1 for s0, s1, _ in pairs if s1 == 1 and s0 == 0); cc = sum(1 for s0, s1, _ in pairs if s1 == 0 and s0 == 1)
                 per = defaultdict(list)
@@ -141,13 +156,13 @@ def render_md(res, manifest, run_id, ref="CL0") -> str:
     L.append(f"Lần chạy {run_id} · engine=isaac · {manifest.get('date', '?')} · hash arena {manifest.get('arena_sha256', '?')[:8]} · Isaac {manifest.get('isaacsim', '?')} · "
              f"cl0 {manifest.get('cl0_code_sha256', '?')[:8]} · vật: {manifest.get('objects', '?')}")
     L.append("")
-    L.append(f"| Phương pháp | Ô | L | n hợp lệ | Thành công | SR [Wilson 95%] | SR sạch | Δ so {ref} (p; bootstrap 95%) | t phát hiện→nhấc p50/p95 (s) | ms/bước p50/p95 |")
+    L.append(f"| Phương pháp | Ô | L | n sắp xếp (lượt) | Thành công | SR [Wilson 95%] | SR sạch | Δ so {ref} (p; bootstrap 95%) | t phát hiện→nhấc p50/p95 (s) | ms/bước p50/p95 |")
     L.append("|---|---|---|---|---|---|---|---|---|---|")
     for g in res["groups"]:
         pv = g.get("paired_vs_ref")
         d = (f"{pv['diff']:+.0%} (p={pv['mcnemar_p']:.3f}; [{fmt(pv['boot95'][0] * 100 if pv['boot95'][0] is not None else None)}, "
              f"{fmt(pv['boot95'][1] * 100 if pv['boot95'][1] is not None else None)}]%, N={pv['N']})") if pv else "—"
-        L.append(f"| {g['method']} | {g['cell']} | {g['L']} | {g['n']} | {g['k']} | {g['sr']:.0%} [{g['wilson'][0]:.0%}, {g['wilson'][1]:.0%}] | {g['sr_clean']:.0%} | {d} | "
+        L.append(f"| {g['method']} | {g['cell']} | {g['L']} | {g['n']} ({g['n_trials']}) | {g['k']} | {g['sr']:.0%} [{g['wilson'][0]:.0%}, {g['wilson'][1]:.0%}] | {g['sr_clean']:.0%} | {d} | "
                  f"{fmt(g['t_detect_to_lift_s']['p50'], 2)}/{fmt(g['t_detect_to_lift_s']['p95'], 2)} | {fmt(g['ms_step']['p50'], 1)}/{fmt(g['ms_step']['p95'], 1)} |")
     L.append("")
     L.append("Nguyên nhân thất bại (đếm, gán tự động theo `LABEL_RULES.md`):")

@@ -1,0 +1,9 @@
+# Mẫu CSV cho g0_analyze.py. Xóa các dòng ví dụ bên dưới (dòng bắt đầu bằng #) rồi điền dữ liệu thật.
+# success: 1/0.  valid: 1/0 (0 = lỗi phần cứng/ngắt khẩn cấp, lượt này bị loại và PHẢI chạy lại).
+# fail_cause (chỉ khi success=0): merge | seg_miss | grasp_point | timing | calib | slip | collision | other
+# cell: seen_C0 / novel_C0 / novel_C2 / novel_C3 (G0 và G2); seen = vật train, novel = vật test; C0..C3 = mức clutter
+# arrangement_id: cùng một sắp xếp vật (đã đánh dấu vị trí trên giấy/băng) dùng cho mọi phương pháp -> ghép cặp được
+trial_id,method,cell,arrangement_id,success,valid,fail_cause,note
+# 1,CL0,seen_C0,1,1,1,,
+# 2,CL0,novel_C2,1,0,1,merge,hai vật dính nhau thành một blob
+# 3,CL0,novel_C2,2,0,0,,servo 4 báo quá tải -> loại, chạy lại

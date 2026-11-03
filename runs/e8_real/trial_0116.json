@@ -1,0 +1,159 @@
+{
+ "trial_id": 116,
+ "method": "CL0",
+ "cell": "dev_C0",
+ "arrangement_id": "dev_C0_020",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl22",
+   "a_mm": -40.0,
+   "b_mm": -167.5,
+   "yaw_deg": 321.1
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "calib",
+  "target": "cyl22",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl22": 0.0
+   },
+   "max_lift_target_mm": 2.9,
+   "select_err_mm": 15.3,
+   "estimate_err_mm": 15.3
+  }
+ },
+ "outcome": "empty_grasp",
+ "finished": true,
+ "t_end_s": 5.24,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.46,
+   "DESCEND"
+  ],
+  [
+   2.0,
+   "CLOSE"
+  ],
+  [
+   2.7,
+   "RELEASE"
+  ],
+  [
+   3.32,
+   "RETURN"
+  ],
+  [
+   5.24,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -25.5,
+    "b": -162.5,
+    "theta": 106.62453871332775,
+    "width": 22.75,
+    "std": 0.3333333333333333
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.74,
+   "name": "freeze",
+   "data": {
+    "est": "(-25.5, -162.5, 107.04670853355483)"
+   }
+  },
+  {
+   "t": 1.46,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 2.0,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.7,
+   "name": "close_done",
+   "data": {
+    "gripper": 4.9162406175120374e-05,
+    "held": false,
+    "err_meas": 0.3385713746419124
+   }
+  },
+  {
+   "t": 2.7,
+   "name": "abort",
+   "data": {
+    "reason": "empty_grasp"
+   }
+  },
+  {
+   "t": 2.7,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 3.32,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 5.24,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 41.0,
+  "reject_wide": 0.0,
+  "reject_other": 34.0,
+  "n_ok_dets": 18.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw"
+ ],
+ "ms_step_p50": 0.6579090004379395,
+ "ms_step_p95": 32.13955560004251,
+ "n_steps": 263,
+ "wall_s": 27.92,
+ "method_exception": null,
+ "renders": 157,
+ "render_wall_s": 11.37
+}

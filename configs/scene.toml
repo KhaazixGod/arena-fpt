@@ -27,19 +27,20 @@ cmd_delay_s = 0.0                    # [default] extra delay between CL-0's send
 
 [table]                              # static platform the arm stands on; its top is the base's lowest point (base_link z = -2.4 mm, from base_so101_v2.stl)
 top_z_mm = -2.4
-x_min_mm = -300.0
-x_max_mm = 80.0
-half_width_mm = 300.0
+x_min_mm = -31.0    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): plate far edge = rear of the base (waveshare plate at x=-31), user: arm at the edge away from the belt
+x_max_mm = 148.5    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): plate depth 18 cm perpendicular to the belt (user confirmed 31/10)
+half_width_mm = 140.0    # REAL LAYOUT, user 31/10: plate 18 cm perpendicular to the belt, 28 cm along it (sketch: 36-64 cm from the left end); arm on the plate, along-belt position not measured, assumed centred
 thickness_mm = 40.0
 
 [belt]
+static_center_a_mm = -40.0    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): belt stopped: arrangements centred here, inside both the reach (+-100) and the camera view (a <= 56)
 dir_deg = 90.0              # direction of travel in W (calib.json belt_dir_deg); 90 = along +y
 z_mm = -2.4                 # belt SURFACE height in W (calib.json z_plane_mm). USER 29/10: "mat bang nam cung muc nen base cua arm" => flush with the table top / base underside (-2.4).
                             # Was -60 (E1 first run, archived runs/e1/archive_belt_z-60). Consequence: a 200 mm band is reachable over only 58 mm of belt; see object_band_x_mm.
-object_band_x_mm = [130.0, 230.0]   # [APPROVED by user 29/10: "dc, de trong khoang day di"; real belt is already built at 200 mm wide, flush with the arm base surface] objects spawn only inside this x band (100 mm wide, 264 mm longest pick segment, CL-0 reach table at z=-2.4, belt speed <= ~94 mm/s)
-center_a_mm = 0.0           # belt centre point along u
-center_b_mm = -190.0        # belt centre line offset along v (left of travel); u=(0,1), v=(-1,0) => centre line at x = +190 mm
-length_mm = 600.0
+object_band_x_mm = [155.0, 255.0]    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): approved 100 mm band moved with the belt: near half, 116-216 mm from the pan axis, common pick segment 200 mm, <= 71 mm/s (kinematics)
+center_a_mm = -45.0    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): belt 91 cm, pan axis 50 cm from the left end [plate centre from the sketch; arm assumed centred, measure at the robot]
+center_b_mm = -249.0    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): near belt edge x = 149 (110 mm from the pan axis), centre line x = 249
+length_mm = 910.0    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): sketch
 width_mm = 200.0            # user measured 20 cm
 thickness_mm = 20.0
 friction = 1.0
@@ -48,10 +49,11 @@ counter_mm_per_step_true = 0.05    # [default, not measured] true belt travel pe
 counter_rate_hz = 100.0            # [default] how often the virtual microcontroller reports the pulse count (S lines); the real Uno firmware rate is unknown
 
 [camera]
+window_a_mm = [-400.0, 56.0]    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): CL-0's top-down window along the belt, limited by the camera view (0.42 Mpx)
 fps = 30
 warm_renders = 8             # renders discarded at every trial reset: flush the RTX temporal history so a trial's images do not depend on the previous trial (E7, 30/10)
 latency_true_s = 0.10        # [default] true camera->PC delay of the simulated camera; arena.toml camera.latency_s is what CL-0 BELIEVES (calib_from_scene measures it: they should agree)
-xyz_mm = [190.0, 0.0, 510.0]   # above the belt centre, looking straight down; image right = belt travel direction u [default, not a measurement]
+xyz_mm = [249.0, -280.0, 497.6]    # REAL LAYOUT 31/10 (docs_input/layout_sketch_user.png + user's corrections): 22 cm from the left end, 10 cm in from the far edge = over the centre line, 50 cm above the belt, straight down
 width = 1280
 height = 720
 hfov_deg = 69.4              # RealSense D435i colour sensor

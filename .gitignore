@@ -1,0 +1,20 @@
+# Python caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Too big for GitHub (100 MB per file) or regenerable; kept only on the machine that made them
+runs/**/episodes/
+runs/**/lerobot/
+runs/**/checkpoints/
+runs/**/videos/
+runs/act_smoke/
+# per-tick ground truth of the runs from 1/11 on (older runs already in git keep theirs); re-run the cell to get it back
+runs/e6_demos_real/*_gt.npz
+runs/e8_*/*_gt.npz
+runs/e9_*/*_gt.npz
+runs/e10_*/*_gt.npz
+runs/e11_*/*_gt.npz
+
+# downloaded weights archive (the unzipped weights are kept)
+third_party/ggcnn_weights/*.zip

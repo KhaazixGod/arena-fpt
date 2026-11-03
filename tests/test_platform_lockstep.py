@@ -71,3 +71,16 @@ def test_reset_rejects_flung_object(fake_platform):
     except SimFault:
         raised = True
     assert raised
+
+
+def test_depth_reaches_frame_and_image(fake_platform):
+    """pixel_grasp gets only frame.img from cl0's controller, so the depth must travel on the image too."""
+    plat, w = fake_platform
+    w.depth_enabled, plat.depth = True, True
+    w.last_depth_mm = lambda: np.full((1, 1), 500.0)
+    plat.reset_trial([])
+    fr = None
+    for _ in range(10):
+        plat.wait_tick()
+        fr = plat.poll_frame() or fr
+    assert fr.depth_mm[0, 0] == 500.0 and fr.img.depth_mm[0, 0] == 500.0

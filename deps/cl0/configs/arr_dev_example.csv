@@ -1,0 +1,15 @@
+# Ví dụ tờ sắp xếp cho lượt thử / tinh chỉnh (dev): cùng cột với make_arrangements.py (arrangement_id,first_method,idx,object,x_mm,y_mm,yaw_deg).
+#   x_mm   : dọc băng so với vật đầu tiên (idx = 1 có x = 0), dương = về phía hạ lưu (băng chạy tới)
+#   y_mm   : từ mép TRÁI băng, nhìn theo chiều băng chạy (băng 150 mm => giữa băng là 75)
+#   yaw_deg: ngược chiều kim đồng hồ nhìn từ trên xuống, so với hướng băng chạy
+# Tên vật: để chạy --sim phải là tên trong cl0/sim/scene.py (default_library); với băng thật hãy đổi thành tên vật dev của bạn.
+# 1-3: một vật, dành cho lượt tĩnh (--speed 0) và băng chậm; 4-5: hai/ba vật cách nhau (đã đủ xa để không chạm nhau).
+arrangement_id,first_method,idx,object,x_mm,y_mm,yaw_deg
+1,A,1,disc30,0,75,0
+2,A,1,box25x50,0,75,0
+3,A,1,box25x50,0,75,90
+4,A,1,disc30,0,50,0
+4,A,2,box25x50,110,95,45
+5,A,1,ellipse28x48,0,75,120
+5,A,2,disc22,90,45,0
+5,A,3,lowcon30,170,100,0

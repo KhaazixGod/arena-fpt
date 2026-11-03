@@ -138,6 +138,7 @@ def main(argv=None) -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--config", default=os.path.join(HERE, "configs", "arena.toml"))
     ap.add_argument("--calib-dir", default=os.path.join(HERE, "runs", "calib"))
+    ap.add_argument("--scene-file", default="", help="another scene TOML (with its own --calib-dir), default configs/scene.toml")
     ap.add_argument("--objects", default="interim", choices=["interim", "sim"], help="interim = 6 E2 primitives; sim = the E5 generated set (configs/objects_sim.json)")
     ap.add_argument("--arrangements-dir", default="", help="default: arrangements/ (interim) or arrangements/sim/ (sim)")
     ap.add_argument("--tau", type=float, default=0.4, help="tau_s in L = v tau / w [assumption 0.4 s, E1 report]")
@@ -181,7 +182,7 @@ def main(argv=None) -> int:
     calib = PlaneCalib.load(calib_path)
     if cfg.belt.mm_per_step <= 0:
         cfg.belt.mm_per_step = calib.mm_per_step              # what build_stack does: the platform's belt readout uses the calibrated mm/pulse
-    sc = S.load_scene_cfg()
+    sc = S.load_scene_cfg(a.scene_file or None)
     for kv in a.scene_set:
         k, val = kv.split("=", 1); sec, key = k.split(".")
         sc.setdefault(sec, {})
@@ -208,7 +209,7 @@ def main(argv=None) -> int:
 
     manifest = {"engine": "isaac", "isaacsim": md.version("isaacsim"), "date": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
                 "argv": sys.argv if argv is None else argv, "arena_sha256": arena_hash(), "cl0_code_sha256": code_sha256(),
-                "arena_toml_sha256": sha256_file(a.config), "scene_toml_sha256": sha256_file(os.path.join(HERE, "configs", "scene.toml")),
+                "arena_toml_sha256": sha256_file(a.config), "scene_toml_sha256": sha256_file(a.scene_file or os.path.join(HERE, "configs", "scene.toml")), "scene_file": a.scene_file or "configs/scene.toml",
                 "usd_sha256": sha256_file(os.path.join(HERE, sc["robot"]["usd"])), "calib_sha256": sha256_file(calib_path), "background_sha256": sha256_file(bg_path),
                 "sheets_sha256": {c: sha256_file(os.path.join(a.arrangements_dir, f"{c}.csv")) for c in sheets},
                 "gpu": subprocess.run(["nvidia-smi", "--query-gpu=name,driver_version", "--format=csv,noheader"], capture_output=True, text=True).stdout.strip(),

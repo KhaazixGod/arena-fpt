@@ -9,6 +9,22 @@ Mọi phương pháp chạy qua **một giao diện**, trên **cùng các tờ s
 | `ARENA_SETUP_REPORT.md` | nhật ký từng giai đoạn kèm bằng chứng |
 | `CLAUDE.md` | luật làm việc |
 
+## Cài trên máy khác
+Code tìm CL-0 và bộ công cụ G0 **cạnh** thư mục này (`../cl0`, `../dir1`); git giữ bản sao của chúng trong `deps/` (cùng hai file kế hoạch).
+```bash
+git clone -b <nhánh> https://github.com/KhaazixGod/arena-fpt.git arena
+cd arena && python setup_workspace.py     # chép deps/cl0 -> ../cl0, deps/dir1 -> ../dir1 (không ghi đè); in hash đóng băng CL-0, phải là 006af1c9…
+```
+Môi trường đã dùng (Linux, RTX 3070 Ti 8 GB):
+
+| môi trường | gói chính | dùng cho |
+|---|---|---|
+| Isaac (`~/env_isaac`, Python 3.12) | `isaacsim 6.0.0.1`, torch 2.11, numpy 2.3, opencv-python-headless 4.13 | `run_arena`, `calib_from_scene.py` |
+| `~/venvs/cl0` (Python 3.12) | numpy 2.2, opencv-python-headless 4.13, lerobot 0.6.1, pytest | test, báo cáo, CL-0 |
+| `~/venvs/lerobot_data` | thêm `datasets 4.8`, `accelerate 1.15` | đổi demo sang LeRobotDataset, huấn luyện ACT, phục vụ ACT qua `remote_server.py` |
+
+Không có trong git (quá 100 MB/file hoặc sinh lại được): demo thô và bộ LeRobot của `runs/e6_demos_real` (ghi lại bằng `scripts/e6_record_400.sh` rồi `to_lerobot.py`), checkpoint ACT `runs/act_j0_s1000` (huấn luyện lại ≈ 2,3 giờ, lệnh trong `ARENA_SETUP_REPORT.md` E11), GT từng tick (`*_gt.npz`) của các lượt từ 1/11. Chạy song song 2 Isaac đã kiểm cho kết quả trùng (`runs/e11_parallel_check`). Trên Windows: hash đóng băng CL-0 dùng dấu phân cách đường dẫn của hệ điều hành nên sẽ **khác** 006af1c9… dù mã y hệt `[chưa kiểm trên Windows]`; so mã bằng `git diff`, đừng so hash.
+
 ## Chạy nhanh
 ```bash
 cd ~/Projects/dir1_tools/arena

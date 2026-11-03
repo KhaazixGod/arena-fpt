@@ -1,0 +1,75 @@
+# Arena scene parameters (Isaac Sim). Separate from arena.toml because cl0's config loader rejects unknown keys.
+# Units here: mm and degrees (CL-0's units); arena/scene.py converts to metres for USD. World frame W = SO-101 base_link (CL-0's W), z up.
+# Defaults of 29/10/2026: the user left these blank in the arena prompt ("dung mac dinh"); every [default] is a proposal, not a measurement.
+
+[physics]
+hz = 300                    # PhysX steps per simulated second. 300 = 6 x 50 Hz control = 10 x 30 fps camera: tick and frame boundaries fall on whole steps (E2, 29/10; E0/E1 ran at 240)
+# E2 finding (29/10): the renderer follows PhysX only after a stepped simulate()+fetch_results(); a bare joint teleport is NOT drawn until one step; app.update() inside the loop adds extra physics steps (do not call it).
+
+[robot]
+usd = "assets/so101_lerobot/so101_new_calib.usda"    # converted from the official so101_new_calib.urdf (sha256 3a65d2d3...), arena/assets/so101_src
+prim = "/World/Robot"
+articulation_root = "/World/Robot/Geometry/base_link"
+stiffness_nm_per_deg = 17.422226     # real STS3215 values the user already uses (so101_env joint_drives.yaml, 13/10/2026), per DEGREE
+damping_nms_per_deg = 0.047665
+max_force_nm = 2.5                   # STS3215 stall torque is ~2.5-2.9 N*m; the official URDF's effort=10 is not a servo limit [chua kiem]
+gripper_deg_at_0 = -10.0             # LeRobot gripper.pos 0..100 -> URDF joint -10..100 deg, LINEAR [uoc luong, E8 must check on the real gripper]
+gripper_deg_at_100 = 100.0
+gripper_collision = "convexDecomposition"   # E2 finding: the converted USD's single convex hull per link turns the jaw gap into a funnel (runs/e2/jaw_hull.json); "convexHull" = as converted
+decomp_max_hulls = 32
+decomp_voxel_resolution = 500000
+decomp_error_pct = 1.0
+gripper_max_force_nm = 2.5          # = max_force_nm (the STS3215 figure the user already uses). E2 probe (runs/e2/gp_*): 0.5 N*m dropped every object, 2.5 N*m held 3/3. [real grip force not measured, E8]
+gripper_max_vel_deg_s = 150.0        # [assumption] servo speed limit of the gripper joint (CL-0's own simulator uses 150 gripper-units/s). E2 probe: WITHOUT it a closing jaw launches the object (vmax 0.46 m/s, 0/3 held). E8 must measure the real closing speed
+pad_friction = 1.5                   # [assumption, E8 must measure] rubber-like pads. E4 (runs/e4/var_*, ORACLE, 20 moving-belt trials): 1.0 -> ~67 %, 1.5 + torsion -> 80 % (16/20; 3 of the 4 failures = the 16 mm tall disc)
+torsional_patch_radius_mm = 5.0     # [assumption] pads have an area: torsional friction on every robot collider (PhysX point contacts let a 2-point grasp pivot freely; E4)
+cmd_delay_s = 0.0                    # [default] extra delay between CL-0's send() and the drive target changing (the real serial bus is ~10-20 ms, not measured; E8)
+
+[table]                              # static platform the arm stands on; its top is the base's lowest point (base_link z = -2.4 mm, from base_so101_v2.stl)
+top_z_mm = -2.4
+x_min_mm = -300.0
+x_max_mm = 80.0
+half_width_mm = 300.0
+thickness_mm = 40.0
+
+[belt]
+dir_deg = 90.0              # direction of travel in W (calib.json belt_dir_deg); 90 = along +y
+z_mm = -2.4                 # belt SURFACE height in W (calib.json z_plane_mm). USER 29/10: "mat bang nam cung muc nen base cua arm" => flush with the table top / base underside (-2.4).
+                            # Was -60 (E1 first run, archived runs/e1/archive_belt_z-60). Consequence: a 200 mm band is reachable over only 58 mm of belt; see object_band_x_mm.
+object_band_x_mm = [130.0, 230.0]   # [APPROVED by user 29/10: "dc, de trong khoang day di"; real belt is already built at 200 mm wide, flush with the arm base surface] objects spawn only inside this x band (100 mm wide, 264 mm longest pick segment, CL-0 reach table at z=-2.4, belt speed <= ~94 mm/s)
+center_a_mm = 0.0           # belt centre point along u
+center_b_mm = -190.0        # belt centre line offset along v (left of travel); u=(0,1), v=(-1,0) => centre line at x = +190 mm
+length_mm = 600.0
+width_mm = 200.0            # user measured 20 cm
+thickness_mm = 20.0
+friction = 1.0
+color = [0.12, 0.12, 0.13]
+counter_mm_per_step_true = 0.05    # [default, not measured] true belt travel per encoder pulse; the arena's CL-0 learns it in calib_from_scene (calib.json mm_per_step)
+counter_rate_hz = 100.0            # [default] how often the virtual microcontroller reports the pulse count (S lines); the real Uno firmware rate is unknown
+
+[camera]
+fps = 30
+warm_renders = 8             # renders discarded at every trial reset: flush the RTX temporal history so a trial's images do not depend on the previous trial (E7, 30/10)
+latency_true_s = 0.10        # [default] true camera->PC delay of the simulated camera; arena.toml camera.latency_s is what CL-0 BELIEVES (calib_from_scene measures it: they should agree)
+xyz_mm = [190.0, 0.0, 510.0]   # above the belt centre, looking straight down; image right = belt travel direction u [default, not a measurement]
+width = 1280
+height = 720
+hfov_deg = 69.4              # RealSense D435i colour sensor
+near_m = 0.01
+far_m = 20.0
+
+[light]
+dome_intensity = 300.0       # E0: a DistantLight alone renders black; a DomeLight lights the scene
+
+[reset]
+settle_s = 0.5               # physics seconds with the belt stopped after placing objects before a trial starts
+home_tol_deg = 0.5           # reset is a fault (valid=0) if the arm is farther than this from home after settling
+
+[parking]                    # where unused pool objects wait (a static shelf next to the table, outside the camera view)
+x_min_mm = -1200.0
+x_max_mm = -400.0
+half_width_mm = 400.0
+
+[objects]
+max_depenetration_m_s = 0.5      # [assumption] PhysX default 3 m/s launched light objects out of the jaws (E2 diag)
+torsional_patch_radius_mm = 5.0  # [assumption] same as the pads (E4)

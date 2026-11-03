@@ -39,7 +39,7 @@ def test_sheet_in_band_and_levels(objset, cell, scene_cfg):
                 assert math.hypot(p.x_mm - q.x_mm, p.y_mm - q.y_mm) >= diam[p.obj] / 2 + diam[q.obj] / 2 + min_pair - 0.2
         st = to_placements(arr, 0.0, scene_cfg, specs)
         a = [p["a_mm"] for p in st]
-        assert abs(min(a) + max(a)) < 1e-6
+        assert abs(0.5 * (min(a) + max(a)) - scene_cfg["belt"].get("static_center_a_mm", 0.0)) < 1e-6
         mv = to_placements(arr, 37.5, scene_cfg, specs)
         assert min(p["a_mm"] - specs[p["name"]].footprint_radius_mm for p in mv) >= belt_start + 5.0 - 1e-6
         assert max(p["a_mm"] for p in mv) >= -150.0 - 1e-6

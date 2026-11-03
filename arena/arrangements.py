@@ -65,7 +65,7 @@ def generate(cell: str, n: int, seed: int, objects_csv: str, scene_cfg: dict) ->
 
 def to_placements(arr, speed_mm_s: float, scene_cfg: dict, specs: Dict[str, object]) -> List[dict]:
     """cl0.arrangements.Arrangement -> [{"name", "a_mm", "b_mm", "yaw_deg"}] in the belt frame of the scene.
-    Static belt: the arrangement is centred at a = 0 (middle of the pick segment).  Moving belt: the most downstream object starts at
+    Static belt: the arrangement is centred at belt.static_center_a_mm (inside the pick segment and the camera view).  Moving belt: the most downstream object starts at
     A_DOWNSTREAM_START_MM, shifted downstream if needed so that every object is on the belt."""
     _, b_left = band_geometry(scene_cfg)
     bc = scene_cfg["belt"]
@@ -78,7 +78,7 @@ def to_placements(arr, speed_mm_s: float, scene_cfg: dict, specs: Dict[str, obje
         if lo < belt_start + A_BELT_START_PAD_MM:
             c += belt_start + A_BELT_START_PAD_MM - lo
     else:
-        c = -0.5 * (min(xs) + max(xs))
+        c = float(bc.get("static_center_a_mm", 0.0)) - 0.5 * (min(xs) + max(xs))
     return [{"name": it.obj, "a_mm": it.x_mm + c, "b_mm": b_left - it.y_mm, "yaw_deg": it.yaw_deg} for it in arr.items]
 
 

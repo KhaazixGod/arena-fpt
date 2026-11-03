@@ -34,6 +34,11 @@ class _StepClock:
         return (self.k - self.k0) / self.hz
 
 
+class ImageWithDepth(np.ndarray):
+    """A BGR image that also carries ``depth_mm``, for detectors that receive only the image (cl0's controller calls detect(frame.img, ...)); a plain array otherwise."""
+    depth_mm = None
+
+
 def _whole(x: float, what: str) -> int:
     n = int(round(x))
     if abs(x - n) > 1e-6 or n < 1:
@@ -178,6 +183,9 @@ class IsaacPlatform:
             a = time.perf_counter()
             img = self.world.render_bgr()
             depth = self.world.last_depth_mm() if self.depth else None
+            if depth is not None:
+                img = img.view(ImageWithDepth)
+                img.depth_mm = depth
             self.stats["renders"] += 1; self.stats["render_wall_s"] += time.perf_counter() - a
         else:
             img, depth = np.zeros((1, 1, 3), np.uint8), None       # a NEW object per frame: the GT tap keys capture-time snapshots by id(img)

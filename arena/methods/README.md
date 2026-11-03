@@ -111,7 +111,8 @@ python ~/Projects/dir1_tools/arena/remote_server.py --factory mypkg.mymethod:mak
 - **Lặp lại:**
   - Mặc định, mỗi lượt dựng lại cảnh PhysX, nên vật lý không phụ thuộc lượt trước.
   - Ảnh render có nhiễu ngẫu nhiên nhỏ (trung bình 0,1–0,4 mức xám, như nhiễu cảm biến). Vì vậy phương pháp **dùng ảnh** không lặp lại trùng từng bit.
-  - Khi so sánh, chạy `--reps 3`. Báo cáo có dòng "nhóm lặp cùng kết quả" cho mỗi phương pháp.
+  - Đo trên CL-0 (`runs/e3_repeat_cl0`): 40/40 nhóm lặp cho cùng kết quả, nên nhiễu này gần như không đổi kết cục. Muốn số chắc hơn thì **thêm sắp xếp (`--n`)**, đừng thêm lần lặp: `report.py` gộp các lần lặp của một sắp xếp thành một đơn vị thống kê, nên `--reps` không làm khoảng tin cậy hẹp lại.
+  - Với phương pháp mới, chạy `--reps 2` trên một mẫu nhỏ để kiểm nó có nhạy với nhiễu không (dòng "nhóm lặp cùng kết quả" trong báo cáo).
   - Phương pháp không dùng ảnh (`ORACLE`, `NOOP`) lặp lại trùng từng bit.
 - Tốc độ:
   - phương pháp dùng ảnh: khoảng 35–60 giây thật mỗi lượt (render 30 fps chiếm phần lớn);

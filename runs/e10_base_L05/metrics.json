@@ -1,0 +1,129 @@
+{
+ "groups": [
+  {
+   "method": "CL0",
+   "cell": "dev_C2",
+   "L": "0.5",
+   "n": 20,
+   "n_trials": 20,
+   "n_ties": 0,
+   "k": 6,
+   "sr": 0.3,
+   "wilson": [
+    0.14547724402157294,
+    0.518972820052479
+   ],
+   "k_clean": 5,
+   "sr_clean": 0.25,
+   "wilson_clean": [
+    0.11186170069997625,
+    0.46870087939258864
+   ],
+   "t_detect_to_lift_s": {
+    "p50": 2.36,
+    "p95": 2.4379999999999997,
+    "n": 12
+   },
+   "ms_step": {
+    "p50": 0.635,
+    "p95": 46.6315
+   },
+   "wall_s_mean": 44.821,
+   "outcomes": {
+    "picked_hold_complete": 6,
+    "late": 2,
+    "ik_fail": 7,
+    "dropped_in_hold": 5
+   }
+  },
+  {
+   "method": "ORACLE",
+   "cell": "dev_C2",
+   "L": "0.5",
+   "n": 20,
+   "n_trials": 20,
+   "n_ties": 0,
+   "k": 16,
+   "sr": 0.8,
+   "wilson": [
+    0.583982565906683,
+    0.9193423379822393
+   ],
+   "k_clean": 14,
+   "sr_clean": 0.7,
+   "wilson_clean": [
+    0.4810271799475211,
+    0.8545227559784271
+   ],
+   "paired_vs_ref": {
+    "ref": "CL0",
+    "N": 20,
+    "b_only_this_wins": 10,
+    "c_only_ref_wins": 0,
+    "diff": 0.5,
+    "mcnemar_p": 0.001953125,
+    "boot95": [
+     0.3,
+     0.7
+    ]
+   },
+   "t_detect_to_lift_s": {
+    "p50": 2.38,
+    "p95": 2.428,
+    "n": 17
+   },
+   "ms_step": {
+    "p50": 0.63,
+    "p95": 15.942
+   },
+   "wall_s_mean": 22.991999999999997,
+   "outcomes": {
+    "picked_hold_complete": 16,
+    "late": 3,
+    "dropped_in_hold": 1
+   }
+  }
+ ],
+ "causes": [
+  {
+   "method": "CL0",
+   "cell": "dev_C2",
+   "L": "0.5",
+   "merge": 0,
+   "seg_miss": 0,
+   "grasp_point": 0,
+   "timing": 2,
+   "calib": 0,
+   "slip": 4,
+   "collision": 8,
+   "other": 0
+  },
+  {
+   "method": "ORACLE",
+   "cell": "dev_C2",
+   "L": "0.5",
+   "merge": 0,
+   "seg_miss": 0,
+   "grasp_point": 0,
+   "timing": 2,
+   "calib": 0,
+   "slip": 0,
+   "collision": 2,
+   "other": 0
+  }
+ ],
+ "bounds": {
+  "ORACLE|dev_C2|L0.5": {
+   "sr": 0.8,
+   "n": 20,
+   "wilson": [
+    0.583982565906683,
+    0.9193423379822393
+   ]
+  }
+ },
+ "repeat": null,
+ "n_rows": 40,
+ "n_invalid": 0,
+ "within_reps": {}
+}

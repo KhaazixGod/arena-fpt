@@ -1,0 +1,123 @@
+# Cấu hình CL-0 — SINH TỰ ĐỘNG từ giá trị mặc định trong cl0/config.py (python -m cl0.config > configs/config_template.toml).
+# Đơn vị: mm, giây, độ (trừ ghi chú). Khoá lạ => báo lỗi. Chỉ cần ghi những khoá bạn muốn đổi; khoá vắng mặt lấy mặc định.
+#
+# PHẢI chỉnh cho máy của bạn (mặc định chỉ là ví dụ):
+#   [camera]   device, width/height/fps (đúng độ phân giải đã hiệu chuẩn), latency_s (đo bằng `calibrate belt`)
+#   [belt]     kind + serial_port + cmd_speed/cmd_stop/line_regex (khớp firmware của bạn), mm_per_step (đo bằng `calibrate belt`), speed_mm_s, width_mm
+#   [robot]    port, robot_id (đúng tên đã hiệu chuẩn bằng lerobot-calibrate), tcp_offset_mm (điểm bạn coi là tâm kẹp), home_q_deg/hold_q_deg
+#   [perception.grasp] gripper_w_mm (độ mở hữu dụng đo bằng thước ở giá trị robot.gripper_open)
+#   [executor] a_pick_min/a_pick_max (từ `python -m cl0.tune reach`), lead_s (từ `calibrate lag`)
+# Sau khi tinh chỉnh xong: `python -m cl0.freeze --config <file>` rồi KHÔNG đổi nữa (xem README_CL0.md).
+
+calib_path = "calib.json"
+background_path = "background.npz"
+
+[camera]
+device = 0    # chỉ số /dev/videoN hoặc đường dẫn. D435i tạo ~6 nút /dev/video*; nút màu là nút có YUYV 1920x1080 (v4l2-ctl --list-formats-ext) [chưa kiểm: chưa cắm]
+width = 1920    # 27/10: RealSense D435i, người dùng chọn 1920x1080 (phải giữ nguyên từ lúc hiệu chuẩn tới G0)
+height = 1080
+fps = 30
+fourcc = "YUYV"    # cảm biến màu D435i qua V4L2 xuất YUYV, không có MJPG [chưa kiểm trên camera thật]; YUYV 1080p30 ≈ 124 MB/s => cắm cổng USB 3
+latency_s = 0.1    # độ trễ camera -> PC đã đo (§3.1 dòng 2); dùng để quy dấu thời gian khung về lúc chụp
+
+[belt]
+speed_mm_s = 50.0    # tốc độ chạy trong lượt thử (chọn theo L = v·tau/w, §3.1)
+mm_per_step = 0.0    # điền sau khi hiệu chuẩn (cl0.calibrate belt)
+textured = false
+period_mm = 0.0    # chu vi băng, cần khi textured = true
+accel_mm_s2 = 200.0    # dốc tăng/giảm tốc của băng (firmware); dùng cho mô hình s(t) khi không có bộ đếm
+width_mm = 200.0    # bề rộng băng (cho cửa sổ nhìn / sinh sắp xếp); 27/10: người dùng đo 20 cm. Rộng 200 mm cần mặt băng thấp hơn đế ≳ 50 mm (xem SETUP_REPORT)
+kind = "counter"    # 27/10: Arduino Uno/Nano báo số xung; người dùng chọn đi qua ROS 2 (phương án A, so101_env/src/so101_belt_bridge)
+serial_port = "/tmp/cl0_belt"    # pty do belt_bridge tạo (giao thức V/S y như mặc định bên dưới); chỉ tồn tại khi belt_bridge đang chạy
+serial_baud = 115200
+serial_open_delay_s = 2.0    # chờ sau khi mở cổng: Arduino/ESP tự reset khi mở cổng serial (DTR) và bỏ qua lệnh trong lúc khởi động
+cmd_speed = "V {steps_per_s:.2f}\n"    # dòng lệnh đặt tốc độ; trường: steps_per_s, v_mm_s
+cmd_stop = "V 0\n"
+line_regex = "^S[ ,:]+(-?\\d+)"    # nhóm 1 = số xung tích luỹ (kind = counter)
+serial_latency_s = 0.003    # trễ từ lúc vi điều khiển đếm tới lúc PC nhận dòng
+cmd_delay_s = 0.05    # trễ từ lúc PC gửi lệnh tới lúc băng bắt đầu đổi tốc độ (kind = model)
+
+[robot]
+port = "/dev/ttyACM0"
+robot_id = "my_follower"
+urdf = ""    # rỗng = dùng số liệu URDF chính thức nhúng sẵn
+tcp_offset_mm = [0.0, 0.0, 0.0]    # trong khung gripper_frame_link
+tilt_deg = 90.0    # góc chúc cố định của trục tiến vào (90 = thẳng xuống)
+joint_margin_deg = 3.0
+q_dot_max_deg_s = 150.0    # chặn tốc độ khớp ở lệnh gửi đi (an toàn)
+home_q_deg = [0.0, -49.0, 48.0, 91.0, 0.0]    # ví dụ; đặt lại theo thiết lập của bạn
+hold_q_deg = [0.0, -37.0, 41.0, 86.0, 0.0]    # tư thế giữ vật 2 s sau khi nhấc (cố định trong W)
+gripper_open = 60.0    # giá trị gripper.pos (0–100) khi mở để kẹp; độ mở hữu dụng w (mm) tương ứng điền ở perception.grasp.gripper_w_mm
+gripper_closed = 0.0
+gripper_held_margin = 6.0    # kẹp dừng cao hơn closed + margin => có vật
+max_relative_target = 0.0    # 0 = không dùng của LeRobot (bộ thực thi tự chặn tốc độ)
+
+[executor]
+control_hz = 50.0
+z_grasp_above_belt_mm = 10.0    # độ cao TCP khi kẹp so với mặt băng (cố định, CL-0 không biết chiều cao vật)
+pre_height_mm = 40.0
+lift_height_mm = 60.0
+min_z_above_belt_mm = 3.0    # chặn cứng: không bao giờ ra lệnh thấp hơn
+omega_xy = 7.0    # rad/s, bộ lọc tới hạn trong hệ băng
+vmax_xy = 300.0    # mm/s trong hệ băng
+omega_z = 9.0
+vmax_z = 150.0
+omega_yaw = 9.0
+vmax_yaw = 360.0    # độ/s
+tol_xy_mm = 4.0
+tol_meas_xy_mm = 6.0    # sai lệch đo được (FK của khớp đọc về) cho phép trước khi hạ
+tol_z_mm = 2.5
+tol_yaw_deg = 6.0
+settle_s = 0.2
+lead_s = 0.0    # dẫn trước bù độ trễ cánh tay: dùng s(t + lead)  [đo bằng cl0.calibrate lag]
+lag_ki = 2.5    # 1/s; tích phân bù (lệnh gốc − đo được) cho trễ servo / võng trọng lực; 0 = tắt
+lag_int_max_mm = 25.0
+lag_int_window_mm = 30.0    # chỉ tích phân khi sai lệch nhỏ hơn mức này
+lag_int_vmax_mm_s = 40.0    # và khi bộ lọc gần tĩnh (tốc độ hệ băng nhỏ hơn mức này)
+freeze_radius_mm = 45.0    # ngừng cập nhật mục tiêu khi TCP vào gần (đầu kẹp che vật)
+arm_exclusion_mm = 55.0    # bỏ phát hiện có tâm trong bán kính này quanh TCP
+close_wait_s = 0.7
+lift_wait_s = 0.6
+hold_s = 2.0
+move_hold_s = 1.0
+trial_timeout_s = 20.0
+t_to_grasp_s = 1.8    # ước lượng thời gian từ lúc chọn tới lúc kẹp; vật phải nằm trong vùng với tới ngay lúc chọn, giữa chừng, lúc kẹp và lúc nhấc
+follow_margin_s = 1.0    # vật còn phải ở trong vùng với tới thêm chừng này sau khi kẹp (tới hết lúc nhấc)
+ik_fail_abort_s = 0.6
+t_after_settle_s = 2.1    # từ lúc ổn định ở độ cao chờ tới lúc nhấc xong (hạ + khép + nhấc); dùng kiểm khả thi trước khi hạ
+lift_timeout_s = 2.0    # quá hạn (hoặc IK hỏng khi nhấc) thì vẫn chuyển sang tư thế giữ
+hard_timeout_s = 45.0    # chốt cứng cho cả lượt: sau mức này mở kẹp và về nhà
+move_peak_deg_s = 150.0    # đỉnh tốc độ khớp khi di chuyển trong không gian khớp (kéo dài thời gian nếu cần)
+a_pick_min = -1e+09    # cửa sổ nhặt bổ sung theo a (W-căn-theo-băng); mặc định không giới hạn
+a_pick_max = 1e+09
+
+[track]
+gate_mm = 12.0
+n_confirm = 3
+window = 6
+max_std_mm = 5.0    # độ lệch chuẩn lớn hơn => chưa ổn định (vật đang trượt / mặt nạ nhảy)
+lost_s = 1.5
+
+[perception]
+res_mm = 0.5
+k_sigma = 4.0    # ngưỡng = max(k_sigma * sigma_nền, t_min)
+t_min = 18.0    # mức xám tối thiểu (tối đa trên 3 kênh)
+sigma_floor = 3.0
+photometric_comp = true    # trừ độ lệch trung vị toàn ảnh (bù đổi sáng/phơi sáng)
+open_mm = 1.5
+close_mm = 3.0
+min_area_mm2 = 150.0
+max_area_mm2 = 12000.0    # lớn hơn: coi là cánh tay/bàn tay, bỏ
+edge_margin_px = 3
+split = "none"    # "none" (CL-0 gốc) | "watershed" (nút tinh chỉnh)
+shift_search_mm = 0.0
+
+[perception.grasp]
+dt_plateau_frac = 0.95    # vùng "cao nguyên" DT: DT >= frac * DT_max; điểm kẹp = điểm cao nguyên gần tâm cao nguyên nhất
+isotropic_ratio = 1.15    # tỉ lệ trục (căn bậc hai tỉ số trị riêng) dưới ngưỡng này => coi là đẳng hướng
+isotropic_theta_deg = 90.0    # góc trục khép (hệ băng) dùng cho vật đẳng hướng; 90 = khép ngang băng
+yaw_mode = "pca"    # "pca" | "local"
+local_radius_mm = 25.0
+gripper_w_mm = 40.0    # độ mở kẹp hữu dụng w  [điền sau khi đo, §3.1 dòng 3]
+width_margin_mm = 4.0    # bỏ vật nếu bề ngang tại điểm kẹp > w - margin
+min_dt_mm = 1.5    # bán kính nội tiếp tối thiểu: mỏng hơn thì không kẹp được

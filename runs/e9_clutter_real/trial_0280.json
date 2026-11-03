@@ -1,0 +1,123 @@
+{
+ "trial_id": 280,
+ "method": "CL0",
+ "cell": "dev_C2",
+ "arrangement_id": "dev_C2_001",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 1,
+ "placements": [
+  {
+   "name": "cyl22",
+   "a_mm": -34.1,
+   "b_mm": -180.1,
+   "yaw_deg": 107.0
+  },
+  {
+   "name": "box21",
+   "a_mm": -10.100000000000001,
+   "b_mm": -230.3,
+   "yaw_deg": 214.4
+  },
+  {
+   "name": "mug24",
+   "a_mm": -69.9,
+   "b_mm": -216.5,
+   "yaw_deg": 195.5
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "seg_miss",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl22": 0.0,
+    "box21": 0.1,
+    "mug24": 0.1
+   }
+  }
+ },
+ "outcome": "no_target",
+ "finished": true,
+ "t_end_s": 22.12,
+ "phases": [
+  [
+   20.02,
+   "RELEASE"
+  ],
+  [
+   20.62,
+   "RETURN"
+  ],
+  [
+   22.12,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 20.02,
+   "name": "abort",
+   "data": {
+    "reason": "no_target"
+   }
+  },
+  {
+   "t": 20.02,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 20.62,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 22.12,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 598.0,
+  "reject_wide": 598.0,
+  "reject_other": 0.0,
+  "n_ok_dets": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw"
+ ],
+ "ms_step_p50": 27.27844100445509,
+ "ms_step_p95": 28.396247506316286,
+ "n_steps": 1107,
+ "wall_s": 114.39,
+ "method_exception": null,
+ "renders": 663,
+ "render_wall_s": 46.63
+}

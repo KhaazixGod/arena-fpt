@@ -340,3 +340,126 @@ Lượt hỏng của `ORACLE`:
   * Với cảnh tĩnh, hai khung liên tiếp chênh **trung bình 0,08–0,36 mức xám**; 0,3–2,5 % số điểm ảnh lệch quá 2 mức (đa số ở mép). Mức này tương đương hoặc nhỏ hơn nhiễu cảm biến của camera thật.
   * Đã thêm 8 lần render bỏ đi lúc reset để xả bộ đệm thời gian (`camera.warm_renders`), nhưng việc này không làm ảnh tất định.
   * Kết luận: **phương pháp không dùng ảnh** (`ORACLE`, `NOOP`) lặp lại trùng từng bit (40/40, M8). **Phương pháp dùng ảnh** có ngẫu nhiên nhỏ như máy thật: M8 đo bằng thống kê (`--reps`), và so sánh dùng ≥ 3 lần lặp (§7 S0c). `report.py` báo "nhóm lặp cùng kết quả" cho mỗi phương pháp.
+
+### 31/10/2026 — M8 của CL-0 và sửa `report.py`
+* `runs/e3_repeat_cl0` (`CL0`, vật tạm, `dev_C0`, 20 sắp xếp × L0/L0.25 × 2 lần lặp, có nhiễu render): **40/40 nhóm lặp cùng kết quả**. SR 15/20 = 75 % (L0) và 12/20 = 60 % (L0.25), chưa tinh chỉnh; vẫn dưới ngưỡng S0b. Số này cao hơn lần chạy trước (70 %, 55 %) 1 sắp xếp mỗi tốc độ; lần trước chưa có `warm_renders`.
+* **Sửa lỗi:** `report.py` từng tính mỗi lần lặp là một lượt độc lập (n bị thổi, Wilson và McNemar hẹp giả). Nay gộp theo sắp xếp, đa số thắng, hoà tính thất bại và báo `n_ties`. Có test. Báo cáo của lần này được sinh lại từ `trials.csv`; dữ liệu thô không đổi. `dir1/g0_analyze.py g2` vẫn ghép theo từng lần lặp, nên khi có `--reps` thì dùng `arena.report`.
+* Lời khuyên `--reps 3` trước đây đã bỏ: với CL-0 lần lặp không thêm thông tin, thêm sắp xếp mới thêm thông tin.
+
+## 31/10/2026 — Quyết định của người dùng và GG-CNN
+Người dùng ("theo ý m đi") chọn theo đề xuất:
+* **S0a:** chấp nhận `ORACLE` 90 % ở L0.25 (bộ vật sinh) là trần của môi trường + bộ thực thi CL-0, ghi rõ trong báo cáo cuối. Ngưỡng 95 % không bị đổi: cổng ghi là chưa đạt, có lý do.
+* **CL-0:** chưa tinh chỉnh trong sim; giờ tinh chỉnh dành cho tay thật.
+* **GG-CNN:** cắm vào arena làm ứng viên CL-2.
+
+### GG-CNN (`arena/methods/ggcnn.py`, tên `GGCNN`, cần `--depth`)
+* Trọng số Cornell từ release v0.1 của `dougsm/ggcnn` (BSD-3), zip 476 kB, sha256 `465ef506…`, `third_party/ggcnn_weights`. Chỉ giải nén file state dict.
+* **Không chạy mã của repo:** lần đầu định nạp `models/ggcnn.py` thì bị bộ phân loại an toàn của Claude Code chặn. Mạng được khai báo lại trong `ggcnn.py` theo kiến trúc đã công bố; `load_state_dict` khớp đủ khoá, nạp bằng `weights_only=True`. Bản clone `third_party/ggcnn` chỉ để đọc.
+* Lựa chọn của mình, không có trong paper: cắt theo cửa sổ băng, cổng độ cao 3 mm so với mặt băng, tìm cực đại địa phương, thang 1,2 mm/điểm ảnh đầu vào `[ước lượng, chưa kiểm]`, và **chặn bề rộng ở 56 mm thay vì loại**. Lý do: bề rộng dự đoán theo kẹp của bộ Cornell, lần đầu cả 598 khung đều bị loại (`runs/e2/archive/e7_ggcnn_try_width_reject`).
+* Chạy thử băng đứng yên, vật tạm: 3/3 thành công (`runs/e7_ggcnn_try`; lệnh bị hết giờ trước khi xong lượt 4, không có dòng nào bị sửa). Kể cả vật ở x = 147 mm mà CL-0 `no_target`.
+* So sánh đầy đủ: `runs/e7_cl0_vs_ggcnn` (đang chạy).
+
+### Sửa lỗi: độ sâu không tới bộ chuyển `pixel_grasp`
+`pixel_grasp` đọc `depth_mm` trên mảng ảnh còn platform chỉ gắn vào `Frame`, nên phương pháp dùng độ sâu qua bộ chuyển này luôn nhận `None`. Nay ảnh là `ImageWithDepth` mang theo `depth_mm`; có test. 40 test đều qua.
+
+## Bố trí thật do người dùng gửi (sơ đồ `docs_input/layout_sketch_user.png`), CHƯA đưa vào `scene.toml`
+Mình đọc sơ đồ như sau `[chờ người dùng xác nhận, đơn vị giả định là cm]`:
+* Băng 91 × 20 cm (sim đang 60 × 20).
+* Tấm đế tay 28 × 28 cm, sát cạnh dài của băng, trải từ 36 đến 64 cm tính từ đầu trái băng.
+* Camera ở cạnh băng phía đối diện tay, cách đầu trái 22 cm, cao **50 cm so với mặt băng** (người dùng nói rõ).
+
+Tính từ mô hình động học, chưa kiểm trên tay thật (`scripts/e8_real_layout_reach.py`, offset TCP −29 mm, kẹp 10 mm trên băng, nhấc 60 mm, trục khép tiếp tuyến):
+| khoảng cách tới trục pan (mm) | 100 | 140 | 180 | 200 | 220 | 240 trở đi |
+|---|---|---|---|---|---|---|
+| đoạn nhặt dài nhất dọc băng (mm) | 420 | 380 | 300 | 240 | 160 | 0 |
+
+Camera thẳng đứng ở 50 cm thấy 692 × 389 mm trên mặt băng. Còn phải biết: khoảng cách trục pan tới mép băng, camera có nghiêng không, chiều chạy băng.
+
+### Trạng thái `runs/e7_cl0_vs_ggcnn` (hình học cũ của sim)
+Phiên trước kết thúc ở 82/160 lượt. `dev_C0` đủ 20 sắp xếp mỗi ô: L0: CL0 17/20, GGCNN 18/20 (p = 1,0); L0.25: cả hai 18/20 (p = 1,0). Chưa đủ để kết luận khác nhau. Trên bộ 36 vật, CL-0 đạt ≥ 80 % ở `dev_C0` (bộ vật tạm chỉ 75 %, 60 %). `dev_C2` chạy tiếp từ chỗ dở.
+
+### Trả lời của người dùng về bố trí (sau sơ đồ)
+* Muốn đặt tay "sát rìa, không kề với băng"; camera nhìn thẳng xuống, lệch vào phía trong băng (chưa có số); băng chạy từ trái sang phải trong sơ đồ (khớp φ = 90°).
+* Tính từ URDF và STL (`scripts/e8_real_layout_edge.py`, kinematics, chưa kiểm trên tay thật): đế tay trải từ 69,8 mm sau trục pan tới 25,8 mm trước trục pan, rộng 111 mm. Tầm với xa nhất thẳng phía trước, offset TCP −29 mm: nhấc 60 mm được 236 mm (trục khép tiếp tuyến), 258 mm (hướng tâm); nhấc 30 mm được 262, 284 mm; chỉ kẹp ở 10 mm được 272, 294 mm.
+* Hệ quả nếu lưng đế sát cạnh xa của tấm 28 cm: trục pan cách mép băng khoảng 210 mm, tay chỉ với tới khoảng 26 mm bề rộng băng. Chưa đổi `scene.toml`, chờ người dùng chọn.
+
+## 31/10/2026 — Bố trí thật đưa vào sim
+Người dùng sửa sơ đồ: cạnh tấm đế là **18 cm**, không phải 28; camera lệch vào trong băng khoảng 10 cm; tay sát cạnh xa băng; băng chạy trái sang phải.
+* `configs/scene.toml` (bản cũ: `configs/archive_scene_simlayout_v1.toml`, hiệu chuẩn cũ: `runs/calib_simlayout_v1`): băng 91 × 20 cm, mép gần cách trục pan 110 mm, tâm băng x = 249 mm; camera thẳng xuống tại (249, −280, 497,6) mm tức trên đường giữa băng, cách đầu trái 22 cm, cao 50 cm so với mặt băng.
+* `[giả định, chờ xác nhận]`: 18 cm là cạnh vuông góc băng; tấm vuông 18 × 18; tay nằm giữa tấm và cách đầu trái băng 50 cm.
+* Dải đặt vật chuyển theo băng: x = 155–255 mm (116–216 mm từ trục pan), đoạn nhặt chung 200 mm, băng tối đa ≈ 71 mm/s (L ≈ 0,48), tính từ động học. Khi băng đứng yên, sắp xếp đặt quanh a = −40 mm. **Dải 10 cm giờ nằm ở nửa băng gần tay.**
+* Hiệu chuẩn từ cảnh (`runs/calib`): homography rms 0,206 mm, kiểm giữ lại tối đa 0,165 mm; hướng băng 90,031°; mm/xung 0,05000; độ trễ 97,9 ms. Ảnh `background_window.png` đã xem.
+* Phương án so sánh, không phải bố trí của người dùng: camera tại (205, −100) mm (`configs/scene_cam_near.toml`, `runs/calib_cam_near`).
+* So sánh đang chạy: `scripts/e8_camera_compare.sh` → `runs/e8_real`, `runs/e8_cam_near`.
+
+### Kết quả `runs/e7_cl0_vs_ggcnn` (bố trí cũ của sim, bộ 36 vật, 20 sắp xếp mỗi ô, engine = isaac)
+| ô | L | CL0 | GGCNN | McNemar p |
+|---|---|---|---|---|
+| dev_C0 | 0 | 17/20 | 18/20 | 1,0 |
+| dev_C0 | 0,25 | 18/20 | 18/20 | 1,0 |
+| dev_C2 | 0 | 17/20 | 14/20 | 0,51 |
+| dev_C2 | 0,25 | 15/20 | 18/20 | 0,45 |
+Chưa thấy khác biệt có ý nghĩa; n = 20 chỉ phát hiện được chênh lớn. Cần chạy lại trên bố trí thật trước khi dùng.
+
+### Xác nhận tấm đế (31/10/2026)
+Người dùng: cạnh vuông góc với băng = 18 cm; tay nằm trên tấm đế. Vậy tấm 18 cm × 28 cm (cạnh 28 dọc băng theo sơ đồ, 36–64 cm từ đầu trái). `scene.toml` và `scene_cam_near.toml`: `table.half_width_mm` 90 → 140. Vị trí tay dọc băng chưa đo, giả định giữa tấm (trục pan cách đầu trái 50 cm).
+* Lần chạy dở với tấm 18 × 18 lưu ở `runs/archive/e8_real_plate18x18` (65 lượt), hiệu chuẩn ở `runs/archive/calib*_plate18x18`; không dùng cho kết luận.
+* Hiệu chuẩn lại `runs/calib`: rms 0,231 mm, kiểm giữ lại tối đa 0,228 mm, độ trễ 98,1 ms. `runs/calib_cam_near`: rms 0,281 mm, tối đa 0,150 mm, 98,3 ms.
+
+### E6 lần 2: 400 demo trên bố trí thật (người dùng chọn 31/10)
+`scripts/e6_record_400.sh` → `runs/e6_demos_real`: `ORACLE`, vật TRAIN, `train_C0..C3` (60 sắp xếp mỗi ô), L0 và L0.25, 480 lượt, chỉ giữ tập thành công, mục tiêu ≥ 400. Chạy sau `e8_camera_compare.sh`. 51 tập cũ (`runs/e6_demos`) theo bố trí cũ, chỉ để thử. Dùng camera của người dùng; nếu sau này dời camera thì phải ghi lại.
+
+**E6 lần 2, sự cố treo chậm (1/11).** 254 lượt đầu 40 giây/lượt. Từ giữa lượt #0254 (khoảng 23:17:46 ngày 31/10), thời gian dựng hình tăng từ 0,07 lên khoảng 50 giây/khung, GPU gần như rảnh, không có lỗi trong log; 4 lượt mất 8.192 đến 13.275 giây. Log hệ thống ghi `systemd-journald: Time jumped backwards` lúc 23:17:42, trùng thời điểm; nguyên nhân gốc chưa chứng minh. Khung hình của các lượt chậm đã kiểm (0256, 0257): không đen, không có khung trùng, số liệu như lượt thường; giữ lại. Tiến trình bị dừng lúc 13:52 ngày 1/11 và chạy tiếp bằng `scripts/e6_record_400_resume.sh`; 5 lượt đầu sau khởi động lại 45 đến 48 giây/lượt. Script có watchdog: 5 phút không có lượt mới thì giết và chạy tiếp. Lệnh gốc trong `manifest.json` vẫn là `--n 60`; phần chạy tiếp dùng `--n 70 --arrangements-dir arrangements/sim_ext` (cùng seed, 60 sắp xếp đầu giống hệt đã so) vì `ORACLE` chỉ đạt khoảng 76% trên vật train, 480 lượt không đủ 400 tập.
+
+**So sánh camera (`runs/e8_real`, `runs/e8_cam_near`), CL0, cùng sắp xếp, n = 20.** dev_C0 L0: thật 12, gần 20 (p = 0,008; 6 lỗi `cyl22` `empty_grasp`, 2 lỗi `mug24`). dev_C0 L0.25: 17 và 18 (p = 1). dev_C2 L0.25: 17 và 14 (p = 0,51). ORACLE trên camera thật dev_C0: 20/20 và 20/20; NOOP: 0/40. Giả thuyết cho `cyl22`: thị sai của vật cao 36,7 mm ở xa tâm camera (khoảng 19 mm với camera thật, khoảng 5 mm với camera gần, tính hình học), [chưa kiểm] bằng sai số gắp đo trực tiếp.
+
+**Quyết định camera (người dùng, 1/11):** giữ camera hiện tại `[249, -280, 497.6]`; không ghi lại demo. Mục tiêu người dùng nêu: tốt và ổn định trong môi trường nhiều vật. Đã biết và chấp nhận: CL0 `dev_C0` L0 = 12/20, dưới ngưỡng S0b. `scripts/e9_clutter_real.sh` → `runs/e9_clutter_real`: CL0 và ORACLE trên `dev_C1..C3`, L0 và L0.25, n = 20, rồi lần lặp thứ hai của CL0 để đo độ lặp lại (360 lượt); chạy sau khi ghi demo xong.
+
+**E6 lần 2, kết quả (1/11).** `runs/e6_demos_real`: 560/560 lượt, 444 tập thành công, 0 lượt không hợp lệ, không có lần treo nào sau khi khởi động lại. `runs/e6_demos_real/lerobot`: đọc lại bằng LeRobot được 444 tập, 115.908 khung, khớp số khung thô; tập cuối khớp trạng thái thô ở khung đầu (sai 0,0). Chuyển đổi hết 51 phút. `engine=isaac`, chỉ dùng cho sim. `runs/e9_clutter_real` bắt đầu 18:36.
+
+**E9 nhiều vật trên bố trí thật (`runs/e9_clutter_real`, 1/11, DEV, n = 20).** CL0 lần 1/lần 2, ORACLE: C1 L0 15/14, 20; C1 L0.25 14/14, 20; C2 L0 12/12, 20; C2 L0.25 16/17, 18; C3 L0 2/2, 18; C3 L0.25 13/14, 14. Lặp lại 113/120 nhóm; 0/360 lượt không hợp lệ. Theo vật (CL0): `cyl22` 4/20, `mug24` 13/30; ORACLE trên hai vật đó 11/12 và 18/19. `scripts/e9_detect_probe.py` → `runs/e9_detect_probe`: ở dev_C3 tĩnh tâm a = -40, 16/20 đống vật dính thành một khối chạm mép cửa sổ camera và bị loại `edge`. Thử điều kiện tâm a = -70: `scripts/e9_static_center.sh` → `runs/e9_static70`; `scene.toml` không đổi.
+
+**Treo dựng hình lặp lại:** watchdog giết 7 lần trong 18:36–22:00; 7 dòng `Time jumped backwards` trong cùng khoảng, 5 lần giết rơi gần một dòng; hai lần còn lại (21:04, 21:30) không có dòng tương ứng ngay lúc đó. Lượt bị giết không ghi kết quả và được chạy lại. Nguyên nhân gốc chưa chứng minh.
+
+**E9 tâm đống vật a = -70 (`runs/e9_static70`, 2/11, L0, n = 20, 0/160 không hợp lệ).** CL0 từ -40 sang -70: C0 12 → 10 (p = 0,5), C1 15 → 11 (p = 0,125), C2 12 → 15 (p = 0,45), C3 2 → 10 (p = 0,039; 10 tốt lên, 2 xấu đi). ORACLE: 20 → 19, 20 → 20, 20 → 20, 18 → 19. `cyl22` 0/11, `mug24` 4/13 với CL0; ORACLE 13/13 và 11/11. `scene.toml` không đổi; a = -70 chưa áp dụng làm mặc định. Tiêu chí S0b CL0 dev_C0 L0 vẫn chưa đạt (10/20).
+
+**Thị sai đã đo (`scripts/e9_parallax_probe.py`, `runs/e9_parallax_probe`).** Sai số phát hiện của bộ phát hiện thật, vật đơn, băng đứng yên, tăng dần từ tâm camera a = -280 và theo chiều cao vật: `cyl22` (cao 36,7 mm) 3–4,5 mm ở a = -280, 12–13 mm ở -70, 14–15 mm ở -40, 16–17 mm ở 0; `cyl26` (22,1 mm) 6 mm ở -40; `box25` (27,3 mm) 5 mm ở -40; `mug24` (34,4 mm) 7 mm ở -40. Sai số chủ yếu dọc băng. Xác nhận giả thuyết thị sai; ước tính 19 mm trước đó cao hơn số đo 14–15 mm. Chưa đo camera gần và chưa đo đường đi thực của lượt băng chạy.
+
+**E10 thử hai núm không thuộc CL-0 gốc (`scripts/e10_knobs.sh`, 2/11 12:42–19:08, DEV, n = 20, CL0, 0/440 không hợp lệ, không lần nào watchdog phải khởi động lại).** So cặp theo từng sắp xếp với CL0 gốc (`runs/e8_real` cho C0, `runs/e9_clutter_real` lượt lặp 0 cho C1–C3, `runs/e10_base_L05` cho C2 L0.5, `runs/e9_static70` cho a = -70), kiểm định McNemar chính xác hai phía.
+
+| Ô | gốc | `yaw_mode="local"` | `split="watershed"` |
+|---|---|---|---|
+| C0 L0 | 12 | 11 (p = 1) | 11 (p = 1) |
+| C0 L0.25 | 17 | 14 (p = 0,25) | 16 (p = 1) |
+| C1 L0 | 15 | 13 (p = 0,5) | 15 (p = 1) |
+| C1 L0.25 | 14 | 15 (p = 1) | 15 (p = 1) |
+| C2 L0 | 12 | 15 (p = 0,38) | 13 (p = 1) |
+| C2 L0.25 | 16 | 16 (p = 1) | 17 (p = 1) |
+| C2 L0.5 | 6 | 7 (p = 1) | 7 (p = 1) |
+| C3 L0 | 2 | 1 (p = 1) | 4 (p = 0,5) |
+| C3 L0.25 | 13 | 13 (p = 1) | 14 (p = 1) |
+| Tổng /180 | 107 | 105 | 112 |
+| a = -70: C2 L0 / C3 L0 | 15 / 10 | — | 15 / 11 |
+
+Không núm nào cải thiện có ý nghĩa; đề xuất giữ CL-0 gốc (cả hai núm tắt), người dùng quyết. C2 L0.5 (75 mm/s, vượt giới hạn dải ≈ 71 mm/s của mặt bằng): CL0 gốc 6/20, ORACLE 16/20; lỗi CL0 gốc: va chạm 8, trượt 4, thời gian 2; ORACLE: va chạm 2, thời gian 2.
+
+**E11 ACT trên demo sim (bắt đầu 2/11 19:25).** Lần chạy kiểm tra đường ống, **không** phải chính sách của hồ sơ: hành động theo khớp (mặc định LeRobot), kế hoạch §3.3 chốt hành động EE. Huấn luyện `runs/act_j0_s1000`: ACT mặc định LeRobot 0.6.1, 100 000 bước, batch 8, hạt giống 1000, 444 tập của `runs/e6_demos_real/lerobot`; đo tốc độ trên RTX 3070 Ti: 12,4 bước/s, 1,8 GB VRAM (`runs/act_smoke`, 300 bước). Đã cài `accelerate 1.15.0` (+ `psutil`) vào `~/venvs/lerobot_data` (LeRobot đòi khi huấn luyện; venv `cl0` không đổi). Cắm vào arena: `arena/methods/act_lerobot.py` qua `remote_server.py` (cách C). Chấm: `scripts/e11_act_eval.sh`, hai làn Isaac song song (lần đầu), làn B chạy trước ORACLE dev_C1 L0.25 n = 10 để kiểm chạy song song cho kết quả trùng `runs/e9_clutter_real`. Ô vật quen mới: `arrangements/sim_seen/seen_C0.csv`, `seen_C1.csv` (hạt giống 40, 41, n = 20, 0 trùng với sắp xếp demo; `scripts/e11_seen_sheets.py`).
+
+**E11 kết quả (2/11 21:40 → 3/11 01:25, 0/250 không hợp lệ, không lần nào watchdog phải khởi động lại).** Huấn luyện: loss 13,9 → 0,038 sau 100 000 bước, 2 giờ 15 phút (`logs/2026-11-02_192528_act_j0_s1000.log`). Chạy song song hai làn: ORACLE dev_C1 L0.25 10/10 trùng `runs/e9_clutter_real` (success, outcome, t_end, t_success, vật) → chạy song song an toàn; mỗi lượt ACT ≈ 142 s thật (20 s mô phỏng + chuyển ảnh qua cầu nối). ACT so cặp với CL0 gốc và ORACLE (n = 20 mỗi ô):
+
+| Ô | ACT | CL0 | ORACLE | ACT hơn / CL0 hơn | p |
+|---|---|---|---|---|---|
+| dev_C0 L0 | 15 | 12 | 20 | 6 / 3 | 0,51 |
+| dev_C0 L0.25 | 19 | 17 | 20 | 3 / 1 | 0,63 |
+| dev_C1 L0 | 14 | 15 | 20 | 4 / 5 | 1 |
+| dev_C1 L0.25 | 14 | 14 | 20 | 3 / 3 | 1 |
+| seen_C0 L0 | 16 | — | 18 | | |
+| seen_C0 L0.25 | 15 | — | 18 | | |
+| seen_C1 L0 | 14 | — | 18 | | |
+| seen_C1 L0.25 | 10 | — | 18 | | |
+
+Tương tự G1a (vật quen, C0/C1, L0.25): 25/40 = 62,5 %, dưới ngưỡng 70 %, trên mức 50 % (không phải lỗi kỹ thuật). Vật quen khó hơn vật lạ ở đây (ORACLE 72/80 so với 80/80): `l14` 1/4, `box04` 3/6, `ring20` 2/4 với ACT (trong demo `l14` chỉ 7/27 tập thành công). Nhãn lỗi của ACT kém tin: ACT không phát pha `CLOSE`, nên quy tắc `collision` (vật bị xô > 10 mm trước `CLOSE`) xét tới hết lượt; 40/43 thất bại mang nhãn `collision`. Hành động theo khớp, không phải chính sách của hồ sơ; số sim, không mang sang máy thật.
+
+Lệnh huấn luyện E11 (để chạy lại trên máy khác): `env -u PYTHONPATH ~/venvs/lerobot_data/bin/python -m lerobot.scripts.lerobot_train --dataset.repo_id=local/e6_demos_real --dataset.root=runs/e6_demos_real/lerobot --policy.type=act --policy.device=cuda --policy.push_to_hub=false --output_dir=runs/act_j0_s1000 --job_name=act_j0_s1000 --steps=100000 --batch_size=8 --log_freq=500 --save_freq=20000 --wandb.enable=false --seed=1000`.
+
+**Đưa lên git (3/11).** `cl0/`, `dir1/` và hai file kế hoạch không nằm trong repo nào; bản sao để trong `deps/` (`setup_workspace.py --collect`), hash đóng băng CL-0 của bản sao = bản gốc = `006af1c9686621e93249f7b2d17cf3e5cfd60ee96862213e13d000ddce63ab12`. `.gitattributes` tắt đổi CRLF. Không đưa lên: demo thô + bộ LeRobot E6 (một file video 136 MB > giới hạn 100 MB của GitHub), checkpoint ACT, `*_gt.npz` từ 1/11 (xem `.gitignore`).

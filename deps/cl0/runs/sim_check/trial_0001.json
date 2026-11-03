@@ -1,0 +1,156 @@
+{
+ "trial_id": 1,
+ "arrangement_id": "1",
+ "cell": "dev_sim",
+ "method": "CL0",
+ "speed_mm_s": 50.0,
+ "session": "sim_check",
+ "config_sha": "7c5cd7863dfbe68ee6abe66e674ffdf466aaa4f9497025a73f0e9e6285fbbbe8",
+ "code_sha": "006af1c9686621e93249f7b2d17cf3e5cfd60ee96862213e13d000ddce63ab12",
+ "wall_s": 4.654846668243408,
+ "calib_sha256": null,
+ "background_sha256": null,
+ "outcome": "picked_hold_complete",
+ "t_end": 13.100000000000648,
+ "finished": true,
+ "picked_hint": "disc30",
+ "diag": {
+  "frames": 90,
+  "reject_wide": 0,
+  "reject_other": 41,
+  "n_ok_dets": 12
+ },
+ "phases": [
+  [
+   4.77999999999992,
+   "APPROACH"
+  ],
+  [
+   6.0399999999998935,
+   "DESCEND"
+  ],
+  [
+   6.65999999999988,
+   "CLOSE"
+  ],
+  [
+   7.379999999999865,
+   "LIFT"
+  ],
+  [
+   7.999999999999852,
+   "MOVE_HOLD"
+  ],
+  [
+   9.000000000000007,
+   "HOLD"
+  ],
+  [
+   11.00000000000032,
+   "RELEASE"
+  ],
+  [
+   11.600000000000414,
+   "RETURN"
+  ],
+  [
+   13.100000000000648,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 4.77999999999992,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -421.125,
+    "b": -224.3,
+    "theta": 90.0,
+    "width": 32.25,
+    "std": 0.26352313834736496
+   }
+  },
+  {
+   "t": 4.77999999999992,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 5.459999999999906,
+   "name": "freeze",
+   "data": {
+    "est": [
+     -421.125,
+     -224.3,
+     90.0
+    ]
+   }
+  },
+  {
+   "t": 6.0399999999998935,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 6.65999999999988,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 7.379999999999865,
+   "name": "close_done",
+   "data": {
+    "gripper": 48.75,
+    "held": true,
+    "err_meas": 0.16678061310618753
+   }
+  },
+  {
+   "t": 7.379999999999865,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 7.999999999999852,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 9.000000000000007,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 9.000000000000007,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 11.00000000000032,
+   "name": "hold_done",
+   "data": {
+    "gripper": 48.75,
+    "lost": false
+   }
+  },
+  {
+   "t": 11.00000000000032,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 11.600000000000414,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 13.100000000000648,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "extra": {
+  "off_mm": 2.7171875107547163
+ }
+}

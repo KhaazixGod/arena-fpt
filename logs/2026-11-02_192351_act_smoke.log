@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/scripts/lerobot_train.py", line 810, in <module>
+    main()
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/scripts/lerobot_train.py", line 806, in main
+    train()
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/configs/parser.py", line 436, in wrapper_inner
+    response = fn(cfg, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/scripts/lerobot_train.py", line 231, in train
+    require_package("accelerate", extra="training")
+  File "/home/pread/venvs/cl0/lib/python3.12/site-packages/lerobot/utils/import_utils.py", line 101, in require_package
+    raise ImportError(
+ImportError: 'accelerate' is required but not installed. Install it with: pip install 'lerobot[training]' (or uv pip install 'lerobot[training]')

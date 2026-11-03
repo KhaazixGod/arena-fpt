@@ -1,0 +1,153 @@
+INFO 2026-11-02 19:24:32 ot_train.py:272 {'batch_size': 8,
+ 'checkpoint_path': None,
+ 'cudnn_deterministic': False,
+ 'dataloader_multiprocessing_context': 'spawn',
+ 'dataset': {'depth_output_unit': 'mm',
+             'episodes': None,
+             'eval_split': 0.0,
+             'image_transforms': {'enable': False,
+                                  'max_num_transforms': 3,
+                                  'random_order': False,
+                                  'tfs': {'affine': {'kwargs': {'degrees': [-5.0,
+                                                                            5.0],
+                                                                'translate': [0.05,
+                                                                              0.05]},
+                                                     'type': 'RandomAffine',
+                                                     'weight': 1.0},
+                                          'brightness': {'kwargs': {'brightness': [0.8,
+                                                                                   1.2]},
+                                                         'type': 'ColorJitter',
+                                                         'weight': 1.0},
+                                          'contrast': {'kwargs': {'contrast': [0.8,
+                                                                               1.2]},
+                                                       'type': 'ColorJitter',
+                                                       'weight': 1.0},
+                                          'hue': {'kwargs': {'hue': [-0.05,
+                                                                     0.05]},
+                                                  'type': 'ColorJitter',
+                                                  'weight': 1.0},
+                                          'saturation': {'kwargs': {'saturation': [0.5,
+                                                                                   1.5]},
+                                                         'type': 'ColorJitter',
+                                                         'weight': 1.0},
+                                          'sharpness': {'kwargs': {'sharpness': [0.5,
+                                                                                 1.5]},
+                                                        'type': 'SharpnessJitter',
+                                                        'weight': 1.0}}},
+             'repo_id': 'local/e6_demos_real',
+             'repo_type': 'dataset',
+             'return_uint8': False,
+             'revision': None,
+             'root': 'runs/e6_demos_real/lerobot',
+             'streaming': False,
+             'use_imagenet_stats': True,
+             'video_backend': 'torchcodec'},
+ 'env': None,
+ 'env_eval_freq': 20000,
+ 'eval': {'batch_size': 14,
+          'n_episodes': 50,
+          'recording': False,
+          'recording_private': False,
+          'recording_repo_id': None,
+          'use_async_envs': True},
+ 'eval_steps': 0,
+ 'job': {'detach': False,
+         'image': 'huggingface/lerobot-gpu:latest',
+         'tags': [],
+         'target': None,
+         'timeout': '2d'},
+ 'job_name': 'act_smoke',
+ 'log_freq': 50,
+ 'max_eval_samples': 0,
+ 'num_workers': 4,
+ 'optimizer': {'betas': [0.9, 0.999],
+               'eps': 1e-08,
+               'grad_clip_norm': 10.0,
+               'lr': 1e-05,
+               'type': 'adamw',
+               'weight_decay': 0.0001},
+ 'output_dir': 'runs/act_smoke',
+ 'peft': None,
+ 'persistent_workers': True,
+ 'policy': {'chunk_size': 100,
+            'device': 'cuda',
+            'dim_feedforward': 3200,
+            'dim_model': 512,
+            'dropout': 0.1,
+            'feedforward_activation': 'relu',
+            'input_features': {},
+            'kl_weight': 10.0,
+            'latent_dim': 32,
+            'license': None,
+            'n_action_steps': 100,
+            'n_decoder_layers': 1,
+            'n_encoder_layers': 4,
+            'n_heads': 8,
+            'n_obs_steps': 1,
+            'n_vae_encoder_layers': 4,
+            'normalization_mapping': {'ACTION': <NormalizationMode.MEAN_STD: 'MEAN_STD'>,
+                                      'STATE': <NormalizationMode.MEAN_STD: 'MEAN_STD'>,
+                                      'VISUAL': <NormalizationMode.MEAN_STD: 'MEAN_STD'>},
+            'optimizer_lr': 1e-05,
+            'optimizer_lr_backbone': 1e-05,
+            'optimizer_weight_decay': 0.0001,
+            'output_features': {},
+            'pre_norm': False,
+            'pretrained_backbone_weights': 'ResNet18_Weights.IMAGENET1K_V1',
+            'pretrained_path': None,
+            'pretrained_revision': None,
+            'private': None,
+            'push_to_hub': False,
+            'replace_final_stride_with_dilation': False,
+            'repo_id': None,
+            'tags': None,
+            'temporal_ensemble_coeff': None,
+            'type': 'act',
+            'use_amp': False,
+            'use_peft': False,
+            'use_vae': True,
+            'vision_backbone': 'resnet18'},
+ 'prefetch_factor': 4,
+ 'rename_map': {},
+ 'resume': False,
+ 'reward_model': None,
+ 'sample_weighting': None,
+ 'save_checkpoint': True,
+ 'save_checkpoint_to_hub': False,
+ 'save_freq': 300,
+ 'scheduler': None,
+ 'seed': 1000,
+ 'steps': 300,
+ 'tolerance_s': 0.0001,
+ 'use_policy_training_preset': True,
+ 'wandb': {'add_tags': True,
+           'disable_artifact': False,
+           'enable': False,
+           'entity': None,
+           'mode': None,
+           'notes': None,
+           'project': 'lerobot',
+           'run_id': None}}
+INFO 2026-11-02 19:24:32 ot_train.py:280 Logs will be saved locally.
+INFO 2026-11-02 19:24:32 ot_train.py:298 Creating dataset
+INFO 2026-11-02 19:24:32 ot_train.py:324 Creating policy
+Downloading: "https://download.pytorch.org/models/resnet18-f37072fd.pth" to /home/pread/.cache/torch/hub/checkpoints/resnet18-f37072fd.pth
+  0%|          | 0.00/44.7M [00:00<?, ?B/s]  0%|          | 128k/44.7M [00:00<01:08, 685kB/s]  1%|          | 256k/44.7M [00:00<00:49, 939kB/s]  1%|          | 384k/44.7M [00:00<00:43, 1.07MB/s]  1%|          | 512k/44.7M [00:00<00:42, 1.10MB/s]  2%|▏         | 768k/44.7M [00:00<00:31, 1.45MB/s]  2%|▏         | 1.00M/44.7M [00:00<00:27, 1.64MB/s]  3%|▎         | 1.25M/44.7M [00:00<00:27, 1.68MB/s]  3%|▎         | 1.50M/44.7M [00:01<00:25, 1.80MB/s]  4%|▍         | 1.75M/44.7M [00:01<00:23, 1.90MB/s]  4%|▍         | 2.00M/44.7M [00:01<00:22, 2.02MB/s]  5%|▌         | 2.25M/44.7M [00:01<00:20, 2.15MB/s]  6%|▌         | 2.50M/44.7M [00:01<00:23, 1.90MB/s]  7%|▋         | 3.00M/44.7M [00:01<00:16, 2.63MB/s]  8%|▊         | 3.38M/44.7M [00:01<00:15, 2.76MB/s]  8%|▊         | 3.75M/44.7M [00:01<00:14, 2.87MB/s]  9%|▉         | 4.12M/44.7M [00:02<00:14, 2.99MB/s] 10%|█         | 4.50M/44.7M [00:02<00:13, 3.14MB/s] 11%|█         | 4.88M/44.7M [00:02<00:12, 3.33MB/s] 12%|█▏        | 5.25M/44.7M [00:02<00:11, 3.47MB/s] 13%|█▎        | 5.75M/44.7M [00:02<00:11, 3.69MB/s] 14%|█▍        | 6.25M/44.7M [00:02<00:10, 3.94MB/s] 15%|█▌        | 6.75M/44.7M [00:02<00:10, 3.63MB/s] 16%|█▌        | 7.25M/44.7M [00:02<00:10, 3.92MB/s] 17%|█▋        | 7.75M/44.7M [00:03<00:10, 3.64MB/s] 19%|█▉        | 8.62M/44.7M [00:03<00:07, 4.82MB/s] 20%|██        | 9.12M/44.7M [00:03<00:09, 4.07MB/s] 22%|██▏       | 9.88M/44.7M [00:03<00:07, 4.70MB/s] 23%|██▎       | 10.4M/44.7M [00:03<00:08, 4.27MB/s] 26%|██▌       | 11.5M/44.7M [00:03<00:05, 5.81MB/s] 27%|██▋       | 12.2M/44.7M [00:03<00:05, 6.14MB/s] 29%|██▉       | 12.9M/44.7M [00:03<00:05, 6.19MB/s] 30%|███       | 13.5M/44.7M [00:04<00:05, 5.97MB/s] 32%|███▏      | 14.5M/44.7M [00:04<00:05, 5.49MB/s] 37%|███▋      | 16.4M/44.7M [00:04<00:03, 8.56MB/s] 39%|███▉      | 17.4M/44.7M [00:04<00:03, 7.60MB/s] 42%|████▏     | 18.8M/44.7M [00:04<00:03, 8.99MB/s] 44%|████▍     | 19.8M/44.7M [00:04<00:02, 9.08MB/s] 46%|████▋     | 20.8M/44.7M [00:04<00:02, 8.89MB/s] 49%|████▊     | 21.8M/44.7M [00:05<00:02, 9.26MB/s] 51%|█████     | 22.8M/44.7M [00:05<00:02, 8.70MB/s] 53%|█████▎    | 23.6M/44.7M [00:05<00:03, 6.97MB/s] 57%|█████▋    | 25.6M/44.7M [00:05<00:02, 8.83MB/s] 61%|██████    | 27.1M/44.7M [00:05<00:01, 9.44MB/s] 64%|██████▍   | 28.8M/44.7M [00:05<00:01, 11.1MB/s] 67%|██████▋   | 30.0M/44.7M [00:05<00:01, 9.45MB/s] 70%|███████   | 31.4M/44.7M [00:06<00:01, 9.37MB/s] 72%|███████▏  | 32.4M/44.7M [00:06<00:01, 6.64MB/s] 77%|███████▋  | 34.2M/44.7M [00:06<00:01, 8.70MB/s] 81%|████████  | 36.2M/44.7M [00:06<00:00, 10.7MB/s] 84%|████████▍ | 37.5M/44.7M [00:06<00:00, 8.98MB/s] 88%|████████▊ | 39.1M/44.7M [00:07<00:00, 9.29MB/s] 91%|█████████ | 40.8M/44.7M [00:07<00:00, 9.56MB/s] 93%|█████████▎| 41.8M/44.7M [00:07<00:00, 9.10MB/s] 97%|█████████▋| 43.2M/44.7M [00:07<00:00, 8.61MB/s] 99%|█████████▉| 44.1M/44.7M [00:07<00:00, 8.47MB/s]100%|██████████| 44.7M/44.7M [00:07<00:00, 5.98MB/s]
+INFO 2026-11-02 19:24:41 ot_train.py:402 Creating optimizer and scheduler
+INFO 2026-11-02 19:24:41 ot_train.py:434 Output dir: runs/act_smoke
+INFO 2026-11-02 19:24:41 ot_train.py:441 cfg.steps=300 (300)
+INFO 2026-11-02 19:24:41 ot_train.py:442 dataset.num_frames=115908 (116K)
+INFO 2026-11-02 19:24:41 ot_train.py:443 dataset.num_episodes=444
+INFO 2026-11-02 19:24:41 ot_train.py:446 Effective batch size: 8 x 1 = 8
+INFO 2026-11-02 19:24:41 ot_train.py:447 num_learnable_params=51597190 (52M)
+INFO 2026-11-02 19:24:41 ot_train.py:448 num_total_params=51597190 (52M)
+Training:   0%|          | 0/300 [00:00<?, ?step/s]INFO 2026-11-02 19:24:41 ot_train.py:597 Start offline training on a fixed dataset, with effective batch size: 8
+Training:   0%|          | 1/300 [00:06<31:29,  6.32s/step]Training:   1%|          | 3/300 [00:06<08:24,  1.70s/step]Training:   2%|▏         | 5/300 [00:06<04:16,  1.15step/s]Training:   2%|▏         | 7/300 [00:06<02:37,  1.86step/s]Training:   3%|▎         | 9/300 [00:06<01:46,  2.73step/s]Training:   4%|▎         | 11/300 [00:07<01:16,  3.76step/s]Training:   4%|▍         | 13/300 [00:07<00:58,  4.91step/s]Training:   5%|▌         | 15/300 [00:07<00:46,  6.10step/s]Training:   6%|▌         | 17/300 [00:07<00:38,  7.27step/s]Training:   6%|▋         | 19/300 [00:07<00:33,  8.37step/s]Training:   7%|▋         | 21/300 [00:07<00:30,  9.30step/s]Training:   8%|▊         | 23/300 [00:08<00:27, 10.07step/s]Training:   8%|▊         | 25/300 [00:08<00:25, 10.66step/s]Training:   9%|▉         | 27/300 [00:08<00:24, 11.17step/s]Training:  10%|▉         | 29/300 [00:08<00:23, 11.53step/s]Training:  10%|█         | 31/300 [00:08<00:22, 11.82step/s]Training:  11%|█         | 33/300 [00:08<00:22, 12.02step/s]Training:  12%|█▏        | 35/300 [00:09<00:21, 12.13step/s]Training:  12%|█▏        | 37/300 [00:09<00:21, 12.21step/s]Training:  13%|█▎        | 39/300 [00:09<00:21, 12.29step/s]Training:  14%|█▎        | 41/300 [00:09<00:20, 12.36step/s]Training:  14%|█▍        | 43/300 [00:09<00:20, 12.39step/s]Training:  15%|█▌        | 45/300 [00:09<00:20, 12.23step/s]Training:  16%|█▌        | 47/300 [00:10<00:20, 12.31step/s]Training:  16%|█▋        | 49/300 [00:10<00:20, 12.33step/s]INFO 2026-11-02 19:24:51 ot_train.py:641 step:50 smpl:400 ep:2 epch:0.00 loss:13.890 grdn:274.448 lr:1.0e-05 updt_s:0.139 data_s:0.066 smp/s:39 mem_gb:1.82 l1_loss:0.638 kld_loss:1.325
+Training:  17%|█▋        | 51/300 [00:10<00:20, 12.35step/s]Training:  18%|█▊        | 53/300 [00:10<00:20, 12.28step/s]Training:  18%|█▊        | 55/300 [00:10<00:19, 12.35step/s]Training:  19%|█▉        | 57/300 [00:10<00:19, 12.40step/s]Training:  20%|█▉        | 59/300 [00:11<00:19, 12.37step/s]Training:  20%|██        | 61/300 [00:11<00:19, 12.35step/s]Training:  21%|██        | 63/300 [00:11<00:19, 12.41step/s]Training:  22%|██▏       | 65/300 [00:11<00:19, 12.37step/s]Training:  22%|██▏       | 67/300 [00:11<00:18, 12.39step/s]Training:  23%|██▎       | 69/300 [00:11<00:18, 12.43step/s]Training:  24%|██▎       | 71/300 [00:11<00:18, 12.45step/s]Training:  24%|██▍       | 73/300 [00:12<00:18, 12.45step/s]Training:  25%|██▌       | 75/300 [00:12<00:18, 12.42step/s]Training:  26%|██▌       | 77/300 [00:12<00:17, 12.44step/s]Training:  26%|██▋       | 79/300 [00:12<00:17, 12.46step/s]Training:  27%|██▋       | 81/300 [00:12<00:17, 12.43step/s]Training:  28%|██▊       | 83/300 [00:12<00:17, 12.45step/s]Training:  28%|██▊       | 85/300 [00:13<00:17, 12.41step/s]Training:  29%|██▉       | 87/300 [00:13<00:17, 12.40step/s]Training:  30%|██▉       | 89/300 [00:13<00:17, 12.39step/s]Training:  30%|███       | 91/300 [00:13<00:16, 12.43step/s]Training:  31%|███       | 93/300 [00:13<00:16, 12.46step/s]Training:  32%|███▏      | 95/300 [00:13<00:16, 12.47step/s]Training:  32%|███▏      | 97/300 [00:14<00:16, 12.46step/s]Training:  33%|███▎      | 99/300 [00:14<00:16, 12.48step/s]INFO 2026-11-02 19:24:55 ot_train.py:641 step:100 smpl:800 ep:3 epch:0.01 loss:4.653 grdn:124.777 lr:1.0e-05 updt_s:0.079 data_s:0.001 smp/s:100 mem_gb:1.79 l1_loss:0.563 kld_loss:0.409
+Training:  34%|███▎      | 101/300 [00:14<00:15, 12.44step/s]Training:  34%|███▍      | 103/300 [00:14<00:15, 12.42step/s]Training:  35%|███▌      | 105/300 [00:14<00:15, 12.38step/s]Training:  36%|███▌      | 107/300 [00:14<00:15, 12.42step/s]Training:  36%|███▋      | 109/300 [00:15<00:15, 12.45step/s]Training:  37%|███▋      | 111/300 [00:15<00:15, 12.44step/s]Training:  38%|███▊      | 113/300 [00:15<00:15, 12.42step/s]Training:  38%|███▊      | 115/300 [00:15<00:14, 12.45step/s]Training:  39%|███▉      | 117/300 [00:15<00:14, 12.46step/s]Training:  40%|███▉      | 119/300 [00:15<00:14, 12.45step/s]Training:  40%|████      | 121/300 [00:15<00:14, 12.46step/s]Training:  41%|████      | 123/300 [00:16<00:14, 12.47step/s]Training:  42%|████▏     | 125/300 [00:16<00:14, 12.43step/s]Training:  42%|████▏     | 127/300 [00:16<00:13, 12.38step/s]Training:  43%|████▎     | 129/300 [00:16<00:13, 12.41step/s]Training:  44%|████▎     | 131/300 [00:16<00:13, 12.45step/s]Training:  44%|████▍     | 133/300 [00:16<00:13, 12.44step/s]Training:  45%|████▌     | 135/300 [00:17<00:13, 12.46step/s]Training:  46%|████▌     | 137/300 [00:17<00:13, 12.47step/s]Training:  46%|████▋     | 139/300 [00:17<00:12, 12.43step/s]Training:  47%|████▋     | 141/300 [00:17<00:12, 12.41step/s]Training:  48%|████▊     | 143/300 [00:17<00:12, 12.44step/s]Training:  48%|████▊     | 145/300 [00:17<00:12, 12.39step/s]Training:  49%|████▉     | 147/300 [00:18<00:12, 12.43step/s]Training:  50%|████▉     | 149/300 [00:18<00:12, 12.42step/s]INFO 2026-11-02 19:24:59 ot_train.py:641 step:150 smpl:1K ep:5 epch:0.01 loss:3.726 grdn:103.166 lr:1.0e-05 updt_s:0.079 data_s:0.001 smp/s:100 mem_gb:1.79 l1_loss:0.526 kld_loss:0.320
+Training:  50%|█████     | 151/300 [00:18<00:11, 12.45step/s]Training:  51%|█████     | 153/300 [00:18<00:11, 12.41step/s]Training:  52%|█████▏    | 155/300 [00:18<00:11, 12.42step/s]Training:  52%|█████▏    | 157/300 [00:18<00:11, 12.44step/s]Training:  53%|█████▎    | 159/300 [00:19<00:11, 12.47step/s]Training:  54%|█████▎    | 161/300 [00:19<00:11, 12.48step/s]Training:  54%|█████▍    | 163/300 [00:19<00:10, 12.46step/s]Training:  55%|█████▌    | 165/300 [00:19<00:10, 12.40step/s]Training:  56%|█████▌    | 167/300 [00:19<00:10, 12.42step/s]Training:  56%|█████▋    | 169/300 [00:19<00:10, 12.45step/s]Training:  57%|█████▋    | 171/300 [00:20<00:10, 12.45step/s]Training:  58%|█████▊    | 173/300 [00:20<00:10, 12.47step/s]Training:  58%|█████▊    | 175/300 [00:20<00:10, 12.48step/s]Training:  59%|█████▉    | 177/300 [00:20<00:09, 12.50step/s]Training:  60%|█████▉    | 179/300 [00:20<00:09, 12.40step/s]Training:  60%|██████    | 181/300 [00:20<00:09, 12.44step/s]Training:  61%|██████    | 183/300 [00:20<00:09, 12.39step/s]Training:  62%|██████▏   | 185/300 [00:21<00:09, 12.39step/s]Training:  62%|██████▏   | 187/300 [00:21<00:09, 12.42step/s]Training:  63%|██████▎   | 189/300 [00:21<00:08, 12.46step/s]Training:  64%|██████▎   | 191/300 [00:21<00:08, 12.46step/s]Training:  64%|██████▍   | 193/300 [00:21<00:08, 12.39step/s]Training:  65%|██████▌   | 195/300 [00:21<00:08, 12.34step/s]Training:  66%|██████▌   | 197/300 [00:22<00:08, 12.36step/s]Training:  66%|██████▋   | 199/300 [00:22<00:08, 12.36step/s]INFO 2026-11-02 19:25:03 ot_train.py:641 step:200 smpl:2K ep:6 epch:0.01 loss:3.454 grdn:95.902 lr:1.0e-05 updt_s:0.079 data_s:0.001 smp/s:100 mem_gb:1.79 l1_loss:0.509 kld_loss:0.294
+Training:  67%|██████▋   | 201/300 [00:22<00:08, 12.19step/s]Training:  68%|██████▊   | 203/300 [00:22<00:07, 12.20step/s]Training:  68%|██████▊   | 205/300 [00:22<00:07, 12.25step/s]Training:  69%|██████▉   | 207/300 [00:22<00:07, 12.15step/s]Training:  70%|██████▉   | 209/300 [00:23<00:07, 12.01step/s]Training:  70%|███████   | 211/300 [00:23<00:07, 11.94step/s]Training:  71%|███████   | 213/300 [00:23<00:07, 11.92step/s]Training:  72%|███████▏  | 215/300 [00:23<00:07, 11.88step/s]Training:  72%|███████▏  | 217/300 [00:23<00:07, 11.83step/s]Training:  73%|███████▎  | 219/300 [00:23<00:06, 11.80step/s]Training:  74%|███████▎  | 221/300 [00:24<00:06, 11.79step/s]Training:  74%|███████▍  | 223/300 [00:24<00:06, 11.73step/s]Training:  75%|███████▌  | 225/300 [00:24<00:06, 11.67step/s]Training:  76%|███████▌  | 227/300 [00:24<00:06, 11.75step/s]Training:  76%|███████▋  | 229/300 [00:24<00:05, 11.94step/s]Training:  77%|███████▋  | 231/300 [00:24<00:05, 12.00step/s]Training:  78%|███████▊  | 233/300 [00:25<00:05, 12.15step/s]Training:  78%|███████▊  | 235/300 [00:25<00:05, 12.06step/s]Training:  79%|███████▉  | 237/300 [00:25<00:05, 12.13step/s]Training:  80%|███████▉  | 239/300 [00:25<00:04, 12.25step/s]Training:  80%|████████  | 241/300 [00:25<00:04, 11.94step/s]Training:  81%|████████  | 243/300 [00:25<00:04, 11.87step/s]Training:  82%|████████▏ | 245/300 [00:26<00:04, 12.07step/s]Training:  82%|████████▏ | 247/300 [00:26<00:04, 11.91step/s]Training:  83%|████████▎ | 249/300 [00:26<00:04, 11.71step/s]INFO 2026-11-02 19:25:08 ot_train.py:641 step:250 smpl:2K ep:8 epch:0.02 loss:3.176 grdn:90.880 lr:1.0e-05 updt_s:0.082 data_s:0.001 smp/s:96 mem_gb:1.79 l1_loss:0.512 kld_loss:0.266
+Training:  84%|████████▎ | 251/300 [00:26<00:04, 11.46step/s]Training:  84%|████████▍ | 253/300 [00:26<00:04, 11.51step/s]Training:  85%|████████▌ | 255/300 [00:27<00:03, 11.53step/s]Training:  86%|████████▌ | 257/300 [00:27<00:03, 11.59step/s]Training:  86%|████████▋ | 259/300 [00:27<00:03, 11.57step/s]Training:  87%|████████▋ | 261/300 [00:27<00:03, 11.53step/s]Training:  88%|████████▊ | 263/300 [00:27<00:03, 11.56step/s]Training:  88%|████████▊ | 265/300 [00:27<00:02, 11.73step/s]Training:  89%|████████▉ | 267/300 [00:28<00:02, 11.87step/s]Training:  90%|████████▉ | 269/300 [00:28<00:02, 12.06step/s]Training:  90%|█████████ | 271/300 [00:28<00:02, 11.88step/s]Training:  91%|█████████ | 273/300 [00:28<00:02, 11.91step/s]Training:  92%|█████████▏| 275/300 [00:28<00:02, 11.87step/s]Training:  92%|█████████▏| 277/300 [00:28<00:01, 12.02step/s]Training:  93%|█████████▎| 279/300 [00:29<00:01, 12.08step/s]Training:  94%|█████████▎| 281/300 [00:29<00:01, 12.03step/s]Training:  94%|█████████▍| 283/300 [00:29<00:01, 12.07step/s]Training:  95%|█████████▌| 285/300 [00:29<00:01, 12.11step/s]Training:  96%|█████████▌| 287/300 [00:29<00:01, 12.12step/s]Training:  96%|█████████▋| 289/300 [00:29<00:00, 11.96step/s]Training:  97%|█████████▋| 291/300 [00:30<00:00, 11.79step/s]Training:  98%|█████████▊| 293/300 [00:30<00:00, 11.82step/s]Training:  98%|█████████▊| 295/300 [00:30<00:00, 11.80step/s]Training:  99%|█████████▉| 297/300 [00:30<00:00, 11.87step/s]Training: 100%|█████████▉| 299/300 [00:30<00:00, 11.87step/s]INFO 2026-11-02 19:25:12 ot_train.py:641 step:300 smpl:2K ep:9 epch:0.02 loss:2.957 grdn:85.280 lr:1.0e-05 updt_s:0.082 data_s:0.001 smp/s:96 mem_gb:1.79 l1_loss:0.513 kld_loss:0.244
+INFO 2026-11-02 19:25:12 ot_train.py:687 Checkpoint policy after step 300
+Training: 100%|██████████| 300/300 [00:31<00:00,  9.61step/s]
+INFO 2026-11-02 19:25:12 ot_train.py:770 End of training

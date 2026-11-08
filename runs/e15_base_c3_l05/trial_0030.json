@@ -1,0 +1,134 @@
+{
+ "trial_id": 30,
+ "method": "CL0",
+ "cell": "dev_C3",
+ "arrangement_id": "dev_C3_016",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl26",
+   "a_mm": -168.0,
+   "b_mm": -181.4,
+   "yaw_deg": 115.0
+  },
+  {
+   "name": "box25",
+   "a_mm": -193.7,
+   "b_mm": -217.1,
+   "yaw_deg": 119.2
+  },
+  {
+   "name": "box21",
+   "a_mm": -150.0,
+   "b_mm": -219.5,
+   "yaw_deg": 92.3
+  },
+  {
+   "name": "mug24",
+   "a_mm": -230.5,
+   "b_mm": -182.1,
+   "yaw_deg": 83.1
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "other",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl26": 0.0,
+    "box25": 0.1,
+    "box21": 0.1,
+    "mug24": 0.0
+   }
+  }
+ },
+ "outcome": "no_target",
+ "finished": true,
+ "t_end_s": 22.12,
+ "phases": [
+  [
+   20.02,
+   "RELEASE"
+  ],
+  [
+   20.62,
+   "RETURN"
+  ],
+  [
+   22.12,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 20.02,
+   "name": "abort",
+   "data": {
+    "reason": "no_target"
+   }
+  },
+  {
+   "t": 20.02,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 20.62,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 22.12,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 598.0,
+  "reject_wide": 77.0,
+  "reject_other": 51.0,
+  "n_ok_dets": 1.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw",
+  "box25.a",
+  "box25.b",
+  "box25.z",
+  "box25.yaw",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw"
+ ],
+ "ms_step_p50": 28.1520530115813,
+ "ms_step_p95": 37.58768810657784,
+ "n_steps": 1107,
+ "wall_s": 161.14,
+ "method_exception": null,
+ "renders": 663,
+ "render_wall_s": 73.42
+}

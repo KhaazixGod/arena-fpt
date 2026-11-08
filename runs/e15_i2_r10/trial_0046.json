@@ -1,0 +1,132 @@
+{
+ "trial_id": 46,
+ "method": "REMOTE:ACT_I2_R10",
+ "cell": "dev_C3",
+ "arrangement_id": "dev_C3_004",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl22",
+   "a_mm": -221.8,
+   "b_mm": -225.2,
+   "yaw_deg": 14.6
+  },
+  {
+   "name": "mug24",
+   "a_mm": -235.60000000000002,
+   "b_mm": -189.7,
+   "yaw_deg": 264.9
+  },
+  {
+   "name": "box21",
+   "a_mm": -190.60000000000002,
+   "b_mm": -200.4,
+   "yaw_deg": 170.1
+  },
+  {
+   "name": "cyl26",
+   "a_mm": -150.0,
+   "b_mm": -196.8,
+   "yaw_deg": 57.7
+  },
+  {
+   "name": "l23",
+   "a_mm": -284.7,
+   "b_mm": -222.3,
+   "yaw_deg": 335.2
+  }
+ ],
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "cyl26",
+  "t_success_s": 4.62,
+  "t_detect_s": null,
+  "t_lift_s": 2.48,
+  "details": {
+   "moved_others_mm": {
+    "cyl22": 0.0,
+    "mug24": 0.0,
+    "box21": 0.0,
+    "l23": 0.3
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s1000/checkpoints/last/pretrained_model",
+    "replan": 10
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 60.0,
+  "ik_fail_ticks": 272.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 13.42,
+  "ik_fail_first": "{'p': [190.6, 202.5, 27.3], 'yaw': -68.5, 'pos_err_mm': 0.0, 'q': [-57.1, 45.5, -48.0, 92.5, -122.7], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.62,
+ "gt_success_obj": "cyl26",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw"
+ ],
+ "ms_step_p50": 3.0895869713276625,
+ "ms_step_p95": 86.46071795374155,
+ "n_steps": 1001,
+ "wall_s": 170.62,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 74.81
+}

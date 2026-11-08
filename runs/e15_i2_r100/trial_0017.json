@@ -1,0 +1,133 @@
+{
+ "trial_id": 17,
+ "method": "REMOTE:ACT_I2",
+ "cell": "dev_C3",
+ "arrangement_id": "dev_C3_009",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl22",
+   "a_mm": -220.7,
+   "b_mm": -204.0,
+   "yaw_deg": 209.2
+  },
+  {
+   "name": "l23",
+   "a_mm": -263.2,
+   "b_mm": -218.2,
+   "yaw_deg": 200.2
+  },
+  {
+   "name": "box21",
+   "a_mm": -191.89999999999998,
+   "b_mm": -218.9,
+   "yaw_deg": 258.9
+  },
+  {
+   "name": "cyl26",
+   "a_mm": -210.2,
+   "b_mm": -175.9,
+   "yaw_deg": 67.8
+  },
+  {
+   "name": "mug24",
+   "a_mm": -150.0,
+   "b_mm": -198.4,
+   "yaw_deg": 289.2
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl22": 3.7,
+    "l23": 0.6,
+    "box21": 11.1,
+    "cyl26": 1.5,
+    "mug24": 29.7
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s1000/checkpoints/last/pretrained_model",
+    "replan": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 696.0,
+  "ik_fail_ticks_lt6s": 2.0,
+  "ik_fail_first_t": 5.96,
+  "ik_fail_first": "{'p': [180.2, 200.1, 60.5], 'yaw': -2.1, 'pos_err_mm': 0.01, 'q': [-59.2, 22.7, -24.8, 92.1, -58.5], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw"
+ ],
+ "ms_step_p50": 74.30421595927328,
+ "ms_step_p95": 89.40359903499484,
+ "n_steps": 1001,
+ "wall_s": 179.59,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 60.49
+}

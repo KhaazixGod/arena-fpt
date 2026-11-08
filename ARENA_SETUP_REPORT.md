@@ -463,3 +463,81 @@ Tương tự G1a (vật quen, C0/C1, L0.25): 25/40 = 62,5 %, dưới ngưỡng 7
 Lệnh huấn luyện E11 (để chạy lại trên máy khác): `env -u PYTHONPATH ~/venvs/lerobot_data/bin/python -m lerobot.scripts.lerobot_train --dataset.repo_id=local/e6_demos_real --dataset.root=runs/e6_demos_real/lerobot --policy.type=act --policy.device=cuda --policy.push_to_hub=false --output_dir=runs/act_j0_s1000 --job_name=act_j0_s1000 --steps=100000 --batch_size=8 --log_freq=500 --save_freq=20000 --wandb.enable=false --seed=1000`.
 
 **Đưa lên git (3/11).** `cl0/`, `dir1/` và hai file kế hoạch không nằm trong repo nào; bản sao để trong `deps/` (`setup_workspace.py --collect`), hash đóng băng CL-0 của bản sao = bản gốc = `006af1c9686621e93249f7b2d17cf3e5cfd60ee96862213e13d000ddce63ab12`. `.gitattributes` tắt đổi CRLF. Không đưa lên: demo thô + bộ LeRobot E6 (một file video 136 MB > giới hạn 100 MB của GitHub), checkpoint ACT, `*_gt.npz` từ 1/11 (xem `.gitignore`).
+
+**Video (3/11, chỉ để xem, không phải số đánh giá).** `runs/e12_video_{cl0,act}` (dev_C1_011 L0.25) và `runs/e13_video_c3_{cl0,act}` (dev_C3_001–004 L0.25, 4–5 vật sát nhau): CL0 3/4, ACT_J0 3/4. Video `.mp4` không vào git (`runs/**/videos/`).
+
+**E14 ACT giao diện I2 (5/11, người dùng: "demo đi").** Chính sách của hồ sơ theo §3.2–3.3: hành động EE trong hệ băng, tương đối so với EE lúc chụp ảnh. Thành phần:
+- `arena/i2.py`: vector 6 chiều `[x_b, y_b, z, cos 2yaw, sin 2yaw, kẹp]`, p_b = p_w − s(t)·u. Yaw mã hoá bằng (cos 2yaw, sin 2yaw) vì yaw là mod 180 (89° và −89° là hai góc gần nhau); góc chúc cố định `robot.tilt_deg`. Đầu vào của mạng: ảnh + vector này của EE đo được (không có góc khớp).
+- Kiểm trước (`runs/e6_demos_real`, 23 tập, 6 048 khung): góc chúc của hành động demo nằm trong 1° quanh 90° ở 99,4 % khung; FK → IK ở góc chúc cố định sai ≤ 0,016 mm, nên đổi nhãn không mất thông tin.
+- `to_lerobot_i2.py`: đổi 444 tập E6 sang `runs/e6_demos_real/lerobot_i2`; s(t) lấy từ GT `belt_s_gt` của lượt, nội suy theo thời điểm khung; thống kê hành động tính lại ở dạng tương đối (chunk 100) bằng `recompute_stats` của LeRobot.
+- `train_act_i2.py`: `lerobot-train` nguyên bản, chỉ thay bộ tiền/hậu xử lý của ACT bằng thứ tự của pi0 (thô → `RelativeActionsProcessorStep` trên x_b, y_b, z → chuẩn hoá → mô hình → bỏ chuẩn hoá → `AbsoluteActionsProcessorStep`). Mô hình ACT không đổi. Hai bước này có sẵn trong LeRobot 0.6.1 nhưng chỉ nối cho pi0/pi05/groot.
+- `arena/methods/act_i2.py`: mỗi lần lập kế hoạch dùng trạng thái đo ĐÚNG lúc chụp ảnh (như demo ghi) và s = `belt.s_at(t_chụp)`; mỗi tick 50 Hz lấy mục tiêu nội suy theo (t − t_chụp)·30 trong chunk, đổi về W bằng `belt.s_at(t)`, IK ở góc chúc cố định, giới hạn tốc độ khớp và z ≥ băng + `min_z_above_belt_mm` như `BeltExecutor`. Lập kế hoạch lại mỗi `n_action_steps` (100) khung như ACT_J0.
+- Kiểm không cần học (`arena/methods/replay_i2.py`, `runs/e14_replay_i2`): phát lại hở nhãn I2 của 4 tập demo qua đúng bộ thực thi này, trên đúng ô/sắp xếp/tốc độ của lượt ORACLE gốc: 3/4 gắp thành công (C0 L0.25, C2 L0.25, C3 L0.25 năm vật). Tập hỏng (ep 240, C2 L0): quỹ đạo TCP và tư thế vật trùng lượt gốc trong ≈ 1 mm và 2° tới 2,7 s; lượt gốc vốn sát nút (má kẹp chạm `t17` khi hạ ở cả hai lượt), lượt phát lại kẹp kẹt trên vật khi khép. Đọc là độ nhạy vật lý, không phải lỗi nhãn `[suy luận]`.
+- Chạy thử đường ống: checkpoint 300 bước trên 3 tập (thư mục tạm), 1 lượt qua `remote_server.py`: 2 lần lập kế hoạch, không lỗi.
+- Chuỗi `scripts/e14_act_i2.sh` (bắt đầu 5/11 17:53): chờ đổi nhãn xong → huấn luyện `runs/act_i2_s1000` (cùng ngân sách ACT_J0: 100 000 bước, batch 8, hạt giống 1000) → hai làn Isaac: A = ACT_I2 dev_C0, dev_C1 × L0, L0.25 (so cặp với ACT_J0, CL0, ORACLE); B = ACT_I2 dev_C2 × L0, L0.25, L0.5 rồi ACT_J0 dev_C2 L0.5. L0.5 nằm ngoài tốc độ của demo (chỉ có L0 và L0.25).
+
+**E14 kết quả (5/11 18:35 → 6/11 00:25, 0/140 không hợp lệ, không lần nào watchdog phải khởi động lại).** Đổi nhãn 444 tập (115 908 khung, s cuối tập tới 351 mm): 18:35. Huấn luyện `runs/act_i2_s1000`: loss 4,44 (bước 500) → 0,053 (100 000), 2 giờ 27 phút (`logs/*_e14_train_act_i2.log`); loss không so được với ACT_J0 (khác không gian hành động và chuẩn hoá). Mỗi lượt ≈ 144 s thật. So cặp theo sắp xếp, McNemar chính xác hai phía, n = 20 mỗi ô (CL0/ORACLE: `runs/e8_real`, `runs/e9_clutter_real` lượt lặp 0, `runs/e10_base_L05`; ACT_J0: `runs/e11_act_dev`, `runs/e14_act_j0_dev2`):
+
+| Ô | ACT_I2 | ACT_J0 | CL0 | ORACLE | I2 vs J0 (hơn/kém, p) | I2 vs CL0 (hơn/kém, p) |
+|---|---|---|---|---|---|---|
+| dev_C0 L0 | 11 | 15 | 12 | 20 | 2/6, 0,29 | 3/4, 1 |
+| dev_C0 L0.25 | 19 | 19 | 17 | 20 | 1/1, 1 | 3/1, 0,63 |
+| dev_C1 L0 | 9 | 14 | 15 | 20 | 2/7, 0,18 | 1/7, 0,070 |
+| dev_C1 L0.25 | 11 | 14 | 14 | 20 | 4/7, 0,55 | 3/6, 0,51 |
+| dev_C2 L0 | 11 | — | 12 | 20 | | 5/6, 1 |
+| dev_C2 L0.25 | 16 | — | 16 | 18 | | 3/3, 1 |
+| **dev_C2 L0.5** | **13** | **4** | **6** | 16 | **11/2, 0,022** | 10/3, 0,092 |
+
+- Ở L0.5 (75 mm/s, ngoài tốc độ của demo: demo chỉ có L0 và L0.25), I2 hơn J0 có ý nghĩa (13 so với 4, p = 0,022) và gần ORACLE (16); hơn CL0 (13 so với 6, p = 0,092, chưa có ý nghĩa). Đúng hướng H4 (giao diện hệ băng chịu băng nhanh) nhưng chưa phải phép thử H4: J0 khác I2 cả giao diện lẫn không gian hành động (khớp so với EE), và L = 0,5 chứ không phải 1,0.
+- Ở L0, I2 kém J0 và CL0 (C0 + C1: 20/40 so với 29/40 và 27/40), chưa có ý nghĩa từng ô. Nguyên nhân chưa rõ `[chưa kiểm]`; giả thuyết: mạng không thấy góc khớp, mã hoá yaw, lập kế hoạch lại chỉ mỗi 3,3 s.
+- Lỗi của I2: `collision` 39, `other` 11 (nhãn `collision` của ACT kém tin như E11).
+- IK hỏng ở mọi lượt (`diag.ik_fail_ticks`), nhưng chạy lại 4 lượt với chẩn đoán (`runs/e14_diag_c0`, `runs/e14_diag_c1`): 0 tick hỏng trong 6 s đầu, lần hỏng đầu ở 9,2–10 s, gần tư thế nhà, IK có nghiệm nhưng bị biên an toàn của `wrist_flex` (92,4°) từ chối. Không phải nguyên nhân thất bại. Trong lần chạy lại, `dev_C0_004` thành công (lần chính: thất bại): kết quả ACT có dao động giữa các lần chạy `[chưa đo mức dao động]`.
+- Số sim (`engine=isaac`), một hạt giống huấn luyện; không mang sang máy thật.
+
+**E15 băng nhanh × nhiều vật (6/11, người dùng: "tiếp tục củng cố ở tốc độ cao và có nhiều vật").** Chỉ ô DEV; ô TEST không chạy. `scripts/e15_fast_clutter.sh` (bắt đầu 6/11 17:26):
+1. Hai làn Isaac. A: demo ORACLE ở L0.5 trên train_C2, train_C3 (60 sắp xếp mỗi ô, giữ lượt thành công, `runs/e15_demos_fast`), rồi đổi nhãn toàn bộ demo (E6 + mới) chạy nền; CL0 + ORACLE dev_C3 L0.5 (`runs/e15_base_c3_l05`, ô còn thiếu); ACT_I2 lập kế hoạch lại mỗi 100 khung trên dev_C3 L0.25, L0.5 (`runs/e15_i2_r100`). B: ACT_I2 lập kế hoạch lại mỗi 10 khung (`ACT_REPLAN=10`) trên dev_C2, dev_C3 × L0.25, L0.5 (`runs/e15_i2_r10`).
+2. Huấn luyện `runs/act_i2f_s1000` trên toàn bộ demo, cùng ngân sách với `act_i2_s1000` (100 000 bước, batch 8, hạt giống 1000): chỉ khác dữ liệu.
+3. Quy tắc chọn trước khi xem pha 3: lập kế hoạch lại mỗi 10 khung nếu tổng thành công của nó ≥ của mỗi 100 khung trên dev_C2 L0.5, dev_C3 L0.25, dev_C3 L0.5; ngược lại 100. Rồi chính sách mới trên dev_C2, dev_C3 × L0.25, L0.5 (`runs/e15_i2f`, `runs/e15_i2f_c3`).
+Lưu ý: demo ORACLE ở L0.5 chỉ có trong sim; trên máy thật, thu demo bằng tay leader ở 75 mm/s khó (§3.2), nên phần cải thiện nhờ dữ liệu nhanh không mang sang cách thu dữ liệu thật; phần nhờ lập kế hoạch lại thì mang sang được.
+
+**E15 pha 1 (6/11 17:26 → 21:42, 0/280 không hợp lệ, không lần nào watchdog phải khởi động lại).** Demo ORACLE ở L0.5: train_C2 41/60, train_C3 35/60 → 76 tập mới (`runs/e15_demos_fast/episodes`); đổi nhãn toàn bộ 444 + 76 = 520 tập vào `runs/e15_demos_fast/lerobot_i2_all`. So cặp (n = 20, McNemar chính xác; CL0/ORACLE: `runs/e9_clutter_real` lượt lặp 0, `runs/e10_base_L05`, `runs/e15_base_c3_l05`; ACT_I2 lập kế hoạch lại mỗi 100 khung: `runs/e14_act_i2_dev2`, `runs/e15_i2_r100`; mỗi 10 khung: `runs/e15_i2_r10`):
+
+| Ô | ACT_I2 /100 khung | ACT_I2 /10 khung | CL0 | ORACLE | /10 vs /100 (hơn/kém, p) | /100 vs CL0 (hơn/kém, p) |
+|---|---|---|---|---|---|---|
+| dev_C2 L0.25 | 16 | 14 | 16 | 18 | 0/2, 0,50 | 3/3, 1 |
+| dev_C2 L0.5 | 13 | 6 | 6 | 16 | 4/11, 0,12 | 10/3, 0,092 |
+| dev_C3 L0.25 | 10 | 16 | 13 | 14 | 7/1, 0,070 | 5/8, 0,58 |
+| dev_C3 L0.5 | 9 | 3 | 8 | 13 | 1/7, 0,070 | 6/5, 1 |
+
+Lập kế hoạch lại mỗi 10 khung giúp ở C3 L0.25 (16 so với 10) nhưng hại ở L0.5 (C2 6 so với 13, C3 3 so với 9); chưa ô nào có ý nghĩa. Nguyên nhân ở L0.5 chưa rõ `[chưa kiểm]`. Theo quy tắc ghi trước: tổng ba ô /10 = 25 < /100 = 32 → chính sách mới dùng 100 khung. dev_C3 L0.5 (75 mm/s, 4–5 vật sát nhau) là ô khó nhất đến giờ: ORACLE chỉ 13/20.
+
+**E15 pha 2–3 (6/11 21:42 → 7/11 01:40, 0/80 không hợp lệ).** Huấn luyện `runs/act_i2f_s1000` trên 520 tập (135 660 khung; 444 E6 + 76 L0.5): loss 0,054 ở 100 000 bước (5,9 epoch), 2 giờ 14 phút (`logs/*_e15_train_act_i2f.log`). Đánh giá với lập kế hoạch lại 100 khung (theo quy tắc). So cặp n = 20 (ACT_I2 cũ = 100 khung, `runs/e14_act_i2_dev2` + `runs/e15_i2_r100`):
+
+| Ô | ACT_I2F (thêm demo L0.5) | ACT_I2 cũ | CL0 | ORACLE | mới vs cũ (hơn/kém, p) | mới vs CL0 (hơn/kém, p) |
+|---|---|---|---|---|---|---|
+| dev_C2 L0.25 | 16 | 16 | 16 | 18 | 2/2, 1 | 2/2, 1 |
+| dev_C2 L0.5 | 14 | 13 | 6 | 16 | 4/3, 1 | **9/1, 0,021** |
+| dev_C3 L0.25 | 12 | 10 | 13 | 14 | 4/2, 0,69 | 5/6, 1 |
+| dev_C3 L0.5 | 8 | 9 | 8 | 13 | 3/4, 1 | 5/5, 1 |
+| Tổng /80 | 50 | 48 | 43 | 61 | 13/11, 0,84 | 21/14, 0,31 |
+
+- Thêm 76 demo L0.5 không đổi kết quả (50 so với 48). Lợi thế ở L0.5 đến từ giao diện I2, không cần demo nhanh; khớp với ý H4b (demo chậm dùng được cho băng nhanh) nhưng chưa phải phép thử H4b.
+- dev_C2 L0.5: ACT_I2F 14 so với CL0 6 (p = 0,021, một ô trong nhiều phép so; chưa hiệu chỉnh đa so sánh).
+- dev_C3 L0.5 là nút thắt của mọi phương pháp: ORACLE 13/20 (thất bại: `collision` 5, `slip` 1, `timing` 1), CL0 8 (`collision` 7, `grasp_point` 3), ACT_I2F 8 (`collision` 11, nhãn ACT kém tin). Với 4–5 vật cách 0–3 mm ở 75 mm/s, ngay cả nhận thức hoàn hảo cũng va vào vật bên cạnh trong 7/20 lượt `[suy luận: giới hạn hình học của kẹp/ thời gian, chưa kiểm]`.
+
+**E16 vì sao ACT_I2 hỏng (8/11, người dùng: "làm sao để cải thiện model").** Phân tích chỉ từ GT của các lượt đã chạy (`scripts/e16_failure_modes.py`, kết quả `logs/2026-11-08_*_e16_failure_modes_before.txt`), không chạy Isaac. Chế độ lỗi do mình định nghĩa từ GT (ACT không phát pha CLOSE nên nhãn `fail_cause_auto` của nó vô nghĩa): lần đóng kẹp đầu = độ mở đo được < 30 (mở = 40).
+- **Bằng chứng 1, lỗi chính là đóng kẹp vào chỗ trống.** ACT_I2 lập kế hoạch lại mỗi 100 khung (`/100`), 62 lượt hỏng trên sáu ô dev: 37 đóng kẹp hẳn (< 3) mà không có vật (60 %), 16 "nhấc một phần" (26 %), 8 nhấc ≥ 25 mm nhưng không giữ đủ 2 s (13 %), 1 kẹt không nhấc, 0 lượt không đóng kẹp. 29/62 lượt có vật bị xô > 10 mm trước lần đóng đầu. "Nhấc một phần" đếm bất kỳ vật nào, bất kỳ lần thử nào trong 20 s (ACT thử lại nhiều lần: ≥ 4 lần đóng ở 92/180 lượt), nên không đồng nghĩa với "gắp đúng vật rồi tuột".
+- **Bằng chứng 2, lệch ngang cố định ≈ −9 mm.** Độ lệch của TCP so với tâm vật gần nhất lúc đóng kẹp đầu, theo hướng ngang băng (db), trung vị: `/100` −9,2 mm (lượt thành công −7,9, thất bại −15,1; độ lệch chuẩn 13,6); CL0 +2,3 (6,9); ORACLE +0,1 (6,1); ACT_J0 +0,7 (12,8). **Cùng mô hình, lập kế hoạch lại mỗi 10 khung (`/10`): +0,6 (7,8)**: lệch biến mất và độ phân tán giảm một nửa. Độ lệch không tỉ lệ với vị trí ngang của vật (hệ số 0,05) hay chiều cao vật (0,15 mm/mm) nên không phải co về trung bình hay thị sai. Thêm 76 demo L0.5 (I2F) không đổi (−7,2).
+- **Bằng chứng 3, `/10` hỏng theo cách khác: nhấc quá sớm.** Từ lúc đóng đến lúc tay nhấc lên 15 mm: ORACLE 0,72 s (thành công), `/100` 0,80 s, nhưng `/10` ở lượt thất bại chỉ **0,20 s** (trung vị). Hai lượt `/10` dev_C3_001 và 002 L0.5: kẹp đo 34 → 0 trong khi z tăng 10 → 48 mm trong 0,4 s. Tỉ lệ "kẹp rỗng lúc nhấc": `/100` 45 % lượt hỏng, ACT_J0 59 %, `/10` 18 %.
+- **Suy ra, chưa kiểm:** (a) độ lệch ngang đến từ kế hoạch đầu của mô hình, không phải bộ thực thi: phát lại nhãn demo qua cùng bộ thực thi cho TCP trùng lượt gốc ≈ 1 mm lúc đóng kẹp (`runs/e14_replay_i2`), và `/10` dùng cùng bộ thực thi mà không lệch; (b) `/10` nhấc sớm vì mỗi lần lập kế hoạch lại thấy kẹp đo ở trạng thái đang khép, khác phân bố demo với vật dev có bề rộng khác `[chưa kiểm]`.
+- **Kế hoạch E16 (chưa huấn luyện lại, `scripts/e16_commit.sh`):** "COMMIT" = lập kế hoạch lại mỗi 10 khung khi lệnh kẹp của chính sách còn MỞ; khi nó ra lệnh ĐÓNG thì chạy hết đoạn đó (100 khung). Ô dev, n = 20: làn A dev_C2, dev_C3 × L0.25, L0.5; làn B dev_C0, dev_C1 × L0 (nơi `/100` kém ACT_J0 và CL0: 20/40 so với 29/40 và 27/40), rồi **chạy lại `/100` trên dev_C2 L0.5** để đo độ dao động giữa các lần chạy của ACT (một lượt dev_C0_004 đã đổi kết quả khi chạy lại ở E14; chưa có số). **Quy tắc chọn, ghi trước lượt đầu:** COMMIT thành chế độ suy luận mặc định của ACT-I2 khi và chỉ khi tổng thành công trên bốn ô dev_C2/dev_C3 × L0.25, L0.5 ≥ `/100` + 5 (48 + 5 = 53/80) **và** ≥ `/10` (39); không thì giữ `/100`. `scripts/e16_pair.py` chấm quy tắc. COMMIT là quy tắc đặt lên trên chính sách (dựa vào lệnh kẹp của chính sách), nên báo cáo là biến thể "ACT-I2 + commit", không phải ACT thuần. Cải thiện ở phía suy luận nên mang sang được robot thật, khác với demo L0.5 chỉ ghi được trong sim.
+
+**E16 sự cố 8/11 15:17 (không phải lỗi mô phỏng, không có lượt `valid=0`).** Isaac của làn B (`runs/e16_commit_c01`) hết bộ nhớ GPU khi cấp phát ảnh (`Out of GPU memory allocating 'Synthetic Image Data Color (LDR)'`, `VK_ERROR_OUT_OF_DEVICE_MEMORY`), lỗi phân đoạn, mã thoát 139, sau 20/40 lượt (`logs/2026-11-08_143008_e16_commit_c01.log`; Ubuntu cũng báo `/var/crash/_usr_bin_python3.12.1000.crash`). Lúc đó trên GPU 8 GB có thêm Xorg, gnome-shell, Steam và các cửa sổ bạn mở sau khi cài lại VS Code (≈ 0,8 GB). Hậu quả dây chuyền: máy chủ ACT của làn đó thoát vì `EOFError` khi Isaac sập giữa lượt, nên lần thử lại 15:19:39 bị từ chối kết nối nhưng `run_arena` vẫn trả mã 0, bộ canh tưởng đã xong và chuyển sang bước sau; hai ô dev_C1 L0 thiếu. Sửa: `remote_server.py` giờ phục vụ tiếp khi `--repeat` và arena ngắt đột ngột; `scripts/e16_resume_c01.sh` (đơn vị systemd `arena-e16b`) chạy 20 lượt thiếu cùng cấu hình, đếm đủ 40 mới dừng. Khi cài lại VS Code cũng đã chuyển chuỗi sang đơn vị systemd `arena-e16` (14:28): mất 2 lượt dở, các lượt xong được giữ. Bài học: khi chạy hai làn Isaac, đừng mở thêm ứng dụng dùng GPU (trình duyệt, game, Steam).
+
+## E16 kết quả (8/11, engine=isaac, 140 lượt, 0 lượt không hợp lệ)
+Bằng chứng: `logs/2026-11-08_175431_e16_pair_final.txt`, `logs/2026-11-08_175431_e16_failure_modes_after_final.txt`; `runs/e16_commit_c23` (80), `runs/e16_commit_c01` (40/40 sau khi chạy bù), `runs/e16_repeat_r100` (20).
+- Quy tắc đăng ký trước: COMMIT cần ≥53/80 và ≥39 trên C2/C3 × L0.25/L0.5. Kết quả COMMIT 41/80 (/100 = 48, /10 = 39, CL0 = 43, ORACLE = 61); COMMIT vs /100 hơn/kém 16/23, p=0.337. → **KHÔNG nhận COMMIT, giữ /100 làm mặc định.**
+- L0 (C0+C1, n=40): COMMIT 22, /100 20, J0 29, CL0 27 (không khác biệt có ý nghĩa).
+- Sàn nhiễu: lặp /100 trên dev_C2 L0.5 (tiến trình máy chủ mới): 13 → 14, 3/20 lượt đổi kết quả. Nghĩa là chênh ±3 giữa hai lần chạy trên một ô n=20 chưa phân biệt được với nhiễu.
+- Cơ chế (chỉ GT): COMMIT sửa lệch ngang (db trung vị −9.2 → +1.8 mm, sd 13.6 → 9.3) nhưng lệch dọc băng mới xuất hiện (da trung vị −6.6 mm), thời gian giữ trước khi nhấc giảm (fail 0.80 → 0.42 s), và `partial_lift` tăng rõ ở C3 L0.5 (2 → 11). Giả thuyết [chưa kiểm]: chunk cam kết sau khi ra lệnh đóng đi theo lệch pha với băng đang chạy nhanh.
+- Kết luận cho luận văn: cải thiện chỉ từ phía suy luận không đủ; cần thay đổi ở mô hình (dữ liệu/huấn luyện) nếu muốn vượt /100.

@@ -1,0 +1,53 @@
+== 1. failure modes (GT only).  pushed = failures that closed after moving an object > 10 mm; |da|,|db| = median TCP offset to the nearest object at the first close (failures that closed)
+method    cells            n  success no_close empty_cl grip_no_ partial_ lift_not   pushed   |da| |db|
+I2(/100)  C0+C1  L0       40       20        0       13        1        5        1    8/20   14.6 14.7
+J0        C0+C1  L0       40       29        1        2        1        2        5    3/10   10.6  9.4
+CL0       C0+C1  L0       40       27        0        9        0        3        1    1/13   15.6  3.0
+ORACLE    C0+C1  L0       40       40        0        0        0        0        0    0/0     nan  nan
+I2(/100)  C0+C1  L0.25    40       30        0        7        0        1        2    1/10    2.9 15.1
+J0        C0+C1  L0.25    40       33        0        0        0        5        2    3/7     6.4  7.6
+CL0       C0+C1  L0.25    40       31        0        4        0        5        0    2/9     7.7  4.1
+ORACLE    C0+C1  L0.25    40       40        0        0        0        0        0    0/0     nan  nan
+I2(/100)  C2  L0.25       20       16        0        0        0        1        3    1/4     5.0 15.6
+I2(/10)   C2  L0.25       20       14        0        0        0        3        3    5/6    11.9  8.3
+I2F       C2  L0.25       20       16        0        2        0        1        1    2/4     3.5 15.5
+CL0       C2  L0.25       40       33        0        1        0        4        2    5/7    12.2  7.1
+ORACLE    C2  L0.25       20       18        1        1        0        0        0    1/1    22.1 14.5
+I2(/100)  C2  L0.5        20       13        0        4        0        3        0    2/7     3.9 16.6
+I2(/10)   C2  L0.5        20        6        0        4        0        6        4    2/14    8.8  8.8
+I2F       C2  L0.5        20       14        0        3        0        3        0    4/6     3.7 17.2
+J0        C2  L0.5        20        4        0        8        0        7        1   15/16   10.7 15.9
+CL0       C2  L0.5        20        6        9        1        0        4        0    0/5     1.1  6.2
+ORACLE    C2  L0.5        20       16        3        0        0        1        0    1/1     2.5  2.3
+I2(/100)  C3  L0.25       20       10        0        5        0        4        1    7/10    4.2 15.9
+I2(/10)   C3  L0.25       20       16        0        0        0        2        2    2/4    11.6  9.3
+I2F       C3  L0.25       20       12        0        3        0        4        1    5/8     1.2 14.8
+CL0       C3  L0.25       20       13        2        1        0        0        4    1/5     2.9  5.4
+ORACLE    C3  L0.25       20       14        4        2        0        0        0    2/2    39.7 40.2
+I2(/100)  C3  L0.5        20        9        0        8        0        2        1    8/11    5.8 20.8
+I2(/10)   C3  L0.5        20        3        0        2        1       11        3    9/17    8.4  4.6
+I2F       C3  L0.5        20        8        0        6        0        4        2    8/12    2.9 10.9
+CL0       C3  L0.5        20        8        7        3        0        2        0    2/5     1.6  6.5
+ORACLE    C3  L0.5        20       13        6        0        0        1        0    0/1     9.1  8.7
+
+== 2. signed offset at the first close (da along the belt, db across; + = TCP downstream / larger b), successes vs failures, all dev cells pooled
+I2(/100)  n=180  db median   -9.2 (ok   -7.9 | fail  -15.1)  sd  13.6   da median    0.2 (ok  -0.5 | fail   3.8)  | db slope vs object b  0.048, vs object height  0.154
+I2(/10)   n= 80  db median    0.6 (ok   -1.3 | fail    5.7)  sd   7.8   da median   -6.0 (ok  -5.2 | fail  -8.4)  | db slope vs object b -0.176, vs object height  0.272
+I2F       n= 80  db median   -7.2 (ok   -6.9 | fail  -12.8)  sd  20.5   da median   -3.0 (ok  -3.2 | fail  -2.4)  | db slope vs object b  0.169, vs object height  0.569
+J0        n= 99  db median    0.7 (ok   -0.1 | fail    4.0)  sd  12.8   da median   -3.3 (ok  -2.3 | fail  -5.3)  | db slope vs object b -0.241, vs object height -0.623
+CL0       n=182  db median    2.3 (ok   -0.2 | fail    4.7)  sd   6.9   da median    2.1 (ok   1.2 | fail   7.5)  | db slope vs object b -0.061, vs object height  0.206
+ORACLE    n=184  db median    0.1 (ok    0.1 | fail   14.5)  sd   6.1   da median   -0.4 (ok  -0.4 | fail  -9.1)  | db slope vs object b -0.055, vs object height -0.044
+
+== 3. close -> lift-off (TCP 15 mm above its height at the close): dwell and gripper opening at lift-off
+I2(/100)  ok   n=106  dwell median 0.80 s  p10 0.37  p90 0.82   opening at lift-off median  20.6  share < 5 (empty jaws): 0.04
+I2(/100)  fail n= 65  dwell median 0.80 s  p10 0.23  p90 1.01   opening at lift-off median   6.8  share < 5 (empty jaws): 0.45
+I2(/10)   ok   n= 39  dwell median 0.66 s  p10 0.20  p90 0.88   opening at lift-off median  21.9  share < 5 (empty jaws): 0.00
+I2(/10)   fail n= 39  dwell median 0.20 s  p10 0.14  p90 0.62   opening at lift-off median  15.0  share < 5 (empty jaws): 0.18
+I2F       ok   n= 49  dwell median 0.76 s  p10 0.25  p90 0.82   opening at lift-off median  22.6  share < 5 (empty jaws): 0.00
+I2F       fail n= 27  dwell median 0.78 s  p10 0.47  p90 1.35   opening at lift-off median   9.7  share < 5 (empty jaws): 0.41
+J0        ok   n= 66  dwell median 0.76 s  p10 0.36  p90 0.80   opening at lift-off median  15.4  share < 5 (empty jaws): 0.05
+J0        fail n= 32  dwell median 0.74 s  p10 0.45  p90 1.00   opening at lift-off median   0.1  share < 5 (empty jaws): 0.59
+CL0       ok   n=131  dwell median 0.68 s  p10 0.22  p90 0.74   opening at lift-off median  22.0  share < 5 (empty jaws): 0.00
+CL0       fail n= 50  dwell median 0.86 s  p10 0.14  p90 1.80   opening at lift-off median  25.1  share < 5 (empty jaws): 0.20
+ORACLE    ok   n=179  dwell median 0.72 s  p10 0.22  p90 0.76   opening at lift-off median  16.9  share < 5 (empty jaws): 0.00
+ORACLE    fail n=  5  dwell median 1.56 s  p10 1.12  p90 1.66   opening at lift-off median  40.0  share < 5 (empty jaws): 0.00

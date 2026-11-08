@@ -1,0 +1,14 @@
+cell            n  COMMIT  /100  /10   J0  CL0  ORACLE | COMMIT vs /100 | vs /10 | vs J0 | vs CL0   (hơn/kém, p)
+dev_C0 L0      20     13     11      -     15     12     20 | 7/5 p=0.774 | - | 3/5 p=0.727 | 6/5 p=1.000
+dev_C1 L0      20      9      9      -     14     15     20 | 7/7 p=1.000 | - | 3/8 p=0.227 | 2/8 p=0.109
+dev_C2 L0.25   20     13     16     14      -     16     18 | 1/4 p=0.375 | 2/3 p=1.000 | - | 3/6 p=0.508
+dev_C2 L0.5    20      9     13      6      4      6     16 | 5/9 p=0.424 | 4/1 p=0.375 | 7/2 p=0.180 | 5/2 p=0.453
+dev_C3 L0.25   20     14     10     16      -     13     14 | 7/3 p=0.344 | 1/3 p=0.625 | - | 5/4 p=1.000
+dev_C3 L0.5    20      5      9      3      -      8     13 | 3/7 p=0.344 | 4/2 p=0.688 | - | 3/6 p=0.508
+
+pooled dev_C2+dev_C3 x L0.25,L0.5 (n=80): COMMIT 41, /100 48, /10 39, CL0 43, ORACLE 61   | COMMIT vs /100 16/23 p=0.337
+pre-registered rule: COMMIT >= /100 + 5 (53) AND >= /10 (39)  ->  KEEP /100 as the default
+
+L0 (dev_C0+dev_C1, n=40): COMMIT 22, /100 20, J0 29, CL0 27, ORACLE 40   | COMMIT vs J0 6/13 p=0.167 | vs CL0 8/13 p=0.383
+
+noise floor (same model, same /100 setting, fresh server process, dev_C2 L0.5, n=20): first run 13, repeat 14, trials whose outcome flipped: 3/20

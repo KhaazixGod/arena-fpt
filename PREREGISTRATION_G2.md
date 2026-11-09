@@ -117,4 +117,18 @@ Chi phí ước lượng [thô]: khoảng 600 lượt (~144 s thật mỗi lư�
 
 ## 8. Sai lệch (điền sau nếu có)
 
-_(chưa có)_
+### Sai lệch 1 (9/11/2026, trước khi chạy bất kỳ lượt TEST của chính sách học): kiểm hệ thống G0
+
+**Sự kiện.** G0 chạy ngày 8/11 (`logs/2026-11-08_223351_g0_decision.txt`): CL0 trên `seen_C0` L0.5 được 6/20 = 30% (< 80%, kiểm hệ thống không đạt theo mục 0); CL0 trên `test_C2` L0.5 được 10/30 = 33% [19, 51], lượt hỏng do nhận thức/điểm kẹp 2/20 = 10% (theo mục 0 là "GO có điều kiện").
+
+**Thừa nhận quan điểm.** Người dùng chọn xử lý sai lệch này **sau khi đã thấy** 6/20 và 10/30, nên lựa chọn dưới đây không độc lập với kết quả; tiêu chí kiểm thay thế dưới đây được nêu trước khi chạy nó, nhưng được chọn có tham khảo số DEV đã biết (CL0 `dev_C0` L0.25 = 17/20, L0 = 12/20, `dev_C2` L0.5 = 6/20).
+
+**Thay đổi so với mục 0.**
+1. Kiểm hệ thống ≥ 80% **ở L0.5 không còn áp dụng**. Lý do giả thuyết: CL0 chậm với băng 75 mm/s (kể cả trên DEV), không nhất thiết là lỗi hiệu chuẩn `[chưa kiểm]`. Kiểm thay thế: CL0 trên `seen_C0` (`arrangements/sim_seen`, không phải ô khoá), **L0.25, n = 20, phải ≥ 16/20 (80%)**. Chạy một lần (`scripts/g0_syscheck_l025.sh`). Nếu < 16/20 thì tính là lỗi kỹ thuật thật, dừng và điều tra hiệu chuẩn (luật 4, trên DEV) trước G2, không viết lại tiêu chí. Nếu ≥ 16/20: hệ thống (camera, hiệu chuẩn, CL0 đóng băng) được coi là hoạt động, và con số 10/30 ở `test_C2` L0.5 được dùng như độ mạnh của CL0 ở ô đó.
+2. Kết quả `test_C2` L0.5 (10/30, "GO có điều kiện") **không** dẫn tới sửa CL0 và chạy lại G0. Lý do: nguyên nhân chính là `slip` (9) và `collision` (8), tức điều khiển/tiếp xúc, không phải nhận thức; sửa chúng là đổi thuật toán CL0 (luật 8) và không kịp kiểm trên DEV trước 15/11. Baseline của claim C vẫn là **CL0 đóng băng, không đổi**. Giới hạn này sẽ được viết vào luận văn: "CL0 chưa phải baseline module hoá mạnh nhất có thể; thất bại chủ yếu ở bước gắp/điều khiển, không ở nhận thức".
+3. Không xây CL-1 (mục 0 chỉ yêu cầu khi "mơ hồ"; G0 không rơi vào vùng đó).
+4. Mục 3 (quy tắc GO/NO-GO cho claim C), mục 4–7 và mọi ngưỡng khác **không đổi**.
+
+### Sai lệch 2 (9/11/2026): H4 không đo được
+
+H4 (mục 5) chạy xong 9/11 (`logs/2026-11-09_*_h4_decision.txt`): cả 6 phương pháp, kể cả ORACLE, đạt 0/30 ở `dev_C0` L1.0. Không có chênh lệch nào để kiểm; theo quy tắc kết quả là "không được ủng hộ" nhưng thực chất là hiệu ứng sàn. Báo cáo như kết quả mô tả: "L = 1.0 (150 mm/s) vượt khả năng cả ORACLE trong sim hiện tại". Không chạy lại ở tốc độ khác trong khuôn khổ file này; nếu sau đó làm H4 ở L0.5 thì ghi riêng là thử nghiệm post-hoc.

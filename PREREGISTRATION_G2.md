@@ -52,7 +52,7 @@ Băm checkpoint hạt giống 1000 (`model.safetensors`):
 f3f08c7798a3baa02242c456c1bf826fe94c46eb368c8b148c081d489ff835b8  act_i2_s1000
 a52cd166c22826e484f88331bedf3287918cc84e605d6aea161d6475af298e84  act_j0_s1000
 ```
-Băm của hạt giống 2000 ghi vào đây **trước** lượt TEST đầu tiên: `act_i2_s2000: ______`, `act_j0_s2000: ______`.
+Băm của hạt giống 2000 ghi vào đây **trước** lượt TEST đầu tiên: `act_i2_s2000: e23de1180e29e53a29f731cd787497f99998993d0716dc36e8b562002e989bc4`, `act_j0_s2000: 948ea82e01760762aea7a65e07cdc4927a6faecf707a5c86f8a561cc3252944c`.
 
 **[ĐÃ XÁC NHẬN 8/11] Chọn I2, không chọn I2F.** I2F (thêm 76 demo L0.5) chỉ ghi được trong sim, không mang sang robot thật. Trên DEV hai bản này không khác (50 so với 48 trên 80 lượt, p = 0,84). I2F, nếu chạy, chỉ là phân tích độ nhạy (mục 6), không tham gia quyết định.
 

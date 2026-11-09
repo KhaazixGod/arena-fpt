@@ -1,0 +1,132 @@
+{
+ "trial_id": 9,
+ "method": "CL0",
+ "cell": "seen_C0",
+ "arrangement_id": "seen_C0_010",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -150.0,
+   "b_mm": -219.4,
+   "yaw_deg": 31.9
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "calib",
+  "target": "ring20",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "ring20": 0.3
+   },
+   "max_lift_target_mm": 0.0,
+   "select_err_mm": 20.8,
+   "estimate_err_mm": 18.7
+  }
+ },
+ "outcome": "late",
+ "finished": true,
+ "t_end_s": 5.96,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   3.7,
+   "RELEASE"
+  ],
+  [
+   4.32,
+   "RETURN"
+  ],
+  [
+   5.96,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -130.0,
+    "b": -214.0,
+    "theta": 90.0,
+    "width": 43.25,
+    "std": 0.7453559924999299
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.6,
+   "name": "freeze",
+   "data": {
+    "est": "(-131.50724836760725, -217.25, 90.0)"
+   }
+  },
+  {
+   "t": 3.7,
+   "name": "abort",
+   "data": {
+    "reason": "late: v\u1eadt s\u1eafp ra kh\u1ecfi v\u00f9ng v\u1edbi t\u1edbi tr\u01b0\u1edbc khi nh\u1ea5c xong"
+   }
+  },
+  {
+   "t": 3.7,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 4.32,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 5.96,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 109.0,
+  "reject_wide": 0.0,
+  "reject_other": 101.0,
+  "n_ok_dets": 14.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw"
+ ],
+ "ms_step_p50": 3.5095830680802464,
+ "ms_step_p95": 39.83482213225216,
+ "n_steps": 299,
+ "wall_s": 32.23,
+ "method_exception": null,
+ "renders": 178,
+ "render_wall_s": 12.24
+}

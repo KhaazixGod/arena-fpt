@@ -1,0 +1,133 @@
+{
+ "trial_id": 13,
+ "method": "REMOTE:ACT_I2_S1000",
+ "cell": "test_C3",
+ "arrangement_id": "test_C3_014",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl36",
+   "a_mm": -184.7,
+   "b_mm": -186.8,
+   "yaw_deg": 92.3
+  },
+  {
+   "name": "ring28",
+   "a_mm": -150.0,
+   "b_mm": -187.6,
+   "yaw_deg": 355.9
+  },
+  {
+   "name": "mug29",
+   "a_mm": -215.7,
+   "b_mm": -212.1,
+   "yaw_deg": 153.9
+  },
+  {
+   "name": "cyl33",
+   "a_mm": -259.79999999999995,
+   "b_mm": -231.2,
+   "yaw_deg": 357.1
+  },
+  {
+   "name": "box35",
+   "a_mm": -312.6,
+   "b_mm": -207.9,
+   "yaw_deg": 318.6
+  }
+ ],
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "ring28",
+  "t_success_s": 4.62,
+  "t_detect_s": null,
+  "t_lift_s": 2.5,
+  "details": {
+   "moved_others_mm": {
+    "cyl36": 3.4,
+    "mug29": 0.0,
+    "cyl33": 0.0,
+    "box35": 0.0
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s1000/checkpoints/last/pretrained_model",
+    "replan": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 691.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 6.08,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [177.6, 201.5, 60.3], 'yaw': -2.4, 'pos_err_mm': 0.01, 'q': [-59.9, 22.7, -24.7, 92.0, -59.5], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.62,
+ "gt_success_obj": "ring28",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "ring28.a",
+  "ring28.b",
+  "ring28.z",
+  "ring28.yaw",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "cyl33.a",
+  "cyl33.b",
+  "cyl33.z",
+  "cyl33.yaw",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw"
+ ],
+ "ms_step_p50": 65.47883804887533,
+ "ms_step_p95": 78.94536200910807,
+ "n_steps": 1001,
+ "wall_s": 150.43,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 47.91
+}

@@ -1,0 +1,88 @@
+{
+ "trial_id": 13,
+ "method": "REMOTE:ACT_I2_S1000",
+ "cell": "test_C0",
+ "arrangement_id": "test_C0_014",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug29",
+   "a_mm": -150.0,
+   "b_mm": -222.5,
+   "yaw_deg": 151.3
+  }
+ ],
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "mug29",
+  "t_success_s": 4.7,
+  "t_detect_s": null,
+  "t_lift_s": 2.58,
+  "details": {
+   "moved_others_mm": {}
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s1000/checkpoints/last/pretrained_model",
+    "replan": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 689.0,
+  "ik_fail_ticks_lt6s": 1.0,
+  "ik_fail_first_t": 5.98,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [177.7, 203.1, 60.0], 'yaw': -2.3, 'pos_err_mm': 0.01, 'q': [-60.1, 23.6, -25.9, 92.3, -59.6], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.7,
+ "gt_success_obj": "mug29",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw"
+ ],
+ "ms_step_p50": 64.03804395813495,
+ "ms_step_p95": 70.53365604951978,
+ "n_steps": 1001,
+ "wall_s": 135.53,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 40.97
+}

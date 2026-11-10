@@ -1,0 +1,161 @@
+{
+ "trial_id": 36,
+ "method": "CL0",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_037",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl33",
+   "a_mm": -221.8,
+   "b_mm": -228.9,
+   "yaw_deg": 106.9
+  },
+  {
+   "name": "box35",
+   "a_mm": -285.6,
+   "b_mm": -209.9,
+   "yaw_deg": 302.4
+  },
+  {
+   "name": "t34",
+   "a_mm": -150.0,
+   "b_mm": -213.8,
+   "yaw_deg": 191.3
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "t34",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl33": 19.0,
+    "box35": 39.4,
+    "t34": 6.1
+   },
+   "max_lift_target_mm": 0.0
+  }
+ },
+ "outcome": "ik_fail",
+ "finished": true,
+ "t_end_s": 8.12,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.34,
+   "DESCEND"
+  ],
+  [
+   5.68,
+   "RELEASE"
+  ],
+  [
+   6.28,
+   "RETURN"
+  ],
+  [
+   8.12,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 2,
+    "a_b": -151.5,
+    "b": -213.5,
+    "theta": 102.96742119937963,
+    "width": 32.5,
+    "std": 0.0
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.6,
+   "name": "freeze",
+   "data": {
+    "est": "(-151.6531608225543, -213.5, 103.64850782084046)"
+   }
+  },
+  {
+   "t": 1.34,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 5.68,
+   "name": "abort",
+   "data": {
+    "reason": "ik_fail"
+   }
+  },
+  {
+   "t": 5.68,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 6.28,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 8.12,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 38.0,
+  "reject_wide": 0.0,
+  "reject_other": 31.0,
+  "n_ok_dets": 52.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl33.a",
+  "cyl33.b",
+  "cyl33.z",
+  "cyl33.yaw",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw"
+ ],
+ "ms_step_p50": 13.845684006810188,
+ "ms_step_p95": 36.62035149754956,
+ "n_steps": 407,
+ "wall_s": 46.31,
+ "method_exception": null,
+ "renders": 243,
+ "render_wall_s": 18.9
+}

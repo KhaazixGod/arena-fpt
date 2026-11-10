@@ -132,3 +132,10 @@ Chi phí ước lượng [thô]: khoảng 600 lượt (~144 s thật mỗi lư�
 ### Sai lệch 2 (9/11/2026): H4 không đo được
 
 H4 (mục 5) chạy xong 9/11 (`logs/2026-11-09_*_h4_decision.txt`): cả 6 phương pháp, kể cả ORACLE, đạt 0/30 ở `dev_C0` L1.0. Không có chênh lệch nào để kiểm; theo quy tắc kết quả là "không được ủng hộ" nhưng thực chất là hiệu ứng sàn. Báo cáo như kết quả mô tả: "L = 1.0 (150 mm/s) vượt khả năng cả ORACLE trong sim hiện tại". Không chạy lại ở tốc độ khác trong khuôn khổ file này; nếu sau đó làm H4 ở L0.5 thì ghi riêng là thử nghiệm post-hoc.
+
+### Sai lệch 3 (10/11/2026): kiểm hệ thống thay thế không đạt; kết quả điều tra (chưa có quyết định về G2)
+
+- Kiểm thay thế (Sai lệch 1): CL0 `seen_C0` L0.25 = **14/20 = 70%**, dưới ngưỡng 16/20 đã ghi trước (`logs/2026-11-09_*_g0_syscheck_l025.txt`, `runs/g0_syscheck_seen_c0_l025`, 0 lượt không hợp lệ). Lượt hỏng: `collision` 3, `slip` 3. Ngưỡng không bị hạ.
+- Điều tra (`scripts/g0_investigate.sh`, ô không khoá, 0 lượt không hợp lệ): ORACLE trên cùng `seen_C0` đạt **18/20 ở L0.25 và 18/20 ở L0.5** (`runs/g0inv_oracle_seen_c0_l025`, `runs/g0inv_oracle_seen_c0_l05`; cả 2 lượt hỏng là `slip`). Vậy mô phỏng, bộ thực thi gắp và tốc độ băng 75 mm/s **không** là trần: khoảng cách đến CL0 (14/20 ở L0.25, 6/20 ở L0.5) nằm ở phần nhận thức/định thời của CL0.
+- Phân tích 14 lượt hỏng của CL0 `seen_C0` L0.5 (`runs/g0_seen_c0`, trường `details`): 8/14 lượt có `max_lift_target_mm = 0` (cánh tay không nhấc được vật) với sai số ước lượng vị trí nhỏ (1–7 mm), gán nhãn `timing` 3 và `other` 5 (+1 `other` khác); 2/14 là `ring20` với sai số chọn điểm ~20 mm (nhãn `calib`); 3/14 `slip`. Đọc: CL0 thường **đến chậm** một vật đang chạy, không phải sai vị trí. Đây là nhận định `[chưa kiểm]`: chưa đo độ trễ của CL0 và chưa so với dấu thời gian.
+- Kết luận kỹ thuật tạm: không thấy lỗi mô phỏng hay hiệu chuẩn chung; thấy điểm yếu của CL0 ở băng chuyển động. Theo chữ của mục 0 đây vẫn là "không đạt"; việc có chạy G2 hay không là quyết định của người dùng, ghi vào Sai lệch 4.

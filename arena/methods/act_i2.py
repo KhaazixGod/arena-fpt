@@ -52,13 +52,19 @@ class ACTI2Method:
         self.tilt, self.margin, self.qdot = float(robot["tilt_deg"]), float(robot["joint_margin_deg"]), float(robot["q_dot_max_deg_s"])
         self.z_min = z_belt_mm + float(executor["min_z_above_belt_mm"])
         self.duration_s, self.ckpt = duration_s, ckpt
+        self.needs_task = getattr(self.policy.config, "env_state_feature", None) is not None   # E18 multi-task checkpoint: task code as environment_state
+        self.task_vec = None
         self.reset(0.0, None)
+
+    def set_task(self, task: dict) -> None:
+        self.task_vec = np.asarray(task["vec"], np.float32)
 
     def reset(self, t0, state) -> None:
         if self.policy is not None:
             self.policy.reset()
         self.t0, self.finished, self.outcome = t0, False, ""
-        self.events: List[TrialEvent] = [TrialEvent(t0, "phase:ACT_I2", {"ckpt": self.ckpt, "replan": self.replan})]
+        self.events: List[TrialEvent] = [TrialEvent(t0, "phase:ACT_I2", {"ckpt": self.ckpt, "replan": self.replan,
+                                                                         "task_vec": None if self.task_vec is None else [float(x) for x in self.task_vec]})]
         self.log: list = []
         self.diag: dict = {"plans": 0, "ik_fail_ticks": 0, "ik_fail_ticks_lt6s": 0, "ik_fail_first_t": -1.0, "commit_t": -1.0}
         self.hist_t: list = []
@@ -91,6 +97,10 @@ class ACTI2Method:
         rgb = cv2.cvtColor(cv2.imdecode(buf, cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
         obs = {"observation.state": torch.from_numpy(vec.astype(np.float32)),
                CAMERA: torch.from_numpy(rgb).permute(2, 0, 1).float().div(255.0)}
+        if self.needs_task:
+            if self.task_vec is None:
+                raise RuntimeError("multi-task checkpoint but no task: run_arena --tasks")
+            obs["observation.environment_state"] = torch.from_numpy(self.task_vec)
         chunk = self.policy.predict_action_chunk(self.pre(obs))          # relative, normalised; the preprocessor cached THIS state
         return self.post(chunk).squeeze(0).float().cpu().numpy(), t_img   # (chunk, 6) absolute belt-frame targets
 

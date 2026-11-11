@@ -116,6 +116,8 @@ def serve(make_method, port: int, name: str, authkey: bytes = b"arena") -> None:
                 op = msg["op"]
                 if op == "reset":
                     st = msg["state"]
+                    if msg.get("task") is not None and hasattr(m, "set_task"):      # E18: the instruction of this trial
+                        m.set_task(msg["task"])
                     m.reset(msg["t0"], RobotState(np.asarray(st["q_deg"], float), float(st["gripper"]), float(st["t"])) if st else None)
                     n_ev = 0
                     belt = BeltView()

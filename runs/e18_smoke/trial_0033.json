@@ -1,0 +1,110 @@
+{
+ "trial_id": 33,
+ "method": "TASK_EXPERT",
+ "cell": "smoke_T",
+ "arrangement_id": "pilot_T_topple_box_mb_01",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box01",
+   "a_mm": -50.3,
+   "b_mm": -207.3,
+   "yaw_deg": 96.0
+  },
+  {
+   "name": "cyl10",
+   "a_mm": 23.9,
+   "b_mm": -236.4,
+   "yaw_deg": 282.1
+  }
+ ],
+ "task": {
+  "family": "topple",
+  "cat": "box",
+  "param": "-b",
+  "text": "knock the box over away from the robot",
+  "id": "topple:box:-b",
+  "vec": [
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   -1.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "not_toppled",
+  "target": "box01",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 4.2,
+   "max_tilt_deg": 24.9,
+   "final_disp_mm": 39.0,
+   "final_along_mm": 38.9,
+   "final_lateral_mm": 2.6,
+   "moved_others_mm": {
+    "cyl10": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 3.98,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "topple:box:-b",
+    "target": "box01",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box01.a",
+  "box01.b",
+  "box01.z",
+  "box01.yaw",
+  "box01.tilt",
+  "cyl10.a",
+  "cyl10.b",
+  "cyl10.z",
+  "cyl10.yaw",
+  "cyl10.tilt"
+ ],
+ "ms_step_p50": 0.5879339878447354,
+ "ms_step_p95": 1.9389432563912123,
+ "n_steps": 200,
+ "wall_s": 12.19,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

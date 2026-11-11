@@ -19,6 +19,7 @@ ap.add_argument("--episodes", nargs="+", required=True); ap.add_argument("--gt-d
 ap.add_argument("--repo-id", default="local/arena_so101_oracle_i2"); ap.add_argument("--camera", default="front"); ap.add_argument("--fps", type=int, default=30)
 ap.add_argument("--config", default=os.path.join(HERE, "configs", "arena.toml")); ap.add_argument("--calib", default=os.path.join(HERE, "runs", "calib", "calib.json"))
 ap.add_argument("--chunk", type=int, default=100, help="ACT chunk_size, for the relative action stats"); ap.add_argument("--limit", type=int, default=0)
+ap.add_argument("--task-vec", action="store_true", help="E18: add observation.environment_state = the episode's task code (meta task_vec, arena/tasks.py)")
 a = ap.parse_args()
 import cv2
 from cl0.config import load_config
@@ -43,6 +44,9 @@ features = {
     "action": {"dtype": "float32", "shape": (len(NAMES),), "names": NAMES},
     f"observation.images.{a.camera}": {"dtype": "video", "shape": (h, w, 3), "names": ["height", "width", "channels"]},
 }
+if a.task_vec:
+    n_tv = len(json.loads(str(first["meta"]))["task_vec"])
+    features["observation.environment_state"] = {"dtype": "float32", "shape": (n_tv,), "names": [f"task{i}" for i in range(n_tv)]}
 ds = LeRobotDataset.create(a.repo_id, a.fps, features, root=a.root, robot_type="so101_follower", use_videos=True)
 lengths, s_end = [], []
 for f in files:
@@ -54,9 +58,12 @@ for f in files:
     for i in range(len(e["t"])):
         rgb = cv2.cvtColor(cv2.imdecode(np.frombuffer(e["jpeg"][i], np.uint8), cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
         st, ac = e["state"][i], e["action"][i]
-        ds.add_frame({"observation.state": to_vec(kin, st[:5], st[5], s[i], u).astype(np.float32),
-                      "action": to_vec(kin, ac[:5], ac[5], s[i], u).astype(np.float32),
-                      f"observation.images.{a.camera}": rgb, "task": meta["task"]})
+        fr = {"observation.state": to_vec(kin, st[:5], st[5], s[i], u).astype(np.float32),
+              "action": to_vec(kin, ac[:5], ac[5], s[i], u).astype(np.float32),
+              f"observation.images.{a.camera}": rgb, "task": meta["task"]}
+        if a.task_vec:
+            fr["observation.environment_state"] = np.asarray(meta["task_vec"], np.float32)
+        ds.add_frame(fr)
     ds.save_episode()
     lengths.append(len(e["t"])); s_end.append(float(s[-1]))
     print(f"  {os.path.relpath(f)}: {len(e['t'])} frames, L={meta['L']}, s_end={s[-1]:.1f} mm", flush=True)

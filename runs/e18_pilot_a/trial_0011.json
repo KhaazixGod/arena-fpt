@@ -1,0 +1,108 @@
+{
+ "trial_id": 11,
+ "method": "TASK_EXPERT",
+ "cell": "pilot_T",
+ "arrangement_id": "pilot_T_pick_L_02",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l15",
+   "a_mm": -26.8,
+   "b_mm": -216.5,
+   "yaw_deg": 13.4
+  },
+  {
+   "name": "cyl10",
+   "a_mm": -111.1,
+   "b_mm": -182.6,
+   "yaw_deg": 356.3
+  }
+ ],
+ "task": {
+  "family": "pick",
+  "cat": "L",
+  "param": "",
+  "text": "pick up the L and hold it",
+  "id": "pick:L",
+  "vec": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "no_contact",
+  "target": "l15",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": -0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 0.0,
+   "final_along_mm": 0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "cyl10": 0.0
+   }
+  }
+ },
+ "outcome": "infeasible",
+ "finished": true,
+ "t_end_s": 0.1,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan_failed",
+   "data": {
+    "reason": "infeasible"
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l15.a",
+  "l15.b",
+  "l15.z",
+  "l15.yaw",
+  "l15.tilt",
+  "cyl10.a",
+  "cyl10.b",
+  "cyl10.z",
+  "cyl10.yaw",
+  "cyl10.tilt"
+ ],
+ "ms_step_p50": 0.00589847331866622,
+ "ms_step_p95": 9.443026297958568,
+ "n_steps": 6,
+ "wall_s": 2.86,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

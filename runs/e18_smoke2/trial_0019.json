@@ -1,0 +1,110 @@
+{
+ "trial_id": 19,
+ "method": "TASK_EXPERT",
+ "cell": "smoke_T",
+ "arrangement_id": "pilot_T_pull_box_down_01",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twbox39",
+   "a_mm": -51.5,
+   "b_mm": -192.0,
+   "yaw_deg": 23.7
+  },
+  {
+   "name": "cyl11",
+   "a_mm": -82.8,
+   "b_mm": -238.2,
+   "yaw_deg": 253.3
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "box",
+  "param": "down",
+  "text": "drag the box downstream without lifting it",
+  "id": "pull:box:down",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "twbox39",
+  "t_success_s": 5.2,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.4,
+   "max_tilt_deg": 2.1,
+   "final_disp_mm": 64.6,
+   "final_along_mm": 64.3,
+   "final_lateral_mm": 6.2,
+   "moved_others_mm": {
+    "cyl11": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.8,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:box:down",
+    "target": "twbox39",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twbox39.a",
+  "twbox39.b",
+  "twbox39.z",
+  "twbox39.yaw",
+  "twbox39.tilt",
+  "cyl11.a",
+  "cyl11.b",
+  "cyl11.z",
+  "cyl11.yaw",
+  "cyl11.tilt"
+ ],
+ "ms_step_p50": 0.5863039987161756,
+ "ms_step_p95": 1.8184384680353105,
+ "n_steps": 291,
+ "wall_s": 16.27,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

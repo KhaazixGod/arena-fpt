@@ -1,0 +1,110 @@
+{
+ "trial_id": 63,
+ "method": "TASK_EXPERT",
+ "cell": "pilot_T",
+ "arrangement_id": "pilot_T_topple_box_pb_04",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twbox37",
+   "a_mm": -46.8,
+   "b_mm": -213.9,
+   "yaw_deg": 337.1
+  },
+  {
+   "name": "cyl07",
+   "a_mm": -93.1,
+   "b_mm": -192.7,
+   "yaw_deg": 229.1
+  }
+ ],
+ "task": {
+  "family": "topple",
+  "cat": "box",
+  "param": "+b",
+  "text": "knock the box over toward the robot",
+  "id": "topple:box:+b",
+  "vec": [
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "twbox37",
+  "t_success_s": 2.52,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 1.6,
+   "max_tilt_deg": 95.6,
+   "final_disp_mm": 36.4,
+   "final_along_mm": 33.5,
+   "final_lateral_mm": 14.2,
+   "moved_others_mm": {
+    "cyl07": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 4.64,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "topple:box:+b",
+    "target": "twbox37",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twbox37.a",
+  "twbox37.b",
+  "twbox37.z",
+  "twbox37.yaw",
+  "twbox37.tilt",
+  "cyl07.a",
+  "cyl07.b",
+  "cyl07.z",
+  "cyl07.yaw",
+  "cyl07.tilt"
+ ],
+ "ms_step_p50": 0.5847769789397717,
+ "ms_step_p95": 2.211718237958848,
+ "n_steps": 233,
+ "wall_s": 17.09,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

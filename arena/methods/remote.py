@@ -47,9 +47,14 @@ class RemoteMethod:
         self._sent_t = th[:1]
         return out
 
+    def set_task(self, task: dict) -> None:
+        """E18: the instruction of the next trial (arena/tasks.py: id, text, vec ...); sent with the reset, never ground truth."""
+        self._task = dict(task)
+
     def reset(self, t0, state) -> None:
         self._n_sent, self._sent_t = 0, []
-        self.conn.send({"op": "reset", "t0": t0, "state": None if state is None else {"q_deg": [float(x) for x in state.q_deg], "gripper": float(state.gripper), "t": float(state.t)}})
+        self.conn.send({"op": "reset", "t0": t0, "state": None if state is None else {"q_deg": [float(x) for x in state.q_deg], "gripper": float(state.gripper), "t": float(state.t)},
+                        "task": getattr(self, "_task", None)})
         self.conn.recv()
         self.finished, self.outcome, self.events, self.log, self.diag, self.phase = False, "", [], [], {}, ""
 

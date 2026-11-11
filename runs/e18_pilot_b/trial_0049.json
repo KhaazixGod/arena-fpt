@@ -1,0 +1,110 @@
+{
+ "trial_id": 49,
+ "method": "TASK_EXPERT",
+ "cell": "pilot_T",
+ "arrangement_id": "pilot_T_pull_ring_down_05",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -67.6,
+   "b_mm": -191.9,
+   "yaw_deg": 1.2
+  },
+  {
+   "name": "cyl11",
+   "a_mm": 21.4,
+   "b_mm": -167.2,
+   "yaw_deg": 265.6
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "ring",
+  "param": "down",
+  "text": "drag the ring downstream without lifting it",
+  "id": "pull:ring:down",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "ring20",
+  "t_success_s": 4.84,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.3,
+   "max_tilt_deg": 0.7,
+   "final_disp_mm": 53.0,
+   "final_along_mm": 53.0,
+   "final_lateral_mm": 1.3,
+   "moved_others_mm": {
+    "cyl11": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.4,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:ring:down",
+    "target": "ring20",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "cyl11.a",
+  "cyl11.b",
+  "cyl11.z",
+  "cyl11.yaw",
+  "cyl11.tilt"
+ ],
+ "ms_step_p50": 0.6576639134436846,
+ "ms_step_p95": 1.8884395249187946,
+ "n_steps": 271,
+ "wall_s": 19.77,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

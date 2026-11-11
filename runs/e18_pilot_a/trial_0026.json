@@ -1,0 +1,110 @@
+{
+ "trial_id": 26,
+ "method": "TASK_EXPERT",
+ "cell": "pilot_T",
+ "arrangement_id": "pilot_T_pick_ring_02",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -45.6,
+   "b_mm": -200.7,
+   "yaw_deg": 270.4
+  },
+  {
+   "name": "box04",
+   "a_mm": 37.7,
+   "b_mm": -224.5,
+   "yaw_deg": 231.2
+  }
+ ],
+ "task": {
+  "family": "pick",
+  "cat": "ring",
+  "param": "",
+  "text": "pick up the ring and hold it",
+  "id": "pick:ring",
+  "vec": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "ring20",
+  "t_success_s": 4.3,
+  "t_detect_s": null,
+  "t_lift_s": 2.16,
+  "details": {
+   "max_lift_mm": 49.1,
+   "max_tilt_deg": 0.1,
+   "final_disp_mm": 3.4,
+   "final_along_mm": 0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "box04": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 4.98,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pick:ring",
+    "target": "ring20",
+    "n_seg": 5
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.28,
+ "gt_success_obj": "ring20",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "box04.a",
+  "box04.b",
+  "box04.z",
+  "box04.yaw",
+  "box04.tilt"
+ ],
+ "ms_step_p50": 0.584952998906374,
+ "ms_step_p95": 2.0230278198141605,
+ "n_steps": 250,
+ "wall_s": 21.29,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

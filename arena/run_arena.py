@@ -33,7 +33,7 @@ if CL0_DIR not in sys.path:
     sys.path.insert(0, CL0_DIR)
 
 ARENA_COLUMNS = ["engine", "seed", "L", "split", "clean", "fail_cause_auto", "t_detect_s", "t_lift_s", "t_success_s", "ms_step_p50", "ms_step_p95", "wall_s",
-                 "target", "n_objects", "rep"]
+                 "target", "n_objects", "rep", "task_id"]
 
 
 def sha256_file(p: str) -> str:
@@ -139,7 +139,9 @@ def main(argv=None) -> int:
     ap.add_argument("--config", default=os.path.join(HERE, "configs", "arena.toml"))
     ap.add_argument("--calib-dir", default=os.path.join(HERE, "runs", "calib"))
     ap.add_argument("--scene-file", default="", help="another scene TOML (with its own --calib-dir), default configs/scene.toml")
-    ap.add_argument("--objects", default="interim", choices=["interim", "sim"], help="interim = 6 E2 primitives; sim = the E5 generated set (configs/objects_sim.json)")
+    ap.add_argument("--objects", default="interim", choices=["interim", "sim", "tasks"],
+                    help="interim = 6 E2 primitives; sim = the E5 generated set (configs/objects_sim.json); tasks = E5 set + towers (configs/objects_tasks.json, E18)")
+    ap.add_argument("--tasks", action="store_true", help="E18: --cells are task sheets <cell>.json (arena/tasks.py); the method gets set_task(); labels by arena/task_labeler.py")
     ap.add_argument("--arrangements-dir", default="", help="default: arrangements/ (interim) or arrangements/sim/ (sim)")
     ap.add_argument("--tau", type=float, default=0.4, help="tau_s in L = v tau / w [assumption 0.4 s, E1 report]")
     ap.add_argument("--video", action="store_true"); ap.add_argument("--debug-video", action="store_true")
@@ -191,10 +193,15 @@ def main(argv=None) -> int:
     if a.objects == "sim":
         from .objects_gen import load_catalog
         pool = load_catalog()
+    elif a.objects == "tasks":
+        from .tasks import load_task_catalog
+        pool = load_task_catalog()
     else:
         pool = INTERIM_SPECS
+    if a.tasks and a.objects != "tasks":
+        raise SystemExit("--tasks needs --objects tasks")
     if not a.arrangements_dir:
-        a.arrangements_dir = os.path.join(HERE, "arrangements", "sim") if a.objects == "sim" else os.path.join(HERE, "arrangements")
+        a.arrangements_dir = os.path.join(HERE, {"sim": "arrangements/sim", "tasks": "arrangements/tasks"}.get(a.objects, "arrangements"))
     world = IsaacWorld(app, pool, sc, debug_cam=a.debug_video, depth=a.depth)
     plat = IsaacPlatform(world, cfg)
     tap = GTTap(world)
@@ -203,7 +210,16 @@ def main(argv=None) -> int:
     extra = dict(kv.split("=", 1) for kv in a.method_arg)
     methods = build_methods(a.methods.split(","), cfg, kin, calib, calib_path, bg_path, tap, extra)
     speeds = [(tok, *parse_speed(tok, cfg.perception.grasp.gripper_w_mm, a.tau)) for tok in a.speeds.split(",")]
-    sheets = {c: read_arrangements(os.path.join(a.arrangements_dir, f"{c}.csv")) for c in a.cells.split(",")}
+    sheet_ext = ".json" if a.tasks else ".csv"
+    if a.tasks:
+        from .tasks import read_sheet, task_list
+        from .task_labeler import label_task
+        TASKS = task_list()
+        sheets = {c: read_sheet(os.path.join(a.arrangements_dir, f"{c}.json")) for c in a.cells.split(",")}
+        if a.t_limit is None:
+            a.t_limit = 25.0                                  # virtual s per task trial (the expert needs <= 16 s; ACT stops itself at ACT_T_S)
+    else:
+        sheets = {c: read_arrangements(os.path.join(a.arrangements_dir, f"{c}.csv")) for c in a.cells.split(",")}
     specs = world.spec_by_name
     belt_end = sc["belt"]["center_a_mm"] + sc["belt"]["length_mm"] / 2.0
 
@@ -211,12 +227,13 @@ def main(argv=None) -> int:
                 "argv": sys.argv if argv is None else argv, "arena_sha256": arena_hash(), "cl0_code_sha256": code_sha256(),
                 "arena_toml_sha256": sha256_file(a.config), "scene_toml_sha256": sha256_file(a.scene_file or os.path.join(HERE, "configs", "scene.toml")), "scene_file": a.scene_file or "configs/scene.toml",
                 "usd_sha256": sha256_file(os.path.join(HERE, sc["robot"]["usd"])), "calib_sha256": sha256_file(calib_path), "background_sha256": sha256_file(bg_path),
-                "sheets_sha256": {c: sha256_file(os.path.join(a.arrangements_dir, f"{c}.csv")) for c in sheets},
+                "sheets_sha256": {c: sha256_file(os.path.join(a.arrangements_dir, f"{c}{sheet_ext}")) for c in sheets},
                 "gpu": subprocess.run(["nvidia-smi", "--query-gpu=name,driver_version", "--format=csv,noheader"], capture_output=True, text=True).stdout.strip(),
                 "methods": {n: {"spec": s.name, "privileged": s.privileged, "uses_pixels": s.uses_pixels, "doc": s.doc} for n, (_, s) in methods.items()},
                 "speeds": [{"token": t, "L": L, "mm_s": v} for t, L, v in speeds], "tau_s": a.tau, "w_mm": cfg.perception.grasp.gripper_w_mm,
                 "objects": ("E5 generated set configs/objects_sim.json sha256 " + sha256_file(os.path.join(HERE, "configs", "objects_sim.json"))[:12]) if a.objects == "sim"
-                           else "INTERIM primitives (arena/arena/objects.py), not the E5 object set", "depth": a.depth,
+                           else ("E18 task catalog configs/objects_tasks.json sha256 " + sha256_file(os.path.join(HERE, "configs", "objects_tasks.json"))[:12]) if a.objects == "tasks"
+                           else "INTERIM primitives (arena/arena/objects.py), not the E5 object set", "depth": a.depth, "tasks": a.tasks,
                 "scene_overrides": a.scene_set, "hard_reset": not a.no_hard_reset, "shuffle_seed": a.shuffle_seed,
                 "manual": {"demos": None, "train_steps": None, "gpu_hours": None, "tuning_hours": None}}
     mpath = os.path.join(out, "manifest.json")
@@ -255,10 +272,21 @@ def main(argv=None) -> int:
         tid = next_id + n_i
         m, spec = methods[mname]
         arr = sheets[cell][aid]
-        pl = to_placements(arr, v, sc, specs)
+        task = None
+        if a.tasks:
+            if v > 0:
+                raise SystemExit("E18 task sheets are for the stopped belt (L0) only")
+            task = TASKS[arr["task_id"]]
+            pl = [dict(p) for p in arr["placements"]]
+            inner = getattr(m, "inner", m)
+            if hasattr(inner, "set_task"):
+                inner.set_task(task)
+        else:
+            pl = to_placements(arr, v, sc, specs)
         row = dict(trial_id=tid, method=mname, cell=cell, arrangement_id=aid, speed_mm_s=f"{v:.1f}", engine="isaac", seed=a.seed, L=f"{L:g}",
                    split=cell.split("_")[0], session=os.path.basename(out), config_sha=manifest["arena_toml_sha256"][:12], code_sha=manifest["cl0_code_sha256"][:12],
-                   operator="arena", time_iso=dt.datetime.now().astimezone().isoformat(timespec="seconds"), n_objects=len(pl), rep=rep, picked_hint="")
+                   operator="arena", time_iso=dt.datetime.now().astimezone().isoformat(timespec="seconds"), n_objects=len(pl), rep=rep, picked_hint="",
+                   task_id=task["id"] if task else "")
         vid = os.path.join(out, "videos", f"trial_{tid:04d}.mp4") if a.video else None
         dvid = os.path.join(out, "videos", f"debug_trial_{tid:04d}.mp4") if a.debug_video else None
         plat.render_enabled = spec.uses_pixels or bool(vid or dvid or a.record_demos)
@@ -275,21 +303,25 @@ def main(argv=None) -> int:
             r = run_trial(plat, m, cfg, pl, v, vid, dvid, a.t_limit, extra_taps=([rec] if rec else []) + taps_extra, hard_reset=not a.no_hard_reset)
             if a.frame_hashes:
                 r["frame_md5"] = hashes
-            lab = label(r["gt_array"], r["gt_columns"], r["events"], r["phases"], r["outcome"], r["diag"], pl, v, specs, world.belt_top_mm, belt_end,
-                        cfg.perception.grasp.gripper_w_mm, sc["belt"]["dir_deg"])
+            if task is not None:
+                lab = label_task(r["gt_array"], r["gt_columns"], pl, task, specs, world.belt_top_mm, cfg.perception.grasp.gripper_w_mm, sc["belt"]["dir_deg"])
+            else:
+                lab = label(r["gt_array"], r["gt_columns"], r["events"], r["phases"], r["outcome"], r["diag"], pl, v, specs, world.belt_top_mm, belt_end,
+                            cfg.perception.grasp.gripper_w_mm, sc["belt"]["dir_deg"])
             row.update(success=lab["success"], valid=1, fail_cause=lab["fail_cause_auto"], fail_cause_auto=lab["fail_cause_auto"], clean=lab["clean"],
                        outcome=r["outcome"], t_end_s=f"{r['t_end_s']:.2f}", t_detect_s=lab["t_detect_s"], t_lift_s=lab["t_lift_s"], t_success_s=lab["t_success_s"],
                        ms_step_p50=f"{r['ms_step_p50']:.2f}", ms_step_p95=f"{r['ms_step_p95']:.2f}", wall_s=r["wall_s"], target=lab["target"],
                        video=os.path.relpath(vid, out) if vid else "", note="")
             np.savez_compressed(os.path.join(out, f"trial_{tid:04d}_gt.npz"), gt=r.pop("gt_array"), columns=np.array(r["gt_columns"]))
             write_log_csv(os.path.join(out, f"trial_{tid:04d}_log.csv"), r.pop("log"))
-            json.dump({"trial_id": tid, "method": mname, "cell": cell, "arrangement_id": aid, "speed_mm_s": v, "L": L, "rep": rep, "placements": pl,
+            json.dump({"trial_id": tid, "method": mname, "cell": cell, "arrangement_id": aid, "speed_mm_s": v, "L": L, "rep": rep, "placements": pl, "task": task,
                        "label": lab, **r}, open(os.path.join(out, f"trial_{tid:04d}.json"), "w"), indent=1, default=float)
             if rec is not None and (lab["success"] or a.demo_all):
                 rd = a.record_demos if os.path.isabs(a.record_demos) else os.path.join(HERE, a.record_demos)
                 n_fr = rec.save(os.path.join(rd, f"episode_{tid:04d}.npz"), {"trial_id": tid, "method": mname, "cell": cell, "arrangement_id": aid, "L": L,
                                 "speed_mm_s": v, "success": lab["success"], "objects": [p["name"] for p in pl], "engine": "isaac", "fps": cfg.camera.fps,
-                                "task": "pick the object from the moving belt and hold it" if v > 0 else "pick the object from the belt and hold it"})
+                                "task": task["text"] if task else ("pick the object from the moving belt and hold it" if v > 0 else "pick the object from the belt and hold it"),
+                                "task_id": task["id"] if task else "", "task_vec": task["vec"] if task else None})
                 row["note"] = f"demo {n_fr} frames"
             faults = 0
         except SimFault as e:

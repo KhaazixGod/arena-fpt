@@ -1,0 +1,110 @@
+{
+ "trial_id": 76,
+ "method": "TASK_EXPERT",
+ "cell": "pilot_T",
+ "arrangement_id": "pilot_T_topple_cyl_ma_02",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twcyl42",
+   "a_mm": -38.1,
+   "b_mm": -203.6,
+   "yaw_deg": 326.2
+  },
+  {
+   "name": "box06",
+   "a_mm": 42.1,
+   "b_mm": -175.0,
+   "yaw_deg": 94.0
+  }
+ ],
+ "task": {
+  "family": "topple",
+  "cat": "cyl",
+  "param": "-a",
+  "text": "knock the cyl over upstream",
+  "id": "topple:cyl:-a",
+  "vec": [
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   -1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "twcyl42",
+  "t_success_s": 2.54,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 1.4,
+   "max_tilt_deg": 90.0,
+   "final_disp_mm": 41.5,
+   "final_along_mm": 41.4,
+   "final_lateral_mm": 2.5,
+   "moved_others_mm": {
+    "box06": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 4.62,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "topple:cyl:-a",
+    "target": "twcyl42",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twcyl42.a",
+  "twcyl42.b",
+  "twcyl42.z",
+  "twcyl42.yaw",
+  "twcyl42.tilt",
+  "box06.a",
+  "box06.b",
+  "box06.z",
+  "box06.yaw",
+  "box06.tilt"
+ ],
+ "ms_step_p50": 0.5910239997319877,
+ "ms_step_p95": 1.9504961557686327,
+ "n_steps": 232,
+ "wall_s": 17.01,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

@@ -44,7 +44,7 @@ ACT_I2T, TASK_EXPERT (trần) và NOOP (sàn) trên cùng cảnh: `test_Theld` (
 ## 6. Checkpoint (điền sau huấn luyện, commit trước TEST)
 
 ```
-act_i2t_s1000: ______
+act_i2t_s1000: f49b73cd5239bd7d3912de844c968facfab640d5879168501ab20c572ab982c8
 ```
 
 ## 7. Quy tắc quyết định

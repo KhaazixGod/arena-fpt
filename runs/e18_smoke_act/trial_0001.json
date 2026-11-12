@@ -1,0 +1,130 @@
+{
+ "trial_id": 1,
+ "method": "REMOTE:ACT_I2T",
+ "cell": "smoke_act",
+ "arrangement_id": "pilot_T_place_T_A_03",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t16",
+   "a_mm": -51.2,
+   "b_mm": -209.4,
+   "yaw_deg": 301.9
+  },
+  {
+   "name": "cyl08",
+   "a_mm": -108.3,
+   "b_mm": -231.8,
+   "yaw_deg": 174.5
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "T",
+  "param": "A",
+  "text": "put the T in zone A",
+  "id": "place:T:A",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "missed_zone",
+  "target": "t16",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 1.3,
+   "max_tilt_deg": 4.0,
+   "final_disp_mm": 26.4,
+   "final_along_mm": 8.7,
+   "final_lateral_mm": 25.0,
+   "final_zone_err_mm": 73.6,
+   "moved_others_mm": {
+    "cyl08": 0.0
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2t_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": "[0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0]"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 35.0,
+  "ik_fail_ticks_lt6s": 35.0,
+  "ik_fail_first_t": 4.02,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [191.9, 19.2, 59.6], 'yaw': 33.1, 'pos_err_mm': 0.0, 'q': [-10.2, -9.6, 17.5, 82.1, -154.3], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t16.a",
+  "t16.b",
+  "t16.z",
+  "t16.yaw",
+  "t16.tilt",
+  "cyl08.a",
+  "cyl08.b",
+  "cyl08.z",
+  "cyl08.yaw",
+  "cyl08.tilt"
+ ],
+ "ms_step_p50": 2.4846720000368805,
+ "ms_step_p95": 4.540908999956628,
+ "n_steps": 1001,
+ "wall_s": 102.52,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 45.3
+}

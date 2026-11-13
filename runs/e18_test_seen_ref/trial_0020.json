@@ -1,0 +1,110 @@
+{
+ "trial_id": 20,
+ "method": "TASK_EXPERT",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pick_L_01",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l13",
+   "a_mm": -38.7,
+   "b_mm": -204.6,
+   "yaw_deg": 124.6
+  },
+  {
+   "name": "box01",
+   "a_mm": 21.7,
+   "b_mm": -235.3,
+   "yaw_deg": 349.1
+  }
+ ],
+ "task": {
+  "family": "pick",
+  "cat": "L",
+  "param": "",
+  "text": "pick up the L and hold it",
+  "id": "pick:L",
+  "vec": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "l13",
+  "t_success_s": 4.28,
+  "t_detect_s": null,
+  "t_lift_s": 2.16,
+  "details": {
+   "max_lift_mm": 49.9,
+   "max_tilt_deg": 0.3,
+   "final_disp_mm": 11.3,
+   "final_along_mm": 0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "box01": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 4.98,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pick:L",
+    "target": "l13",
+    "n_seg": 5
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.26,
+ "gt_success_obj": "l13",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l13.a",
+  "l13.b",
+  "l13.z",
+  "l13.yaw",
+  "l13.tilt",
+  "box01.a",
+  "box01.b",
+  "box01.z",
+  "box01.yaw",
+  "box01.tilt"
+ ],
+ "ms_step_p50": 0.5779414996140986,
+ "ms_step_p95": 1.9800263994511622,
+ "n_steps": 250,
+ "wall_s": 20.08,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

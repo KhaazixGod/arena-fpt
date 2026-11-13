@@ -1,0 +1,110 @@
+{
+ "trial_id": 262,
+ "method": "TASK_EXPERT",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_topple_box_pa_02",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twbox38",
+   "a_mm": -31.2,
+   "b_mm": -216.3,
+   "yaw_deg": 112.5
+  },
+  {
+   "name": "cyl08",
+   "a_mm": 34.6,
+   "b_mm": -173.5,
+   "yaw_deg": 252.4
+  }
+ ],
+ "task": {
+  "family": "topple",
+  "cat": "box",
+  "param": "+a",
+  "text": "knock the box over downstream",
+  "id": "topple:box:+a",
+  "vec": [
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "twbox38",
+  "t_success_s": 2.58,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 2.4,
+   "max_tilt_deg": 94.4,
+   "final_disp_mm": 39.6,
+   "final_along_mm": 37.9,
+   "final_lateral_mm": 11.6,
+   "moved_others_mm": {
+    "cyl08": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 4.64,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "topple:box:+a",
+    "target": "twbox38",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twbox38.a",
+  "twbox38.b",
+  "twbox38.z",
+  "twbox38.yaw",
+  "twbox38.tilt",
+  "cyl08.a",
+  "cyl08.b",
+  "cyl08.z",
+  "cyl08.yaw",
+  "cyl08.tilt"
+ ],
+ "ms_step_p50": 0.5794330027129035,
+ "ms_step_p95": 1.8678317974263334,
+ "n_steps": 233,
+ "wall_s": 16.63,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

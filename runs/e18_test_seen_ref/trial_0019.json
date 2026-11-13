@@ -1,0 +1,118 @@
+{
+ "trial_id": 19,
+ "method": "NOOP",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pick_cyl_05",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twcyl40",
+   "a_mm": -54.6,
+   "b_mm": -200.4,
+   "yaw_deg": 314.3
+  },
+  {
+   "name": "box03",
+   "a_mm": 3.5,
+   "b_mm": -186.3,
+   "yaw_deg": 177.8
+  }
+ ],
+ "task": {
+  "family": "pick",
+  "cat": "cyl",
+  "param": "",
+  "text": "pick up the cyl and hold it",
+  "id": "pick:cyl",
+  "vec": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "no_contact",
+  "target": "twcyl40",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 0.1,
+   "final_along_mm": -0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "box03": 0.0
+   }
+  }
+ },
+ "outcome": "noop",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "NOOP"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:NOOP",
+   "data": {}
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twcyl40.a",
+  "twcyl40.b",
+  "twcyl40.z",
+  "twcyl40.yaw",
+  "twcyl40.tilt",
+  "box03.a",
+  "box03.b",
+  "box03.z",
+  "box03.yaw",
+  "box03.tilt"
+ ],
+ "ms_step_p50": 0.004986999556422234,
+ "ms_step_p95": 0.00591000025451649,
+ "n_steps": 1001,
+ "wall_s": 42.94,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

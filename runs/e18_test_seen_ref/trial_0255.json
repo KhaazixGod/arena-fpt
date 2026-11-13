@@ -1,0 +1,118 @@
+{
+ "trial_id": 255,
+ "method": "NOOP",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pull_ring_down_03",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -54.3,
+   "b_mm": -193.7,
+   "yaw_deg": 219.8
+  },
+  {
+   "name": "box05",
+   "a_mm": 33.4,
+   "b_mm": -232.6,
+   "yaw_deg": 18.2
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "ring",
+  "param": "down",
+  "text": "drag the ring downstream without lifting it",
+  "id": "pull:ring:down",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "no_contact",
+  "target": "ring20",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 0.7,
+   "final_along_mm": 0.3,
+   "final_lateral_mm": 0.7,
+   "moved_others_mm": {
+    "box05": 0.0
+   }
+  }
+ },
+ "outcome": "noop",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "NOOP"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:NOOP",
+   "data": {}
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "box05.a",
+  "box05.b",
+  "box05.z",
+  "box05.yaw",
+  "box05.tilt"
+ ],
+ "ms_step_p50": 0.0048439978854730725,
+ "ms_step_p95": 0.0057299985201098025,
+ "n_steps": 1001,
+ "wall_s": 42.41,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

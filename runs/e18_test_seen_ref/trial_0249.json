@@ -1,0 +1,118 @@
+{
+ "trial_id": 249,
+ "method": "NOOP",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pull_mug_robot_05",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug18",
+   "a_mm": -37.0,
+   "b_mm": -236.2,
+   "yaw_deg": 340.5
+  },
+  {
+   "name": "box04",
+   "a_mm": -114.9,
+   "b_mm": -192.7,
+   "yaw_deg": 33.3
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "mug",
+  "param": "robot",
+  "text": "drag the mug toward the robot without lifting it",
+  "id": "pull:mug:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "no_contact",
+  "target": "mug18",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 0.0,
+   "final_along_mm": -0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "box04": 0.0
+   }
+  }
+ },
+ "outcome": "noop",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "NOOP"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:NOOP",
+   "data": {}
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug18.a",
+  "mug18.b",
+  "mug18.z",
+  "mug18.yaw",
+  "mug18.tilt",
+  "box04.a",
+  "box04.b",
+  "box04.z",
+  "box04.yaw",
+  "box04.tilt"
+ ],
+ "ms_step_p50": 0.004857000021729618,
+ "ms_step_p95": 0.0058129990065936,
+ "n_steps": 1001,
+ "wall_s": 42.59,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

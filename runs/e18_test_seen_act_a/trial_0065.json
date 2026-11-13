@@ -1,0 +1,130 @@
+{
+ "trial_id": 65,
+ "method": "REMOTE:ACT_I2T",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_place_ring_A_01",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -34.5,
+   "b_mm": -213.3,
+   "yaw_deg": 307.4
+  },
+  {
+   "name": "box03",
+   "a_mm": -113.0,
+   "b_mm": -197.7,
+   "yaw_deg": 97.1
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "ring",
+  "param": "A",
+  "text": "put the ring in zone A",
+  "id": "place:ring:A",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "missed_zone",
+  "target": "ring20",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": 2.66,
+  "details": {
+   "max_lift_mm": 45.6,
+   "max_tilt_deg": 21.7,
+   "final_disp_mm": 72.2,
+   "final_along_mm": 29.3,
+   "final_lateral_mm": 66.0,
+   "final_zone_err_mm": 65.2,
+   "moved_others_mm": {
+    "box03": 0.1
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2t_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": "[0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0]"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 27.0,
+  "ik_fail_ticks_lt6s": 27.0,
+  "ik_fail_first_t": 3.16,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [216.1, -31.4, 54.9], 'yaw': 15.4, 'pos_err_mm': 0.01, 'q': [7.4, 3.4, 4.4, 82.2, -154.4], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "box03.a",
+  "box03.b",
+  "box03.z",
+  "box03.yaw",
+  "box03.tilt"
+ ],
+ "ms_step_p50": 2.669121000508312,
+ "ms_step_p95": 4.075495999131817,
+ "n_steps": 1001,
+ "wall_s": 139.3,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 72.87
+}

@@ -1,0 +1,128 @@
+{
+ "trial_id": 5,
+ "method": "REMOTE:ACT_I2T",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pick_cyl_01",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twcyl41",
+   "a_mm": -40.5,
+   "b_mm": -199.0,
+   "yaw_deg": 226.5
+  },
+  {
+   "name": "box01",
+   "a_mm": -113.1,
+   "b_mm": -194.9,
+   "yaw_deg": 325.9
+  }
+ ],
+ "task": {
+  "family": "pick",
+  "cat": "cyl",
+  "param": "",
+  "text": "pick up the cyl and hold it",
+  "id": "pick:cyl",
+  "vec": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "twcyl41",
+  "t_success_s": 4.42,
+  "t_detect_s": null,
+  "t_lift_s": 2.28,
+  "details": {
+   "max_lift_mm": 38.5,
+   "max_tilt_deg": 9.1,
+   "final_disp_mm": 16.1,
+   "final_along_mm": 0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "box01": 0.0
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2t_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": "[1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.4,
+ "gt_success_obj": "twcyl41",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twcyl41.a",
+  "twcyl41.b",
+  "twcyl41.z",
+  "twcyl41.yaw",
+  "twcyl41.tilt",
+  "box01.a",
+  "box01.b",
+  "box01.z",
+  "box01.yaw",
+  "box01.tilt"
+ ],
+ "ms_step_p50": 2.3056169993651565,
+ "ms_step_p95": 3.2649620006850455,
+ "n_steps": 1001,
+ "wall_s": 148.24,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 72.7
+}

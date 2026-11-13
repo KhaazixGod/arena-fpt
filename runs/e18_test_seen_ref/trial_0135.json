@@ -1,0 +1,119 @@
+{
+ "trial_id": 135,
+ "method": "NOOP",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_place_ring_A_03",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -31.8,
+   "b_mm": -211.5,
+   "yaw_deg": 29.3
+  },
+  {
+   "name": "cyl07",
+   "a_mm": -112.4,
+   "b_mm": -173.8,
+   "yaw_deg": 224.4
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "ring",
+  "param": "A",
+  "text": "put the ring in zone A",
+  "id": "place:ring:A",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "no_contact",
+  "target": "ring20",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 0.8,
+   "final_along_mm": -0.5,
+   "final_lateral_mm": 0.7,
+   "final_zone_err_mm": 57.8,
+   "moved_others_mm": {
+    "cyl07": 0.0
+   }
+  }
+ },
+ "outcome": "noop",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "NOOP"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:NOOP",
+   "data": {}
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "cyl07.a",
+  "cyl07.b",
+  "cyl07.z",
+  "cyl07.yaw",
+  "cyl07.tilt"
+ ],
+ "ms_step_p50": 0.004955003532813862,
+ "ms_step_p95": 0.005842000973643735,
+ "n_steps": 1001,
+ "wall_s": 42.13,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

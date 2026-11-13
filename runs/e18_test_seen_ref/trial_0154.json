@@ -1,0 +1,110 @@
+{
+ "trial_id": 154,
+ "method": "TASK_EXPERT",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pull_box_robot_03",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twbox38",
+   "a_mm": -33.1,
+   "b_mm": -239.2,
+   "yaw_deg": 30.3
+  },
+  {
+   "name": "mug18",
+   "a_mm": -96.2,
+   "b_mm": -180.8,
+   "yaw_deg": 44.1
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "box",
+  "param": "robot",
+  "text": "drag the box toward the robot without lifting it",
+  "id": "pull:box:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "short",
+  "target": "twbox38",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 1.1,
+   "max_tilt_deg": 6.3,
+   "final_disp_mm": 35.8,
+   "final_along_mm": 34.7,
+   "final_lateral_mm": 8.8,
+   "moved_others_mm": {
+    "mug18": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 6.44,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:box:robot",
+    "target": "twbox38",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twbox38.a",
+  "twbox38.b",
+  "twbox38.z",
+  "twbox38.yaw",
+  "twbox38.tilt",
+  "mug18.a",
+  "mug18.b",
+  "mug18.z",
+  "mug18.yaw",
+  "mug18.tilt"
+ ],
+ "ms_step_p50": 0.5890370011911727,
+ "ms_step_p95": 1.9992205987364284,
+ "n_steps": 323,
+ "wall_s": 23.4,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

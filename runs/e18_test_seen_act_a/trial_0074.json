@@ -1,0 +1,129 @@
+{
+ "trial_id": 74,
+ "method": "REMOTE:ACT_I2T",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_place_ring_B_05",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -28.3,
+   "b_mm": -195.6,
+   "yaw_deg": 71.5
+  },
+  {
+   "name": "box01",
+   "a_mm": 39.9,
+   "b_mm": -174.1,
+   "yaw_deg": 209.2
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "ring",
+  "param": "B",
+  "text": "put the ring in zone B",
+  "id": "place:ring:B",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   -1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "ring20",
+  "t_success_s": 6.3,
+  "t_detect_s": null,
+  "t_lift_s": 2.16,
+  "details": {
+   "max_lift_mm": 51.4,
+   "max_tilt_deg": 5.8,
+   "final_disp_mm": 77.7,
+   "final_along_mm": 76.7,
+   "final_lateral_mm": 12.2,
+   "final_zone_err_mm": 2.8,
+   "moved_others_mm": {
+    "box01": 0.0
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2t_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": "[0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, -1.0, 0.0]"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "box01.a",
+  "box01.b",
+  "box01.z",
+  "box01.yaw",
+  "box01.tilt"
+ ],
+ "ms_step_p50": 2.3580130000482313,
+ "ms_step_p95": 2.916053002991248,
+ "n_steps": 1001,
+ "wall_s": 91.94,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 40.03
+}

@@ -1,0 +1,118 @@
+{
+ "trial_id": 25,
+ "method": "NOOP",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pick_L_03",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l15",
+   "a_mm": -26.0,
+   "b_mm": -216.5,
+   "yaw_deg": 169.9
+  },
+  {
+   "name": "box01",
+   "a_mm": 40.4,
+   "b_mm": -175.8,
+   "yaw_deg": 265.2
+  }
+ ],
+ "task": {
+  "family": "pick",
+  "cat": "L",
+  "param": "",
+  "text": "pick up the L and hold it",
+  "id": "pick:L",
+  "vec": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "no_contact",
+  "target": "l15",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 2.7,
+   "final_along_mm": -0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "box01": 0.0
+   }
+  }
+ },
+ "outcome": "noop",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "NOOP"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:NOOP",
+   "data": {}
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l15.a",
+  "l15.b",
+  "l15.z",
+  "l15.yaw",
+  "l15.tilt",
+  "box01.a",
+  "box01.b",
+  "box01.z",
+  "box01.yaw",
+  "box01.tilt"
+ ],
+ "ms_step_p50": 0.004920999344903976,
+ "ms_step_p95": 0.006487000064225867,
+ "n_steps": 1001,
+ "wall_s": 44.18,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

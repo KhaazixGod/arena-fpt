@@ -1,0 +1,129 @@
+{
+ "trial_id": 43,
+ "method": "REMOTE:ACT_I2T",
+ "cell": "test_Theld",
+ "arrangement_id": "test_Theld_pull_T_down_04",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t17",
+   "a_mm": -59.6,
+   "b_mm": -213.2,
+   "yaw_deg": 102.1
+  },
+  {
+   "name": "box06",
+   "a_mm": 27.6,
+   "b_mm": -178.0,
+   "yaw_deg": 280.1
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "T",
+  "param": "down",
+  "text": "drag the T downstream without lifting it",
+  "id": "pull:T:down",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "short",
+  "target": "t17",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": 3.76,
+  "details": {
+   "max_lift_mm": 6.5,
+   "max_tilt_deg": 12.9,
+   "final_disp_mm": 74.7,
+   "final_along_mm": 40.8,
+   "final_lateral_mm": 62.6,
+   "moved_others_mm": {
+    "box06": 12.6
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2t_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": "[0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0]"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 11.0,
+  "ik_fail_ticks_lt6s": 11.0,
+  "ik_fail_first_t": 3.48,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [214.6, -17.7, 5.8], 'yaw': 19.6, 'pos_err_mm': 0.01, 'q': [3.1, 8.4, 19.7, 61.9, -154.5], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t17.a",
+  "t17.b",
+  "t17.z",
+  "t17.yaw",
+  "t17.tilt",
+  "box06.a",
+  "box06.b",
+  "box06.z",
+  "box06.yaw",
+  "box06.tilt"
+ ],
+ "ms_step_p50": 2.5993290000769775,
+ "ms_step_p95": 4.91334900016227,
+ "n_steps": 1001,
+ "wall_s": 150.94,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 72.11
+}

@@ -1,0 +1,111 @@
+{
+ "trial_id": 36,
+ "method": "TASK_EXPERT",
+ "cell": "test_Theld",
+ "arrangement_id": "test_Theld_place_cyl_B_09",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl08",
+   "a_mm": -54.2,
+   "b_mm": -201.8,
+   "yaw_deg": 249.2
+  },
+  {
+   "name": "t16",
+   "a_mm": 31.2,
+   "b_mm": -196.3,
+   "yaw_deg": 111.4
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "cyl",
+  "param": "B",
+  "text": "put the cyl in zone B",
+  "id": "place:cyl:B",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   -1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "cyl08",
+  "t_success_s": 6.04,
+  "t_detect_s": null,
+  "t_lift_s": 2.3,
+  "details": {
+   "max_lift_mm": 50.0,
+   "max_tilt_deg": 0.2,
+   "final_disp_mm": 36.6,
+   "final_along_mm": 35.6,
+   "final_lateral_mm": 8.3,
+   "final_zone_err_mm": 16.0,
+   "moved_others_mm": {
+    "t16": 0.6
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 6.62,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "place:cyl:B",
+    "target": "cyl08",
+    "n_seg": 9
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl08.a",
+  "cyl08.b",
+  "cyl08.z",
+  "cyl08.yaw",
+  "cyl08.tilt",
+  "t16.a",
+  "t16.b",
+  "t16.z",
+  "t16.yaw",
+  "t16.tilt"
+ ],
+ "ms_step_p50": 0.5750684995291522,
+ "ms_step_p95": 1.5825802503968582,
+ "n_steps": 332,
+ "wall_s": 17.49,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

@@ -1,0 +1,118 @@
+{
+ "trial_id": 219,
+ "method": "NOOP",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pull_L_down_05",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l13",
+   "a_mm": -65.9,
+   "b_mm": -217.6,
+   "yaw_deg": 81.7
+  },
+  {
+   "name": "cyl07",
+   "a_mm": -112.5,
+   "b_mm": -171.3,
+   "yaw_deg": 335.1
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "L",
+  "param": "down",
+  "text": "drag the L downstream without lifting it",
+  "id": "pull:L:down",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "no_contact",
+  "target": "l13",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 2.5,
+   "final_along_mm": -1.7,
+   "final_lateral_mm": 1.8,
+   "moved_others_mm": {
+    "cyl07": 0.0
+   }
+  }
+ },
+ "outcome": "noop",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "NOOP"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:NOOP",
+   "data": {}
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l13.a",
+  "l13.b",
+  "l13.z",
+  "l13.yaw",
+  "l13.tilt",
+  "cyl07.a",
+  "cyl07.b",
+  "cyl07.z",
+  "cyl07.yaw",
+  "cyl07.tilt"
+ ],
+ "ms_step_p50": 0.0048820002120919526,
+ "ms_step_p95": 0.005808000423712656,
+ "n_steps": 1001,
+ "wall_s": 41.79,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

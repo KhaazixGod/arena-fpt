@@ -1,0 +1,128 @@
+{
+ "groups": [
+  {
+   "method": "ORACLE",
+   "cell": "train_C2",
+   "L": "0.5",
+   "n": 60,
+   "n_trials": 60,
+   "n_ties": 0,
+   "k": 41,
+   "sr": 0.6833333333333333,
+   "wilson": [
+    0.5576623287169538,
+    0.7869413251704964
+   ],
+   "k_clean": 39,
+   "sr_clean": 0.65,
+   "wilson_clean": [
+    0.5236261874086521,
+    0.7583222566810799
+   ],
+   "t_detect_to_lift_s": {
+    "p50": 2.36,
+    "p95": 2.42,
+    "n": 54
+   },
+   "ms_step": {
+    "p50": 0.64,
+    "p95": 22.843999999999994
+   },
+   "wall_s_mean": 59.017,
+   "outcomes": {
+    "dropped_in_hold": 11,
+    "picked_hold_complete": 43,
+    "late": 2,
+    "ik_fail": 3,
+    "empty_grasp": 1
+   }
+  },
+  {
+   "method": "ORACLE",
+   "cell": "train_C3",
+   "L": "0.5",
+   "n": 60,
+   "n_trials": 60,
+   "n_ties": 0,
+   "k": 35,
+   "sr": 0.5833333333333334,
+   "wilson": [
+    0.4572808092532306,
+    0.699357215241065
+   ],
+   "k_clean": 25,
+   "sr_clean": 0.4166666666666667,
+   "wilson_clean": [
+    0.30064278475893513,
+    0.5427191907467694
+   ],
+   "t_detect_to_lift_s": {
+    "p50": 2.38,
+    "p95": 2.46,
+    "n": 51
+   },
+   "ms_step": {
+    "p50": 0.64,
+    "p95": 27.67699999999999
+   },
+   "wall_s_mean": 57.89483333333333,
+   "outcomes": {
+    "picked_hold_complete": 36,
+    "empty_grasp": 2,
+    "dropped_in_hold": 14,
+    "ik_fail": 6,
+    "late": 2
+   }
+  }
+ ],
+ "causes": [
+  {
+   "method": "ORACLE",
+   "cell": "train_C2",
+   "L": "0.5",
+   "merge": 0,
+   "seg_miss": 0,
+   "grasp_point": 2,
+   "timing": 1,
+   "calib": 0,
+   "slip": 12,
+   "collision": 4,
+   "other": 0
+  },
+  {
+   "method": "ORACLE",
+   "cell": "train_C3",
+   "L": "0.5",
+   "merge": 0,
+   "seg_miss": 0,
+   "grasp_point": 3,
+   "timing": 2,
+   "calib": 0,
+   "slip": 10,
+   "collision": 10,
+   "other": 0
+  }
+ ],
+ "bounds": {
+  "ORACLE|train_C2|L0.5": {
+   "sr": 0.6833333333333333,
+   "n": 60,
+   "wilson": [
+    0.5576623287169538,
+    0.7869413251704964
+   ]
+  },
+  "ORACLE|train_C3|L0.5": {
+   "sr": 0.5833333333333334,
+   "n": 60,
+   "wilson": [
+    0.4572808092532306,
+    0.699357215241065
+   ]
+  }
+ },
+ "repeat": null,
+ "n_rows": 120,
+ "n_invalid": 0,
+ "within_reps": {}
+}

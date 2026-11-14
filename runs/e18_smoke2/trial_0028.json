@@ -1,0 +1,110 @@
+{
+ "trial_id": 28,
+ "method": "TASK_EXPERT",
+ "cell": "smoke_T",
+ "arrangement_id": "pilot_T_pull_ring_robot_01",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -36.8,
+   "b_mm": -231.0,
+   "yaw_deg": 295.4
+  },
+  {
+   "name": "cyl11",
+   "a_mm": -88.8,
+   "b_mm": -197.6,
+   "yaw_deg": 277.3
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "ring",
+  "param": "robot",
+  "text": "drag the ring toward the robot without lifting it",
+  "id": "pull:ring:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "ring20",
+  "t_success_s": 5.44,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 2.6,
+   "max_tilt_deg": 6.2,
+   "final_disp_mm": 54.1,
+   "final_along_mm": 53.8,
+   "final_lateral_mm": 6.1,
+   "moved_others_mm": {
+    "cyl11": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 6.02,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:ring:robot",
+    "target": "ring20",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "cyl11.a",
+  "cyl11.b",
+  "cyl11.z",
+  "cyl11.yaw",
+  "cyl11.tilt"
+ ],
+ "ms_step_p50": 0.5747334798797965,
+ "ms_step_p95": 1.712048781337215,
+ "n_steps": 302,
+ "wall_s": 17.33,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

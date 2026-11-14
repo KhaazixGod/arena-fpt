@@ -1,0 +1,129 @@
+{
+ "trial_id": 4,
+ "method": "REMOTE:ACT_I2T",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pick_box_05",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box06",
+   "a_mm": -33.6,
+   "b_mm": -210.8,
+   "yaw_deg": 303.6
+  },
+  {
+   "name": "l15",
+   "a_mm": -100.4,
+   "b_mm": -200.1,
+   "yaw_deg": 151.9
+  }
+ ],
+ "task": {
+  "family": "pick",
+  "cat": "box",
+  "param": "",
+  "text": "pick up the box and hold it",
+  "id": "pick:box",
+  "vec": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "box06",
+  "t_success_s": 4.5,
+  "t_detect_s": null,
+  "t_lift_s": 2.36,
+  "details": {
+   "max_lift_mm": 51.9,
+   "max_tilt_deg": 0.2,
+   "final_disp_mm": 8.3,
+   "final_along_mm": 0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "l15": 0.4
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2t_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": "[1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 1.0,
+  "ik_fail_ticks_lt6s": 1.0,
+  "ik_fail_first_t": 1.02,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [205.3, -56.9, 39.5], 'yaw': 3.9, 'pos_err_mm': 0.0, 'q': [16.5, 2.8, 11.9, 75.4, -156.8], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.48,
+ "gt_success_obj": "box06",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box06.a",
+  "box06.b",
+  "box06.z",
+  "box06.yaw",
+  "box06.tilt",
+  "l15.a",
+  "l15.b",
+  "l15.z",
+  "l15.yaw",
+  "l15.tilt"
+ ],
+ "ms_step_p50": 2.3617269998794654,
+ "ms_step_p95": 3.3450779992563184,
+ "n_steps": 1001,
+ "wall_s": 145.45,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 73.06
+}

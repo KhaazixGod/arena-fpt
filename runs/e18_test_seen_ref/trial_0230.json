@@ -1,0 +1,110 @@
+{
+ "trial_id": 230,
+ "method": "TASK_EXPERT",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pull_T_up_01",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t17",
+   "a_mm": -17.1,
+   "b_mm": -195.3,
+   "yaw_deg": 108.4
+  },
+  {
+   "name": "cyl10",
+   "a_mm": -93.1,
+   "b_mm": -236.5,
+   "yaw_deg": 232.2
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "T",
+  "param": "up",
+  "text": "drag the T upstream without lifting it",
+  "id": "pull:T:up",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   -1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "t17",
+  "t_success_s": 5.54,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.1,
+   "max_tilt_deg": 0.4,
+   "final_disp_mm": 45.7,
+   "final_along_mm": 42.9,
+   "final_lateral_mm": 15.9,
+   "moved_others_mm": {
+    "cyl10": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 6.12,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:T:up",
+    "target": "t17",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t17.a",
+  "t17.b",
+  "t17.z",
+  "t17.yaw",
+  "t17.tilt",
+  "cyl10.a",
+  "cyl10.b",
+  "cyl10.z",
+  "cyl10.yaw",
+  "cyl10.tilt"
+ ],
+ "ms_step_p50": 0.5757799990533385,
+ "ms_step_p95": 1.8201344009867169,
+ "n_steps": 307,
+ "wall_s": 22.99,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

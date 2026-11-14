@@ -1,0 +1,122 @@
+{
+ "trial_id": 18,
+ "method": "REMOTE:ACT_I2_S1000",
+ "cell": "test_C3",
+ "arrangement_id": "test_C3_019",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug29",
+   "a_mm": -202.1,
+   "b_mm": -209.3,
+   "yaw_deg": 287.2
+  },
+  {
+   "name": "u27",
+   "a_mm": -260.7,
+   "b_mm": -197.5,
+   "yaw_deg": 294.1
+  },
+  {
+   "name": "cyl36",
+   "a_mm": -288.5,
+   "b_mm": -239.1,
+   "yaw_deg": 230.7
+  },
+  {
+   "name": "t34",
+   "a_mm": -150.0,
+   "b_mm": -195.1,
+   "yaw_deg": 113.9
+  }
+ ],
+ "label": {
+  "success": 1,
+  "clean": 0,
+  "fail_cause_auto": "",
+  "target": "t34",
+  "t_success_s": 4.64,
+  "t_detect_s": null,
+  "t_lift_s": 2.52,
+  "details": {
+   "moved_others_mm": {
+    "mug29": 22.6,
+    "u27": 0.3,
+    "cyl36": 0.0
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s1000/checkpoints/last/pretrained_model",
+    "replan": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 692.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 6.06,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [175.3, 203.5, 60.7], 'yaw': -2.2, 'pos_err_mm': 0.0, 'q': [-60.6, 23.1, -25.4, 92.4, -60.1], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.62,
+ "gt_success_obj": "t34",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "u27.a",
+  "u27.b",
+  "u27.z",
+  "u27.yaw",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw"
+ ],
+ "ms_step_p50": 65.46416296623647,
+ "ms_step_p95": 79.19684494845569,
+ "n_steps": 1001,
+ "wall_s": 149.4,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 48.37
+}

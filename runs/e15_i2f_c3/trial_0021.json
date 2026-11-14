@@ -1,0 +1,133 @@
+{
+ "trial_id": 21,
+ "method": "REMOTE:ACT_I2F",
+ "cell": "dev_C3",
+ "arrangement_id": "dev_C3_011",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box25",
+   "a_mm": -205.2,
+   "b_mm": -210.5,
+   "yaw_deg": 130.0
+  },
+  {
+   "name": "cyl26",
+   "a_mm": -242.2,
+   "b_mm": -234.7,
+   "yaw_deg": 348.2
+  },
+  {
+   "name": "l23",
+   "a_mm": -150.0,
+   "b_mm": -194.0,
+   "yaw_deg": 28.8
+  },
+  {
+   "name": "mug24",
+   "a_mm": -283.79999999999995,
+   "b_mm": -216.7,
+   "yaw_deg": 148.7
+  },
+  {
+   "name": "box21",
+   "a_mm": -251.1,
+   "b_mm": -180.9,
+   "yaw_deg": 318.6
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "box25": 0.0,
+    "cyl26": 0.0,
+    "l23": 1238.6,
+    "mug24": 0.0,
+    "box21": 0.2
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2f_s1000/checkpoints/last/pretrained_model",
+    "replan": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 564.0,
+  "ik_fail_ticks_lt6s": 6.0,
+  "ik_fail_first_t": 2.28,
+  "ik_fail_first": "{'p': [200.7, 4.6, 4.4], 'yaw': 27.3, 'pos_err_mm': 0.01, 'q': [-4.5, 2.2, 28.5, 59.3, -154.4], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box25.a",
+  "box25.b",
+  "box25.z",
+  "box25.yaw",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw"
+ ],
+ "ms_step_p50": 21.478865994140506,
+ "ms_step_p95": 87.12465898133814,
+ "n_steps": 1001,
+ "wall_s": 163.41,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 59.35
+}

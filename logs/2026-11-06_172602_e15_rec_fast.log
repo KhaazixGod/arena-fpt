@@ -1,0 +1,606 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1793960763.158187 1094198 descriptor_database.cc:633] File already exists in database: grpc/health/v1/health.proto
+W0000 00:00:1793960763.158230 1094198 message.cc:301] Protobuf GeneratedMessageFactory: File is already registered: grpc/health/v1/health.proto
+2026-11-06T10:26:02Z [Info] [carb] Logging to file: /home/pread/env_isaac/lib/python3.12/site-packages/isaacsim/kit/logs/Kit/Isaac-Sim Python/6.0/kit_20261106_172602.log
+[0.072s] [ext: omni.assets.plugins-0.0.0] startup
+[0.073s] [ext: omni.blobkey-1.1.2] startup
+[0.074s] [ext: omni.kit.async_engine-0.0.3] startup
+[0.215s] [ext: omni.client.lib-1.1.1] startup
+[0.227s] [ext: omni.client-1.3.0] startup
+[0.230s] [ext: omni.protobuf.lib-1.0.0] startup
+[0.231s] [ext: omni.grpc.lib-1.0.0] startup
+[0.236s] [ext: omni.metrics.core-0.0.3] startup
+[0.236s] [ext: omni.datastore-0.0.0] startup
+[0.237s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[0.239s] [ext: omni.hsscclient-1.1.4] startup
+[0.240s] [ext: omni.stats-1.0.1] startup
+[0.240s] [ext: omni.ujitso.default-1.0.0] startup
+[0.245s] [ext: omni.gpu_foundation-0.0.0] startup
+[0.494s] [ext: carb.windowing.plugins-1.0.1] startup
+[0.495s] [ext: omni.kit.renderer.init-1.0.1] startup
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 595.99.02     | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | NVIDIA GeForce RTX 3070 Ti       | Yes: 0 |     | 8192    MB | 10de      | 0          |
+|     |                                  |        |     |            | 2482      | 112cc88d.. |
+|     |                                  |        |     |            | 1         |            |
+|=============================================================================================|
+| OS: 24.04.5 LTS (Noble Numbat) ubuntu, Version: 24.04.5, Kernel: 7.0.0-42-generic
+| XServer Vendor: The X.Org Foundation, XServer Version: 12101011 (1.21.1.11)
+| Processor: Intel(R) Core(TM) i9-10900 CPU @ 2.80GHz
+| Cores: 10 | Logical Cores: 20
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 48088 | Free Memory: 33675
+| Total Page/Swap (MB): 8191 | Free Page/Swap: 7295
+|---------------------------------------------------------------------------------------------|
+2026-11-06T10:26:04Z [1,314ms] [Warning] [omni.rtx] CPU performance profile is set to powersave. This profile sets the CPU to the lowest frequency reducing performance.
+[1.493s] [ext: omni.kit.pipapi-0.0.0] startup
+[1.494s] [ext: omni.kit.telemetry-0.5.2] startup
+[1.538s] [ext: omni.kit.loop-isaac-1.6.0] startup
+[1.540s] [ext: omni.kit.test-2.0.7] startup
+[1.606s] [ext: omni.materialx.libs-1.0.9] startup
+[1.614s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[1.614s] [ext: omni.usd.config-1.0.7] startup
+[1.619s] [ext: omni.usd.libs-1.0.3] startup
+[1.722s] [ext: omni.iray.libs-0.0.1] startup
+[1.727s] [ext: omni.mdl-57.0.3] startup
+[1.747s] [ext: omni.mdl.neuraylib-0.2.20] startup
+[1.749s] [ext: omni.kit.usd.mdl-1.1.9] startup
+[1.858s] [ext: omni.appwindow-1.2.2] startup
+[1.860s] [ext: omni.kit.renderer.core-1.2.2] startup
+[9.246s] [ext: omni.kit.renderer.capture-2.0.1] startup
+[9.248s] [ext: omni.kit.renderer.imgui-2.0.6] startup
+[9.304s] [ext: omni.ui-3.1.3] startup
+[9.314s] [ext: omni.kit.mainwindow-1.0.3] startup
+[9.315s] [ext: carb.audio-0.1.0] startup
+[9.318s] [ext: omni.uiaudio-1.0.0] startup
+[9.319s] [ext: omni.kit.uiapp-0.0.0] startup
+[9.319s] [ext: omni.usd.schema.metrics.assembler-110.1.0] startup
+[9.323s] [ext: omni.usd.schema.audio-0.0.1] startup
+[9.326s] [ext: omni.usd_resolver-1.0.0] startup
+[9.329s] [ext: omni.usd.core-1.8.3] startup
+[9.334s] [ext: omni.metropolis.schema-0.0.3] startup
+[9.334s] [ext: isaacsim.anim.robot.schema-0.1.1] startup
+[9.335s] [ext: omni.usd.schema.anim-0.0.1] startup
+[9.355s] [ext: omni.usd.schema.geospatial-0.0.1] startup
+[9.358s] [ext: omni.usd.schema.omnigraph-1.0.1] startup
+[9.364s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[9.367s] [ext: omni.activity.core-1.0.3] startup
+[9.368s] [ext: omni.cubric-0.1.0] startup
+[9.368s] [ext: omni.graph.exec-0.9.6] startup
+[9.369s] [ext: omni.hydra.scene_delegate-0.3.5] startup
+[9.373s] [ext: usdrt.scenegraph-7.6.3] startup
+[9.400s] [ext: omni.hydra.usdrt_delegate-7.5.2] startup
+[9.407s] [ext: omni.inspect-1.0.2] startup
+[9.409s] [ext: omni.kit.actions.core-1.0.0] startup
+[9.410s] [ext: omni.kit.audiodeviceenum-1.0.2] startup
+[9.412s] [ext: omni.kit.commands-1.5.0] startup
+[9.415s] [ext: omni.kit.exec.core-0.13.5] startup
+[9.416s] [ext: omni.kit.usd_undo-0.1.8] startup
+[9.417s] [ext: omni.kit.window.popup_dialog-2.0.25] startup
+[9.420s] [ext: omni.kit.widget.nucleus_connector-2.3.1] startup
+[9.423s] [ext: omni.timeline-1.1.0] startup
+[9.425s] [ext: omni.usd-1.15.2] startup
+[9.467s] [ext: omni.graph.core-3.1.2] startup
+[9.470s] [ext: omni.kit.notification_manager-1.0.11] startup
+[9.472s] [ext: isaacsim.core.deprecation_manager-0.4.2] startup
+[9.473s] [ext: isaacsim.replicator.agent.schema-0.1.1] startup
+[9.474s] [ext: isaacsim.robot.schema-6.3.6] startup
+[9.481s] [ext: isaacsim.robot_motion.schema-0.2.0] startup
+[9.481s] [ext: omni.anim.behavior.schema-110.1.0] startup
+[9.486s] [ext: omni.anim.graph.schema-110.1.1] startup
+[9.492s] [ext: omni.anim.navigation.schema-110.1.0] startup
+[9.495s] [ext: omni.behavior.tree.schema-110.1.0] startup
+[9.496s] [ext: omni.kit.asset_converter-5.1.4] startup
+[9.509s] [ext: omni.usd.schema.flow-110.0.0] startup
+[9.510s] [ext: omni.usd.schema.mujoco-1.1.0] startup
+[9.510s] [ext: omni.usd.schema.newton-1.2.0] startup
+[9.511s] [ext: omni.usd.schema.omni_lens_distortion-1.0.0] startup
+[9.512s] [ext: omni.usd.schema.omni_projectors-1.0.0] startup
+[9.512s] [ext: omni.usd.schema.omni_sensors-0.0.0] startup
+[9.520s] [ext: omni.usd.schema.omniscripting-1.0.1] startup
+[9.525s] [ext: omni.usd.schema.physical_lighting-0.1.0] startup
+[9.529s] [ext: omni.usd.schema.physx-110.1.11] startup
+[9.560s] [ext: omni.usd.schema.render_settings.rtx-1.0.2] startup
+[9.564s] [ext: omni.usd.schema.usd_particle_field-1.0.0] startup
+[9.564s] [ext: isaacsim.core.version-2.1.0] startup
+[9.565s] [ext: omni.kit.menu.core-1.2.0] startup
+[9.566s] [ext: omni.kit.menu.utils-2.2.3] startup
+[9.573s] [ext: isaacsim.app.about-2.3.0] startup
+[9.578s] [ext: isaacsim.asset.transformer-1.2.3] startup
+[9.582s] [ext: omni.scene.optimizer.core-110.1.0] startup
+[9.651s] [ext: isaacsim.asset.importer.utils-1.8.0] startup
+[9.653s] [ext: omni.convexdecomposition-110.1.11] startup
+[9.656s] [ext: omni.physics-110.1.11] startup
+[9.659s] [ext: omni.physx.gpu-110.1.11] startup
+[9.659s] [ext: omni.physx.foundation-110.1.11] startup
+[9.661s] [ext: omni.usdphysics-110.1.11] startup
+[9.663s] [ext: omni.physx.cooking-110.1.11] startup
+[9.665s] [ext: omni.physx-110.1.11] startup
+[9.676s] [ext: omni.physics.physx-110.1.11] startup
+[9.678s] [ext: isaacsim.asset.exporter.urdf-2.0.3] startup
+[9.687s] [ext: omni.kit.clipboard-1.1.1] startup
+[9.688s] [ext: omni.kit.usd.layers-2.6.1] startup
+[9.696s] [ext: omni.kit.widget.context_menu-1.4.0] startup
+[9.698s] [ext: omni.kit.context_menu-1.9.0] startup
+[9.699s] [ext: omni.kit.helper.file_utils-0.1.10] startup
+[9.701s] [ext: omni.kit.widget.nucleus_info-2.0.2] startup
+[9.702s] [ext: omni.kit.search_core-1.0.8] startup
+[9.702s] [ext: omni.kit.widget.path_field-2.0.13] startup
+[9.703s] [ext: omni.kit.widget.browser_bar-2.0.10] startup
+[9.704s] [ext: omni.kit.widget.filebrowser-2.13.4] startup
+[9.709s] [ext: omni.kit.widget.options_menu-1.1.6] startup
+[9.712s] [ext: omni.kit.widget.options_button-1.0.3] startup
+[9.713s] [ext: omni.kit.widget.search_delegate-1.0.9] startup
+[9.714s] [ext: omni.ui.scene-2.0.1] startup
+[9.719s] [ext: omni.kit.window.filepicker-2.15.5] startup
+[9.733s] [ext: omni.kit.window.file_importer-1.1.21] startup
+[9.735s] [ext: omni.kit.material.library-3.1.2] startup
+[9.740s] [ext: isaacsim.asset.transformer.rules-1.7.8] startup
+[9.752s] [ext: omni.usdex.libs-2.2.2] startup
+[9.761s] [ext: isaacsim.asset.importer.mjcf-3.10.0] startup
+[9.763s] [ext: isaacsim.asset.importer.urdf-3.11.0] startup
+[9.768s] [ext: omni.kit.primitive.mesh-1.1.0] startup
+[9.771s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[9.772s] [ext: omni.kit.stage_templates-2.0.2] startup
+[9.773s] [ext: omni.usd.metrics.assembler-110.1.2] startup
+[9.777s] [ext: omni.warp.core-1.13.0] startup
+[10.012s] [ext: isaacsim.core.experimental.utils-0.17.1] startup
+[10.013s] [ext: omni.physics.stageupdate-110.1.11] startup
+[10.016s] [ext: omni.physics.tensors-110.1.11] startup
+[10.020s] [ext: omni.physx.tensors-110.1.11] startup
+[10.024s] [ext: isaacsim.core.simulation_manager-1.15.4] startup
+2026-11-06T10:26:12Z [10,008ms] [Warning] [isaacsim.core.simulation_manager.plugin] USD stage is not available; stage-opened subscription is deferred
+2026-11-06T10:26:12Z [10,009ms] [Warning] [isaacsim.core.simulation_manager.plugin] USD stage is not available; stage-opened subscription is deferred
+[10.041s] [ext: isaacsim.storage.native-1.9.2] startup
+[10.043s] [ext: omni.usd.metrics.assembler.physics-110.1.11] startup
+[10.045s] [ext: isaacsim.core.utils-4.1.6] startup
+[10.048s] [ext: isaacsim.core.prims-0.11.6] startup
+[11.512s] [ext: isaacsim.core.api-5.2.12] startup
+[11.522s] [ext: isaacsim.core.cloner-1.7.2] startup
+[11.524s] [ext: isaacsim.test.docstring-1.3.1] startup
+[11.528s] [ext: isaacsim.core.experimental.prims-1.8.8] startup
+[11.557s] [ext: isaacsim.core.experimental.primdata-0.3.2] startup
+[11.560s] [ext: omni.graph.tools-1.81.0] startup
+[11.588s] [ext: omni.graph-1.142.5] startup
+[11.632s] [ext: isaacsim.core.experimental.actuators-0.1.0] startup
+[14.357s] [ext: isaacsim.core.experimental.materials-0.7.0] startup
+[14.363s] [ext: isaacsim.core.experimental.objects-0.8.0] startup
+[14.439s] [ext: omni.hydra.engine.stats-1.0.5] startup
+[14.443s] [ext: omni.hydra.rtx.shadercache.vulkan-1.0.0] startup
+[14.444s] [ext: omni.index.libs-387500.3473.0] startup
+[14.444s] [ext: omni.index-1.0.1] startup
+[14.445s] [ext: omni.ujitso.client-0.0.0] startup
+[14.445s] [ext: omni.usd.schema.playback-1.0.0] startup
+[14.450s] [ext: omni.volume-0.5.2] startup
+[14.455s] [ext: omni.hydra.rtx-1.0.3] startup
+2026-11-06T10:26:17Z [14,440ms] [Warning] [omni.log] Source: omni.hydra was already registered.
+[14.495s] [ext: omni.kit.hydra_texture-1.6.0] startup
+[14.500s] [ext: omni.kit.raycast.query-1.2.0] startup
+[14.506s] [ext: omni.kit.viewport.legacy_gizmos-1.0.24] startup
+[14.509s] [ext: omni.kit.viewport.registry-104.0.6] startup
+[14.510s] [ext: omni.kit.viewport.scene_camera_model-1.0.7] startup
+[14.515s] [ext: omni.kit.widget.viewport-109.2.0] startup
+[14.520s] [ext: omni.kit.window.drop_support-1.0.8] startup
+[14.521s] [ext: omni.kit.viewport.window-109.0.2] startup
+[14.541s] [ext: omni.kit.viewport.utility-2.0.1] startup
+[14.542s] [ext: isaacsim.core.rendering_manager-0.4.2] startup
+[14.566s] [ext: omni.graph.action_core-1.1.9] startup
+[14.569s] [ext: omni.graph.action_nodes_core-2.10.2] startup
+[14.572s] [ext: omni.graph.action_nodes-2.10.3] startup
+[14.597s] [ext: omni.graph.action-2.10.2] startup
+[14.599s] [ext: omni.graph.image.core-0.6.1] startup
+[14.601s] [ext: omni.graph.image.nodes-1.3.1] startup
+[14.602s] [ext: omni.graph.nodes_core-2.10.3] startup
+[14.609s] [ext: omni.graph.nodes-2.11.1] startup
+[14.618s] [ext: omni.kit.hotkeys.core-1.3.12] startup
+[14.619s] [ext: omni.kit.property.adapter.core-1.1.1] startup
+[14.622s] [ext: omni.kit.property.adapter.usd-1.0.5] startup
+[14.624s] [ext: omni.kit.widget.filter-1.1.5] startup
+[14.626s] [ext: omni.kit.widget.highlight_label-1.0.3] startup
+[14.627s] [ext: omni.kit.widget.searchfield-1.1.8] startup
+[14.629s] [ext: omni.kit.window.file_exporter-1.0.36] startup
+[14.630s] [ext: omni.kit.widget.stage-4.3.0] startup
+[14.641s] [ext: omni.kit.window.content_browser_registry-0.0.6] startup
+[14.643s] [ext: omni.kit.window.file-2.0.10] startup
+[14.646s] [ext: omni.kit.window.content_browser-3.1.8] startup
+[14.660s] [ext: omni.kit.window.property-1.15.1] startup
+[14.675s] [ext: omni.kit.property.usd-4.8.1] startup
+[14.688s] [ext: omni.graph.scriptnode-2.10.2] startup
+[14.699s] [ext: omni.kit.widget.searchable_combobox-1.0.7] startup
+[14.701s] [ext: omni.kit.widget.settings-2.0.0] startup
+[14.704s] [ext: omni.kit.window.preferences-1.8.3] startup
+[14.711s] [ext: omni.kit.viewport.menubar.core-107.2.2] startup
+[14.727s] [ext: omni.syntheticdata-0.6.15] startup
+[14.760s] [ext: omni.replicator.nv-1.1.1] startup
+[14.767s] [ext: omni.videoencoding-0.2.1] startup
+[14.770s] [ext: omni.replicator.core-1.13.25] startup
+2026-11-06T10:26:17Z [14,749ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
+2026-11-06T10:26:17Z [14,839ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
+[15.060s] [ext: isaacsim.core.nodes-5.10.4] startup
+[15.110s] [ext: isaacsim.core.throttling-2.3.3] startup
+[15.112s] [ext: omni.kit.manipulator.viewport-107.0.1] startup
+[15.114s] [ext: omni.graph.visualization.nodes-2.1.4] startup
+[15.133s] [ext: omni.kit.window.extensions-1.5.7] startup
+[15.140s] [ext: isaacsim.gui.components-1.8.4] startup
+[15.146s] [ext: isaacsim.robot.surface_gripper-3.6.1] startup
+[15.161s] [ext: isaacsim.robot.manipulators-3.4.4] startup
+[15.175s] [ext: isaacsim.robot_motion.lula-4.1.2] startup
+[15.183s] [ext: isaacsim.robot_motion.motion_generation-8.2.8] startup
+[15.192s] [ext: isaacsim.cortex.framework-1.0.17] startup
+[15.195s] [ext: isaacsim.cortex.behaviors-2.0.16] startup
+[15.198s] [ext: isaacsim.examples.base-1.3.1] startup
+[15.200s] [ext: omni.kit.widget.zoombar-1.0.7] startup
+[15.201s] [ext: omni.kit.browser.core-2.3.18] startup
+[15.206s] [ext: omni.kit.browser.folder.core-2.0.2] startup
+[15.212s] [ext: omni.kit.widget.stage_icons-1.0.8] startup
+[15.213s] [ext: omni.kit.window.stage-2.6.1] startup
+[15.217s] [ext: omni.kit.menu.stage-1.2.7] startup
+[15.219s] [ext: omni.kit.usd.collect-3.0.5] startup
+[15.223s] [ext: omni.kit.widget.prompt-1.0.7] startup
+[15.224s] [ext: omni.kit.tool.collect-2.2.19] startup
+[15.227s] [ext: isaacsim.examples.browser-0.3.1] startup
+[15.230s] [ext: omni.kit.search.files-1.0.4] startup
+[15.231s] [ext: omni.kit.widget.calendar-1.0.9] startup
+[15.232s] [ext: omni.kit.widget.extended_searchfield-1.0.31] startup
+[15.243s] [ext: omni.simready.content.browser-0.3.7] startup
+[15.355s] [ext: isaacsim.gui.content_browser-0.4.2] startup
+[15.359s] [ext: omni.kit.selection-0.1.6] startup
+[15.361s] [ext: isaacsim.gui.menu-2.10.5] startup
+[15.371s] [ext: isaacsim.gui.property-1.6.2] startup
+[15.381s] [ext: omni.kit.viewport.actions-107.0.2] startup
+[15.387s] [ext: omni.kit.viewport.menubar.display-107.1.3] startup
+[15.389s] [ext: isaacsim.gui.sensors.icon-2.2.0] startup
+[15.393s] [ext: omni.behavior.scripting.core-110.1.0] startup
+[15.397s] [ext: isaacsim.replicator.behavior-1.5.3] startup
+[15.398s] [ext: isaacsim.replicator.experimental.domain_randomization-1.2.4] startup
+[15.419s] [ext: isaacsim.replicator.domain_randomization-1.2.1] startup
+[15.517s] [ext: isaacsim.replicator.writers-1.5.3] startup
+[15.546s] [ext: isaacsim.robot.experimental.wheeled_robots-0.2.9] startup
+[15.576s] [ext: isaacsim.robot.policy.examples-5.2.11] startup
+[15.605s] [ext: isaacsim.robot.wheeled_robots-5.2.3] startup
+[15.611s] [ext: isaacsim.robot.wheeled_robots.nodes-0.1.2] startup
+[15.636s] [ext: isaacsim.robot_motion.experimental.motion_generation-6.1.2] startup
+[15.651s] [ext: isaacsim.robot_motion.cumotion-1.3.0] startup
+[15.668s] [ext: omni.kit.numpy.common-0.1.3] startup
+[15.670s] [ext: isaacsim.sensors.camera-1.7.8] startup
+[15.709s] [ext: isaacsim.sensors.experimental.physics-3.0.1] startup
+[15.719s] [ext: omni.sensors.net-1.0.1] startup
+[15.723s] [ext: omni.sensors.nv.common-3.0.0] startup
+[15.737s] [ext: omni.sensors.nv.materials-2.0.0] startup
+[15.741s] [ext: omni.sensors.nv.acoustic-3.0.0] startup
+[15.745s] [ext: omni.sensors.nv.ids-2.0.1] startup
+[15.747s] [ext: omni.sensors.nv.lidar-3.0.0] startup
+[15.752s] [ext: omni.sensors.nv.radar-3.0.0] startup
+[15.757s] [ext: isaacsim.sensors.experimental.rtx-1.4.3] startup
+[16.099s] [ext: isaacsim.sensors.physics.nodes-1.5.2] startup
+[16.108s] [ext: isaacsim.util.debug_draw-3.2.2] startup
+[16.115s] [ext: isaacsim.sensors.physx-2.5.4] startup
+[16.126s] [ext: isaacsim.sensors.rtx-15.17.0] startup
+[16.143s] [ext: isaacsim.simulation_app-2.18.3] startup
+[16.144s] [ext: omni.anim.curve.core-1.6.0] startup
+[16.157s] [ext: omni.graph.ui_nodes-2.10.5] startup
+[16.190s] [ext: omni.hydra.scene_api-0.1.3] startup
+[16.197s] [ext: omni.kit.manipulator.camera-110.0.0] startup
+[16.202s] [ext: omni.kit.manipulator.selector-1.1.4] startup
+[16.204s] [ext: omni.kit.manipulator.transform-107.0.0] startup
+[16.209s] [ext: omni.kit.widget.toolbar-2.1.0] startup
+[16.217s] [ext: omni.kit.manipulator.tool.snap-1.5.14] startup
+[16.222s] [ext: omni.kit.viewport.manipulator.transform-107.0.4] startup
+[16.225s] [ext: omni.kit.manipulator.prim.core-108.0.2] startup
+[16.233s] [ext: omni.kit.manipulator.prim.usd-107.0.3] startup
+[16.235s] [ext: omni.kit.manipulator.prim-108.0.0] startup
+[16.235s] [ext: omni.kit.manipulator.selection-109.0.1] startup
+[16.237s] [ext: omni.kit.menu.create-2.0.2] startup
+[16.239s] [ext: omni.kit.property.audio-1.0.16] startup
+[16.243s] [ext: omni.kit.property.camera-1.0.14] startup
+[16.245s] [ext: omni.kit.property.geometry-2.1.2] startup
+[16.249s] [ext: omni.kit.property.light-1.0.14] startup
+2026-11-06T10:26:19Z [16,250ms] [Warning] [omni.usd] Encountered USD Warnings but USD Diagnostics are currently muted. To view USD Warnings, please set the '/persistent/app/usd/muteUsdDiagnostics' setting to false in Preferences page.
+[16.292s] [ext: omni.kit.property.material-1.14.2] startup
+[16.300s] [ext: omni.kit.property.render-1.2.2] startup
+[16.302s] [ext: omni.kit.property.transform-1.6.9] startup
+[16.306s] [ext: omni.kit.property.bundle-1.5.1] startup
+[16.308s] [ext: omni.kit.usdz_export-1.1.0] startup
+[16.311s] [ext: omni.kit.tool.asset_importer-5.2.0] startup
+[16.317s] [ext: omni.kit.ui.actions-1.0.5] startup
+[16.319s] [ext: omni.kit.viewport.menubar.camera-107.0.10] startup
+[16.325s] [ext: omni.kit.viewport.menubar.lighting-107.3.2] startup
+[16.328s] [ext: omni.kit.viewport.menubar.render-107.0.10] startup
+[16.331s] [ext: omni.kit.viewport.menubar.settings-110.0.1] startup
+[16.336s] [ext: omni.kit.window.console-1.1.8] startup
+[16.341s] [ext: omni.kit.window.status_bar-0.1.11] startup
+[16.344s] [ext: omni.kit.window.toolbar-3.0.3] startup
+[16.347s] [ext: omni.ocio-0.1.1] startup
+[16.349s] [ext: omni.physx.commands-110.1.11] startup
+[16.360s] [ext: omni.replicator.replicator_yaml-2.0.12] startup
+[16.372s] [ext: omni.rtx.window.settings-0.8.0] startup
+[16.378s] [ext: omni.rtx.settings.core-0.7.0] startup
+[16.382s] [ext: omni.usd.metrics.assembler.ui-110.1.1] startup
+[16.390s] [ext: semantics.schema.editor-2.0.2] startup
+[16.393s] [ext: semantics.schema.property-2.0.1] startup
+[16.395s] [ext: omni.kit.menu.common-2.0.2] startup
+[16.397s] [ext: isaacsim.exp.base-6.0.0] startup
+[16.397s] [ext: isaacsim.exp.base.python-6.0.0] startup
+[16.399s] Simulation App Starting
+[17.615s] Simulation App Startup Complete
+[17.625s] app ready
+Starting kit application with the following args:  ['/home/pread/env_isaac/lib/python3.12/site-packages/isaacsim/exts/isaacsim.simulation_app/isaacsim/simulation_app/simulation_app.py', '/home/pread/env_isaac/lib/python3.12/site-packages/isaacsim/apps/isaacsim.exp.base.python.kit', '--/app/tokens/exe-path=/home/pread/env_isaac/lib/python3.12/site-packages/isaacsim/kit', '--/persistent/app/viewport/displayOptions=3094', '--/rtx/materialDb/syncLoads=True', '--/rtx/hydra/materialSyncLoads=True', '--/omni.kit.plugin/syncUsdLoads=True', '--/app/renderer/resolution/width=1280', '--/app/renderer/resolution/height=720', '--/app/window/width=1440', '--/app/window/height=900', '--/renderer/multiGpu/enabled=True', '--/app/fastShutdown=True', '--/app/installSignalHandlers=0', '--ext-folder', '/home/pread/env_isaac/lib/python3.12/site-packages/isaacsim/exts', '--ext-folder', '/home/pread/env_isaac/lib/python3.12/site-packages/isaacsim/apps', '--/physics/cudaDevice=0', '--/plugins/carb.tasking.plugin/threadCount=20', '--/plugins/omni.tbb.globalcontrol/maxThreadCount=20', '--portable', '--no-window', '--/app/window/hideUi=1']
+Passing the following args to the base kit application:  ['--objects', 'sim', '--n', '20', '--out', 'runs/e15_demos_fast', '--report', '--methods', 'ORACLE', '--cells', 'train_C2,train_C3', '--speeds', 'L0.5', '--n', '60', '--record-demos', 'runs/e15_demos_fast/episodes']
+Warp 1.13.0 initialized:
+   CUDA Toolkit 12.9, Driver 13.2
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA GeForce RTX 3070 Ti" (8 GiB, sm_86, mempool enabled)
+   Kernel cache:
+     /home/pread/.cache/warp/1.13.0
+run_arena: 120 trials planned, 0 already done, 120 to run -> /home/pread/Projects/dir1_tools/arena/runs/e15_demos_fast
+[1/120] #0000 ORACLE   train_C2 train_C2_001 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=41.13s  (eta 82 min)
+[2/120] #0001 ORACLE   train_C2 train_C2_002 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=47.32s  (eta 87 min)
+[3/120] #0002 ORACLE   train_C2 train_C2_003 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=72.68s  (eta 105 min)
+[4/120] #0003 ORACLE   train_C2 train_C2_004 L0.5   -> success=0 valid=1 outcome=late cause=collision wall=53.28s  (eta 104 min)
+[5/120] #0004 ORACLE   train_C2 train_C2_005 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.0s  (eta 106 min)
+[6/120] #0005 ORACLE   train_C2 train_C2_006 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=63.87s  (eta 108 min)
+[7/120] #0006 ORACLE   train_C2 train_C2_007 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=54.13s  (eta 106 min)
+[8/120] #0007 ORACLE   train_C2 train_C2_008 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=55.21s  (eta 105 min)
+[9/120] #0008 ORACLE   train_C2 train_C2_009 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.73s  (eta 105 min)
+[10/120] #0009 ORACLE   train_C2 train_C2_010 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=67.1s  (eta 106 min)
+[11/120] #0010 ORACLE   train_C2 train_C2_011 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=65.11s  (eta 107 min)
+[12/120] #0011 ORACLE   train_C2 train_C2_012 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.65s  (eta 106 min)
+[13/120] #0012 ORACLE   train_C2 train_C2_013 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=59.66s  (eta 105 min)
+[14/120] #0013 ORACLE   train_C2 train_C2_014 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=65.78s  (eta 105 min)
+[15/120] #0014 ORACLE   train_C2 train_C2_015 L0.5   -> success=0 valid=1 outcome=empty_grasp cause=grasp_point wall=39.91s  (eta 102 min)
+[16/120] #0015 ORACLE   train_C2 train_C2_016 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=69.85s  (eta 102 min)
+[17/120] #0016 ORACLE   train_C2 train_C2_017 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=61.35s  (eta 101 min)
+[18/120] #0017 ORACLE   train_C2 train_C2_018 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=66.91s  (eta 101 min)
+[19/120] #0018 ORACLE   train_C2 train_C2_019 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.55s  (eta 100 min)
+[20/120] #0019 ORACLE   train_C2 train_C2_020 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=59.15s  (eta 99 min)
+[21/120] #0020 ORACLE   train_C2 train_C2_021 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=69.39s  (eta 99 min)
+[22/120] #0021 ORACLE   train_C2 train_C2_022 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.25s  (eta 98 min)
+[23/120] #0022 ORACLE   train_C2 train_C2_023 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.56s  (eta 97 min)
+[24/120] #0023 ORACLE   train_C2 train_C2_024 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=61.06s  (eta 96 min)
+[25/120] #0024 ORACLE   train_C2 train_C2_025 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=59.13s  (eta 95 min)
+2026-11-06T10:26:22Z [19,320ms] [Warning] [omni.syntheticdata.plugin] OgnSdPostRenderVarToHost : rendervar copy from texture directly to host buffer is counter-performant. Please use copy from texture to device buffer first.
+2026-11-06T10:26:22Z [19,639ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:26:25Z [22,714ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:27:06Z [63,856ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:27:54Z [111,510ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:29:07Z [184,156ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:30:00Z [237,394ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:31:02Z [299,625ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:32:06Z [363,375ms] [Warning] [carb] Client omni.kit.viewport.legacy_gizmos has acquired [carb::settings::ISettings v1.1] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
+2026-11-06T10:32:06Z [363,375ms] [Warning] [carb] Client omni.kit.viewport.legacy_gizmos has acquired [carb::dictionary::IDictionary v1.2] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
+2026-11-06T10:32:06Z [363,670ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:33:00Z [417,844ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:33:56Z [473,097ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:34:58Z [535,974ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:36:06Z [603,230ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:37:11Z [668,526ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:38:10Z [727,337ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:39:09Z [786,921ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:40:15Z [852,896ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:40:55Z [892,830ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:42:05Z [962,873ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:43:07Z [1,024,363ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:44:14Z [1,091,245ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:45:12Z [1,150,021ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:46:12Z [1,209,290ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:47:21Z [1,278,929ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:48:24Z [1,341,178ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:49:22Z [1,399,943ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:50:24Z [1,461,127ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:51:23Z [1,520,367ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+[26/120] #0025 ORACLE   train_C2 train_C2_026 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=53.41s  (eta 93 min)
+[27/120] #0026 ORACLE   train_C2 train_C2_027 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=67.85s  (eta 93 min)
+[28/120] #0027 ORACLE   train_C2 train_C2_028 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=59.79s  (eta 92 min)
+[29/120] #0028 ORACLE   train_C2 train_C2_029 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=59.53s  (eta 91 min)
+[30/120] #0029 ORACLE   train_C2 train_C2_030 L0.5   -> success=0 valid=1 outcome=picked_hold_complete cause=slip wall=66.75s  (eta 90 min)
+[31/120] #0030 ORACLE   train_C2 train_C2_031 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=56.56s  (eta 89 min)
+[32/120] #0031 ORACLE   train_C2 train_C2_032 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=63.41s  (eta 88 min)
+[33/120] #0032 ORACLE   train_C2 train_C2_033 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.86s  (eta 87 min)
+[34/120] #0033 ORACLE   train_C2 train_C2_034 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=grasp_point wall=57.39s  (eta 86 min)
+[35/120] #0034 ORACLE   train_C2 train_C2_035 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.65s  (eta 85 min)
+[36/120] #0035 ORACLE   train_C2 train_C2_036 L0.5   -> success=0 valid=1 outcome=late cause=timing wall=22.72s  (eta 83 min)
+[37/120] #0036 ORACLE   train_C2 train_C2_037 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=53.24s  (eta 82 min)
+[38/120] #0037 ORACLE   train_C2 train_C2_038 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=53.04s  (eta 80 min)
+[39/120] #0038 ORACLE   train_C2 train_C2_039 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.81s  (eta 80 min)
+[40/120] #0039 ORACLE   train_C2 train_C2_040 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=60.6s  (eta 79 min)
+[41/120] #0040 ORACLE   train_C2 train_C2_041 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=57.96s  (eta 78 min)
+[42/120] #0041 ORACLE   train_C2 train_C2_042 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=69.07s  (eta 77 min)
+[43/120] #0042 ORACLE   train_C2 train_C2_043 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=54.36s  (eta 76 min)
+[44/120] #0043 ORACLE   train_C2 train_C2_044 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=53.05s  (eta 75 min)
+[45/120] #0044 ORACLE   train_C2 train_C2_045 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.85s  (eta 74 min)
+[46/120] #0045 ORACLE   train_C2 train_C2_046 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.66s  (eta 73 min)
+[47/120] #0046 ORACLE   train_C2 train_C2_047 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=54.65s  (eta 72 min)
+[48/120] #0047 ORACLE   train_C2 train_C2_048 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=61.53s  (eta 71 min)
+[49/120] #0048 ORACLE   train_C2 train_C2_049 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.93s  (eta 70 min)
+[50/120] #0049 ORACLE   train_C2 train_C2_050 L0.5   -> success=0 valid=1 outcome=picked_hold_complete cause=slip wall=56.68s  (eta 69 min)
+[51/120] #0050 ORACLE   train_C2 train_C2_051 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.11s  (eta 68 min)
+[52/120] #0051 ORACLE   train_C2 train_C2_052 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=65.96s  (eta 67 min)
+[53/120] #0052 ORACLE   train_C2 train_C2_053 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=59.53s  (eta 66 min)
+[54/120] #0053 ORACLE   train_C2 train_C2_054 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=60.87s  (eta 65 min)
+[55/120] #0054 ORACLE   train_C2 train_C2_055 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=55.79s  (eta 64 min)
+2026-11-06T10:52:16Z [1,573,806ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:53:24Z [1,642,003ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:54:24Z [1,701,807ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:55:24Z [1,761,284ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:56:31Z [1,828,257ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:57:27Z [1,884,866ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:58:31Z [1,948,359ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T10:59:34Z [2,011,256ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:00:31Z [2,068,715ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:01:34Z [2,131,505ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:01:57Z [2,154,257ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:02:50Z [2,207,617ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:03:43Z [2,260,801ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:04:42Z [2,319,771ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:05:43Z [2,380,467ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:06:41Z [2,438,612ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:07:50Z [2,507,688ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:08:45Z [2,562,077ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:09:38Z [2,615,332ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:10:37Z [2,674,273ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:11:40Z [2,737,061ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:12:34Z [2,791,746ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:13:36Z [2,853,162ms] [Warning] [carb] Client omni.kit.viewport.legacy_gizmos has acquired [carb::input::IInput v1.2] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
+2026-11-06T11:13:36Z [2,853,443ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:14:35Z [2,912,393ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:15:32Z [2,969,112ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:16:34Z [3,031,459ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:17:40Z [3,097,526ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:18:40Z [3,157,182ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:19:41Z [3,218,167ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:20:37Z [3,274,079ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+[56/120] #0055 ORACLE   train_C2 train_C2_056 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=51.96s  (eta 63 min)
+[57/120] #0056 ORACLE   train_C2 train_C2_057 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.54s  (eta 62 min)
+[58/120] #0057 ORACLE   train_C2 train_C2_058 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=57.69s  (eta 61 min)
+[59/120] #0058 ORACLE   train_C2 train_C2_059 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=56.64s  (eta 60 min)
+[60/120] #0059 ORACLE   train_C2 train_C2_060 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=66.82s  (eta 59 min)
+[61/120] #0060 ORACLE   train_C3 train_C3_001 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=54.83s  (eta 58 min)
+[62/120] #0061 ORACLE   train_C3 train_C3_002 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=55.89s  (eta 57 min)
+[63/120] #0062 ORACLE   train_C3 train_C3_003 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=64.18s  (eta 56 min)
+[64/120] #0063 ORACLE   train_C3 train_C3_004 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=63.84s  (eta 55 min)
+[65/120] #0064 ORACLE   train_C3 train_C3_005 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.57s  (eta 54 min)
+[66/120] #0065 ORACLE   train_C3 train_C3_006 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=63.55s  (eta 53 min)
+[67/120] #0066 ORACLE   train_C3 train_C3_007 L0.5   -> success=0 valid=1 outcome=empty_grasp cause=collision wall=37.58s  (eta 52 min)
+[68/120] #0067 ORACLE   train_C3 train_C3_008 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=56.48s  (eta 51 min)
+[69/120] #0068 ORACLE   train_C3 train_C3_009 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=collision wall=54.14s  (eta 50 min)
+[70/120] #0069 ORACLE   train_C3 train_C3_010 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=61.37s  (eta 49 min)
+[71/120] #0070 ORACLE   train_C3 train_C3_011 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=60.65s  (eta 48 min)
+[72/120] #0071 ORACLE   train_C3 train_C3_012 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=55.02s  (eta 47 min)
+[73/120] #0072 ORACLE   train_C3 train_C3_013 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=60.45s  (eta 46 min)
+[74/120] #0073 ORACLE   train_C3 train_C3_014 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=54.51s  (eta 45 min)
+[75/120] #0074 ORACLE   train_C3 train_C3_015 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.26s  (eta 44 min)
+[76/120] #0075 ORACLE   train_C3 train_C3_016 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=63.71s  (eta 43 min)
+[77/120] #0076 ORACLE   train_C3 train_C3_017 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=67.74s  (eta 42 min)
+[78/120] #0077 ORACLE   train_C3 train_C3_018 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=67.22s  (eta 41 min)
+[79/120] #0078 ORACLE   train_C3 train_C3_019 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=61.17s  (eta 40 min)
+[80/120] #0079 ORACLE   train_C3 train_C3_020 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=54.87s  (eta 39 min)
+[81/120] #0080 ORACLE   train_C3 train_C3_021 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=grasp_point wall=60.18s  (eta 38 min)
+[82/120] #0081 ORACLE   train_C3 train_C3_022 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=61.92s  (eta 37 min)
+[83/120] #0082 ORACLE   train_C3 train_C3_023 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=61.77s  (eta 36 min)
+[84/120] #0083 ORACLE   train_C3 train_C3_024 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=54.97s  (eta 35 min)
+[85/120] #0084 ORACLE   train_C3 train_C3_025 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=64.31s  (eta 35 min)
+[86/120] #0085 ORACLE   train_C3 train_C3_026 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=51.96s  (eta 33 min)
+[87/120] #0086 ORACLE   train_C3 train_C3_027 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=55.88s  (eta 32 min)
+2026-11-06T11:21:29Z [3,326,265ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:22:31Z [3,388,966ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:23:29Z [3,446,672ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:24:26Z [3,503,346ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:25:33Z [3,570,307ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:26:28Z [3,625,275ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:27:24Z [3,681,290ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:28:28Z [3,745,640ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:29:32Z [3,809,725ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:30:31Z [3,868,292ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:31:34Z [3,931,990ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:32:12Z [3,969,780ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:33:09Z [4,026,238ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:34:03Z [4,080,460ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:35:04Z [4,142,007ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:36:05Z [4,202,721ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:37:00Z [4,257,962ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:38:01Z [4,318,457ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:38:55Z [4,372,972ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:39:54Z [4,431,292ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:40:58Z [4,495,215ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:42:05Z [4,563,032ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:43:13Z [4,630,460ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:44:14Z [4,691,728ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:45:09Z [4,746,699ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:46:09Z [4,806,951ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:47:11Z [4,868,919ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:48:13Z [4,930,750ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:49:08Z [4,986,010ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:50:13Z [5,050,245ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:51:05Z [5,102,413ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:52:01Z [5,158,162ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+[88/120] #0087 ORACLE   train_C3 train_C3_028 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.24s  (eta 32 min)
+[89/120] #0088 ORACLE   train_C3 train_C3_029 L0.5   -> success=0 valid=1 outcome=empty_grasp cause=collision wall=35.07s  (eta 30 min)
+[90/120] #0089 ORACLE   train_C3 train_C3_030 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=61.01s  (eta 29 min)
+[91/120] #0090 ORACLE   train_C3 train_C3_031 L0.5   -> success=0 valid=1 outcome=picked_hold_complete cause=slip wall=66.83s  (eta 28 min)
+[92/120] #0091 ORACLE   train_C3 train_C3_032 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=56.68s  (eta 27 min)
+[93/120] #0092 ORACLE   train_C3 train_C3_033 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=52.29s  (eta 26 min)
+[94/120] #0093 ORACLE   train_C3 train_C3_034 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=69.22s  (eta 26 min)
+[95/120] #0094 ORACLE   train_C3 train_C3_035 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=65.97s  (eta 25 min)
+[96/120] #0095 ORACLE   train_C3 train_C3_036 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=71.72s  (eta 24 min)
+[97/120] #0096 ORACLE   train_C3 train_C3_037 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=53.84s  (eta 23 min)
+[98/120] #0097 ORACLE   train_C3 train_C3_038 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.65s  (eta 22 min)
+[99/120] #0098 ORACLE   train_C3 train_C3_039 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=56.61s  (eta 21 min)
+[100/120] #0099 ORACLE   train_C3 train_C3_040 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=58.18s  (eta 20 min)
+[101/120] #0100 ORACLE   train_C3 train_C3_041 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=grasp_point wall=63.4s  (eta 19 min)
+[102/120] #0101 ORACLE   train_C3 train_C3_042 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=collision wall=61.67s  (eta 18 min)
+[103/120] #0102 ORACLE   train_C3 train_C3_043 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=53.67s  (eta 17 min)
+[104/120] #0103 ORACLE   train_C3 train_C3_044 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=56.8s  (eta 16 min)
+[105/120] #0104 ORACLE   train_C3 train_C3_045 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=56.3s  (eta 15 min)
+[106/120] #0105 ORACLE   train_C3 train_C3_046 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=66.59s  (eta 14 min)
+[107/120] #0106 ORACLE   train_C3 train_C3_047 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=55.88s  (eta 13 min)
+[108/120] #0107 ORACLE   train_C3 train_C3_048 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=66.91s  (eta 12 min)
+[109/120] #0108 ORACLE   train_C3 train_C3_049 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=52.02s  (eta 11 min)
+[110/120] #0109 ORACLE   train_C3 train_C3_050 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=57.75s  (eta 10 min)
+[111/120] #0110 ORACLE   train_C3 train_C3_051 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=62.45s  (eta 9 min)
+[112/120] #0111 ORACLE   train_C3 train_C3_052 L0.5   -> success=0 valid=1 outcome=late cause=timing wall=27.37s  (eta 8 min)
+[113/120] #0112 ORACLE   train_C3 train_C3_053 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=53.5s  (eta 7 min)
+[114/120] #0113 ORACLE   train_C3 train_C3_054 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=70.62s  (eta 6 min)
+[115/120] #0114 ORACLE   train_C3 train_C3_055 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=slip wall=53.82s  (eta 5 min)
+[116/120] #0115 ORACLE   train_C3 train_C3_056 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=58.99s  (eta 4 min)
+[117/120] #0116 ORACLE   train_C3 train_C3_057 L0.5   -> success=0 valid=1 outcome=late cause=timing wall=22.16s  (eta 3 min)
+[118/120] #0117 ORACLE   train_C3 train_C3_058 L0.5   -> success=0 valid=1 outcome=ik_fail cause=collision wall=56.59s  (eta 2 min)
+[119/120] #0118 ORACLE   train_C3 train_C3_059 L0.5   -> success=1 valid=1 outcome=picked_hold_complete cause= wall=60.79s  (eta 1 min)
+2026-11-06T11:53:03Z [5,220,562ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:53:38Z [5,255,651ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:54:39Z [5,316,793ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:55:46Z [5,383,575ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:56:43Z [5,440,413ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:57:35Z [5,492,730ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:58:45Z [5,562,139ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T11:59:51Z [5,628,213ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:01:03Z [5,700,091ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:01:56Z [5,753,975ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:02:59Z [5,816,826ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:03:56Z [5,873,458ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:04:54Z [5,931,761ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:05:58Z [5,995,141ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:06:59Z [6,056,828ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:07:53Z [6,110,755ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:08:50Z [6,167,581ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:09:47Z [6,224,089ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:10:53Z [6,290,855ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:11:49Z [6,346,776ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:12:56Z [6,413,825ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:13:49Z [6,466,084ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:14:46Z [6,524,016ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:15:49Z [6,586,553ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:16:16Z [6,613,936ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:17:10Z [6,667,370ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:18:21Z [6,738,189ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:19:15Z [6,792,082ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:20:14Z [6,851,158ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:20:36Z [6,873,427ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:21:32Z [6,930,002ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+2026-11-06T12:22:33Z [6,990,950ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+[120/120] #0119 ORACLE   train_C3 train_C3_060 L0.5   -> success=0 valid=1 outcome=dropped_in_hold cause=grasp_point wall=59.08s  (eta 0 min)
+Lần chạy e15_demos_fast · engine=isaac · 2026-11-06T17:26:25+07:00 · hash arena 519767a2 · Isaac 6.0.0.1 · cl0 006af1c9 · vật: E5 generated set configs/objects_sim.json sha256 aa49c57deff0
+
+| Phương pháp | Ô | L | n sắp xếp (lượt) | Thành công | SR [Wilson 95%] | SR sạch | Δ so CL0 (p; bootstrap 95%) | t phát hiện→nhấc p50/p95 (s) | ms/bước p50/p95 |
+|---|---|---|---|---|---|---|---|---|---|
+| ORACLE | train_C2 | 0.5 | 60 (60) | 41 | 68% [56%, 79%] | 65% | — | 2.36/2.42 | 0.6/22.8 |
+| ORACLE | train_C3 | 0.5 | 60 (60) | 35 | 58% [46%, 70%] | 42% | — | 2.38/2.46 | 0.6/27.7 |
+
+Nguyên nhân thất bại (đếm, gán tự động theo `LABEL_RULES.md`):
+| Phương pháp | Ô | L | merge | seg_miss | grasp_point | timing | calib | slip | collision | other |
+|---|---|---|---|---|---|---|---|---|---|---|
+| ORACLE | train_C2 | 0.5 | 0 | 0 | 2 | 1 | 0 | 12 | 4 | 0 |
+| ORACLE | train_C3 | 0.5 | 0 | 0 | 3 | 2 | 0 | 10 | 10 | 0 |
+
+Chặn dưới/trên: ORACLE train_C2 L0.5 = 68% (n=60), ORACLE train_C3 L0.5 = 58% (n=60)
+Độ lặp lại: chưa đo (dùng --repeat hoặc --reps ≥ 2)
+Tốc độ: 58 giây thật/lượt (trung bình các nhóm) · lượt không hợp lệ: 0/120
+
+2026-11-06T12:23:33Z [7,050,081ms] [Warning] [carb] Plugin interface for a client: omni.hydratexture.plugin was already released.
+[7050.253s] Simulation App Shutting Down

@@ -1,0 +1,111 @@
+{
+ "trial_id": 52,
+ "method": "TASK_EXPERT",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_place_box_A_02",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box05",
+   "a_mm": -36.2,
+   "b_mm": -204.1,
+   "yaw_deg": 17.2
+  },
+  {
+   "name": "cyl11",
+   "a_mm": -93.4,
+   "b_mm": -221.5,
+   "yaw_deg": 317.1
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "box",
+  "param": "A",
+  "text": "put the box in zone A",
+  "id": "place:box:A",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "box05",
+  "t_success_s": 6.8,
+  "t_detect_s": null,
+  "t_lift_s": 2.9,
+  "details": {
+   "max_lift_mm": 52.4,
+   "max_tilt_deg": 1.4,
+   "final_disp_mm": 58.3,
+   "final_along_mm": 55.9,
+   "final_lateral_mm": 16.4,
+   "final_zone_err_mm": 18.1,
+   "moved_others_mm": {
+    "cyl11": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 7.38,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "place:box:A",
+    "target": "box05",
+    "n_seg": 9
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 6.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box05.a",
+  "box05.b",
+  "box05.z",
+  "box05.yaw",
+  "box05.tilt",
+  "cyl11.a",
+  "cyl11.b",
+  "cyl11.z",
+  "cyl11.yaw",
+  "cyl11.tilt"
+ ],
+ "ms_step_p50": 0.6494079998446978,
+ "ms_step_p95": 80.4633838501104,
+ "n_steps": 370,
+ "wall_s": 30.07,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

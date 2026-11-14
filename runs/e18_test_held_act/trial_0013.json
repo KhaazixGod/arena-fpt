@@ -1,0 +1,130 @@
+{
+ "trial_id": 13,
+ "method": "REMOTE:ACT_I2T",
+ "cell": "test_Theld",
+ "arrangement_id": "test_Theld_place_cyl_B_04",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl09",
+   "a_mm": -30.8,
+   "b_mm": -212.9,
+   "yaw_deg": 357.9
+  },
+  {
+   "name": "l13",
+   "a_mm": 34.3,
+   "b_mm": -224.9,
+   "yaw_deg": 306.4
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "cyl",
+  "param": "B",
+  "text": "put the cyl in zone B",
+  "id": "place:cyl:B",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   -1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "missed_zone",
+  "target": "cyl09",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 27.3,
+   "final_along_mm": -22.3,
+   "final_lateral_mm": 15.7,
+   "final_zone_err_mm": 96.8,
+   "moved_others_mm": {
+    "l13": 1.4
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2t_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": "[0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0]"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 1.0,
+  "ik_fail_ticks_lt6s": 1.0,
+  "ik_fail_first_t": 0.98,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [205.7, -51.5, 41.3], 'yaw': 8.5, 'pos_err_mm': 0.0, 'q': [14.4, 1.7, 12.3, 75.9, -154.2], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl09.a",
+  "cyl09.b",
+  "cyl09.z",
+  "cyl09.yaw",
+  "cyl09.tilt",
+  "l13.a",
+  "l13.b",
+  "l13.z",
+  "l13.yaw",
+  "l13.tilt"
+ ],
+ "ms_step_p50": 2.4912939998102956,
+ "ms_step_p95": 3.4589009997034736,
+ "n_steps": 1001,
+ "wall_s": 141.18,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 68.38
+}

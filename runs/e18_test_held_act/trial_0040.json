@@ -1,0 +1,129 @@
+{
+ "trial_id": 40,
+ "method": "REMOTE:ACT_I2T",
+ "cell": "test_Theld",
+ "arrangement_id": "test_Theld_pull_T_down_01",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t16",
+   "a_mm": -67.9,
+   "b_mm": -190.8,
+   "yaw_deg": 11.2
+  },
+  {
+   "name": "cyl08",
+   "a_mm": 20.7,
+   "b_mm": -219.4,
+   "yaw_deg": 279.8
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "T",
+  "param": "down",
+  "text": "drag the T downstream without lifting it",
+  "id": "pull:T:down",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "short",
+  "target": "t16",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.7,
+   "max_tilt_deg": 1.9,
+   "final_disp_mm": 47.3,
+   "final_along_mm": 17.4,
+   "final_lateral_mm": 43.9,
+   "moved_others_mm": {
+    "cyl08": 7.8
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2t_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": "[0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0]"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 20.0,
+  "ik_fail_ticks_lt6s": 20.0,
+  "ik_fail_first_t": 3.0,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [200.0, -27.6, 5.1], 'yaw': 15.5, 'pos_err_mm': 0.0, 'q': [6.9, 2.7, 27.5, 59.8, -154.8], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t16.a",
+  "t16.b",
+  "t16.z",
+  "t16.yaw",
+  "t16.tilt",
+  "cyl08.a",
+  "cyl08.b",
+  "cyl08.z",
+  "cyl08.yaw",
+  "cyl08.tilt"
+ ],
+ "ms_step_p50": 2.609973000289756,
+ "ms_step_p95": 4.864887999247003,
+ "n_steps": 1001,
+ "wall_s": 142.66,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 67.8
+}

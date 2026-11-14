@@ -51,13 +51,13 @@ class GTRecorder:
                     self.success_t, self.success_obj = t, n
             else:
                 self._run[n] = 0.0
-            row += [o["a_mm"], o["b_mm"], o["pos_mm"][2], o["yaw_deg"]]
+            row += [o["a_mm"], o["b_mm"], o["pos_mm"][2], o["yaw_deg"], o.get("tilt_deg", 0.0)]
         self.rows.append(row)
 
     def columns(self) -> List[str]:
         c = ["t", "belt_s_gt", "tcp_x", "tcp_y", "tcp_z", "jaw_yaw", "grip_pos"]
         for n in self.names:
-            c += [f"{n}.a", f"{n}.b", f"{n}.z", f"{n}.yaw"]
+            c += [f"{n}.a", f"{n}.b", f"{n}.z", f"{n}.yaw", f"{n}.tilt"]          # .tilt added for E18 (11/11); every reader indexes columns by name
         return c
 
     def array(self) -> np.ndarray:

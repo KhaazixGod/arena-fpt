@@ -1,0 +1,110 @@
+{
+ "trial_id": 118,
+ "method": "TASK_EXPERT",
+ "cell": "test_Theld",
+ "arrangement_id": "test_Theld_pull_ring_robot_10",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -49.8,
+   "b_mm": -237.6,
+   "yaw_deg": 144.6
+  },
+  {
+   "name": "l14",
+   "a_mm": 26.0,
+   "b_mm": -206.8,
+   "yaw_deg": 45.7
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "ring",
+  "param": "robot",
+  "text": "drag the ring toward the robot without lifting it",
+  "id": "pull:ring:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "ring20",
+  "t_success_s": 5.1,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.7,
+   "max_tilt_deg": 1.6,
+   "final_disp_mm": 52.4,
+   "final_along_mm": 52.2,
+   "final_lateral_mm": 3.7,
+   "moved_others_mm": {
+    "l14": 0.4
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.68,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:ring:robot",
+    "target": "ring20",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "l14.a",
+  "l14.b",
+  "l14.z",
+  "l14.yaw",
+  "l14.tilt"
+ ],
+ "ms_step_p50": 0.5618670002149884,
+ "ms_step_p95": 1.6509392014995683,
+ "n_steps": 285,
+ "wall_s": 15.95,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

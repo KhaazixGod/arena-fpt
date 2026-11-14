@@ -1,0 +1,56 @@
+A 14:05:23 g2_c2_i2s1000 attempt 1, have 0/60
+B 14:06:23 g2_c2_i2s2000 attempt 1, have 0/60
+A 14:10:53 g2_c2_i2s1000 stalled 330s, killing 1581303
+A 14:11:13 g2_c2_i2s1000 run_arena exit 0 now 0/60
+A 14:11:18 g2_c2_i2s1000 attempt 2, have 0/60
+B 16:43:24 g2_c2_i2s2000 run_arena exit 0 now 60/60
+B 16:43:29 g2_c2_i2s2000 complete (60/60 valid)
+B 16:43:29 g2_c2_oracle attempt 1, have 0/60
+A 17:11:19 g2_c2_i2s1000 run_arena exit 0 now 60/60
+A 17:11:24 g2_c2_i2s1000 complete (60/60 valid)
+A 17:11:24 g2_c0_i2s1000 attempt 1, have 0/30
+B 17:11:59 g2_c2_oracle run_arena exit 0 now 60/60
+B 17:12:04 g2_c2_oracle complete (60/60 valid)
+B 17:12:04 g2_c0_oracle attempt 1, have 0/30
+B 17:26:34 g2_c0_oracle run_arena exit 0 now 30/30
+B 17:26:39 g2_c0_oracle complete (30/30 valid)
+B 17:26:39 g2_c3_oracle attempt 1, have 0/30
+B 17:41:40 g2_c3_oracle run_arena exit 0 now 30/30
+B 17:41:45 g2_c3_oracle complete (30/30 valid)
+A 18:25:55 g2_c0_i2s1000 run_arena exit 0 now 30/30
+A 18:26:00 g2_c0_i2s1000 complete (30/30 valid)
+A 18:26:00 g2_c3_i2s1000 attempt 1, have 0/30
+A 19:36:31 g2_c3_i2s1000 run_arena exit 0 now 30/30
+A 19:36:36 g2_c3_i2s1000 complete (30/30 valid)
+A 19:36:36 g2_c2_cl0 attempt 1, have 0/60
+A 20:21:06 g2_c2_cl0 run_arena exit 0 now 60/60
+A 20:21:11 g2_c2_cl0 complete (60/60 valid)
+A 20:21:11 g2_c0_cl0 attempt 1, have 0/30
+A 20:43:41 g2_c0_cl0 run_arena exit 0 now 30/30
+A 20:43:46 g2_c0_cl0 complete (30/30 valid)
+A 20:43:46 g2_c3_cl0 attempt 1, have 0/30
+A 21:08:17 g2_c3_cl0 run_arena exit 0 now 30/30
+A 21:08:22 g2_c3_cl0 complete (30/30 valid)
+test_C2 L0.5, 60 arrangements valid for all four methods (pre-registered n = 60)
+  I2_s1000  21/60 = 35% [24, 48]
+  I2_s2000  18/60 = 30% [20, 43]
+  CL0       22/60 = 37% [26, 49]
+  ORACLE    28/60 = 47% [35, 59]
+  seed 1000: ACT_I2 35% vs CL0 37%  gap -1.7 pts  I2-only/CL0-only 8/9  McNemar p = 1.0000
+  seed 2000: ACT_I2 30% vs CL0 37%  gap -6.7 pts  I2-only/CL0-only 7/11  McNemar p = 0.4807
+
+(a) seed 1000: gap >= +15, p <= 0.05, SR >= 60%      -> FAIL
+(b) seed 2000: gap >= +15, SR >= 60% (point estimate) -> FAIL
+RESULT: NO-GO -> report as is and move to direction 4; do not change thresholds, policy or seed
+note: ORACLE only 47% (< 70%): the cell is limited by geometry; rule still applied as written
+
+By hard type of the target object (descriptive):
+  concave   I2_s1000: 5/5  CL0: 5/21
+  lowcon    I2_s1000: 2/2  CL0: 0/6
+  no target I2_s1000: 0/39  CL0: 0/0
+  ordinary  I2_s1000: 9/9  CL0: 10/18
+  thin      I2_s1000: 5/5  CL0: 7/15
+
+Descriptive cells (n = 30, L0.5):
+  test_C0: I2_s1000 9/30 = 30% [17, 48] | CL0 10/30 = 33% [19, 51] | ORACLE 18/30 = 60% [42, 75]
+  test_C3: I2_s1000 14/30 = 47% [30, 64] | CL0 9/30 = 30% [17, 48] | ORACLE 18/30 = 60% [42, 75]

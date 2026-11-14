@@ -1,0 +1,133 @@
+{
+ "trial_id": 48,
+ "method": "REMOTE:ACT_I2_R10",
+ "cell": "dev_C3",
+ "arrangement_id": "dev_C3_005",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl22",
+   "a_mm": -181.5,
+   "b_mm": -200.7,
+   "yaw_deg": 259.2
+  },
+  {
+   "name": "l23",
+   "a_mm": -226.4,
+   "b_mm": -190.3,
+   "yaw_deg": 344.6
+  },
+  {
+   "name": "box21",
+   "a_mm": -280.2,
+   "b_mm": -205.4,
+   "yaw_deg": 227.5
+  },
+  {
+   "name": "box25",
+   "a_mm": -315.4,
+   "b_mm": -179.0,
+   "yaw_deg": 184.2
+  },
+  {
+   "name": "cyl26",
+   "a_mm": -150.0,
+   "b_mm": -193.0,
+   "yaw_deg": 97.9
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl22": 13.0,
+    "l23": 4.2,
+    "box21": 49.8,
+    "box25": 182.8,
+    "cyl26": 15.1
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s1000/checkpoints/last/pretrained_model",
+    "replan": 10
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 60.0,
+  "ik_fail_ticks": 236.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 13.76,
+  "ik_fail_first": "{'p': [183.5, 207.3, 25.9], 'yaw': -77.2, 'pos_err_mm': 0.0, 'q': [-58.4, 48.8, -53.1, 94.3, -132.9], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "box25.a",
+  "box25.b",
+  "box25.z",
+  "box25.yaw",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw"
+ ],
+ "ms_step_p50": 3.1324600568041205,
+ "ms_step_p95": 86.4747460000217,
+ "n_steps": 1001,
+ "wall_s": 166.16,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 75.98
+}

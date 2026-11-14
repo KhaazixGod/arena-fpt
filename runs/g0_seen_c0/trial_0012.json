@@ -1,0 +1,141 @@
+{
+ "trial_id": 12,
+ "method": "CL0",
+ "cell": "seen_C0",
+ "arrangement_id": "seen_C0_013",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl10",
+   "a_mm": -150.0,
+   "b_mm": -227.8,
+   "yaw_deg": 25.1
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "other",
+  "target": "cyl10",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl10": 0.0
+   },
+   "max_lift_target_mm": 0.0,
+   "select_err_mm": 6.6,
+   "estimate_err_mm": 7.1
+  }
+ },
+ "outcome": "ik_fail",
+ "finished": true,
+ "t_end_s": 6.78,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.36,
+   "DESCEND"
+  ],
+  [
+   4.68,
+   "RELEASE"
+  ],
+  [
+   5.28,
+   "RETURN"
+  ],
+  [
+   6.78,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -143.5,
+    "b": -226.5,
+    "theta": 98.59704310003535,
+    "width": 36.0,
+    "std": 0.23570226039551584
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.64,
+   "name": "freeze",
+   "data": {
+    "est": "(-143.05979347975762, -226.5, 96.52889274287551)"
+   }
+  },
+  {
+   "t": 1.36,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 4.68,
+   "name": "abort",
+   "data": {
+    "reason": "ik_fail"
+   }
+  },
+  {
+   "t": 4.68,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 5.28,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 6.78,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 38.0,
+  "reject_wide": 0.0,
+  "reject_other": 34.0,
+  "n_ok_dets": 15.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl10.a",
+  "cyl10.b",
+  "cyl10.z",
+  "cyl10.yaw"
+ ],
+ "ms_step_p50": 13.880469487048686,
+ "ms_step_p95": 31.969564728206063,
+ "n_steps": 340,
+ "wall_s": 35.47,
+ "method_exception": null,
+ "renders": 203,
+ "render_wall_s": 14.05
+}

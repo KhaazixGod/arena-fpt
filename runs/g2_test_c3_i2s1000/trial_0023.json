@@ -1,0 +1,134 @@
+{
+ "trial_id": 23,
+ "method": "REMOTE:ACT_I2_S1000",
+ "cell": "test_C3",
+ "arrangement_id": "test_C3_024",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t34",
+   "a_mm": -340.6,
+   "b_mm": -192.8,
+   "yaw_deg": 263.4
+  },
+  {
+   "name": "ring28",
+   "a_mm": -382.20000000000005,
+   "b_mm": -217.9,
+   "yaw_deg": 97.9
+  },
+  {
+   "name": "box35",
+   "a_mm": -279.90000000000003,
+   "b_mm": -197.4,
+   "yaw_deg": 272.5
+  },
+  {
+   "name": "plate30",
+   "a_mm": -215.00000000000003,
+   "b_mm": -212.4,
+   "yaw_deg": 189.9
+  },
+  {
+   "name": "plate31",
+   "a_mm": -150.00000000000003,
+   "b_mm": -201.0,
+   "yaw_deg": 240.4
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "t34": 3.3,
+    "ring28": 0.5,
+    "box35": 0.0,
+    "plate30": 0.0,
+    "plate31": 19.1
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s1000/checkpoints/last/pretrained_model",
+    "replan": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 684.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 6.08,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [176.0, 201.8, 61.1], 'yaw': -2.3, 'pos_err_mm': 0.01, 'q': [-60.3, 22.4, -24.5, 92.2, -59.8], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "ring28.a",
+  "ring28.b",
+  "ring28.z",
+  "ring28.yaw",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "plate30.a",
+  "plate30.b",
+  "plate30.z",
+  "plate30.yaw",
+  "plate31.a",
+  "plate31.b",
+  "plate31.z",
+  "plate31.yaw"
+ ],
+ "ms_step_p50": 64.15611202828586,
+ "ms_step_p95": 70.3927839640528,
+ "n_steps": 1001,
+ "wall_s": 132.93,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 40.77
+}

@@ -1,0 +1,111 @@
+{
+ "trial_id": 48,
+ "method": "TASK_EXPERT",
+ "cell": "pilot_T",
+ "arrangement_id": "pilot_T_place_cyl_B_04",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl12",
+   "a_mm": -29.8,
+   "b_mm": -199.9,
+   "yaw_deg": 329.0
+  },
+  {
+   "name": "box05",
+   "a_mm": 23.5,
+   "b_mm": -198.3,
+   "yaw_deg": 31.7
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "cyl",
+  "param": "B",
+  "text": "put the cyl in zone B",
+  "id": "place:cyl:B",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   -1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "cyl12",
+  "t_success_s": 6.2,
+  "t_detect_s": null,
+  "t_lift_s": 2.32,
+  "details": {
+   "max_lift_mm": 34.7,
+   "max_tilt_deg": 26.0,
+   "final_disp_mm": 65.4,
+   "final_along_mm": 63.8,
+   "final_lateral_mm": 14.2,
+   "final_zone_err_mm": 14.5,
+   "moved_others_mm": {
+    "box05": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 6.8,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "place:cyl:B",
+    "target": "cyl12",
+    "n_seg": 9
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl12.a",
+  "cyl12.b",
+  "cyl12.z",
+  "cyl12.yaw",
+  "cyl12.tilt",
+  "box05.a",
+  "box05.b",
+  "box05.z",
+  "box05.yaw",
+  "box05.tilt"
+ ],
+ "ms_step_p50": 0.7018320029601455,
+ "ms_step_p95": 2.008641022257507,
+ "n_steps": 341,
+ "wall_s": 26.92,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

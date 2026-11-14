@@ -1,0 +1,23 @@
+test_C2 L0.5, 60 arrangements valid for all four methods (pre-registered n = 60)
+  I2_s1000  21/60 = 35% [24, 48]
+  I2_s2000  18/60 = 30% [20, 43]
+  CL0       22/60 = 37% [26, 49]
+  ORACLE    28/60 = 47% [35, 59]
+  seed 1000: ACT_I2 35% vs CL0 37%  gap -1.7 pts  I2-only/CL0-only 8/9  McNemar p = 1.0000
+  seed 2000: ACT_I2 30% vs CL0 37%  gap -6.7 pts  I2-only/CL0-only 7/11  McNemar p = 0.4807
+
+(a) seed 1000: gap >= +15, p <= 0.05, SR >= 60%      -> FAIL
+(b) seed 2000: gap >= +15, SR >= 60% (point estimate) -> FAIL
+RESULT: NO-GO -> report as is and move to direction 4; do not change thresholds, policy or seed
+note: ORACLE only 47% (< 70%): the cell is limited by geometry; rule still applied as written
+
+By hard type of the target object (descriptive):
+  concave   I2_s1000: 5/5  CL0: 5/21
+  lowcon    I2_s1000: 2/2  CL0: 0/6
+  no target I2_s1000: 0/39  CL0: 0/0
+  ordinary  I2_s1000: 9/9  CL0: 10/18
+  thin      I2_s1000: 5/5  CL0: 7/15
+
+Descriptive cells (n = 30, L0.5):
+  test_C0: I2_s1000 9/30 = 30% [17, 48] | CL0 10/30 = 33% [19, 51] | ORACLE 18/30 = 60% [42, 75]
+  test_C3: I2_s1000 14/30 = 47% [30, 64] | CL0 9/30 = 30% [17, 48] | ORACLE 18/30 = 60% [42, 75]

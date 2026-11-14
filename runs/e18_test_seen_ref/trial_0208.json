@@ -1,0 +1,110 @@
+{
+ "trial_id": 208,
+ "method": "TASK_EXPERT",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pull_L_robot_05",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l13",
+   "a_mm": -28.6,
+   "b_mm": -234.0,
+   "yaw_deg": 267.8
+  },
+  {
+   "name": "cyl11",
+   "a_mm": -85.6,
+   "b_mm": -228.3,
+   "yaw_deg": 349.4
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "L",
+  "param": "robot",
+  "text": "drag the L toward the robot without lifting it",
+  "id": "pull:L:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "l13",
+  "t_success_s": 4.82,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.1,
+   "max_tilt_deg": 0.1,
+   "final_disp_mm": 47.4,
+   "final_along_mm": 45.8,
+   "final_lateral_mm": 12.3,
+   "moved_others_mm": {
+    "cyl11": 5.4
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.4,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:L:robot",
+    "target": "l13",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l13.a",
+  "l13.b",
+  "l13.z",
+  "l13.yaw",
+  "l13.tilt",
+  "cyl11.a",
+  "cyl11.b",
+  "cyl11.z",
+  "cyl11.yaw",
+  "cyl11.tilt"
+ ],
+ "ms_step_p50": 0.5943479991401546,
+ "ms_step_p95": 1.8349319998378633,
+ "n_steps": 271,
+ "wall_s": 19.66,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

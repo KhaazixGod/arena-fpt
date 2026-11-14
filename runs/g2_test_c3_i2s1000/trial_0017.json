@@ -1,0 +1,123 @@
+{
+ "trial_id": 17,
+ "method": "REMOTE:ACT_I2_S1000",
+ "cell": "test_C3",
+ "arrangement_id": "test_C3_018",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring28",
+   "a_mm": -238.7,
+   "b_mm": -229.2,
+   "yaw_deg": 44.5
+  },
+  {
+   "name": "box35",
+   "a_mm": -281.2,
+   "b_mm": -195.5,
+   "yaw_deg": 165.4
+  },
+  {
+   "name": "cyl33",
+   "a_mm": -207.6,
+   "b_mm": -197.9,
+   "yaw_deg": 69.1
+  },
+  {
+   "name": "u27",
+   "a_mm": -150.0,
+   "b_mm": -191.2,
+   "yaw_deg": 51.5
+  }
+ ],
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "ring28": 0.6,
+    "box35": 0.0,
+    "cyl33": 0.4,
+    "u27": 10.8
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s1000/checkpoints/last/pretrained_model",
+    "replan": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 689.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 6.04,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [176.6, 202.6, 60.4], 'yaw': -1.4, 'pos_err_mm': 0.01, 'q': [-60.2, 22.8, -24.9, 92.1, -58.8], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring28.a",
+  "ring28.b",
+  "ring28.z",
+  "ring28.yaw",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "cyl33.a",
+  "cyl33.b",
+  "cyl33.z",
+  "cyl33.yaw",
+  "u27.a",
+  "u27.b",
+  "u27.z",
+  "u27.yaw"
+ ],
+ "ms_step_p50": 65.57040405459702,
+ "ms_step_p95": 78.86000303551555,
+ "n_steps": 1001,
+ "wall_s": 145.79,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 46.74
+}

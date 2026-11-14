@@ -1,0 +1,156 @@
+
+== NOOP
+    pick:box           0/5  {'no_contact': 5}
+    pick:cyl           0/5  {'no_contact': 5}
+    pick:L             0/5  {'no_contact': 5}
+    pick:T             0/5  {'no_contact': 5}
+  H pick:mug           0/10  {'no_contact': 10}
+    pick:ring          0/5  {'no_contact': 5}
+    place:box:A        0/5  {'no_contact': 5}
+    place:box:B        0/5  {'no_contact': 5}
+    place:cyl:A        0/5  {'no_contact': 5}
+  H place:cyl:B        0/10  {'no_contact': 10}
+  H place:L:A          0/10  {'no_contact': 10}
+    place:L:B          0/5  {'no_contact': 5}
+    place:T:A          0/5  {'no_contact': 5}
+    place:T:B          0/5  {'no_contact': 5}
+    place:mug:A        0/5  {'no_contact': 5}
+    place:mug:B        0/5  {'no_contact': 5}
+    place:ring:A       0/5  {'no_contact': 5}
+    place:ring:B       0/5  {'no_contact': 5}
+    pull:box:robot     0/5  {'no_contact': 5}
+    pull:box:down      0/5  {'no_contact': 5}
+    pull:box:up        0/5  {'no_contact': 5}
+    pull:cyl:robot     0/5  {'no_contact': 5}
+    pull:cyl:down      0/5  {'no_contact': 5}
+  H pull:cyl:up        0/10  {'no_contact': 10}
+    pull:L:robot       0/5  {'no_contact': 5}
+    pull:L:down        0/5  {'no_contact': 5}
+    pull:T:robot       0/5  {'no_contact': 5}
+  H pull:T:down        0/10  {'no_contact': 10}
+    pull:T:up          0/5  {'no_contact': 5}
+    pull:mug:robot     0/5  {'no_contact': 5}
+  H pull:ring:robot    0/10  {'no_contact': 10}
+    pull:ring:down     0/5  {'no_contact': 5}
+  H pull:ring:up       0/10  {'no_contact': 10}
+    topple:box:+a      0/5  {'no_contact': 5}
+  H topple:box:-a      0/10  {'no_contact': 10}
+    topple:box:+b      0/5  {'no_contact': 5}
+    topple:cyl:+a      0/5  {'no_contact': 5}
+    topple:cyl:-a      0/5  {'no_contact': 5}
+    topple:cyl:+b      0/5  {'no_contact': 5}
+    topple:mug:+b      0/5  {'no_contact': 5}
+  family pick    heldout    0/10  =   0.0% [   0,   28]
+  family pick    train      0/25  =   0.0% [   0,   13]
+  family place   heldout    0/20  =   0.0% [   0,   16]
+  family place   train      0/50  =   0.0% [   0,    7]
+  family pull    heldout    0/40  =   0.0% [   0,    9]
+  family pull    train      0/55  =   0.0% [   0,    7]
+  family topple  heldout    0/10  =   0.0% [   0,   28]
+  family topple  train      0/30  =   0.0% [   0,   11]
+
+== REMOTE:ACT_I2T
+    pick:box           4/5  {'other': 1}
+    pick:cyl           5/5  
+    pick:L             5/5  
+    pick:T             4/5  {'dropped': 1}
+  H pick:mug           9/10  {'other': 1}
+    pick:ring          4/5  {'dropped': 1}
+    place:box:A        5/5  
+    place:box:B        5/5  
+    place:cyl:A        3/5  {'knocked_over': 1, 'missed_zone': 1}
+  H place:cyl:B        5/10  {'missed_zone': 2, 'knocked_over': 2, 'not_released': 1}
+  H place:L:A          10/10  
+    place:L:B          5/5  
+    place:T:A          1/5  {'missed_zone': 4}
+    place:T:B          1/5  {'missed_zone': 3, 'knocked_over': 1}
+    place:mug:A        4/5  {'missed_zone': 1}
+    place:mug:B        5/5  
+    place:ring:A       3/5  {'missed_zone': 2}
+    place:ring:B       4/5  {'knocked_over': 1}
+    pull:box:robot     2/5  {'short': 1, 'knocked_over': 2}
+    pull:box:down      4/5  {'knocked_over': 1}
+    pull:box:up        2/5  {'short': 3}
+    pull:cyl:robot     2/5  {'short': 2, 'lifted': 1}
+    pull:cyl:down      2/5  {'short': 3}
+  H pull:cyl:up        5/10  {'not_released': 2, 'short': 3}
+    pull:L:robot       4/5  {'short': 1}
+    pull:L:down        4/5  {'short': 1}
+    pull:T:robot       4/5  {'lifted': 1}
+  H pull:T:down        5/10  {'short': 5}
+    pull:T:up          3/5  {'short': 2}
+    pull:mug:robot     4/5  {'knocked_over': 1}
+  H pull:ring:robot    9/10  {'knocked_over': 1}
+    pull:ring:down     3/5  {'knocked_over': 1, 'short': 1}
+  H pull:ring:up       8/10  {'short': 2}
+    topple:box:+a      5/5  
+  H topple:box:-a      7/10  {'not_toppled': 1, 'no_contact': 2}
+    topple:box:+b      5/5  
+    topple:cyl:+a      5/5  
+    topple:cyl:-a      5/5  
+    topple:cyl:+b      5/5  
+    topple:mug:+b      5/5  
+  family pick    heldout    9/10  =  90.0% [  60,   98]
+  family pick    train     22/25  =  88.0% [  70,   96]
+  family place   heldout   15/20  =  75.0% [  53,   89]
+  family place   train     36/50  =  72.0% [  58,   83]
+  family pull    heldout   27/40  =  67.5% [  52,   80]
+  family pull    train     34/55  =  61.8% [  49,   73]
+  family topple  heldout    7/10  =  70.0% [  40,   89]
+  family topple  train     30/30  = 100.0% [  89,  100]
+
+== TASK_EXPERT
+    pick:box           5/5  
+    pick:cyl           5/5  
+    pick:L             4/5  {'dropped': 1}
+    pick:T             4/5  {'no_contact': 1}
+  H pick:mug           10/10  
+    pick:ring          5/5  
+    place:box:A        4/5  {'no_contact': 1}
+    place:box:B        5/5  
+    place:cyl:A        5/5  
+  H place:cyl:B        10/10  
+  H place:L:A          8/10  {'missed_zone': 1, 'no_contact': 1}
+    place:L:B          5/5  
+    place:T:A          5/5  
+    place:T:B          5/5  
+    place:mug:A        5/5  
+    place:mug:B        5/5  
+    place:ring:A       5/5  
+    place:ring:B       5/5  
+    pull:box:robot     4/5  {'short': 1}
+    pull:box:down      5/5  
+    pull:box:up        4/5  {'short': 1}
+    pull:cyl:robot     4/5  {'short': 1}
+    pull:cyl:down      4/5  {'short': 1}
+  H pull:cyl:up        7/10  {'short': 3}
+    pull:L:robot       5/5  
+    pull:L:down        5/5  
+    pull:T:robot       3/5  {'short': 2}
+  H pull:T:down        9/10  {'short': 1}
+    pull:T:up          2/5  {'no_contact': 1, 'short': 2}
+    pull:mug:robot     4/5  {'short': 1}
+  H pull:ring:robot    10/10  
+    pull:ring:down     4/5  {'short': 1}
+  H pull:ring:up       10/10  
+    topple:box:+a      5/5  
+  H topple:box:-a      10/10  
+    topple:box:+b      5/5  
+    topple:cyl:+a      5/5  
+    topple:cyl:-a      5/5  
+    topple:cyl:+b      5/5  
+    topple:mug:+b      3/5  {'wrong_direction': 1, 'not_toppled': 1}
+  family pick    heldout   10/10  = 100.0% [  72,  100]
+  family pick    train     23/25  =  92.0% [  75,   98]
+  family place   heldout   18/20  =  90.0% [  70,   97]
+  family place   train     49/50  =  98.0% [  90,  100]
+  family pull    heldout   36/40  =  90.0% [  77,   96]
+  family pull    train     44/55  =  80.0% [  68,   88]
+  family topple  heldout   10/10  = 100.0% [  72,  100]
+  family topple  train     28/30  =  93.3% [  79,   98]
+
+== E18 decision for REMOTE:ACT_I2T
+  trained tasks  122/160 =  76.2% [  69,   82]   per family >= 30%: True
+  held-out tasks  58/80  =  72.5% [  62,   81]   NOOP held-out 0/80; one-sided binomial vs p0 = 0.010: p = 2.18e-97
+  H-skills (trained >= 50% and every family >= 30%): SUPPORTED
+  H-compose (held-out >= 30% and p <= 0.05):        SUPPORTED

@@ -1,0 +1,110 @@
+{
+ "trial_id": 86,
+ "method": "TASK_EXPERT",
+ "cell": "test_Theld",
+ "arrangement_id": "test_Theld_pull_T_down_04",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t17",
+   "a_mm": -59.6,
+   "b_mm": -213.2,
+   "yaw_deg": 102.1
+  },
+  {
+   "name": "box06",
+   "a_mm": 27.6,
+   "b_mm": -178.0,
+   "yaw_deg": 280.1
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "T",
+  "param": "down",
+  "text": "drag the T downstream without lifting it",
+  "id": "pull:T:down",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "short",
+  "target": "t17",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": 3.44,
+  "details": {
+   "max_lift_mm": 9.5,
+   "max_tilt_deg": 3.3,
+   "final_disp_mm": 55.5,
+   "final_along_mm": 26.5,
+   "final_lateral_mm": 48.8,
+   "moved_others_mm": {
+    "box06": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 6.06,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:T:down",
+    "target": "t17",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 8.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t17.a",
+  "t17.b",
+  "t17.z",
+  "t17.yaw",
+  "t17.tilt",
+  "box06.a",
+  "box06.b",
+  "box06.z",
+  "box06.yaw",
+  "box06.tilt"
+ ],
+ "ms_step_p50": 0.5677020017174073,
+ "ms_step_p95": 65.85459600173635,
+ "n_steps": 304,
+ "wall_s": 18.37,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

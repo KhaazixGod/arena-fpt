@@ -1,0 +1,38 @@
+
+== TASK_EXPERT
+    pick:box           25/25  
+    pick:cyl           25/25  
+    pick:L             18/25  {'dropped': 7}
+    pick:T             25/25  
+    pick:ring          25/25  
+    place:box:A        25/25  
+    place:box:B        25/25  
+    place:cyl:A        21/25  {'knocked_over': 4}
+    place:L:B          25/25  
+    place:T:A          23/25  {'no_contact': 1, 'missed_zone': 1}
+    place:T:B          25/25  
+    place:mug:A        21/25  {'no_contact': 1, 'missed_zone': 3}
+    place:mug:B        25/25  
+    place:ring:A       20/25  {'knocked_over': 5}
+    place:ring:B       25/25  
+    pull:box:robot     25/25  
+    pull:box:down      24/25  {'short': 1}
+    pull:box:up        19/25  {'short': 5, 'knocked_over': 1}
+    pull:cyl:robot     23/25  {'short': 2}
+    pull:cyl:down      21/25  {'short': 4}
+    pull:L:robot       20/25  {'no_contact': 2, 'short': 3}
+    pull:L:down        21/25  {'short': 1, 'no_contact': 3}
+    pull:T:robot       23/25  {'no_contact': 1, 'short': 1}
+    pull:T:up          14/25  {'short': 11}
+    pull:mug:robot     19/25  {'short': 5, 'no_contact': 1}
+    pull:ring:down     23/25  {'short': 2}
+    topple:box:+a      25/25  
+    topple:box:+b      24/25  {'wrong_direction': 1}
+    topple:cyl:+a      25/25  
+    topple:cyl:-a      23/25  {'not_toppled': 2}
+    topple:cyl:+b      25/25  
+    topple:mug:+b      17/25  {'wrong_direction': 3, 'not_toppled': 5}
+  family pick    train    118/125 =  94.4% [  89,   97]
+  family place   train    235/250 =  94.0% [  90,   96]
+  family pull    train    232/275 =  84.4% [  80,   88]
+  family topple  train    139/150 =  92.7% [  87,   96]

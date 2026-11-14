@@ -1,0 +1,111 @@
+{
+ "trial_id": 50,
+ "method": "TASK_EXPERT",
+ "cell": "test_Theld",
+ "arrangement_id": "test_Theld_place_L_A_06",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l15",
+   "a_mm": -25.1,
+   "b_mm": -193.3,
+   "yaw_deg": 208.8
+  },
+  {
+   "name": "box05",
+   "a_mm": -64.1,
+   "b_mm": -237.4,
+   "yaw_deg": 120.6
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "L",
+  "param": "A",
+  "text": "put the L in zone A",
+  "id": "place:L:A",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "missed_zone",
+  "target": "l15",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": 2.84,
+  "details": {
+   "max_lift_mm": 45.7,
+   "max_tilt_deg": 7.4,
+   "final_disp_mm": 58.0,
+   "final_along_mm": 54.6,
+   "final_lateral_mm": 19.7,
+   "final_zone_err_mm": 31.7,
+   "moved_others_mm": {
+    "box05": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 7.12,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "place:L:A",
+    "target": "l15",
+    "n_seg": 9
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 5.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l15.a",
+  "l15.b",
+  "l15.z",
+  "l15.yaw",
+  "l15.tilt",
+  "box05.a",
+  "box05.b",
+  "box05.z",
+  "box05.yaw",
+  "box05.tilt"
+ ],
+ "ms_step_p50": 0.5779490020358935,
+ "ms_step_p95": 65.05858300079126,
+ "n_steps": 357,
+ "wall_s": 20.29,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

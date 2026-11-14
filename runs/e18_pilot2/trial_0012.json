@@ -1,0 +1,110 @@
+{
+ "trial_id": 12,
+ "method": "TASK_EXPERT",
+ "cell": "pilot_T2",
+ "arrangement_id": "pilot_T2_pull_L_up_03",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l15",
+   "a_mm": -26.1,
+   "b_mm": -211.3,
+   "yaw_deg": 311.6
+  },
+  {
+   "name": "cyl11",
+   "a_mm": -112.5,
+   "b_mm": -240.2,
+   "yaw_deg": 263.9
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "L",
+  "param": "up",
+  "text": "drag the L upstream without lifting it",
+  "id": "pull:L:up",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   -1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "short",
+  "target": "l15",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.4,
+   "max_tilt_deg": 0.8,
+   "final_disp_mm": 33.6,
+   "final_along_mm": 32.7,
+   "final_lateral_mm": 8.0,
+   "moved_others_mm": {
+    "cyl11": 41.4
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.46,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:L:up",
+    "target": "l15",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l15.a",
+  "l15.b",
+  "l15.z",
+  "l15.yaw",
+  "l15.tilt",
+  "cyl11.a",
+  "cyl11.b",
+  "cyl11.z",
+  "cyl11.yaw",
+  "cyl11.tilt"
+ ],
+ "ms_step_p50": 0.5850929883308709,
+ "ms_step_p95": 1.8383387301582836,
+ "n_steps": 274,
+ "wall_s": 15.85,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

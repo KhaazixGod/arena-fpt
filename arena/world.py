@@ -226,7 +226,9 @@ class IsaacWorld:
         out = {}
         for n, i in self._obj_i.items():
             p = tf[i, :3] * 1000.0
+            qx, qy = float(tf[i, 3]), float(tf[i, 4])
             out[n] = {"pos_mm": p, "yaw_deg": _yaw_from_quat(tf[i, 3:7]),
+                      "tilt_deg": math.degrees(math.acos(max(-1.0, min(1.0, 1.0 - 2.0 * (qx * qx + qy * qy))))),   # angle of the body z axis from vertical (E18 topple)
                       "a_mm": float(p[0] * self.u[0] + p[1] * self.u[1]), "b_mm": float(p[0] * self.v[0] + p[1] * self.v[1])}
         return out
 

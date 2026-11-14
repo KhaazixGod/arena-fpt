@@ -116,6 +116,8 @@ def serve(make_method, port: int, name: str, authkey: bytes = b"arena") -> None:
                 op = msg["op"]
                 if op == "reset":
                     st = msg["state"]
+                    if msg.get("task") is not None and hasattr(m, "set_task"):      # E18: the instruction of this trial
+                        m.set_task(msg["task"])
                     m.reset(msg["t0"], RobotState(np.asarray(st["q_deg"], float), float(st["gripper"]), float(st["t"])) if st else None)
                     n_ev = 0
                     belt = BeltView()
@@ -162,7 +164,13 @@ def main(argv=None) -> int:
     mod, fn = a.factory.split(":", 1)
     make = getattr(importlib.import_module(mod), fn)
     while True:
-        serve(make, a.port, a.name, a.authkey.encode())
+        try:
+            serve(make, a.port, a.name, a.authkey.encode())
+        except (EOFError, ConnectionError, OSError) as e:      # the arena died mid-trial (Isaac out of GPU memory, crash): serve the next run instead of exiting
+            print(f"[remote_server] {a.name}: arena disconnected abruptly ({type(e).__name__}); " + ("serving again" if a.repeat else "exiting"), flush=True)
+            if not a.repeat:
+                raise
+            continue
         if not a.repeat:
             return 0
 

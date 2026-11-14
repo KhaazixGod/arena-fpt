@@ -1,0 +1,118 @@
+{
+ "trial_id": 207,
+ "method": "NOOP",
+ "cell": "test_Tseen",
+ "arrangement_id": "test_Tseen_pull_L_robot_04",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l14",
+   "a_mm": -43.7,
+   "b_mm": -232.2,
+   "yaw_deg": 162.7
+  },
+  {
+   "name": "box01",
+   "a_mm": -101.0,
+   "b_mm": -188.6,
+   "yaw_deg": 212.3
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "L",
+  "param": "robot",
+  "text": "drag the L toward the robot without lifting it",
+  "id": "pull:L:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "no_contact",
+  "target": "l14",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": -0.0,
+   "max_tilt_deg": 0.0,
+   "final_disp_mm": 2.9,
+   "final_along_mm": -1.9,
+   "final_lateral_mm": 2.2,
+   "moved_others_mm": {
+    "box01": 0.0
+   }
+  }
+ },
+ "outcome": "noop",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "NOOP"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:NOOP",
+   "data": {}
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l14.a",
+  "l14.b",
+  "l14.z",
+  "l14.yaw",
+  "l14.tilt",
+  "box01.a",
+  "box01.b",
+  "box01.z",
+  "box01.yaw",
+  "box01.tilt"
+ ],
+ "ms_step_p50": 0.004845998773816973,
+ "ms_step_p95": 0.005779002094641328,
+ "n_steps": 1001,
+ "wall_s": 41.71,
+ "method_exception": null,
+ "renders": 0,
+ "render_wall_s": 0.0
+}

@@ -1,0 +1,110 @@
+{
+ "trial_id": 8,
+ "method": "REMOTE:ACT_I2F",
+ "cell": "dev_C2",
+ "arrangement_id": "dev_C2_005",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l23",
+   "a_mm": -150.0,
+   "b_mm": -203.1,
+   "yaw_deg": 337.0
+  },
+  {
+   "name": "box25",
+   "a_mm": -220.0,
+   "b_mm": -185.7,
+   "yaw_deg": 41.5
+  },
+  {
+   "name": "cyl22",
+   "a_mm": -231.0,
+   "b_mm": -233.6,
+   "yaw_deg": 303.6
+  }
+ ],
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "l23",
+  "t_success_s": 4.64,
+  "t_detect_s": null,
+  "t_lift_s": 2.52,
+  "details": {
+   "moved_others_mm": {
+    "box25": 0.1,
+    "cyl22": 0.0
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2f_s1000/checkpoints/last/pretrained_model",
+    "replan": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 520.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 8.16,
+  "ik_fail_first": "{'p': [34.1, -116.9, 60.6], 'yaw': 86.9, 'pos_err_mm': 0.0, 'q': [91.9, -50.5, 48.5, 92.1, 1.6], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.62,
+ "gt_success_obj": "l23",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "box25.a",
+  "box25.b",
+  "box25.z",
+  "box25.yaw",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw"
+ ],
+ "ms_step_p50": 3.7340359995141625,
+ "ms_step_p95": 86.6234569111839,
+ "n_steps": 1001,
+ "wall_s": 159.4,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 60.18
+}

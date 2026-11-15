@@ -40,6 +40,7 @@ Nhật ký chẩn đoán: `PAPER_NOTES.md`.
 - **Xác nhận một lần** trên một sheet không dùng để chỉnh (`train_C3`, L0,5).
 - **`CL0_W`** [người dùng duyệt 15/11, luật 8]: nhận thức của CL0 cộng đúng sửa W1. Đây là baseline mô-đun công bằng: chính sách học được hưởng thầy đã sửa thì baseline mô-đun cũng phải được. CL0 gốc vẫn giữ để nối với G2.
 - **Thời gian:** viết mã 3–4 giờ; mỗi lần kiểm 60 cảnh khoảng 25 phút mỗi làn.
+- **Kết quả 15/11 (`PAPER_NOTES.md` P2): đạt cổng.** `train_C2` L0,5: ORACLE 41/60 → ORACLE_W 49/60 (mất 0, được 8, p = 0,0078); L0: 50 → 52; nhịp giữ lệnh 1055 → 0. Chuỗi qua đêm `scripts/p2p3_chain.sh`: xác nhận `train_C3` + `CL0_W` trên `dev_C2` → chốt tự động → P3 demo → `ACT_W` ×3.
 
 ### P3. Demo mới
 

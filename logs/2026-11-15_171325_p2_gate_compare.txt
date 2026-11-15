@@ -1,0 +1,32 @@
+
+== runs/p2_oraclew2_train_c2_l05  vs  runs/p1_oracle_train_c2_l05   (speed 75.0 mm/s, paired n = 60; valid rows base 60, W1 60)
+  success  base 41/60 = 68.3%   W1 49/60 = 81.7%
+  paired   W1 lost 0, gained 8; exact McNemar p = 0.0078
+  lost:   []
+  gained: ['train_C2_003', 'train_C2_004', 'train_C2_013', 'train_C2_015', 'train_C2_018', 'train_C2_030', 'train_C2_042', 'train_C2_058']
+  base outcomes {'dropped_in_hold': 11, 'picked_hold_complete': 43, 'late': 2, 'ik_fail': 3, 'empty_grasp': 1}
+       fail causes {'slip': 12, 'collision': 4, 'grasp_point': 2, 'timing': 1}
+       trials with >= 10 held ticks: 10; with a held tick at the wrist-roll margin: 13; held ticks total 1055
+  W1   outcomes {'dropped_in_hold': 7, 'picked_hold_complete': 50, 'empty_grasp': 2, 'late': 1}
+       fail causes {'slip': 7, 'timing': 2, 'grasp_point': 2}
+       trials with >= 10 held ticks: 0; with a held tick at the wrist-roll margin: 0; held ticks total 0
+       W1 switched branch in 16 trials: base->W1 success 1->1 6, 0->1 8, 1->0 0, 0->0 2
+       switched: ['train_C2_003', 'train_C2_004', 'train_C2_005', 'train_C2_006', 'train_C2_010', 'train_C2_012', 'train_C2_013', 'train_C2_015', 'train_C2_016', 'train_C2_018', 'train_C2_028', 'train_C2_030', 'train_C2_041', 'train_C2_042', 'train_C2_049', 'train_C2_058']
+       not switched (44): 1->1 35, 0->1 0, 1->0 0, 0->0 9  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 195 ms, max 263 ms
+
+== runs/p2_oraclew2_train_c2_l0  vs  runs/p1_slip_D_l0   (speed 0.0 mm/s, paired n = 60; valid rows base 60, W1 60)
+  success  base 50/60 = 83.3%   W1 52/60 = 86.7%
+  paired   W1 lost 0, gained 2; exact McNemar p = 0.5000
+  lost:   []
+  gained: ['train_C2_006', 'train_C2_030']
+  base outcomes {'picked_hold_complete': 55, 'dropped_in_hold': 4, 'empty_grasp': 1}
+       fail causes {'slip': 6, 'collision': 2, 'grasp_point': 2}
+       trials with >= 10 held ticks: 59; with a held tick at the wrist-roll margin: 0; held ticks total 1519
+  W1   outcomes {'picked_hold_complete': 55, 'dropped_in_hold': 4, 'empty_grasp': 1}
+       fail causes {'slip': 4, 'collision': 2, 'grasp_point': 2}
+       trials with >= 10 held ticks: 59; with a held tick at the wrist-roll margin: 0; held ticks total 1300
+       W1 switched branch in 11 trials: base->W1 success 1->1 8, 0->1 2, 1->0 0, 0->0 1
+       switched: ['train_C2_001', 'train_C2_003', 'train_C2_004', 'train_C2_006', 'train_C2_013', 'train_C2_015', 'train_C2_016', 'train_C2_018', 'train_C2_030', 'train_C2_042', 'train_C2_058']
+       not switched (49): 1->1 42, 0->1 0, 1->0 0, 0->0 7  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 57 ms, max 68 ms

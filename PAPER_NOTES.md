@@ -49,3 +49,11 @@ Tham số lấy từ log sheet không khóa `train_C2` L0,5 (`runs/p1_oracle_tra
 - Môi trường: cài `diffusers==0.38.0` (LeRobot 0.6.1 cần ≥0.38,<0.40) + `regex==2026.9.29`, `importlib_metadata`, `lazy-importer` 0.1.0 (Apache-2.0, chỉ là tiện ích import, không gọi mạng/tiến trình), `zipp` vào **site-packages riêng của `~/venvs/lerobot_data`** (không nâng cấp gói nào; venv `cl0` không đổi). Gỡ: `~/venvs/lerobot_data/bin/pip uninstall diffusers lazy-importer`.
 - Kiểm trên CPU (dữ liệu E6, mô hình thu nhỏ, 3 bước): huấn luyện chạy (loss 1,2–1,3), checkpoint nạp lại bằng `make_pre_post_processors` gốc (bước tương đối được nối lại), kiểm đơn vị bước tương đối (trừ đúng state khung cuối trên x, y, z; yaw/gripper giữ nguyên), suy luận 2 khung → chuỗi (8, 6) tuyệt đối; phương thức DP_I2 với băng/camera giả: 6 kế hoạch trong 1,5 s, lệnh khớp mọi nhịp.
 - Chưa làm: đo tốc độ huấn luyện trên GPU, chọn siêu tham số trên DEV (horizon, n_action_steps, kích thước UNet, số bước khử nhiễu khi suy luận).
+
+### P2 xác nhận trên `train_C3` (sheet không dùng khi thiết kế W1; 15/11 17:43; chuỗi `scripts/p2p3_chain.sh`)
+| `train_C3` L0,5, 60 cảnh ghép cặp | ORACLE (`runs/p2_oracle_train_c3_l05`) | ORACLE_W (`runs/p2_oraclew_train_c3_l05`) | mất / được | McNemar chính xác |
+|---|---|---|---|---|
+| Thành công | 35/60 (58,3%) | **44/60 (73,3%)** | 0 / 9 | p = 0,0039 |
+- Nhịp giữ lệnh 1563 (17 lượt có nhịp ở biên cổ tay) → 72 (0 lượt ở biên cổ tay). W1 đổi nhánh 19 lượt: 9 hỏng → đạt, 8 đạt → đạt, 2 hỏng → hỏng; 41 lượt không đổi nhánh giống hệt bản gốc. Lỗi `collision` 10 → 6, `slip` 10 → 8, `grasp_point` 3 → 0.
+- Còn 2 lượt `ik_fail` (013, 060, ở cả hai bản): khớp gập cổ tay q4 ≈ 91° (biên 92°) khi hạ ở xa và thấp; không phải cổ tay xoay.
+- **Ứng viên W2 (chưa làm, chỉ ghi):** kiểm khả thi lúc chọn vật của CL-0 (`_pick_a_grasp`, `_lift_feasible`) cũng dùng tốc độ băng đo được khi băng còn tăng tốc (~8–25/75 mm/s ở 0,18 s), nên đoán vật đi ~15 mm thay vì ~120 mm tới lúc kẹp và có thể chọn vật sẽ ra khỏi tầm. Ảnh hưởng ≤ 4 lượt mỗi sheet (`ik_fail`/`late`). Đây là đổi logic chọn vật → cần người dùng duyệt nếu muốn áp cho `CL0_W`.

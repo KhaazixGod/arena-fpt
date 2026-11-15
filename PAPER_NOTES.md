@@ -43,3 +43,9 @@ Tham số lấy từ log sheet không khóa `train_C2` L0,5 (`runs/p1_oracle_tra
 - **Cổng [đề xuất trước khi chạy]: đạt cả ba**: 0 lượt đóng băng vì biên cổ tay; L0,5 49/60 ≥ 45/60; L0 không giảm (+2).
 - Lưu ý: tham số W1 (cửa sổ 4 s, bắt đầu 0,5 s, 10°) lấy từ log chính sheet này, nên p ở đây là bằng chứng thăm dò. Sheet xác nhận là `train_C3` (chuỗi `scripts/p2p3_chain.sh`, đang chạy).
 - Thời gian lập kế hoạch: trung vị 195 ms mỗi lượt (một lần, lúc chọn vật).
+
+## P4 chuẩn bị: Diffusion Policy với giao diện I2 (15/11, chưa huấn luyện thật)
+- Mã: `arena/dp_i2.py` (bước tương đối `relative_actions_last_obs`: với lô huấn luyện của DP, state là (B, n_obs, D), bước gốc của LeRobot 0.6.1 sẽ trừ sai/không broadcast; bước mới lấy state **khung cuối** làm mốc), `train_dp_i2.py` (như `train_act_i2.py`, chỉ thay factory processor), `arena/methods/diffusion_i2.py` (cùng bộ thực thi I2 như ACT_I2; đẩy MỌI khung vào hàng đợi 2 quan sát, lấy mẫu chuỗi mỗi `DP_REPLAN` khung).
+- Môi trường: cài `diffusers==0.38.0` (LeRobot 0.6.1 cần ≥0.38,<0.40) + `regex==2026.9.29`, `importlib_metadata`, `lazy-importer` 0.1.0 (Apache-2.0, chỉ là tiện ích import, không gọi mạng/tiến trình), `zipp` vào **site-packages riêng của `~/venvs/lerobot_data`** (không nâng cấp gói nào; venv `cl0` không đổi). Gỡ: `~/venvs/lerobot_data/bin/pip uninstall diffusers lazy-importer`.
+- Kiểm trên CPU (dữ liệu E6, mô hình thu nhỏ, 3 bước): huấn luyện chạy (loss 1,2–1,3), checkpoint nạp lại bằng `make_pre_post_processors` gốc (bước tương đối được nối lại), kiểm đơn vị bước tương đối (trừ đúng state khung cuối trên x, y, z; yaw/gripper giữ nguyên), suy luận 2 khung → chuỗi (8, 6) tuyệt đối; phương thức DP_I2 với băng/camera giả: 6 kế hoạch trong 1,5 s, lệnh khớp mọi nhịp.
+- Chưa làm: đo tốc độ huấn luyện trên GPU, chọn siêu tham số trên DEV (horizon, n_action_steps, kích thước UNet, số bước khử nhiễu khi suy luận).

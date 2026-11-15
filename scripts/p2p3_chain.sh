@@ -19,6 +19,7 @@ PY
 bash scripts/p3_demos_w.sh || { echo "$(date +%T) p3 failed"; exit 1; }
 need_no_isaac
 DS=runs/p3_demos_w/lerobot_i2
+[ -f $DS/meta/stats.json ] || { echo "$(date +%T) no complete dataset $DS; not training"; exit 4; }
 for SEED in 1000 2000 3000; do
     OUT=runs/act_w_s$SEED
     [ -f $OUT/checkpoints/last/pretrained_model/model.safetensors ] && continue

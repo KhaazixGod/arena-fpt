@@ -12,6 +12,9 @@ run_until p3_demos_b runs/p3_demos_w_b 420 $C --cells train_C2,train_C3 --record
 pb=$!
 wait $pa $pb
 echo "$(date +%T) episodes: a $(ls runs/p3_demos_w_a/episodes | grep -c npz), b $(ls runs/p3_demos_w_b/episodes | grep -c npz)"
+# never convert (and never train) on an incomplete demo set: run_until gives up after 6 attempts and returns without an error code
+[ "$(valid_rows runs/p3_demos_w_a/trials.csv)" -ge 420 ] && [ "$(valid_rows runs/p3_demos_w_b/trials.csv)" -ge 420 ] \
+    || { echo "$(date +%T) P3 INCOMPLETE: a $(valid_rows runs/p3_demos_w_a/trials.csv)/420, b $(valid_rows runs/p3_demos_w_b/trials.csv)/420; not converting"; exit 4; }
 need_no_isaac
 DS=runs/p3_demos_w/lerobot_i2
 if [ ! -f "$DS/meta/stats.json" ]; then

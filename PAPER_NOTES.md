@@ -57,3 +57,11 @@ Tham số lấy từ log sheet không khóa `train_C2` L0,5 (`runs/p1_oracle_tra
 - Nhịp giữ lệnh 1563 (17 lượt có nhịp ở biên cổ tay) → 72 (0 lượt ở biên cổ tay). W1 đổi nhánh 19 lượt: 9 hỏng → đạt, 8 đạt → đạt, 2 hỏng → hỏng; 41 lượt không đổi nhánh giống hệt bản gốc. Lỗi `collision` 10 → 6, `slip` 10 → 8, `grasp_point` 3 → 0.
 - Còn 2 lượt `ik_fail` (013, 060, ở cả hai bản): khớp gập cổ tay q4 ≈ 91° (biên 92°) khi hạ ở xa và thấp; không phải cổ tay xoay.
 - **Ứng viên W2 (chưa làm, chỉ ghi):** kiểm khả thi lúc chọn vật của CL-0 (`_pick_a_grasp`, `_lift_feasible`) cũng dùng tốc độ băng đo được khi băng còn tăng tốc (~8–25/75 mm/s ở 0,18 s), nên đoán vật đi ~15 mm thay vì ~120 mm tới lúc kẹp và có thể chọn vật sẽ ra khỏi tầm. Ảnh hưởng ≤ 4 lượt mỗi sheet (`ik_fail`/`late`). Đây là đổi logic chọn vật → cần người dùng duyệt nếu muốn áp cho `CL0_W`.
+
+### P2 `CL0_W` trên DEV (15/11 18:48; `logs/2026-11-15_184802_p2_confirm_compare.txt`)
+| `dev_C2` L0,5, 60 cảnh ghép cặp, engine=isaac | CL0 (`runs/p2_cl0_dev_c2_l05`) | CL0_W (`runs/p2_cl0w_dev_c2_l05`) | mất / được | McNemar chính xác |
+|---|---|---|---|---|
+| Thành công | 25/60 (41,7%) | **52/60 (86,7%)** | 2 / 29 | p < 10⁻⁶ |
+- CL0 chịu cơ chế A **nặng hơn ORACLE nhiều**: 37/60 lượt có nhịp giữ lệnh ở biên cổ tay (ORACLE `train_C2`: 13/60), `ik_fail` 18. Lý do: CL0 nhắm yaw 90–130° trong hệ băng (vật tròn dùng 90° cố định, `isotropic_theta_deg`); từ tư thế nhà (−2,8°), nhánh gần nhất là θ − 180°, cổ tay đi về phía âm rồi chạm −157° khi đế quay theo vật. W1 đổi nhánh 48/60 lượt.
+- CL0_W: `ik_fail` 18 → 2, nhịp giữ lệnh 5053 → 188, lượt có nhịp ở biên cổ tay 37 → 0. Mất 2 lượt (021, 034; đều là lượt đổi nhánh). Trong 12 lượt không đổi nhánh có 1 lượt khác kết quả: CL0 dùng ảnh render, nên khác ORACLE là không hoàn toàn tất định.
+- **Hệ quả cho bài báo.** (1) So sánh G2 (ACT ≈ CL0, 35% / 37%) bị lẫn bởi lỗi bộ thực thi: lỗi này gần như không chạm ACT (2/100 lượt DEV) nhưng chạm CL0 nặng [suy luận cho TEST: chưa kiểm, không chạy TEST]. (2) Baseline mô-đun công bằng (`CL0_W`) đạt 87% trên DEV L0,5, cao hơn mọi kết quả ACT trên DEV L0,5 đã có (`e14_act_i2_dev2` 13/20, `e15_i2f` 14/20). H1 ("ACT_W hơn baseline mô-đun mạnh nhất ≥ 15 điểm") **rất khó đạt**. Cần người dùng chọn lại khung bài báo trước khi viết tiền đăng ký.

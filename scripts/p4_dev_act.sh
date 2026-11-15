@@ -6,7 +6,7 @@ source "$(dirname "$(readlink -f "$0")")/lib_chain.sh"
 need_no_training
 COMMON="--cells dev_C2 --speeds L0.5 --n 20 --arrangements-dir arrangements/sim"
 port=7301
-for spec in "act_old_s1000:runs/act_i2_s1000" "act_w_s1000:runs/act_w_s1000" "act_w_s2000:runs/act_w_s2000" "act_w_s3000:runs/act_w_s3000"; do
+for spec in ${P4_MODELS:-"act_old_s1000:runs/act_i2_s1000" "act_w_s1000:runs/act_w_s1000" "act_w_s2000:runs/act_w_s2000" "act_w_s3000:runs/act_w_s3000"}; do
     name=${spec%%:*}; ck=${spec#*:}/checkpoints/last/pretrained_model
     [ -f "$ck/model.safetensors" ] || { echo "missing $ck"; continue; }
     s=$(serve_i2 $port "${name^^}" "$ck"); sleep 25

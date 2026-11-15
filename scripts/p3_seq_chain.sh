@@ -5,6 +5,7 @@
 # set, then trains ACT_W x3 (scripts/p2p3_chain.sh step 4).
 source "$(dirname "$(readlink -f "$0")")/lib_chain.sh"
 need_no_training
+export RUN_UNTIL_ATTEMPTS=60                      # single-lane stalls recur (~every 30-60 min, CPU-side, GPU idle); keep resuming
 VL="logs/$(date +%F_%H%M%S)_p3_vram.log"
 ( while true; do echo "$(date +%T) $(nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv,noheader | tr -d '\n') | $(nvidia-smi --query-compute-apps=pid,used_memory --format=csv,noheader | tr '\n' ' ')"; sleep 60; done ) > "$VL" 2>&1 &
 VP=$!

@@ -158,6 +158,8 @@ def main(argv=None) -> int:
     ap.add_argument("--record-demos", default="", help="E6: directory for raw demo episodes (arena/demos.py); convert with arena/to_lerobot.py")
     ap.add_argument("--demo-size", default="640x360"); ap.add_argument("--demo-all", action="store_true", help="also keep failed episodes (default: successes only)")
     a = ap.parse_args(argv)
+    import faulthandler, signal                     # paper-dev P3: the stall watchdog (scripts/lib_chain.sh run_until) sends SIGUSR1 first -> all thread stacks in the log
+    faulthandler.register(signal.SIGUSR1, all_threads=True)
     if any(c.strip().startswith("test") for c in a.cells.split(",")) and not a.allow_locked:
         raise SystemExit("test_* cells are LOCKED: they run only on the user's explicit order (arena/CLAUDE.md rule 5); add --allow-locked when that order exists")
     out = a.out if os.path.isabs(a.out) else os.path.join(HERE, a.out)

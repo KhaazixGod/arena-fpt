@@ -36,7 +36,7 @@ run_until() {
     local tag=$1 out=$2 expected=$3; shift 3
     mkdir -p "$out"
     local attempt pid new age have
-    for attempt in 1 2 3 4 5 6; do
+    for attempt in $(seq 1 "${RUN_UNTIL_ATTEMPTS:-6}"); do       # paper-dev: RUN_UNTIL_ATTEMPTS (default 6 as before)
         have=$(valid_rows "$out/trials.csv")
         [ "$have" -ge "$expected" ] && { echo "$(date +%T) $tag complete ($have/$expected valid)"; return 0; }
         echo "$(date +%T) $tag attempt $attempt, have $have/$expected"
@@ -48,7 +48,8 @@ run_until() {
             new=$(ls -t "$out/trials.csv" "$out/.watchdog" 2>/dev/null | head -1)
             age=$(( $(date +%s) - $(stat -c %Y "$new") ))
             if [ "$age" -gt 300 ]; then
-                echo "$(date +%T) $tag stalled ${age}s, killing $pid"
+                echo "$(date +%T) $tag stalled ${age}s, killing $pid (stacks via SIGUSR1 in its log)"
+                kill -USR1 $pid 2>/dev/null; sleep 5
                 kill $pid; sleep 20; kill -9 $pid 2>/dev/null
             fi
         done

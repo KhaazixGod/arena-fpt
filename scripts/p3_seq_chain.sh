@@ -6,6 +6,7 @@
 source "$(dirname "$(readlink -f "$0")")/lib_chain.sh"
 need_no_training
 export RUN_UNTIL_ATTEMPTS=60                      # single-lane stalls recur (~every 30-60 min, CPU-side, GPU idle); keep resuming
+export RUN_UNTIL_STALL_S=200                      # stall = omni.replicator orchestrator.step hang (SIGUSR1 stacks 22:04); trials take 40-65 s, longest legit ~40 s virtual x 5
 VL="logs/$(date +%F_%H%M%S)_p3_vram.log"
 ( while true; do echo "$(date +%T) $(nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv,noheader | tr -d '\n') | $(nvidia-smi --query-compute-apps=pid,used_memory --format=csv,noheader | tr '\n' ' ')"; sleep 60; done ) > "$VL" 2>&1 &
 VP=$!

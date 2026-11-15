@@ -47,7 +47,7 @@ run_until() {
             sleep 30
             new=$(ls -t "$out/trials.csv" "$out/.watchdog" 2>/dev/null | head -1)
             age=$(( $(date +%s) - $(stat -c %Y "$new") ))
-            if [ "$age" -gt 300 ]; then
+            if [ "$age" -gt "${RUN_UNTIL_STALL_S:-300}" ]; then         # paper-dev: RUN_UNTIL_STALL_S (default 300 as before)
                 echo "$(date +%T) $tag stalled ${age}s, killing $pid (stacks via SIGUSR1 in its log)"
                 kill -USR1 $pid 2>/dev/null; sleep 5
                 kill $pid; sleep 20; kill -9 $pid 2>/dev/null

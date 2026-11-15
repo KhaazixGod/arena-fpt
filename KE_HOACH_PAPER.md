@@ -1,6 +1,7 @@
 # KE_HOACH_PAPER: từ G2 NO-GO đến bài báo (nhánh `paper-dev`)
 
 **Trạng thái.** Kế hoạch, 14/11/2026. Ngày 14/11 người dùng đồng ý hướng: sửa thầy → sinh demo mới → huấn luyện ACT và Diffusion Policy → TEST mới có tiền đăng ký.
+Ngày 15/11 người dùng quyết (mục 5): duyệt `CL0_W`; chưa có hội nghị/tạp chí đích; TEST dùng lại tập vật TEST cũ; máy này chạy toàn bộ (robot thật dùng máy khác). P2 bắt đầu 15/11.
 Bản đồ án đóng băng ở tag `thesis-freeze-2026-11-14`. Không sửa gì trong bản đó, không sửa `cl0/`.
 Nhật ký chẩn đoán: `PAPER_NOTES.md`.
 
@@ -25,7 +26,7 @@ Nhật ký chẩn đoán: `PAPER_NOTES.md`.
 3. Chỉ chỉnh trên sheet không khóa (`train_*`, `dev_*`), mỗi lần một thay đổi, ghép cặp với bản gốc, ghi vào `PAPER_NOTES.md`.
 4. TEST mới dùng sheet hạt giống mới, băm và commit trong `PREREGISTRATION_PAPER.md` trước lượt TEST đầu tiên. Chỉ chạy khi người dùng ra lệnh (luật 5).
 5. Mỗi chính sách học có ≥ 3 hạt giống. Báo cáo mọi kết quả, kể cả xấu.
-6. Luật 1 vẫn áp dụng: không chạy Isaac song song với huấn luyện. Từ 16/11, robot thật được ưu tiên dùng máy ban ngày; job sim và huấn luyện chạy đêm [đề xuất].
+6. Luật 1 vẫn áp dụng: không chạy Isaac song song với huấn luyện. Máy này dành cho sim và huấn luyện cả ngày lẫn đêm; robot thật dùng máy khác (người dùng, 15/11).
 
 ## 2. Các bước
 
@@ -36,7 +37,7 @@ Nhật ký chẩn đoán: `PAPER_NOTES.md`.
 - **Cổng [đề xuất]:** không còn lượt nào bị đóng băng lệnh khớp vì biên cổ tay; SR ở L0,5 ≥ 75% (45/60); SR ở L0 không giảm quá 2 lượt.
 - **Nếu không đạt cổng:** thêm W3 cho vật rộng (chỉ hạ khi sai số bám nhỏ hơn khoảng hở còn lại của vật). Mỗi lần một thay đổi, tối đa 2 vòng. Sau đó dùng bản tốt nhất và ghi lại.
 - **Xác nhận một lần** trên một sheet không dùng để chỉnh (`train_C3`, L0,5).
-- **`CL0_W`** [cần người dùng duyệt, luật 8]: nhận thức của CL0 cộng đúng sửa W1. Đây là baseline mô-đun công bằng: chính sách học được hưởng thầy đã sửa thì baseline mô-đun cũng phải được. CL0 gốc vẫn giữ để nối với G2.
+- **`CL0_W`** [người dùng duyệt 15/11, luật 8]: nhận thức của CL0 cộng đúng sửa W1. Đây là baseline mô-đun công bằng: chính sách học được hưởng thầy đã sửa thì baseline mô-đun cũng phải được. CL0 gốc vẫn giữ để nối với G2.
 - **Thời gian:** viết mã 3–4 giờ; mỗi lần kiểm 60 cảnh khoảng 25 phút mỗi làn.
 
 ### P3. Demo mới
@@ -59,10 +60,10 @@ Nhật ký chẩn đoán: `PAPER_NOTES.md`.
 
 ### P5. Tiền đăng ký và TEST mới
 
-- **Sheet mới:** `python -m arena.arrangements --set sim --cell test_C2 --n 60 --seed <mới> --out locked/paper/...`, băm trong `PREREGISTRATION_PAPER.md`. Vật: tập vật TEST cũ, để so được với G2. Phải ghi rõ là kết quả theo từng vật của G2 đã được xem.
+- **Sheet mới:** `python -m arena.arrangements --set sim --cell test_C2 --n 60 --seed <mới> --out locked/paper/...`, băm trong `PREREGISTRATION_PAPER.md`. Vật: tập vật TEST cũ (người dùng chốt 15/11), để so được với G2. Phải ghi rõ là kết quả theo từng vật của G2 đã được xem.
 - **Phương pháp** (cùng 60 sắp xếp, ghép cặp): CL0, `CL0_W`, ORACLE, `ORACLE_W`, ACT_old (`act_i2_s1000`, `act_i2_s2000` có sẵn), `ACT_W` ×3, `DP_W` ×3, `ACT_W_slow` ×1.
 - **Giả thuyết [đề xuất, chốt khi viết tiền đăng ký]:**
-  - H1 (chính): `ACT_W` hơn baseline mô-đun mạnh nhất (`CL0_W` nếu được duyệt, không thì CL0) theo cấu trúc claim C của G2 (hiệu ≥ +15 điểm, McNemar chính xác p ≤ 0,05, SR ≥ 60%). Cách gộp 3 hạt giống chốt ở bước này; tôi sẽ đề xuất gộp theo từng sắp xếp để tăng công suất.
+  - H1 (chính): `ACT_W` hơn baseline mô-đun mạnh nhất (`CL0_W` hoặc CL0, lấy cái mạnh hơn trên DEV) theo cấu trúc claim C của G2 (hiệu ≥ +15 điểm, McNemar chính xác p ≤ 0,05, SR ≥ 60%). Cách gộp 3 hạt giống chốt ở bước này; tôi sẽ đề xuất gộp theo từng sắp xếp để tăng công suất.
   - H2: `ACT_W` hơn ACT_old (hiệu ứng của thầy mới cộng demo L0,5).
   - H3 (phụ): `DP_W` so với `ACT_W`, kiểm hai phía.
   - Holm cho H1–H2. Mọi thứ còn lại là mô tả.
@@ -83,7 +84,7 @@ Hiệu chuẩn bắt đầu 16/11. Cần tiền đăng ký riêng. Còn chờ ng
 | Ngày | Việc | Cần người dùng |
 |---|---|---|
 | 14/11 tối – 15/11 | P2: viết `ORACLE_W`, kiểm trên `train_C2` (L0,5 và L0) | Không (15/11 là hạn luận văn) |
-| 16/11 | Cổng P2, xác nhận trên `train_C3`; `CL0_W` nếu được duyệt. Đêm: P3 sinh demo | Duyệt `CL0_W` |
+| 16/11 | Cổng P2, xác nhận trên `train_C3`; `CL0_W`. Đêm: P3 sinh demo | Không |
 | 17/11 | P3 xong, chuyển dữ liệu; DP: viết bộ chạy, đo tốc độ. Đêm: `ACT_W` ×3 | Không |
 | 18/11 | DP: chọn siêu tham số trên DEV, rồi huấn luyện 3 hạt giống (GPU cả ngày lẫn đêm) | Không |
 | 19/11 | Kiểm DEV mọi mô hình; viết tiền đăng ký; sinh và khóa sheet | Duyệt tiền đăng ký |
@@ -97,13 +98,13 @@ Robot thật: kết quả khoảng 22/11 (kế hoạch riêng). Lịch này chư
 - W1 chỉ sửa nhóm A (8/19 lượt hỏng). Nếu sửa hết thì trần tối đa khoảng 82%; nhóm B và C vẫn còn.
 - Vật TEST có đĩa mỏng (`plate`), loại chỉ có trong tập TEST, là nơi ORACLE hay hỏng vì điểm kẹp (G2: 10/25). Không chỉnh được trên vật này mà không rò rỉ TEST, nên trần trên TEST có thể vẫn thấp.
 - DP chậm hơn dự kiến → DP còn 1 hạt giống và chỉ mô tả; ACT vẫn là chính sách chính.
-- Tranh máy với robot thật → job sim chạy đêm.
 - TEST mới vẫn không thấy lợi thế → báo cáo nguyên trạng, như đã làm với G2.
 - `ACT_W` khác ACT_old ở hai chỗ (thầy và tốc độ demo). Ablation `ACT_W_slow` chỉ tách được một phần, và chỉ là mô tả.
 
 ## 5. Người dùng cần quyết
 
-1. Duyệt `CL0_W` làm baseline mô-đun bổ sung (luật 8). [Khuyên: có]
-2. Hội nghị hoặc tạp chí đích, và hạn nộp (quyết định phạm vi và lịch).
-3. Sheet TEST dùng lại tập vật TEST cũ [khuyên, để so được với G2] hay sinh tập vật mới.
-4. Quy tắc dùng chung máy với robot thật từ 16/11.
+Đã quyết ngày 15/11:
+1. `CL0_W`: **duyệt** (theo khuyến nghị).
+2. Hội nghị hoặc tạp chí đích: **chưa có**. Lịch giữ như mục 3.
+3. Tập vật TEST: **dùng lại tập vật TEST cũ**.
+4. Máy: **máy này chạy toàn bộ**; robot thật dùng máy khác.

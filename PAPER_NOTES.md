@@ -71,3 +71,14 @@ Tham số lấy từ log sheet không khóa `train_C2` L0,5 (`runs/p1_oracle_tra
 - Lỗi script: `p3_demos_w.sh` không kiểm số lượt trước khi chuyển dữ liệu, nên chuỗi đã bắt đầu đổi 146 tập dở dang (đã dừng; thư mục dở dang để riêng ở `runs/p3_demos_w/lerobot_i2_PARTIAL_killed_2026-11-15`, không dùng). Đã sửa: chỉ chuyển khi đủ 420/420 mỗi làn; chuỗi chỉ huấn luyện khi có `meta/stats.json`.
 - Chạy lại 21:02 với **một Isaac mỗi lúc** (`scripts/p3_seq_chain.sh`, unit `arena-p3seq`): tiếp tục từ các lượt đã có, rồi chuyển dữ liệu, rồi `ACT_W` ×3.
 - **Nguyên nhân treo (stack qua SIGUSR1, 22:04):** luồng chính kẹt trong `omni.replicator.core ... orchestrator.step` (gọi từ `arena/world.py::_grab` khi chụp khung), GPU 0%: bộ điều phối render của Isaac chờ một khung không tới. Không phải mã W1. Lỗi này có từ trước (chuỗi E9: 7 lần, E18: 1, G2: 1; bộ canh giữ xử lý), tối nay dày hơn (~25 phút/lần) khi ghi demo; một làn cũng bị. Không sửa đường render (giữ nền tảng như các lần chạy trước); chỉ cho bộ canh giữ thử tới 60 lần và kết luận treo sau 200 s (`RUN_UNTIL_ATTEMPTS`, `RUN_UNTIL_STALL_S`, mặc định cũ không đổi). Kiểm: số dòng CSV = số JSON, số tập demo = số lượt thành công ở cả hai làn (không có tập mồ côi).
+
+## P3 kết quả (16/11 04:59; `runs/p3_demos_w_a`, `runs/p3_demos_w_b`; engine=isaac)
+ORACLE_W trên các sheet của E6 (`arrangements/sim_ext`, `train_C0..C3`, 70 sắp xếp đầu mỗi ô) × L0, L0,25, L0,5: **840/840 lượt hợp lệ, 677 tập thành công (80,6%)** → demo.
+| Tốc độ | Tập / lượt | | Ô | Tập / lượt |
+|---|---|---|---|---|
+| L0 | 229/280 (81,8%) | | train_C0 | 167/210 |
+| L0,25 | 233/280 (83,2%) | | train_C1 | 170/210 |
+| **L0,5** | **215/280 (76,8%)** | | train_C2 | 178/210 |
+| | | | train_C3 | 162/210 |
+- So với E6 (ORACLE cũ, 444 tập từ 560 lượt, chỉ L0/L0,25): thêm 215 tập L0,5; phần L0+L0,25 có 462 tập (≈ cỡ E6), dùng cho ablation `ACT_W_slow` (tách hiệu ứng thầy đã sửa khỏi hiệu ứng thêm L0,5).
+- Lỗi treo của Replicator: 1 lần sau khi chạy một làn với ngưỡng 200 s (23:42), bộ canh giữ tự chạy lại.

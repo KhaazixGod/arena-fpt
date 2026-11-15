@@ -11,6 +11,7 @@ Nhật ký chẩn đoán: `PAPER_NOTES.md`.
 |---|---|---|
 | G2 (TEST, có tiền đăng ký): `test_C2`, L0,5 | ACT_I2 35% / 30% (hạt giống 1000 / 2000), CL0 37%, ORACLE 47% → NO-GO | `logs/2026-11-10_210822_g2_decision.txt` |
 | Thầy của ACT_I2 là ORACLE, nhưng demo **chỉ ở L0 và L0,25** | 444 tập, `train_C0..C3` (`arrangements/sim_ext`), không có tập nào ở L0,5 | `runs/e6_demos_real/manifest.json` |
+| Nhưng đã thử thêm demo L0,5 (E15, ACT_I2F: +76 tập ORACLE L0,5) | DEV: 50 so với 48 trên 80 lượt, p = 0,84 → **không khác**. Thêm demo tốc độ cao một mình không đủ | `PREREGISTRATION_G2.md` mục 2, `ARENA_SETUP_REPORT.md` E15 |
 | Trần ORACLE trên vật huấn luyện | L0,5: 41/60 (68%); băng đứng yên: 50/60 | `runs/p1_oracle_train_c2_l05`, `runs/p1_slip_D_l0` |
 | Cơ chế A: khớp cổ tay xoay chạm biên khi bám băng | 8/19 lượt hỏng, 1/41 lượt đạt, 0/60 ở L0 | `PAPER_NOTES.md` (P1b) |
 | Cơ chế B: vật rộng, hàm kẹp va vào vật khi hạ | 3/19 lượt hỏng (`cyl12`) | `PAPER_NOTES.md` (P1b) |
@@ -100,6 +101,7 @@ Robot thật: kết quả khoảng 22/11 (kế hoạch riêng). Lịch này chư
 - DP chậm hơn dự kiến → DP còn 1 hạt giống và chỉ mô tả; ACT vẫn là chính sách chính.
 - TEST mới vẫn không thấy lợi thế → báo cáo nguyên trạng, như đã làm với G2.
 - `ACT_W` khác ACT_old ở hai chỗ (thầy và tốc độ demo). Ablation `ACT_W_slow` chỉ tách được một phần, và chỉ là mô tả.
+- E15 đã cho thấy thêm 76 demo L0,5 từ thầy cũ không cải thiện ACT trên DEV. Nếu W1 chỉ sửa được ít lượt, `ACT_W` có thể không hơn ACT_old (H2 thất bại). Cách giảm rủi ro: kiểm `ACT_W` trên DEV trước khi viết tiền đăng ký; nếu không khác, báo cáo nguyên trạng và xem lại hướng.
 
 ## 5. Người dùng cần quyết
 

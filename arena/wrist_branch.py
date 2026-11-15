@@ -81,6 +81,30 @@ def free_roll(kin):
     return k2
 
 
+def belt_travel(taus, v_now: float, v_cmd: Optional[float] = None, accel: float = 0.0) -> np.ndarray:
+    """Predicted belt travel (mm) after each tau (s).  With the commanded speed ``v_cmd`` and the firmware ramp ``accel`` (cfg.belt.accel_mm_s2) the speed
+    goes from the measured ``v_now`` to ``v_cmd`` at that ramp, then stays (the belt model of cl0.hw.belt.Belt); else the measured speed stays.
+    Needed because every trial starts the belt from rest: at selection (t = 0.18 s) it still accelerates (~25 of 75 mm/s at L0.5)."""
+    taus = np.asarray(taus, float)
+    if v_cmd is None or accel <= 0.0:
+        return v_now * taus
+    dv = v_cmd - v_now
+    t_r = abs(dv) / accel
+    sg = 1.0 if dv >= 0 else -1.0
+    ramp = v_now * np.minimum(taus, t_r) + 0.5 * sg * accel * np.minimum(taus, t_r) ** 2
+    return ramp + v_cmd * np.maximum(taus - t_r, 0.0)
+
+
+def commanded_speed(belt) -> Optional[float]:
+    """The last belt speed the PC commanded (cl0.hw.belt.Belt keeps its own commands: _segs = [(t_eff, s0, v0, v_target), ...]); None if unknown.
+    This is the controller's own command, not ground truth (the same object CL-0 reads s_at / speed_at from)."""
+    segs = getattr(belt, "_segs", None)
+    try:
+        return float(segs[-1][3]) if segs else None
+    except (TypeError, IndexError, ValueError):
+        return None
+
+
 @dataclass
 class BranchPlan:
     k0: int                                   # CL-0's branch: th_ref = th + 180 k0 (nearest to the current yaw)
@@ -92,6 +116,8 @@ class BranchPlan:
     why: Dict[int, str] = field(default_factory=dict)           # what the first violation is: roll | joint | ik | ""
     h5_min: Dict[int, float] = field(default_factory=dict)      # min predicted wrist-roll headroom beyond the margin (deg)
     q5_span: Dict[int, Tuple[float, float]] = field(default_factory=dict)
+    v_now: float = 0.0                        # measured belt speed at selection (mm/s)
+    v_cmd: Optional[float] = None             # commanded belt speed used for the travel prediction (None: measured speed kept)
     ms: float = 0.0
 
     @property
@@ -104,13 +130,14 @@ class BranchPlan:
                     th_plan=None if self.th_plan is None else r(self.th_plan),
                     ttv={str(k): r(v) for k, v in self.ttv.items()}, why={str(k): v for k, v in self.why.items()},
                     h5_min={str(k): r(v) for k, v in self.h5_min.items()},
-                    q5_span={str(k): [r(a), r(b)] for k, (a, b) in self.q5_span.items()}, ms=r(self.ms))
+                    q5_span={str(k): [r(a), r(b)] for k, (a, b) in self.q5_span.items()}, v_now=r(self.v_now),
+                    v_cmd=None if self.v_cmd is None else r(self.v_cmd), ms=r(self.ms))
 
 
 def plan_branch(kin, kin_free, wm: WristModel, cfg, phi_deg: float, z_belt_mm: float, q_now, th_now_bf: float,
                 tgt_a_b: float, tgt_b: float, th_tgt: float, s_now: float, sdot: float,
                 window_s: float = 4.0, dt_s: float = 0.2, h_min_deg: float = 10.0, max_turn_deg: float = 270.0,
-                t_start_s: float = 0.5, t_descend_s: float = 1.0) -> BranchPlan:
+                t_start_s: float = 0.5, t_descend_s: float = 1.0, v_cmd: Optional[float] = None, accel_mm_s2: float = 0.0) -> BranchPlan:
     """Branch plan for one attempt (see the module doc).  ``th_now_bf``: the yaw filter's start value (measured TCP yaw, belt frame); ``th_tgt``: target yaw.
     Object positions from ``t_start_s`` on: the TCP reaches the object about 0.5 s after selection (freeze event at 0.46-0.54 s in
     runs/p1_oracle_train_c2_l05), so earlier positions are never visited.  Heights: pre-grasp height until ``t_descend_s`` (APPROACH; select -> DESCEND
@@ -126,14 +153,15 @@ def plan_branch(kin, kin_free, wm: WristModel, cfg, phi_deg: float, z_belt_mm: f
     m0 = int(round((phi_deg + th_now_bf - yaw_now) / 180.0))
     k0 = int(round((th_now_bf - th_tgt) / 180.0))
     taus = np.arange(t_start_s, window_s + 1e-9, dt_s)
-    pts = [(tgt_a_b + s_now + sdot * float(tau)) * u + tgt_b * v for tau in taus]
+    travel = belt_travel(taus, sdot, v_cmd, accel_mm_s2)
+    pts = [(tgt_a_b + s_now + float(ds)) * u + tgt_b * v for ds in travel]
 
     # a top-down solution near the first point (any branch) to seed the joints other than the roll
     r0 = kin.ik([float(pts[0][0]), float(pts[0][1]), zp], phi_deg + th_tgt, tilt_deg=rb.tilt_deg)
     q_seed0 = np.asarray(r0.q_deg, float) if r0.ok else np.array([0.0, 0.0, 45.0, 45.0, 0.0])
 
     ks = [k for k in range(k0 - 2, k0 + 3) if abs(th_tgt + 180.0 * k - th_now_bf) <= max_turn_deg]
-    plan = BranchPlan(k0=k0, k=k0, th_plan=None, m0=m0, at_risk=False)
+    plan = BranchPlan(k0=k0, k=k0, th_plan=None, m0=m0, at_risk=False, v_now=float(sdot), v_cmd=v_cmd)
     for k in ks:
         yaw_j = phi_deg + th_tgt + 180.0 * (k - m0)            # joint-implied yaw the arm turns to on this branch (continuous from q_now)
         # transient: the yaw filter (omega_yaw) reaches its target before the pan has moved much, so check the roll at (target yaw, current pan)

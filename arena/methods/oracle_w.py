@@ -4,6 +4,8 @@ ORACLE_W = ORACLE (ground-truth perception, yaw-aware feasibility, CL-0's tracke
 CL0_W    = CL0 (the frozen baseline, unchanged perception and reach map) + W1, so the modular baseline gets the same executor fix as the teacher of the
            learned policies (approved by the user on 15/11/2026, arena/CLAUDE.md rule 8).  CL0 and ORACLE stay registered unchanged.
 W1 changes only the attempts whose predicted wrist roll on CL-0's branch comes within h_min of a joint limit; every attempt logs a ``w1_branch`` event.
+The object's future belt travel is predicted from the measured belt speed, the PC's own commanded speed and the firmware ramp (cfg.belt.accel_mm_s2):
+each trial starts the belt from rest, so the measured speed at selection (t = 0.18 s) is only ~25 of 75 mm/s at L0.5 (first run, v1, used it as is).
 Method args (``--method-arg``): ``w1_window_s`` (4.0), ``w1_h_min_deg`` (10.0).
 """
 from __future__ import annotations
@@ -14,7 +16,7 @@ from cl0.controller import CL0Controller
 from cl0.system import build_stack
 from cl0.types import Command
 
-from ..wrist_branch import BranchExecutor, WristModel, free_roll, plan_branch
+from ..wrist_branch import BranchExecutor, WristModel, commanded_speed, free_roll, plan_branch
 from .base import MethodContext, register
 from .yawfeasible import YawFeasibleController, yaw_reach
 
@@ -34,6 +36,10 @@ class W1Mixin:
         self.exe = BranchExecutor(self.cfg, self.kin, self.phi, self.zb, self.wm)
         self.reset(0.0, None)
 
+    def step(self, t, frame, belt, state) -> Command:                 # keep the belt object for the commanded speed (wrist_branch.commanded_speed)
+        self._w1_belt = belt
+        return super().step(t, frame, belt, state)
+
     def _do_wait(self, t, dt, s_now, sdot, state, tcp) -> Command:      # = CL0Controller._do_wait + the W1 plan line
         if self.tracker.confirmed() and self._select(t, s_now, sdot):
             self.exe.start(tcp, s_now, sdot)
@@ -45,8 +51,10 @@ class W1Mixin:
 
     def _w1_plan(self, t, s_now, sdot, tcp) -> None:
         a, b, th = self.target_est
+        v_cmd = commanded_speed(getattr(self, "_w1_belt", None))
         plan = plan_branch(self.kin, self.kin_free, self.wm, self.cfg, self.phi, self.zb, self.exe.q_last, float(self.exe.fth.x),
-                           a, b, th, s_now, sdot, window_s=self.w1_window_s, h_min_deg=self.w1_h_min_deg)
+                           a, b, th, s_now, sdot, window_s=self.w1_window_s, h_min_deg=self.w1_h_min_deg,
+                           v_cmd=v_cmd, accel_mm_s2=float(self.cfg.belt.accel_mm_s2))
         self.exe.set_plan(plan.th_plan, plan.m0)
         self._event(t, "w1_branch", **plan.event())
 

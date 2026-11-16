@@ -113,3 +113,9 @@ dp_w_s1000: 737d09ccd963a151b6be4ca4a1161f27c74372602a834389582e3b22153d0d3e  (1
 - Lỗi của ACT gần như toàn `collision` (kẹp chạm vật/vật bên cạnh), không phải cổ tay; nên sửa thầy không chạm vào điểm yếu của học sinh.
 - Sau khi sửa bộ thực thi, pipeline mô-đun (CL0_W 17/20) ≥ chính sách học (14–15/20) trên DEV. Khớp khung (b).
 - **Ablation ACT_W_slow s1000** (demo ORACLE_W chỉ L0/L0,25, 462 tập ≈ cỡ E6; `runs/p4_dev_act_w_slow_s1000_dev_c2_l05`): **15/20** (collision 5) = ACT_old = ACT_W s1000/s2000. Trên 20 cảnh DEV này, ACT không nhạy với thầy (ORACLE hay ORACLE_W) lẫn với demo L0,5; giới hạn của nó là va chạm.
+
+## P5 bước 3: Diffusion Policy trên DEV (17/11 00:34–01:11; `runs/p4_dev_dp_w_s1000_dev_c2_l05`)
+- DP_W s1000 (UNet 256-512-1024, batch 16, 82 000 bước ≈ 4 h; đo tốc độ 0,174 s/bước; VRAM 4,45 GB; `DP_REPLAN` = 32, DDPM 100 bước khi suy luận): **16/20** (collision 3, other 1), 111 s/lượt (ACT 136 s).
+- So ACT_W s1000: mất 3, được 4, p = 1,0. So CL0_W (17/20): mất 3, được 4, p = 1,0.
+- Bảng DEV `dev_C2` L0,5 (20 cảnh): CL0 7 < ACT 13–15 ≤ DP 16 ≤ CL0_W 17. Sau khi sửa bộ thực thi, pipeline mô-đun ngang chính sách học tốt nhất.
+- Tiếp (`scripts/p6_queue.sh`, unit `arena-p6q`): ORACLE/ORACLE_W trên `dev_C2` L0,5 (n = 60), rồi DP_W s2000, s3000 (cùng công thức) + DEV.

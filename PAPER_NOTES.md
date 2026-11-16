@@ -86,4 +86,5 @@ ORACLE_W trên các sheet của E6 (`arrangements/sim_ext`, `train_C0..C3`, 70 s
 ## P4 checkpoint (sha256, để điền vào tiền đăng ký mới)
 ```
 act_w_s1000: abd7cb0a154dc8a541fbb6a9bb03ce803e37e0abb1a8703ded41e9aa43f8115f  (16/11 08:31; 100 000 bước, batch 8, loss ~0,05; logs/2026-11-16_061648_train_act_w_s1000.log)
+act_w_s2000: c07a917d9d125bca4f2e0585368c04d24400ca2b1743fb3bd2590894bf3cbb6c  (16/11 10:46; 2026-11-16_083151_train_act_w_s2000.log)
 ```

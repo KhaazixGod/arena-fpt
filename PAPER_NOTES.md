@@ -89,3 +89,13 @@ act_w_s1000: abd7cb0a154dc8a541fbb6a9bb03ce803e37e0abb1a8703ded41e9aa43f8115f  (
 act_w_s2000: c07a917d9d125bca4f2e0585368c04d24400ca2b1743fb3bd2590894bf3cbb6c  (16/11 10:46; 2026-11-16_083151_train_act_w_s2000.log)
 act_w_s3000: 37d2e0d9e1ebf46a74e253696ddb8ae89ab1657386e786c9919be3324ec145a5  (16/11 13:02; 2026-11-16_104643_train_act_w_s3000.log)
 ```
+
+## P5 bước 1: W1 theo tốc độ trên DEV (16/11 13:02–14:38; `logs/2026-11-16_143831_p5_sweep_compare.txt`; `scripts/p5_queue.sh`)
+| `dev_C2`, ghép cặp, engine=isaac | ORACLE → ORACLE_W | CL0 → CL0_W | lượt có nhịp giữ ở biên cổ tay (gốc → W1) |
+|---|---|---|---|
+| L0,25 (n = 30) | 27 → 29 (mất 0 / được 2, p = 0,50) | 24 → 26 (0 / 2, p = 0,50) | ORACLE 5 → 0; CL0 11 → 1 |
+| L0,5 (n = 60) | chưa chạy trên `dev_C2` (train_C2 41 → 49, train_C3 35 → 44) | **25 → 52** (2 / 29, p < 10⁻⁶) | CL0 37 → 0 |
+| L1,0 (n = 60) | 0 → 0 | 0 → 0 | ORACLE 0 → 0; CL0 3 → 0 |
+- L1,0 (150 mm/s) là sàn cho mọi phương pháp: ORACLE `late` 50 + `ik_fail` 10; ORACLE_W `late` 60; CL0 `late` 36 + `ik_fail` 24; CL0_W `late` 59. `late` = phép kiểm khả thi của CL-0 trước khi hạ (vật đi ~315 mm trong `t_after_settle_s` = 2,1 s → ra khỏi tầm). W1 đổi `ik_fail` thành `late`; giới hạn ở L1,0 là tầm với và thời gian, không phải cổ tay. Giải thích kết quả H4 của G2 (0/30 mọi phương pháp ở L1,0).
+- L0,25: cổ tay vẫn chạm biên (CL0 11/30 lượt) nhưng tay kịp bắt lại, ít khi thành thất bại → hiệu ứng nhỏ (+2/30).
+- Kết luận cho H3: hiệu ứng của W1 lớn nhất ở tốc độ trung bình (L0,5): đủ nhanh để đế quay nhiều mỗi lượt, chưa nhanh tới mức vật ra khỏi tầm. Còn thiếu ORACLE/ORACLE_W trên `dev_C2` L0,5 để bảng DEV đủ ô.

@@ -1,0 +1,64 @@
+
+== runs/p5_woracle_dev_c2_l10  vs  runs/p5_oracle_dev_c2_l10   (speed 150.0 mm/s, paired n = 60; valid rows base 60, W1 60)
+  success  base 0/60 = 0.0%   W1 0/60 = 0.0%
+  paired   W1 lost 0, gained 0; exact McNemar p = 1.0000
+  lost:   []
+  gained: []
+  base outcomes {'late': 50, 'ik_fail': 10}
+       fail causes {'timing': 50, 'other': 8, 'collision': 2}
+       trials with >= 10 held ticks: 10; with a held tick at the wrist-roll margin: 0; held ticks total 1022
+  W1   outcomes {'late': 60}
+       fail causes {'timing': 60}
+       trials with >= 10 held ticks: 0; with a held tick at the wrist-roll margin: 0; held ticks total 0
+       W1 switched branch in 25 trials: base->W1 success 1->1 0, 0->1 0, 1->0 0, 0->0 25
+       switched: ['dev_C2_001', 'dev_C2_003', 'dev_C2_004', 'dev_C2_008', 'dev_C2_010', 'dev_C2_012', 'dev_C2_013', 'dev_C2_016', 'dev_C2_017', 'dev_C2_027', 'dev_C2_028', 'dev_C2_029', 'dev_C2_030', 'dev_C2_034', 'dev_C2_036', 'dev_C2_037', 'dev_C2_038', 'dev_C2_041', 'dev_C2_042', 'dev_C2_048', 'dev_C2_052', 'dev_C2_053', 'dev_C2_056', 'dev_C2_058', 'dev_C2_059']
+       not switched (35): 1->1 0, 0->1 0, 1->0 0, 0->0 35  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 1241 ms, max 1468 ms
+
+== runs/p5_woracle_dev_c2_l025  vs  runs/p5_oracle_dev_c2_l025   (speed 37.5 mm/s, paired n = 30; valid rows base 30, W1 30)
+  success  base 27/30 = 90.0%   W1 29/30 = 96.7%
+  paired   W1 lost 0, gained 2; exact McNemar p = 0.5000
+  lost:   []
+  gained: ['dev_C2_013', 'dev_C2_028']
+  base outcomes {'picked_hold_complete': 27, 'empty_grasp': 2, 'late': 1}
+       fail causes {'collision': 2, 'timing': 1}
+       trials with >= 10 held ticks: 5; with a held tick at the wrist-roll margin: 5; held ticks total 457
+  W1   outcomes {'picked_hold_complete': 29, 'late': 1}
+       fail causes {'timing': 1}
+       trials with >= 10 held ticks: 0; with a held tick at the wrist-roll margin: 0; held ticks total 0
+       W1 switched branch in 10 trials: base->W1 success 1->1 8, 0->1 2, 1->0 0, 0->0 0
+       switched: ['dev_C2_001', 'dev_C2_003', 'dev_C2_004', 'dev_C2_008', 'dev_C2_013', 'dev_C2_017', 'dev_C2_027', 'dev_C2_028', 'dev_C2_029', 'dev_C2_030']
+       not switched (20): 1->1 19, 0->1 0, 1->0 0, 0->0 1  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 187 ms, max 210 ms
+
+== runs/p5_wcl0_dev_c2_l10  vs  runs/p5_cl0_dev_c2_l10   (speed 150.0 mm/s, paired n = 60; valid rows base 60, W1 60)
+  success  base 0/60 = 0.0%   W1 0/60 = 0.0%
+  paired   W1 lost 0, gained 0; exact McNemar p = 1.0000
+  lost:   []
+  gained: []
+  base outcomes {'late': 36, 'ik_fail': 24}
+       fail causes {'timing': 36, 'other': 23, 'collision': 1}
+       trials with >= 10 held ticks: 25; with a held tick at the wrist-roll margin: 3; held ticks total 2458
+  W1   outcomes {'late': 59, 'ik_fail': 1}
+       fail causes {'timing': 59, 'other': 1}
+       trials with >= 10 held ticks: 1; with a held tick at the wrist-roll margin: 0; held ticks total 109
+       W1 switched branch in 48 trials: base->W1 success 1->1 0, 0->1 0, 1->0 0, 0->0 48
+       switched: ['dev_C2_001', 'dev_C2_002', 'dev_C2_003', 'dev_C2_004', 'dev_C2_007', 'dev_C2_008', 'dev_C2_009', 'dev_C2_010', 'dev_C2_011', 'dev_C2_012', 'dev_C2_013', 'dev_C2_014', 'dev_C2_016', 'dev_C2_017', 'dev_C2_018', 'dev_C2_019', 'dev_C2_021', 'dev_C2_024', 'dev_C2_025', 'dev_C2_026', 'dev_C2_027', 'dev_C2_028', 'dev_C2_029', 'dev_C2_030', 'dev_C2_031', 'dev_C2_032', 'dev_C2_033', 'dev_C2_034', 'dev_C2_036', 'dev_C2_037', 'dev_C2_038', 'dev_C2_039', 'dev_C2_040', 'dev_C2_041', 'dev_C2_042', 'dev_C2_043', 'dev_C2_045', 'dev_C2_047', 'dev_C2_048', 'dev_C2_050', 'dev_C2_051', 'dev_C2_052', 'dev_C2_053', 'dev_C2_055', 'dev_C2_056', 'dev_C2_057', 'dev_C2_058', 'dev_C2_059']
+       not switched (12): 1->1 0, 0->1 0, 1->0 0, 0->0 12  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 1307 ms, max 1560 ms
+
+== runs/p5_wcl0_dev_c2_l025  vs  runs/p5_cl0_dev_c2_l025   (speed 37.5 mm/s, paired n = 30; valid rows base 30, W1 30)
+  success  base 24/30 = 80.0%   W1 26/30 = 86.7%
+  paired   W1 lost 0, gained 2; exact McNemar p = 0.5000
+  lost:   []
+  gained: ['dev_C2_011', 'dev_C2_026']
+  base outcomes {'picked_hold_complete': 24, 'empty_grasp': 1, 'dropped_in_hold': 5}
+       fail causes {'collision': 3, 'slip': 2, 'timing': 1}
+       trials with >= 10 held ticks: 11; with a held tick at the wrist-roll margin: 11; held ticks total 772
+  W1   outcomes {'picked_hold_complete': 26, 'ik_fail': 1, 'dropped_in_hold': 2, 'empty_grasp': 1}
+       fail causes {'collision': 2, 'slip': 1, 'timing': 1}
+       trials with >= 10 held ticks: 2; with a held tick at the wrist-roll margin: 1; held ticks total 205
+       W1 switched branch in 20 trials: base->W1 success 1->1 15, 0->1 2, 1->0 0, 0->0 3
+       switched: ['dev_C2_001', 'dev_C2_002', 'dev_C2_004', 'dev_C2_007', 'dev_C2_008', 'dev_C2_009', 'dev_C2_010', 'dev_C2_011', 'dev_C2_012', 'dev_C2_013', 'dev_C2_014', 'dev_C2_017', 'dev_C2_018', 'dev_C2_021', 'dev_C2_025', 'dev_C2_026', 'dev_C2_027', 'dev_C2_028', 'dev_C2_029', 'dev_C2_030']
+       not switched (10): 1->1 9, 0->1 0, 1->0 0, 0->0 1  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 204 ms, max 236 ms

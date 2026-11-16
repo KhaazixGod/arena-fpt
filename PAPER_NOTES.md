@@ -111,3 +111,4 @@ act_w_slow_s1000: 97fec9039fc7d79f4c31a52bd69e5df4b89a11fdb307ea9edfe989bbd0a5b6
 - ACT_W s1000 vs ACT_old s1000: mất 3, được 3, p = 1,0. **H2 (thầy đã sửa + demo L0,5 giúp học sinh) không được ủng hộ trên DEV**, giống E15 (I2F).
 - Lỗi của ACT gần như toàn `collision` (kẹp chạm vật/vật bên cạnh), không phải cổ tay; nên sửa thầy không chạm vào điểm yếu của học sinh.
 - Sau khi sửa bộ thực thi, pipeline mô-đun (CL0_W 17/20) ≥ chính sách học (14–15/20) trên DEV. Khớp khung (b).
+- **Ablation ACT_W_slow s1000** (demo ORACLE_W chỉ L0/L0,25, 462 tập ≈ cỡ E6; `runs/p4_dev_act_w_slow_s1000_dev_c2_l05`): **15/20** (collision 5) = ACT_old = ACT_W s1000/s2000. Trên 20 cảnh DEV này, ACT không nhạy với thầy (ORACLE hay ORACLE_W) lẫn với demo L0,5; giới hạn của nó là va chạm.

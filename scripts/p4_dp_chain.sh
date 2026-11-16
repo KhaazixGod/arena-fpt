@@ -6,15 +6,18 @@
 #   3. DEV check of DP_W s1000 (dev_C2 L0.5 n = 20, the ACT DEV scenes), DP_REPLAN = n_action_steps
 # Stops there: seeds 2000/3000 only after the DEV check was looked at.  Defaults, no tuning; DEV only.
 source "$(dirname "$(readlink -f "$0")")/lib_chain.sh"
-while systemctl --user is-active -q arena-p4next; do sleep 60; done
+while systemctl --user is-active -q arena-p4next || systemctl --user is-active -q arena-p5q; do sleep 60; done
 need_no_isaac
 DS=runs/p3_demos_w/lerobot_i2
-COMMON="--dataset.repo_id=local/arena_so101_oraclew_i2 --dataset.root=$DS --policy.type=diffusion --policy.device=cuda --policy.push_to_hub=false --batch_size=16 --log_freq=100 --wandb.enable=false"
-if [ ! -f runs/dp_pilot/pilot_done ]; then
+# 16/11 17:26: the default UNet (512, 1024, 2048) ran out of the 8 GB at batch 16 (logs/2026-11-16_172533_dp_pilot.log) -> UNet (256, 512, 1024), batch 16;
+# a hardware choice made before any DP result, everything else LeRobot 0.6.1 defaults
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+COMMON="--dataset.repo_id=local/arena_so101_oraclew_i2 --dataset.root=$DS --policy.type=diffusion --policy.down_dims=[256,512,1024] --policy.device=cuda --policy.push_to_hub=false --batch_size=16 --log_freq=100 --wandb.enable=false"
+if [ ! -f runs/dp_pilot/pilot2_done ]; then
     echo "$(date +%T) DP timing pilot"
-    env -u PYTHONPATH "$LR_PY" train_dp_i2.py $COMMON --output_dir=runs/dp_pilot/run --job_name=dp_pilot --steps=1500 --save_freq=100000 --seed=1 \
+    env -u PYTHONPATH "$LR_PY" train_dp_i2.py $COMMON --output_dir=runs/dp_pilot/run2 --job_name=dp_pilot2 --steps=1500 --save_freq=100000 --seed=1 \
         > "logs/$(date +%F_%H%M%S)_dp_pilot.log" 2>&1 || { echo "DP pilot failed"; exit 1; }
-    touch runs/dp_pilot/pilot_done
+    touch runs/dp_pilot/pilot2_done
 fi
 PL=$(ls -t logs/*_dp_pilot.log | head -1)
 SPS=$(python3 - "$PL" <<'PY'

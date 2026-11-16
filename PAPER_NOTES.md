@@ -120,3 +120,4 @@ dp_w_s2000: 88b47f6aea835c4f9077f45dbbc58a1b2c7f16388c5c8567b76ddd948fed997a  (1
 - So ACT_W s1000: mất 3, được 4, p = 1,0. So CL0_W (17/20): mất 3, được 4, p = 1,0.
 - Bảng DEV `dev_C2` L0,5 (20 cảnh): CL0 7 < ACT 13–15 ≤ DP 16 ≤ CL0_W 17. Sau khi sửa bộ thực thi, pipeline mô-đun ngang chính sách học tốt nhất.
 - Tiếp (`scripts/p6_queue.sh`, unit `arena-p6q`): ORACLE/ORACLE_W trên `dev_C2` L0,5 (n = 60), rồi DP_W s2000, s3000 (cùng công thức) + DEV.
+- DP_W s2000 (cùng công thức): **13/20** (collision 7; `runs/p4_dev_dp_w_s2000_dev_c2_l05`). DP s1000 16, s2000 13 → trung bình 14,5/20, cùng mức ACT (13–15). Chênh giữa hạt giống (±1,5 lượt) cỡ chênh giữa phương pháp học.

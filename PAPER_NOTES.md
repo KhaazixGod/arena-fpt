@@ -82,3 +82,8 @@ ORACLE_W trên các sheet của E6 (`arrangements/sim_ext`, `train_C0..C3`, 70 s
 | | | | train_C3 | 162/210 |
 - So với E6 (ORACLE cũ, 444 tập từ 560 lượt, chỉ L0/L0,25): thêm 215 tập L0,5; phần L0+L0,25 có 462 tập (≈ cỡ E6), dùng cho ablation `ACT_W_slow` (tách hiệu ứng thầy đã sửa khỏi hiệu ứng thêm L0,5).
 - Lỗi treo của Replicator: 1 lần sau khi chạy một làn với ngưỡng 200 s (23:42), bộ canh giữ tự chạy lại.
+
+## P4 checkpoint (sha256, để điền vào tiền đăng ký mới)
+```
+act_w_s1000: abd7cb0a154dc8a541fbb6a9bb03ce803e37e0abb1a8703ded41e9aa43f8115f  (16/11 08:31; 100 000 bước, batch 8, loss ~0,05; logs/2026-11-16_061648_train_act_w_s1000.log)
+```

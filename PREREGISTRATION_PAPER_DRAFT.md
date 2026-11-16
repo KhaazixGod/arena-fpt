@@ -4,7 +4,7 @@
 
 **Khung (người dùng chốt 16/11).** Kết quả chính: lỗi chọn nhánh cổ tay của bộ thực thi trên băng chuyển động và cách sửa W1 (`arena/wrist_branch.py`). ACT và DP là baseline học; H2 là câu hỏi phụ.
 
-**Đã biết trước khi viết (công khai trong bài báo).** Mọi số dưới đây là sheet không khóa (`PAPER_NOTES.md`): ORACLE → ORACLE_W 41 → 49/60 (`train_C2` L0,5), 35 → 44/60 (`train_C3`); CL0 → CL0_W 25 → 52/60 (`dev_C2` L0,5), 24 → 26/30 (L0,25), 0 → 0/60 (L1,0); ACT_old 15/20, ACT_W 15/15/13 trên 20 cảnh `dev_C2` L0,5. Kết quả G2 trên `locked/test_C2.csv` (cùng tập vật) đã được xem, kể cả theo từng vật (ORACLE yếu ở đĩa mỏng `plate`). W1 không được chỉnh trên vật hay sheet TEST nào.
+**Đã biết trước khi viết (công khai trong bài báo).** Mọi số dưới đây là sheet không khóa (`PAPER_NOTES.md`): ORACLE → ORACLE_W 41 → 49/60 (`train_C2` L0,5), 35 → 44/60 (`train_C3`), 45 → 58/60 (`dev_C2` L0,5), 27 → 29/30 (`dev_C2` L0,25), 0 → 0/60 (`dev_C2` L1,0); CL0 → CL0_W 25 → 52/60 (`dev_C2` L0,5), 24 → 26/30 (L0,25), 0 → 0/60 (L1,0); ACT_old 15/20, ACT_W 15/15/13, ACT_W_slow 15/20, DP_W s1000 16/20 trên 20 cảnh `dev_C2` L0,5. Kết quả G2 trên `locked/test_C2.csv` (cùng tập vật) đã được xem, kể cả theo từng vật (ORACLE yếu ở đĩa mỏng `plate`). W1 không được chỉnh trên vật hay sheet TEST nào.
 
 ## 1. Sheet TEST mới
 

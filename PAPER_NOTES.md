@@ -99,3 +99,14 @@ act_w_s3000: 37d2e0d9e1ebf46a74e253696ddb8ae89ab1657386e786c9919be3324ec145a5  (
 - L1,0 (150 mm/s) là sàn cho mọi phương pháp: ORACLE `late` 50 + `ik_fail` 10; ORACLE_W `late` 60; CL0 `late` 36 + `ik_fail` 24; CL0_W `late` 59. `late` = phép kiểm khả thi của CL-0 trước khi hạ (vật đi ~315 mm trong `t_after_settle_s` = 2,1 s → ra khỏi tầm). W1 đổi `ik_fail` thành `late`; giới hạn ở L1,0 là tầm với và thời gian, không phải cổ tay. Giải thích kết quả H4 của G2 (0/30 mọi phương pháp ở L1,0).
 - L0,25: cổ tay vẫn chạm biên (CL0 11/30 lượt) nhưng tay kịp bắt lại, ít khi thành thất bại → hiệu ứng nhỏ (+2/30).
 - Kết luận cho H3: hiệu ứng của W1 lớn nhất ở tốc độ trung bình (L0,5): đủ nhanh để đế quay nhiều mỗi lượt, chưa nhanh tới mức vật ra khỏi tầm. Còn thiếu ORACLE/ORACLE_W trên `dev_C2` L0,5 để bảng DEV đủ ô.
+
+## P5 bước 2: ACT trên DEV (16/11 14:38–17:25; `runs/p4_dev_*_dev_c2_l05`; cùng 20 cảnh `dev_C2_001..020`, L0,5; suy luận như G2)
+| Phương pháp | Thành công | Lỗi |
+|---|---|---|
+| CL0 (`runs/p2_cl0_dev_c2_l05`, 20 cảnh đầu) | 7/20 | collision 7, timing 3, slip 3 |
+| ACT_old s1000 (`act_i2_s1000`, chạy lại với mã hiện tại; E14 cũ: 13/20) | 15/20 | collision 5 |
+| ACT_W s1000 / s2000 / s3000 | 15 / 15 / 13 (trung bình 14,3/20 = 72%) | collision 4 / 5 / 6, other 1 / 0 / 1 |
+| CL0_W (`runs/p2_cl0w_dev_c2_l05`, 20 cảnh đầu) | **17/20** | collision 2, timing 1 |
+- ACT_W s1000 vs ACT_old s1000: mất 3, được 3, p = 1,0. **H2 (thầy đã sửa + demo L0,5 giúp học sinh) không được ủng hộ trên DEV**, giống E15 (I2F).
+- Lỗi của ACT gần như toàn `collision` (kẹp chạm vật/vật bên cạnh), không phải cổ tay; nên sửa thầy không chạm vào điểm yếu của học sinh.
+- Sau khi sửa bộ thực thi, pipeline mô-đun (CL0_W 17/20) ≥ chính sách học (14–15/20) trên DEV. Khớp khung (b).

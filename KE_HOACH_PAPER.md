@@ -111,3 +111,24 @@ Robot thật: kết quả khoảng 22/11 (kế hoạch riêng). Lịch này chư
 2. Hội nghị hoặc tạp chí đích: **chưa có**. Lịch giữ như mục 3.
 3. Tập vật TEST: **dùng lại tập vật TEST cũ**.
 4. Máy: **máy này chạy toàn bộ**; robot thật dùng máy khác.
+
+## 6. Khung (b): người dùng chốt ngày 16/11 (thay mục 2 P5 về giả thuyết)
+
+**Câu chuyện.** Trên băng chuyển động, bộ thực thi cổ điển chọn nhánh góc kẹp (θ hay θ+180°) theo tính liên tục; vì khi kẹp thẳng đứng q5 = yaw + q1 − 177,2°, cổ tay xoay đúng bằng góc quay của đế khi bám vật, và nhánh gần nhất có thể chạm biên khớp. Lỗi này chi phối thất bại của pipeline mô-đun (CL0 37/60 lượt chạm biên trên DEV L0,5) và của thầy đặc quyền (ORACLE), nhưng gần như không chạm chính sách học (ACT 2/100 lượt DEV). W1 (chọn nhánh theo khoảng trống cổ tay dự báo trên cửa sổ bám) sửa nó: CL0 42% → 87% (DEV), ORACLE 68% → 82% / 58% → 73% (train_C2 / train_C3). Hệ quả: so sánh G2 "học ≈ mô-đun" bị lẫn bởi lỗi bộ thực thi; học bắt chước còn bị chặn bởi chất lượng thầy.
+
+**Thí nghiệm (theo thứ tự hàng đợi `scripts/p5_queue.sh`, unit `arena-p5q`):**
+1. Quét tốc độ trên DEV (`dev_C2`, ghép cặp): CL0 vs CL0_W, ORACLE vs ORACLE_W ở L1,0 (n = 60) và L0,25 (n = 30); L0,5 đã có. Dự đoán: hiệu ứng W1 tăng theo tốc độ (đế quay nhiều hơn mỗi lượt).
+2. DEV ACT_old vs ACT_W ×3 (L0,5, n = 20).
+3. DP_W hạt giống 1000 + DEV.
+4. Ablation ACT_W_slow.
+5. Tiền đăng ký `PREREGISTRATION_PAPER.md` + sheet TEST mới (hạt giống mới, vật TEST cũ), rồi TEST khi người dùng ra lệnh.
+
+**Giả thuyết dự thảo (chốt khi viết tiền đăng ký, sau bước 1–2):**
+- H1 (chính): CL0_W > CL0 trên TEST L0,5 (cùng 60 cảnh; McNemar chính xác một phía p ≤ 0,05; hiệu ≥ +15 điểm).
+- H1b: ORACLE_W > ORACLE trên TEST L0,5 (cùng kiểm).
+- H2 (phụ): ACT_W (gộp 3 hạt giống theo cảnh) > ACT_old trên TEST L0,5.
+- H3 (mô tả hoặc kiểm, tùy kết quả bước 1): hiệu ứng W1 theo tốc độ (L0,25 / L0,5 / L1,0).
+- Mô tả: so sánh học với mô-đun đã sửa; phân loại nguyên nhân hỏng; số nhịp giữ lệnh.
+- Holm cho H1, H1b, H2.
+
+**Thay đổi so với mục 2:** H1 cũ ("ACT_W hơn baseline mô-đun mạnh nhất") bỏ, vì CL0_W 87% trên DEV làm nó gần như chắc chắn thất bại. Báo cáo nó như so sánh mô tả.

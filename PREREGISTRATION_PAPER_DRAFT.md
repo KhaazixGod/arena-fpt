@@ -4,7 +4,7 @@
 
 **Khung (người dùng chốt 16/11).** Kết quả chính: lỗi chọn nhánh cổ tay của bộ thực thi trên băng chuyển động và cách sửa W1 (`arena/wrist_branch.py`). ACT và DP là baseline học; H2 là câu hỏi phụ.
 
-**Đã biết trước khi viết (công khai trong bài báo).** Mọi số dưới đây là sheet không khóa (`PAPER_NOTES.md`): ORACLE → ORACLE_W 41 → 49/60 (`train_C2` L0,5), 35 → 44/60 (`train_C3`), 45 → 58/60 (`dev_C2` L0,5), 27 → 29/30 (`dev_C2` L0,25), 0 → 0/60 (`dev_C2` L1,0); CL0 → CL0_W 25 → 52/60 (`dev_C2` L0,5), 24 → 26/30 (L0,25), 0 → 0/60 (L1,0); ACT_old 15/20, ACT_W 15/15/13, ACT_W_slow 15/20, DP_W s1000 16/20 trên 20 cảnh `dev_C2` L0,5. Kết quả G2 trên `locked/test_C2.csv` (cùng tập vật) đã được xem, kể cả theo từng vật (ORACLE yếu ở đĩa mỏng `plate`). W1 không được chỉnh trên vật hay sheet TEST nào.
+**Đã biết trước khi viết (công khai trong bài báo).** Mọi số dưới đây là sheet không khóa (`PAPER_NOTES.md`): ORACLE → ORACLE_W 41 → 49/60 (`train_C2` L0,5), 35 → 44/60 (`train_C3`), 45 → 58/60 (`dev_C2` L0,5), 27 → 29/30 (`dev_C2` L0,25), 0 → 0/60 (`dev_C2` L1,0); CL0 → CL0_W 25 → 52/60 (`dev_C2` L0,5), 24 → 26/30 (L0,25), 0 → 0/60 (L1,0); ACT_old 15/20, ACT_W 15/15/13, ACT_W_slow 15/20, DP_W 16/13/16, ORACLE 16, ORACLE_W 19, CL0 7, CL0_W 17 trên 20 cảnh `dev_C2` L0,5. Kết quả G2 trên `locked/test_C2.csv` (cùng tập vật) đã được xem, kể cả theo từng vật (ORACLE yếu ở đĩa mỏng `plate`). W1 không được chỉnh trên vật hay sheet TEST nào.
 
 ## 1. Sheet TEST mới
 
@@ -22,7 +22,7 @@
 | ORACLE_W | ORACLE + W1 | thầy mới |
 | ACT_old s1000, s2000 | `act_i2_s1000`, `act_i2_s2000` (demo E6 của ORACLE) | checkpoint của G2 |
 | ACT_W s1000, s2000, s3000 | cùng công thức, demo P3 của ORACLE_W | băm: `PAPER_NOTES.md` |
-| DP_W | Diffusion Policy I2, UNet (256, 512, 1024) | số hạt giống tùy thời gian; chỉ mô tả |
+| DP_W s1000, s2000, s3000 | Diffusion Policy I2, UNet (256, 512, 1024), batch 16, 82 000 bước | chỉ mô tả |
 | ACT_W_slow s1000 | ACT_W chỉ trên demo L0/L0,25 | ablation, chỉ mô tả |
 
 Suy luận ACT như G2 (`ACT_REPLAN=0`, `ACT_COMMIT=0`); DP: `DP_REPLAN` = n_action_steps (32), số bước khử nhiễu mặc định của checkpoint. Tham số W1 cố định: cửa sổ 4,0 s, bắt đầu 0,5 s, khoảng an toàn 10°.
@@ -48,8 +48,8 @@ Holm–Bonferroni trên H1, H1b, H2 ở α = 0,05 (gia đình 3 phép kiểm).
 ## 6. Thứ tự chạy và kiểm soát
 
 - Chuỗi `scripts/p6_test.sh` (viết khi khóa): kiểm `CONFIRM_TEST=yes` và file tiền đăng ký đã commit; một Isaac mỗi lúc cho các phương pháp render ảnh; ORACLE/ORACLE_W có thể chạy song song với một làn khác.
-- Thứ tự: CL0, CL0_W, ORACLE, ORACLE_W (L0,5) → ACT_old ×2, ACT_W ×3 → DP_W, ACT_W_slow → ô L0,25.
-- Ước lượng: khoảng 25 giờ máy (ACT ~136 s/lượt, CL0 ~65 s, ORACLE ~30 s).
+- Thứ tự: CL0, CL0_W, ORACLE, ORACLE_W (L0,5) → ACT_old ×2, ACT_W ×3 → DP_W ×3, ACT_W_slow → ô L0,25.
+- Ước lượng: khoảng 28 giờ máy (ACT ~136 s/lượt, DP ~111 s, CL0 ~65 s, ORACLE ~30 s; 6 ACT + 3 DP × 60 lượt là phần lớn).
 - Phân tích: `scripts/p6_decide.py` (viết và commit cùng tiền đăng ký, trước TEST).
 
 ## 7. Băm (điền khi khóa)
@@ -61,7 +61,10 @@ commit paper-dev: ...
 act_w_s1000: abd7cb0a154dc8a541fbb6a9bb03ce803e37e0abb1a8703ded41e9aa43f8115f
 act_w_s2000: c07a917d9d125bca4f2e0585368c04d24400ca2b1743fb3bd2590894bf3cbb6c
 act_w_s3000: 37d2e0d9e1ebf46a74e253696ddb8ae89ab1657386e786c9919be3324ec145a5
-dp_w_*, act_w_slow_s1000: ...
+act_w_slow_s1000: 97fec9039fc7d79f4c31a52bd69e5df4b89a11fdb307ea9edfe989bbd0a5b695
+dp_w_s1000: 737d09ccd963a151b6be4ca4a1161f27c74372602a834389582e3b22153d0d3e
+dp_w_s2000: 88b47f6aea835c4f9077f45dbbc58a1b2c7f16388c5c8567b76ddd948fed997a
+dp_w_s3000: 0ad63bf645a4f4548a0115958166861e3ff7615a9150ed7a2c130e60a0f59ef9
 ```
 
 ## 8. Sai lệch

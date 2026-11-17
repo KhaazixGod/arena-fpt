@@ -122,3 +122,14 @@ dp_w_s3000: 0ad63bf645a4f4548a0115958166861e3ff7615a9150ed7a2c130e60a0f59ef9  (1
 - Bảng DEV `dev_C2` L0,5 (20 cảnh): CL0 7 < ACT 13–15 ≤ DP 16 ≤ CL0_W 17. Sau khi sửa bộ thực thi, pipeline mô-đun ngang chính sách học tốt nhất.
 - Tiếp (`scripts/p6_queue.sh`, unit `arena-p6q`): ORACLE/ORACLE_W trên `dev_C2` L0,5 (n = 60), rồi DP_W s2000, s3000 (cùng công thức) + DEV.
 - DP_W s2000 (cùng công thức): **13/20** (collision 7; `runs/p4_dev_dp_w_s2000_dev_c2_l05`). DP s1000 16, s2000 13 → trung bình 14,5/20, cùng mức ACT (13–15). Chênh giữa hạt giống (±1,5 lượt) cỡ chênh giữa phương pháp học.
+- DP_W s3000: **16/20** (collision 4; `runs/p4_dev_dp_w_s3000_dev_c2_l05`). DP ×3: 16 / 13 / 16 (trung bình 15,0).
+
+## Bảng DEV cuối (17/11 10:56; `dev_C2_001..020`, L0,5, cùng 20 cảnh; engine=isaac)
+| Phương pháp | Thành công | | Phương pháp | Thành công |
+|---|---|---|---|---|
+| CL0 | 7/20 | | ORACLE | 16/20 |
+| ACT_old s1000 | 15/20 | | **CL0_W** | **17/20** |
+| ACT_W s1000 / s2000 / s3000 | 15 / 15 / 13 | | **ORACLE_W** | **19/20** |
+| ACT_W_slow s1000 | 15/20 | | | |
+| DP_W s1000 / s2000 / s3000 | 16 / 13 / 16 | | | |
+Lỗi của mọi chính sách học chủ yếu là `collision`; lỗi của CL0 gốc chủ yếu là va chạm + thời gian + trượt, phần lớn biến mất với W1.

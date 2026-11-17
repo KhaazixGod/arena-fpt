@@ -91,6 +91,7 @@ act_w_s3000: 37d2e0d9e1ebf46a74e253696ddb8ae89ab1657386e786c9919be3324ec145a5  (
 act_w_slow_s1000: 97fec9039fc7d79f4c31a52bd69e5df4b89a11fdb307ea9edfe989bbd0a5b695  (16/11 ~19:45; ablation, 462 tập L0/L0,25; 2026-11-16_172750_train_act_w_slow_s1000.log)
 dp_w_s1000: 737d09ccd963a151b6be4ca4a1161f27c74372602a834389582e3b22153d0d3e  (17/11 ~00:35; UNet 256-512-1024, batch 16, 82 000 bước, loss ~0,003; 2026-11-16_203501_train_dp_w_s1000.log)
 dp_w_s2000: 88b47f6aea835c4f9077f45dbbc58a1b2c7f16388c5c8567b76ddd948fed997a  (17/11 ~05:40; cùng công thức; 2026-11-17_014139_train_dp_w_s2000.log)
+dp_w_s3000: 0ad63bf645a4f4548a0115958166861e3ff7615a9150ed7a2c130e60a0f59ef9  (17/11 ~10:15; cùng công thức; 2026-11-17_061804_train_dp_w_s3000.log)
 ```
 
 ## P5 bước 1: W1 theo tốc độ trên DEV (16/11 13:02–14:38; `logs/2026-11-16_143831_p5_sweep_compare.txt`; `scripts/p5_queue.sh`)

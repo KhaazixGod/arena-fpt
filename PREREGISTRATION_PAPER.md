@@ -140,7 +140,7 @@ Holm–Bonferroni trên H1, H1b, H2 ở α = 0,05 (gia đình 3 phép kiểm).
 `lock_commit` là commit chứa sheet, hai script và mã ở trên. Nó được ghi vào file này ở commit ngay sau.
 
 ```
-lock_commit: (điền ở commit kế tiếp)
+lock_commit: 248c7e845150c182d348bda065a3e23b7ab2fb2f
 locked/paper/test_C2.csv: 29aa1c3beb50847f04f73918044256afe7c733d38d420b158b8bd7b5e142b4ca
 configs/objects_sim.csv: 3d9e600afceacdc5dd931ffc2424afad61933416e567cc4fcf10aad6b4051baa
 configs/objects_sim.json: aa49c57deff0dab6408c48d9b0d0e5a1e3c2afea6590324aabf819ddaa418066

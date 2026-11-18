@@ -6,30 +6,34 @@ const L = require("./lib.js");
 const { D, FONT, H1, H2, H3, P, NOTE, BL, EQ, TABLE, FIG, out, push, runs } = L;
 const { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel, Footer, PageNumber, TableOfContents, LevelFormat } = D;
 L.setRefs(require("./refs.js"));
+const F = require("./fill.js");   // P6 / P7 results, filled automatically once the chains have written them
+// sentences written from DEV data that a new result could contradict get a yellow flag instead of being rewritten automatically
+const LEARNED_CAUGHT_UP = (F.P6.ok && F.P6.modularAhead() === false) || (F.P7.ok && !!F.P7.best() && F.P7.count("CL0_W (W1)") !== null && F.P7.count(F.P7.best()) >= F.P7.count("CL0_W (W1)"));
+const FLAG_MOD = LEARNED_CAUGHT_UP ? " {{cần xem lại: ở TEST mới hoặc P7 có chính sách học không thua CL0_W}}" : "";
 const FIGS = path.join(__dirname, "figures");
 const fig = f => path.join(FIGS, f);
 
 // ======================================================================= cover
 const center = (text, size, bold = false, after = 120, italics = false) => push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after },
     children: runs(text, { size, bold, italics }) }));
-center("{{TÊN TRƯỜNG ĐẠI HỌC}}", 28, true, 60);
+center(F.INFO.truong || "{{TÊN TRƯỜNG ĐẠI HỌC}}", 28, true, 60);
 center("NGÀNH TRÍ TUỆ NHÂN TẠO", 26, true, 1400);
 center("BÁO CÁO ĐỒ ÁN TỐT NGHIỆP", 32, true, 600);
 center("SỬ DỤNG ACT (ACTION CHUNKING WITH TRANSFORMERS)", 34, true, 60);
 center("CHO BÀI TOÁN GẮP VẬT LẠ TRÊN BĂNG CHUYỀN", 34, true, 60);
 center("VỚI TAY ROBOT GIÁ RẺ SO-101:", 34, true, 60);
 center("SO SÁNH VỚI CÁC PHƯƠNG PHÁP ĐÃ CÔNG BỐ", 34, true, 1200);
-push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: runs("Sinh viên thực hiện: {{Họ và tên — MSSV}}") }));
-push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: runs("Giảng viên hướng dẫn: {{Họ và tên}}") }));
-push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 1600 }, children: runs("Bản nháp ngày 18/11/2026 — số liệu TEST mới và bảng so sánh benchmark sẽ được điền sau") }));
-center("{{Thành phố}}, tháng 11 năm 2026", 26, false, 0, true);
+push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: runs("Sinh viên thực hiện: " + (F.INFO.sinh_vien || "{{Họ và tên — MSSV}}")) }));
+push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: runs("Giảng viên hướng dẫn: " + (F.INFO.gvhd || "{{Họ và tên}}")) }));
+push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 1600 }, children: runs(F.P6.ok && F.P7.ok ? `Bản ngày ${F.today()}` : `Bản nháp ngày ${F.today()} — ${F.P6.ok ? "bảng so sánh benchmark cùng máy" : "số liệu TEST mới và bảng so sánh benchmark"} sẽ được điền khi chuỗi chạy xong`) }));
+center(`${F.INFO.thanh_pho || "{{Thành phố}}"}, tháng 11 năm 2026`, 26, false, 0, true);
 
 // ======================================================================= front matter
 H1("TÓM TẮT", false);
 P("Đồ án nghiên cứu việc dùng **ACT (Action Chunking with Transformers)** [@act], một chính sách học bắt chước từ ảnh, cho bài toán gắp vật **chưa từng thấy** từ **băng chuyền đang chạy** bằng tay robot giá rẻ **SO-101** [@so101] với **một camera RGB cố định**. Toàn bộ thí nghiệm chạy trong một môi trường mô phỏng Isaac Sim [@isaac] dựng theo bàn thí nghiệm thật (gọi là **arena**), với 36 vật sinh theo thủ tục, bốn mức lộn xộn và nhiều tốc độ băng.");
 P("Để chọn phương pháp, đồ án dựa trên một benchmark của nhóm đã thử tái lập **30 bài báo** gần đây (visual servoing, thao tác hai tay, học bắt chước) trên cùng arena. Chỉ 4 bài chạy được trọn lưới đánh giá DEV; 15/22 bài bị chặn vì cần phần cứng ngoài nền tảng (tay thứ hai, cảm biến xúc giác, camera cổ tay). Trong số các phương pháp chạy được, ACT là phương pháp duy nhất được port nguyên vẹn, có sẵn trong LeRobot [@lerobot] cho SO-101 và huấn luyện được trong khoảng 2,5 giờ trên GPU 8 GB, nên được chọn làm chính sách học trọng tâm; Diffusion Policy [@dp] là baseline học thứ hai, và một pipeline mô-đun không cần huấn luyện (CL0) là baseline cổ điển.");
 P("Đóng góp kỹ thuật chính về phía ACT là **giao diện hành động I2**: chính sách xuất mục tiêu đầu kẹp **tương đối, trong hệ quy chiếu đi theo băng**, còn bộ thực thi bù quãng băng đi trong lúc thực hiện. Ở 75 mm/s, I2 đạt 13/20 so với 4/20 của ACT mặc định trên cùng cảnh DEV (McNemar p = 0,022), dù demo chỉ được ghi ở băng đứng yên và băng chậm. Trên 40 lượt DEV chung của benchmark, ACT_I2 đạt **30/40 (75%)**, cao hơn cả bốn bài báo tái lập (30–62,5%, trong đó bản port ACT gốc đạt 50%) nhưng thấp hơn CL0 (87,5%).");
-P("Ở kiểm định có tiền đăng ký của đồ án (G2, 60 cảnh TEST, 75 mm/s), ACT_I2 đạt 35% và 30% (hai hạt giống), không khác CL0 (37%); giả thuyết “ACT hơn mô-đun ≥ 15 điểm” bị bác bỏ. Một mở rộng 40 nhiệm vụ (E18) cho thấy ACT đa nhiệm vụ tổng quát hóa sang 8 nhiệm vụ chưa thấy (72,5%). Sau khi đóng băng đồ án, phân tích lỗi phát hiện bộ thực thi của baseline mô-đun chọn sai nhánh góc kẹp khi cổ tay chạm giới hạn khớp ở băng nhanh; bản sửa W1 nâng CL0 từ 25/60 lên 52/60 trên DEV. Một TEST mới có tiền đăng ký (ACT, ACT với demo đã sửa, Diffusion Policy, CL0, CL0 + W1) đang chạy; kết quả: {{điền sau khi TEST xong, dự kiến 19/11/2026}}.");
+P("Ở kiểm định có tiền đăng ký của đồ án (G2, 60 cảnh TEST, 75 mm/s), ACT_I2 đạt 35% và 30% (hai hạt giống), không khác CL0 (37%); giả thuyết “ACT hơn mô-đun ≥ 15 điểm” bị bác bỏ. Một mở rộng 40 nhiệm vụ (E18) cho thấy ACT đa nhiệm vụ tổng quát hóa sang 8 nhiệm vụ chưa thấy (72,5%). Sau khi đóng băng đồ án, phân tích lỗi phát hiện bộ thực thi của baseline mô-đun chọn sai nhánh góc kẹp khi cổ tay chạm giới hạn khớp ở băng nhanh; bản sửa W1 nâng CL0 từ 25/60 lên 52/60 trên DEV. Một TEST mới có tiền đăng ký (ACT, ACT với demo đã sửa, Diffusion Policy, CL0, CL0 + W1) " + (F.P6.ok ? `đã chạy xong (${F.P6.doneText}): ${F.P6.sentence()}.` : "đang chạy; kết quả: {{điền sau khi TEST xong, dự kiến 19/11/2026}}.") + (F.P7.ok ? ` Trên 40 lượt DEV của benchmark, ${F.P7.sentence()}.` : ""));
 P("**Từ khóa:** học bắt chước, ACT, Diffusion Policy, gắp vật trên băng chuyền, SO-101, Isaac Sim, tiền đăng ký, McNemar.", { noIndent: true });
 
 H1("DANH MỤC TỪ VIẾT TẮT", false);
@@ -314,9 +318,9 @@ BL([
     "**Baseline mô-đun đã sửa đứng đầu nhóm không đặc quyền:** CL0_W 17/20, so với CL0 gốc 7/20.",
 ]);
 
-H2("4.8. TEST mới có tiền đăng ký (sau đóng băng, đang chạy)");
+H2(F.P6.ok ? "4.8. TEST mới có tiền đăng ký (sau đóng băng)" : "4.8. TEST mới có tiền đăng ký (sau đóng băng, đang chạy)");
 P("`PREREGISTRATION_PAPER.md` được khóa ở commit `248c7e8` ngày 18/11/2026, trước lượt TEST đầu tiên: tờ mới `locked/paper/test_C2.csv` (60 cảnh, hạt giống 1611, dùng lại 10 vật TEST cũ), mọi phương pháp ở L0,5 và các phương pháp mô-đun thêm ở L0,25. Ba giả thuyết với hiệu chỉnh Holm (α = 0,05): **H1** CL0_W hơn CL0 (McNemar một phía, chênh ≥ +15 điểm); **H1b** ORACLE_W hơn ORACLE (chênh ≥ +5 điểm); **H2** ACT_W khác ACT_old (hoán vị đổi dấu hai phía trên trung bình theo hạt giống). So sánh DP, ablation, học so với mô-đun và ô L0,25 chỉ để mô tả.");
-TABLE("Kết quả TEST mới (test_C2 mới, n = 60 mỗi phương pháp) — điền khi chuỗi P6 xong", ["Phương pháp", "L0,5: thành công", "Wilson 95%", "L0,25: thành công", "Ghi chú"], [
+TABLE("Kết quả TEST mới (test_C2 mới, n = 60 mỗi phương pháp)" + (F.P6.ok ? "" : " — điền khi chuỗi P6 xong"), ["Phương pháp", "L0,5: thành công", "Wilson 95%", "L0,25: thành công", "Ghi chú"], F.P6.tableRows() || [
     ["CL0", "{{…/60}}", "{{…}}", "{{…/60}}", ""],
     ["CL0_W", "{{…/60}}", "{{…}}", "{{…/60}}", "H1"],
     ["ORACLE", "{{…/60}}", "{{…}}", "{{…/60}}", ""],
@@ -325,13 +329,20 @@ TABLE("Kết quả TEST mới (test_C2 mới, n = 60 mỗi phương pháp) — �
     ["ACT_W s1000 / s2000 / s3000", "{{… / … / …}}", "{{…}}", "—", "H2"],
     ["ACT_W_slow s1000", "{{…/60}}", "{{…}}", "—", "ablation"],
     ["DP_W s1000 / s2000 / s3000", "{{… / … / …}}", "{{…}}", "—", "mô tả"],
-], [28, 20, 16, 18, 18], { center: [1, 2, 3], source: "`logs/*_p6_decision.txt`, `runs/p6_test_decision.json` (tạo khi chuỗi xong)." });
-TABLE("Quyết định theo tiền đăng ký — điền khi chuỗi P6 xong", ["Giả thuyết", "Chênh lệch", "p (thô)", "p (Holm)", "Kết luận"], [
+], [26, 20, 22, 16, 16], { center: [1, 2, 3], source: F.P6.src + "." });
+TABLE("Quyết định theo tiền đăng ký (Holm trên H1, H1b, H2; α = 0,05)" + (F.P6.ok ? "" : " — điền khi chuỗi P6 xong"), ["Giả thuyết", "Chênh lệch", "p (thô)", "p (Holm)", "Kết luận"], F.P6.decisionRows() || [
     ["H1: CL0_W > CL0", "{{…}}", "{{…}}", "{{…}}", "{{…}}"],
     ["H1b: ORACLE_W > ORACLE", "{{…}}", "{{…}}", "{{…}}", "{{…}}"],
     ["H2: ACT_W ≠ ACT_old", "{{…}}", "{{…}}", "{{…}}", "{{…}}"],
-], [32, 17, 15, 15, 21], { center: [1, 2, 3, 4] });
-NOTE("Tình trạng lúc viết (18/11/2026, 20:44): 7/17 lần chạy đã xong với 60/60 lượt hợp lệ mỗi lần, 0 lượt không hợp lệ; tỉ lệ thành công chưa được xem, theo đúng tiền đăng ký. Dự kiến xong khoảng 14:30 ngày 19/11/2026.");
+], [24, 30, 10, 10, 26], { center: [2, 3], source: F.P6.ok ? F.P6.src + "; McNemar chính xác một phía (H1, H1b), hoán vị đổi dấu hai phía (H2)." : undefined });
+if (F.P6.ok) {
+    NOTE(F.P6.statusNote());
+    if (F.figIf("fig_p6_test.png")) FIG(F.figIf("fig_p6_test.png"), 15, "TEST mới: mọi phương pháp trên test_C2 mới ở L0,5 (60 cảnh, vật chưa thấy); chỉ H1, H1b, H2 quyết định, phần còn lại là mô tả");
+    P("**Phần mô tả** (không tham gia quyết định, theo mục 4 của tiền đăng ký):", { noIndent: true });
+    BL(F.P6.descBullets());
+} else {
+    NOTE("Tình trạng lúc viết (18/11/2026, 20:44): 7/17 lần chạy đã xong với 60/60 lượt hợp lệ mỗi lần, 0 lượt không hợp lệ; tỉ lệ thành công chưa được xem, theo đúng tiền đăng ký. Dự kiến xong khoảng 14:30 ngày 19/11/2026.");
+}
 
 H2("4.9. So sánh với các bài báo trên benchmark");
 P("Phần này trả lời vế thứ hai của CH4 trên **đúng 40 lượt DEV** mà benchmark dùng cho mọi bài báo (dev_C0 và dev_C2, cảnh 001–010, ở L0 và L0,25). Benchmark chạy arena ở commit `4963d40`, tổ tiên của mã hiện tại, với cùng tệp vật, cùng cảnh và cùng tờ sắp xếp; khác biệt duy nhất là máy chạy (Windows, RTX 4060 Laptop) và tệp hiệu chuẩn camera.");
@@ -349,8 +360,8 @@ BL([
     "**Cần đọc thận trọng:** hai bên chạy trên hai máy. Trên máy của đồ án, CL0 cũng đạt 35/40 trên 40 lượt này (`runs/e7_cl0_vs_ggcnn`) nhưng chỉ 30/40 lượt cho cùng kết quả với máy benchmark; chênh khoảng ±5 lượt có thể chỉ do khác máy. Mỗi ô chỉ có 10 lượt.",
     "**Không so trực tiếp với số trong bài báo gốc** (ví dụ ACT 86% trên tác vụ chuyển khối, DP 20,7% trung bình trên RoboTwin): khác tác vụ, khác robot, khác định nghĩa thành công; chính benchmark cũng ghi “không so được”.",
 ]);
-P("Để so cả chín chính sách học và các phương pháp có W1 trên cùng máy, chuỗi P7 chạy lại toàn bộ trên 40 lượt này ngay sau TEST (`scripts/p7_bench_dev.sh`, so sánh bằng `scripts/p7_bench_compare.py`). Bảng 4.9 sẽ được điền khi chuỗi xong.");
-TABLE("Mọi phương pháp của đồ án trên 40 lượt DEV của benchmark, chạy trên cùng máy (P7) — điền khi chuỗi P7 xong", ["Phương pháp", "Thành công /40", "Wilson 95%", "C0 L0 / C0 L0,25 / C2 L0 / C2 L0,25", "So với CL0_W (p)"], [
+P("Để so cả chín chính sách học và các phương pháp có W1 trên cùng máy, chuỗi P7 chạy lại toàn bộ trên 40 lượt này ngay sau TEST (`scripts/p7_bench_dev.sh`, so sánh bằng `scripts/p7_bench_compare.py`). " + (F.P7.ok ? `Chuỗi xong lúc ${F.P7.doneText}; Bảng 4.9 và hình ngay sau nó đọc tự động từ kết quả của chuỗi.` : "Bảng 4.9 sẽ được điền khi chuỗi xong.") + "");
+TABLE("Mọi phương pháp của đồ án trên 40 lượt DEV của benchmark, chạy trên cùng máy (P7)" + (F.P7.ok ? "" : " — điền khi chuỗi P7 xong"), ["Phương pháp", "Thành công /40", "Wilson 95%", F.P7.ok ? "C0 L0 · C0 L0,25 · C2 L0 · C2 L0,25 (hàng nhiều hạt giống: cộng)" : "C0 L0 / C0 L0,25 / C2 L0 / C2 L0,25", "So với CL0_W (McNemar p)"], F.P7.tableRows() || [
     ["CL0 / CL0_W", "{{… / …}}", "{{…}}", "{{…}}", "{{…}}"],
     ["ORACLE / ORACLE_W", "{{… / …}}", "{{…}}", "{{…}}", "{{…}}"],
     ["ACT_old s1000 / s2000", "{{… / …}}", "{{…}}", "{{…}}", "{{…}}"],
@@ -358,7 +369,11 @@ TABLE("Mọi phương pháp của đồ án trên 40 lượt DEV của benchmark
     ["ACT_W_slow s1000", "{{…}}", "{{…}}", "{{…}}", "{{…}}"],
     ["DP_W s1000 / s2000 / s3000", "{{… / … / …}}", "{{…}}", "{{…}}", "{{…}}"],
     ["P05 / P07 / P17 / P19 (benchmark, khác máy)", "18 / 12 / 25 / 20", "", "", "{{…}}"],
-], [30, 17, 14, 23, 16], { center: [1, 2, 3, 4], source: "`logs/*_p7_bench_compare.txt`, `runs/p7_bench_compare.json` (tạo khi chuỗi xong)." });
+], [26, 17, 17, 22, 18], { center: [1, 2, 3, 4], source: F.P7.src + (F.P7.ok ? "; McNemar chính xác hai phía, không hiệu chỉnh (Holm trong log)." : ".") });
+if (F.P7.ok) {
+    BL(F.P7.bullets());
+    if (F.figIf("fig_p7_bench.png")) FIG(F.figIf("fig_p7_bench.png"), 15, "Mọi phương pháp trên 40 lượt DEV của benchmark: phương pháp của đồ án chạy cùng máy (P7), bài báo tái lập lấy từ máy benchmark");
+}
 
 H2("4.10. Thảo luận");
 H3("4.10.1. ACT làm tốt ở đâu");
@@ -373,7 +388,7 @@ H3("4.10.2. Hạn chế của ACT trong bài toán này");
 BL([
     "**Va chạm và đóng kẹp vào chỗ trống** là lỗi chủ yếu; có độ lệch ngang hệ thống khoảng −9 mm ở kế hoạch đầu.",
     "**Phương sai giữa các hạt giống và giữa các lần chạy lớn** (13–16/20 giữa hạt giống, 3/20 lượt đổi kết quả khi chạy lại), nên cần nhiều lượt và nhiều hạt giống để kết luận.",
-    "**Không vượt được baseline mô-đun đã sửa.** Trên DEV ở L0,5, CL0_W (17/20) đứng trên mọi chính sách học (13–16/20); trên lưới benchmark, CL0 (87,5%) đứng trên ACT (75%).",
+    "**Không vượt được baseline mô-đun đã sửa.** Trên DEV ở L0,5, CL0_W (17/20) đứng trên mọi chính sách học (13–16/20); trên lưới benchmark, CL0 (87,5%) đứng trên ACT (75%)." + FLAG_MOD + "",
     "**Dữ liệu tốt hơn không giúp.** Thêm demo nhanh (E15) hay đổi sang chuyên gia đã sửa (ACT_W) đều không đổi kết quả trên DEV.",
 ]);
 H3("4.10.3. Mối đe dọa đến tính đúng đắn");
@@ -381,7 +396,7 @@ BL([
     "**Mô phỏng:** vật lý kẹp, ma sát và render khác thực tế; mô phỏng lockstep bỏ qua độ trễ suy luận.",
     "**Chuyên gia có đặc quyền:** demo từ ORACLE sạch và nhất quán hơn demo người; trên robot thật, ghi demo bằng tay leader ở 75 mm/s khó hơn nhiều.",
     "**Cỡ mẫu:** ô DEV 20 lượt chỉ thấy được chênh lớn (≳ 30 điểm); các kết luận mạnh chỉ dựa trên TEST 60 lượt có tiền đăng ký.",
-    "**So sánh khác máy** với benchmark (mục 4.9), sẽ được thay bằng P7 chạy cùng máy.",
+    F.P7.ok ? "**So sánh với bài báo vẫn khác máy:** các phương pháp của đồ án đã chạy lại cùng máy (P7), nhưng các bản port bài báo vẫn chỉ có số từ máy benchmark." : "**So sánh khác máy** với benchmark (mục 4.9), sẽ được thay bằng P7 chạy cùng máy.",
 ]);
 
 // ======================================================================= Chapter 5
@@ -391,10 +406,10 @@ P("Đồ án đã chọn, cài đặt và đánh giá công bằng ACT cho bài 
 BL([
     "**CH1 (chọn phương pháp).** Trong 30 bài báo, chỉ 4 chạy được trọn lưới DEV trên nền tảng một tay; ACT là phương pháp học duy nhất được port nguyên vẹn và vừa ngân sách tính toán, nên được chọn làm trọng tâm, với Diffusion Policy là baseline học thứ hai và CL0 là baseline mô-đun.",
     "**CH2 (biểu diễn hành động).** Giao diện I2 (mục tiêu đầu kẹp tương đối trong hệ băng, bộ thực thi bù băng trôi) là điều chỉnh quyết định: ở 75 mm/s, 13/20 so với 4/20 của ACT mặc định (p = 0,022), dù demo không có tốc độ này. Thực hiện trọn chunk 100 khung (/100) tốt hơn hoặc bằng các chế độ lập kế hoạch lại dày hơn.",
-    "**CH3 (so với mô-đun).** Ở TEST có tiền đăng ký của đồ án (G2), ACT_I2 (35%, 30%) không khác CL0 (37%); claim “hơn 15 điểm” bị bác bỏ. Phân tích sau đóng băng cho thấy CL0 khi đó bị lỗi cổ tay của bộ thực thi; sau khi sửa (W1), baseline mô-đun dẫn trước trên DEV. Kết quả TEST mới: {{điền sau 19/11}}.",
-    "**CH4 (dữ liệu, DP, bài báo khác).** Chuyên gia tốt hơn và demo nhanh hơn không làm ACT tốt hơn trên DEV; ACT và Diffusion Policy ngang nhau (13–16/20). Trên lưới DEV của benchmark, ACT của đồ án (75%) hơn mọi bài báo tái lập (30–62,5%), kể cả bản port ACT gốc (50%). Bảng so cả chín chính sách trên cùng máy: {{điền sau 20/11}}.",
+    "**CH3 (so với mô-đun).** Ở TEST có tiền đăng ký của đồ án (G2), ACT_I2 (35%, 30%) không khác CL0 (37%); claim “hơn 15 điểm” bị bác bỏ. Phân tích sau đóng băng cho thấy CL0 khi đó bị lỗi cổ tay của bộ thực thi; sau khi sửa (W1), baseline mô-đun dẫn trước trên DEV. Kết quả TEST mới: " + (F.P6.ok ? F.P6.sentence() + "." : "{{điền sau 19/11}}.") + (F.P6.ok && F.P6.modularAhead() === false ? " {{cần xem lại: trên TEST mới ACT_W không thua CL0_W — viết lại các câu “ACT chưa vượt mô-đun”}}" : ""),
+    "**CH4 (dữ liệu, DP, bài báo khác).** Chuyên gia tốt hơn và demo nhanh hơn không làm ACT tốt hơn trên DEV; ACT và Diffusion Policy ngang nhau (13–16/20). Trên lưới DEV của benchmark, ACT của đồ án (75%) hơn mọi bài báo tái lập (30–62,5%), kể cả bản port ACT gốc (50%). Bảng so cả chín chính sách trên cùng máy: " + (F.P7.ok ? F.P7.sentence() + " (Bảng 4.9)." : "{{điền sau 20/11}}."),
 ]);
-P("**Phương pháp rút ra cho nền tảng giá rẻ.** Với một tay, một camera cố định và GPU 8 GB, chính sách học nên dùng là **ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia** — cấu hình này mạnh hơn mọi phương pháp đã công bố mà nhóm tái lập được trên cùng arena. Tuy vậy, với một baseline mô-đun được sửa đúng bộ thực thi, ACT chưa vượt được pipeline mô-đun ở bài toán gắp đơn lẻ; lợi thế của ACT nằm ở chỗ không cần nhận thức thủ công và mở rộng sang nhiều kỹ năng trong một mô hình (E18). Bài học phương pháp luận quan trọng nhất là: so sánh “học với mô-đun” chỉ có nghĩa khi bộ thực thi chung đã được kiểm lỗi, và chỉ nên kết luận trên TEST có tiền đăng ký.");
+P("**Phương pháp rút ra cho nền tảng giá rẻ.** Với một tay, một camera cố định và GPU 8 GB, chính sách học nên dùng là **ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia** — cấu hình này mạnh hơn mọi phương pháp đã công bố mà nhóm tái lập được trên cùng arena. Tuy vậy, với một baseline mô-đun được sửa đúng bộ thực thi, ACT chưa vượt được pipeline mô-đun ở bài toán gắp đơn lẻ; lợi thế của ACT nằm ở chỗ không cần nhận thức thủ công và mở rộng sang nhiều kỹ năng trong một mô hình (E18). Bài học phương pháp luận quan trọng nhất là: so sánh “học với mô-đun” chỉ có nghĩa khi bộ thực thi chung đã được kiểm lỗi, và chỉ nên kết luận trên TEST có tiền đăng ký." + FLAG_MOD + "");
 H2("5.2. Hạn chế");
 BL([
     "Toàn bộ kết quả là mô phỏng; chưa có số trên robot thật.",
@@ -474,5 +489,4 @@ const doc = new Document({
         children: out,
     }],
 });
-const target = path.join(__dirname, "Bao_cao_do_an_ACT.docx");
-Packer.toBuffer(doc).then(buf => { fs.writeFileSync(target, buf); console.log("wrote", target, buf.length, "bytes"); });
+L.save(doc, path.join(F.OUT_DIR, "Bao_cao_do_an_ACT.docx"));

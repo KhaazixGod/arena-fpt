@@ -7,9 +7,12 @@ const { Document, Packer, Paragraph, TextRun, AlignmentType, Footer, PageNumber,
 const ALL = require("./refs.js");
 L.setRefs(["act", "dp", "lerobot", "so101", "isaac", "mcnemar", "wilson", "holm"].map(k => ALL.find(r => r.key === k)));
 const fig = f => path.join(__dirname, "figures", f);
+const F = require("./fill.js");   // P6 / P7 results, filled automatically once the chains have written them
+const CAUGHT_UP = (F.P6.ok && F.P6.modularAhead() === false) || (F.P7.ok && !!F.P7.best() && F.P7.count("CL0_W (W1)") !== null && F.P7.count(F.P7.best()) >= F.P7.count("CL0_W (W1)"));
+const FLAG_MOD = CAUGHT_UP ? " {{cần xem lại: ở TEST mới hoặc P7 có chính sách học không thua CL0_W}}" : "";
 
 H1("BÁO CÁO TÓM TẮT: ACT CHO BÀI TOÁN GẮP VẬT LẠ TRÊN BĂNG CHUYỀN VỚI TAY SO-101", false, "#", { noBreak: true });
-push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: runs("Mô phỏng Isaac Sim, một camera RGB cố định — bản ngày 18/11/2026; ô {{vàng}} điền khi TEST mới (19/11) và so sánh cùng máy (20/11) xong", { size: 24, italics: true }) }));
+push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: runs("Mô phỏng Isaac Sim, một camera RGB cố định — bản ngày " + F.today() + (F.P6.ok && F.P7.ok ? "; số TEST mới và so sánh cùng máy đọc tự động từ kết quả của các chuỗi" : F.P6.ok ? "; ô {{vàng}} điền khi so sánh cùng máy (~20/11) xong" : "; ô {{vàng}} điền khi TEST mới (19/11) và so sánh cùng máy (20/11) xong"), { size: 24, italics: true }) }));
 
 H2("1. Kết luận");
 BL([
@@ -17,7 +20,7 @@ BL([
     "**Giao diện I2 là điều chỉnh quyết định.** Cho ACT xuất mục tiêu đầu kẹp tương đối trong hệ quy chiếu băng: ở 75 mm/s đạt 13/20 so với 4/20 của ACT mặc định (p = 0,022), dù demo không có tốc độ này.",
     "**Hơn mọi bài báo tái lập**, trên cùng 40 lượt DEV của benchmark: ACT đạt 75%, các bài báo đạt 30–62,5%. Bản port ACT gốc đạt 50% (p = 0,041). ACT vẫn **thấp hơn pipeline mô-đun CL0** (87,5%), dù chênh lệch chưa có ý nghĩa (p = 0,125).",
     "**TEST có tiền đăng ký của đồ án (G2):** ACT 35% và 30% (hai hạt giống), CL0 37% → giả thuyết “ACT hơn mô-đun ≥ 15 điểm” bị bác bỏ.",
-    "**Sau đóng băng:** bộ thực thi của baseline mô-đun có lỗi cổ tay ở băng nhanh. Sửa bằng W1 nâng CL0 từ 25/60 lên 52/60 trên DEV, nên kết quả G2 nhiều khả năng bị lẫn bởi lỗi này. TEST mới: {{kết quả, ~19/11}}.",
+    "**Sau đóng băng:** bộ thực thi của baseline mô-đun có lỗi cổ tay ở băng nhanh. Sửa bằng W1 nâng CL0 từ 25/60 lên 52/60 trên DEV, nên kết quả G2 nhiều khả năng bị lẫn bởi lỗi này. " + (F.P6.ok ? `**TEST mới có tiền đăng ký** (xong ${F.P6.doneText}): ${F.P6.sentence()}.` : "TEST mới: {{kết quả, ~19/11}}.") + FLAG_MOD,
 ]);
 
 H2("2. Bài toán");
@@ -55,24 +58,25 @@ TABLE("Kết quả chính (số lượt thành công; ghép cặp trên cùng c�
     ["W1 (sau đóng băng)", "dev_C2, L0,5, n = 60", "CL0 25 → 52 (p = 5·10⁻⁷); ORACLE 45 → 58 (p = 2·10⁻⁴)", "`BAO_CAO_PAPER_DEV.md` mục 5"],
     ["Chính sách học mới (sau đóng băng)", "dev_C2, L0,5, n = 20", "ACT 13–15, DP 13–16, CL0 7, CL0_W 17, ORACLE_W 19", "`runs/p4_dev_*`, `runs/p2_*`, `runs/p5_*`"],
     ["So với bài báo (benchmark)", "40 lượt DEV chung, khác máy", "ACT 30/40; P17 25, P19 20, P05 18, P07 12; CL0 35, ORACLE 40", "`Benmark_Capstone/results/raw`, `runs/e14_*`"],
-    ["**TEST mới** (tiền đăng ký)", "test_C2 mới, L0,5, n = 60", "H1 CL0_W > CL0: {{…}}; H1b ORACLE_W > ORACLE: {{…}}; H2 ACT_W vs ACT_old: {{…}}; DP: {{…}}", "`logs/*_p6_decision.txt`"],
-    ["So sánh cùng máy (P7)", "40 lượt DEV của benchmark", "9 chính sách học + CL0/CL0_W/ORACLE/ORACLE_W: {{…}}", "`logs/*_p7_bench_compare.txt`"],
+    ["**TEST mới** (tiền đăng ký)", "test_C2 mới, L0,5, n = 60", F.P6.shortCell() || "H1 CL0_W > CL0: {{…}}; H1b ORACLE_W > ORACLE: {{…}}; H2 ACT_W vs ACT_old: {{…}}; DP: {{…}}", F.P6.ok ? F.P6.src : "`logs/*_p6_decision.txt`"],
+    ["So sánh cùng máy (P7)", "40 lượt DEV của benchmark", F.P7.shortCell() || "9 chính sách học + CL0/CL0_W/ORACLE/ORACLE_W: {{…}}", F.P7.ok ? F.P7.src : "`logs/*_p7_bench_compare.txt`"],
 ], [22, 20, 36, 22]);
-FIG(fig("fig_benchmark_dev.png"), 14, "ACT của đồ án so với các bài báo tái lập trên 40 lượt DEV chung của benchmark");
+if (F.P7.ok && F.figIf("fig_p7_bench.png")) FIG(F.figIf("fig_p7_bench.png"), 12, "Mọi phương pháp trên 40 lượt DEV chung của benchmark: phương pháp của đồ án chạy cùng máy (P7), bài báo tái lập lấy từ máy benchmark");
+else FIG(fig("fig_benchmark_dev.png"), 14, "ACT của đồ án so với các bài báo tái lập trên 40 lượt DEV chung của benchmark");
 
 H2("6. Phương pháp đề xuất và hạn chế");
-P("**Phương pháp đề xuất cho nền tảng giá rẻ:** ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia. Cấu hình này mạnh hơn mọi phương pháp đã công bố mà nhóm tái lập được trên cùng arena. Tuy vậy, ACT chưa vượt pipeline mô-đun khi bộ thực thi của pipeline đã được sửa. Lợi thế của ACT là không cần nhận thức thủ công và học được nhiều kỹ năng trong một mô hình (E18).");
+P("**Phương pháp đề xuất cho nền tảng giá rẻ:** ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia. Cấu hình này mạnh hơn mọi phương pháp đã công bố mà nhóm tái lập được trên cùng arena. Tuy vậy, ACT chưa vượt pipeline mô-đun khi bộ thực thi của pipeline đã được sửa." + FLAG_MOD + " Lợi thế của ACT là không cần nhận thức thủ công và học được nhiều kỹ năng trong một mô hình (E18).");
 BL([
     "Chỉ mô phỏng (lockstep, không có trễ suy luận thật); chưa có số trên robot thật.",
     "Demo sinh bởi chuyên gia có đặc quyền; demo người ở 75 mm/s khó hơn nhiều.",
     "Lỗi chính của ACT: va chạm và đóng kẹp vào chỗ trống (lệch ngang khoảng −9 mm). Phương sai giữa các hạt giống (13–16/20) và giữa các lần chạy (3/20 lượt đổi kết quả) lớn.",
-    "So sánh với benchmark là khác máy: chênh lệch khoảng ±5 lượt có thể chỉ do máy. Chuỗi P7 chạy lại cùng máy.",
+    F.P7.ok ? "So sánh với bài báo vẫn là khác máy: phương pháp của đồ án đã chạy lại cùng máy (P7), các bản port bài báo chỉ có số từ máy benchmark; chênh lệch khoảng ±5 lượt có thể chỉ do máy." : "So sánh với benchmark là khác máy: chênh lệch khoảng ±5 lượt có thể chỉ do máy. Chuỗi P7 chạy lại cùng máy.",
     "Ở 150 mm/s mọi phương pháp đều thất bại vì tầm với và thời gian.",
 ]);
 
 H2("7. Việc tiếp theo");
 BL([
-    "Điền kết quả TEST mới (~19/11) và bảng so sánh cùng máy (~20/11) vào báo cáo.",
+    ...(F.P6.ok && F.P7.ok ? [] : [F.P6.ok ? "Điền bảng so sánh cùng máy (~20/11) vào báo cáo." : "Điền kết quả TEST mới (~19/11) và bảng so sánh cùng máy (~20/11) vào báo cáo."]),
     "Kiểm chứng ACT_I2 và CL0_W trên tay SO-101 thật.",
     "Áp W1 cho bộ thực thi của ACT/DP; giảm lệch ngang của ACT bằng dữ liệu hoặc huấn luyện.",
 ]);
@@ -103,5 +107,4 @@ const doc = new Document({
         children: out,
     }],
 });
-const target = path.join(__dirname, "Bao_cao_tom_tat_ACT.docx");
-Packer.toBuffer(doc).then(buf => { fs.writeFileSync(target, buf); console.log("wrote", target, buf.length, "bytes"); });
+L.save(doc, path.join(F.OUT_DIR, "Bao_cao_tom_tat_ACT.docx"));

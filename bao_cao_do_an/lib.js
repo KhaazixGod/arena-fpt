@@ -96,4 +96,23 @@ function FIG(file, widthCm, cap) {
 }
 function refNo(key) { if (!refIdx[key]) throw new Error("ref " + key); return refIdx[key]; }
 
-module.exports = { D, FONT, BODY, SMALL, CONTENT_W, setRefs, runs, H1, H2, H3, P, NOTE, BL, EQ, TABLE, FIG, out, push, refNo, getRefs: () => REFS };
+// Write the .docx.  If the file on disk is not the one this builder wrote last time (someone edited it in Word/LibreOffice), keep it and write
+// <name>_moi.docx next to it instead, so hand edits are never overwritten.  Hashes of the last build: .build_sha256.json in the same folder.
+function save(doc, target) {
+    const path = require("path"), crypto = require("crypto");
+    const sha = b => crypto.createHash("sha256").update(b).digest("hex");
+    const rec = path.join(path.dirname(target), ".build_sha256.json"), key = path.basename(target);
+    let R = {}; try { R = JSON.parse(fs.readFileSync(rec, "utf8")); } catch (e) { R = {}; }
+    let dest = target;
+    if (fs.existsSync(target) && R[key] && sha(fs.readFileSync(target)) !== R[key]) {
+        dest = target.replace(/\.docx$/, "_moi.docx");
+        console.log(`WARNING ${key} changed after the last build (edited by hand?): left as it is, new build written to ${path.basename(dest)}`);
+    }
+    return D.Packer.toBuffer(doc).then(buf => {
+        fs.writeFileSync(dest, buf);
+        if (dest === target) { R[key] = sha(buf); fs.writeFileSync(rec, JSON.stringify(R, null, 1)); }
+        console.log("wrote", dest, buf.length, "bytes");
+    });
+}
+
+module.exports = { D, FONT, BODY, SMALL, CONTENT_W, setRefs, runs, H1, H2, H3, P, NOTE, BL, EQ, TABLE, FIG, out, push, refNo, save, getRefs: () => REFS };

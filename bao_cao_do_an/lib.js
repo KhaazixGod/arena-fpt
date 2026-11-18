@@ -34,10 +34,10 @@ let chap = 0, chapLabel = "", tabN = 0, figN = 0, eqN = 0, listInst = 0;
 const out = [];
 const push = (...x) => out.push(...x);
 
-function H1(text, numbered = true, label = "") {
+function H1(text, numbered = true, label = "", opts = {}) {
     if (numbered) { chap += 1; chapLabel = String(chap); } else { chapLabel = label; }
-    tabN = 0; figN = 0; eqN = 0;
-    push(new Paragraph({ heading: HeadingLevel.HEADING_1, pageBreakBefore: true, alignment: AlignmentType.CENTER,
+    if (!opts.keepCounters) { tabN = 0; figN = 0; eqN = 0; }
+    push(new Paragraph({ heading: HeadingLevel.HEADING_1, pageBreakBefore: opts.noBreak ? false : true, alignment: AlignmentType.CENTER,
         children: [new TextRun({ text: numbered ? `CHƯƠNG ${chap}. ${text}` : text, font: FONT, size: 30, bold: true })] }));
 }
 function H2(text) { push(new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun({ text, font: FONT, size: 28, bold: true })] })); }
@@ -60,12 +60,12 @@ function BL(items, numbered = false) {
 function EQ(text) {
     eqN += 1;
     push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 80, after: 80 }, tabStops: [{ type: "right", position: CONTENT_W }],
-        children: [...runs(text, { italics: true }), new TextRun({ text: `\t(${chapLabel}.${eqN})`, font: FONT, size: BODY })] }));
+        children: [...runs(text, { italics: true }), new TextRun({ text: chapLabel === "#" ? `\t(${eqN})` : `\t(${chapLabel}.${eqN})`, font: FONT, size: BODY })] }));
 }
 function caption(kind, text) {
     const n = kind === "Bảng" ? ++tabN : ++figN;
     return new Paragraph({ alignment: AlignmentType.CENTER, keepNext: kind === "Bảng", spacing: { before: kind === "Bảng" ? 160 : 60, after: kind === "Bảng" ? 60 : 200, line: 300, lineRule: "auto" },
-        children: [new TextRun({ text: chapLabel ? `${kind} ${chapLabel}.${n}. ` : `${kind}: `, font: FONT, size: 24, bold: true }), ...runs(text, { size: 24, italics: true })] });
+        children: [new TextRun({ text: chapLabel === "#" ? `${kind} ${n}. ` : chapLabel ? `${kind} ${chapLabel}.${n}. ` : `${kind}: `, font: FONT, size: 24, bold: true }), ...runs(text, { size: 24, italics: true })] });
 }
 function cellPara(text, bold, align) {
     return new Paragraph({ alignment: align || AlignmentType.LEFT, spacing: { before: 20, after: 20, line: 260, lineRule: "auto" }, children: runs(text, { size: SMALL, bold }) });

@@ -5,7 +5,8 @@ SIFT keypoints + descriptors (cv2.SIFT_create, default parameters), FLANN kd-tre
 with checks 50, Lowe ratio 0.75, then RANSAC with a 5 px threshold.  CNS feeds the matches to its GNN servo (essential-matrix RANSAC); here the paper's
 servo is not exercised (as in the benchmark): the inlier matches give a 2D similarity reference -> current image (objects lie flat on the belt under the
 top-down camera) that moves the reference grasp.  One detection per reference view; reference views matching the same place are merged.
-Options (--opt): min_inliers (8), ratio (0.75), ransac_px (5).  Chosen before any run; changed only on DEV (ARENA_TUNING_LOG.md).
+Options (--opt): min_inliers (3 = CNS's own minimum, classic.py "Too few matches" below 3; set before any arena run after a check on the
+reference renders: the textureless sim objects give 0-20 SIFT keypoints, a box 5 inliers), ratio (0.75), ransac_px (5).  Changes only on DEV.
 """
 from __future__ import annotations
 
@@ -22,7 +23,7 @@ VERSION = "p05_cns 1 (2026-11-20)"
 class Detector:
     NAME = "P05_CNS"
 
-    def __init__(self, ref_dir: str, info: dict, min_inliers="8", ratio="0.75", ransac_px="5"):
+    def __init__(self, ref_dir: str, info: dict, min_inliers="3", ratio="0.75", ransac_px="5"):
         self.min_inl, self.ratio, self.thr = int(min_inliers), float(ratio), float(ransac_px)
         self.belt = Belt(info)
         self.region = self.belt.mask()

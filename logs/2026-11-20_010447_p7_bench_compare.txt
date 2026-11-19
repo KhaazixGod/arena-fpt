@@ -1,0 +1,101 @@
+P7 benchmark-DEV comparison (exploratory, DEV, not pre-registered; engine=isaac)
+grid: 40 pairs = dev_C0/dev_C2 001..010 x L0/L0.25; ours = this machine, bench = ../../Benmark_Capstone (other machine)
+
+method                             src      succ     SR    Wilson 95%   C0/L0 C0/L.25  C2/L0 C2/L.25  t_lift  ms_p50  failures
+CL0                                ours   32/40   80.0% [65.2, 89.5]    7/10    9/10   6/10   10/10    2.58    0.65  {'slip': 4, 'calib': 2, 'seg_miss': 1, 'collision': 1}
+CL0_W (W1)                         ours   32/40   80.0% [65.2, 89.5]    7/10    9/10   8/10    8/10    2.58    0.62  {'slip': 3, 'calib': 3, 'seg_miss': 1, 'collision': 1}
+ORACLE                             ours   40/40  100.0% [91.2,100.0]   10/10   10/10  10/10   10/10     2.6    0.65  {}
+ORACLE_W (W1)                      ours   40/40  100.0% [91.2,100.0]   10/10   10/10  10/10   10/10     2.6    0.66  {}
+ACT_old s1000                      ours   29/40   72.5% [57.2, 83.9]    5/10   10/10   6/10    8/10    2.52    2.95  {'collision': 9, 'other': 2}
+ACT_old s2000                      ours   33/40   82.5% [68.1, 91.3]    9/10    9/10   8/10    7/10    2.52    3.63  {'collision': 6, 'other': 1}
+ACT_W s1000                        ours   32/40   80.0% [65.2, 89.5]    9/10   10/10   6/10    7/10    2.53     2.9  {'collision': 6, 'other': 2}
+ACT_W s2000                        ours   32/40   80.0% [65.2, 89.5]    9/10    8/10   7/10    8/10    2.58    2.83  {'collision': 8}
+ACT_W s3000                        ours   33/40   82.5% [68.1, 91.3]   10/10   10/10   6/10    7/10     2.5    2.79  {'collision': 7}
+ACT_W_slow s1000                   ours   32/40   80.0% [65.2, 89.5]    9/10    9/10   6/10    8/10    2.53    2.86  {'collision': 6, 'other': 2}
+DP_W s1000                         ours   23/40   57.5% [42.2, 71.5]    7/10    7/10   4/10    5/10    2.64    5.58  {'collision': 15, 'other': 2}
+DP_W s2000                         ours   25/40   62.5% [47.0, 75.8]    8/10    6/10   5/10    6/10    2.72    5.66  {'collision': 14, 'other': 1}
+DP_W s3000                         ours   28/40   70.0% [54.6, 81.9]    8/10    7/10   4/10    9/10    2.65    5.63  {'collision': 12}
+bench CL0                          bench  35/40   87.5% [73.9, 94.5]    7/10   10/10   8/10   10/10    2.58    0.39  {'calib': 2, 'slip': 1, 'seg_miss': 1, 'collision': 1}
+bench ORACLE                       bench  40/40  100.0% [91.2,100.0]   10/10   10/10  10/10   10/10     2.6    0.36  {}
+bench NOOP                         bench   0/40    0.0% [ 0.0,  8.8]    0/10    0/10   0/10    0/10             0.0  {'other': 40}
+P05 CNS frontend                   bench  18/40   45.0% [30.7, 60.2]    4/10    4/10   2/10    8/10    3.13    0.47  {'other': 9, 'seg_miss': 6, 'slip': 4, 'calib': 1, 'grasp_point': 1, 'collision': 1}
+P07 ViT-VS                         bench  12/40   30.0% [18.1, 45.4]    2/10    4/10   4/10    2/10    2.81     0.4  {'calib': 8, 'collision': 8, 'slip': 6, 'grasp_point': 4, 'timing': 2}
+P17 ODIL stage1                    bench  25/40   62.5% [47.0, 75.8]    5/10    5/10   6/10    9/10     2.6    0.36  {'grasp_point': 7, 'slip': 3, 'calib': 2, 'collision': 2, 'other': 1}
+P18 FlowControl                    bench   0/12    0.0% [ 0.0, 24.2]    0/10     0/2    0/0     0/0         1992.47  {'other': 10, 'slip': 1, 'calib': 1}  INCOMPLETE 12/40
+P19 ACT                            bench  20/40   50.0% [35.2, 64.8]    8/10    5/10   3/10    4/10    3.01   28.55  {'collision': 7, 'slip': 5, 'grasp_point': 4, 'timing': 4}
+ACT_old s1000 (E14, older code)    extra  30/40   75.0% [59.8, 85.8]    5/10   10/10   7/10    8/10    2.55    2.91  {'collision': 6, 'other': 4}
+
+seed groups (mean over seeds, complete runs only):
+  modular      seeds 2: [32, 32] -> mean 32.0/40 = 80.0%
+  privileged   seeds 2: [40, 40] -> mean 40.0/40 = 100.0%
+  ACT_old      seeds 2: [29, 33] -> mean 31.0/40 = 77.5%
+  ACT_W        seeds 3: [32, 32, 33] -> mean 32.3/40 = 80.8%
+  DP_W         seeds 3: [23, 25, 28] -> mean 25.3/40 = 63.3%
+
+paired vs CL0_W (W1) (exact McNemar two-sided; Holm within this table):
+  CL0                                n=40  only CL0             2  only ref  2  p=1.0000  Holm 1.0000  (same machine)
+  ORACLE                             n=40  only ORACLE          8  only ref  0  p=0.0078  Holm 0.1206  (same machine)
+  ORACLE_W (W1)                      n=40  only ORACLE_W        8  only ref  0  p=0.0078  Holm 0.1206  (same machine)
+  ACT_old s1000                      n=40  only ACT_old s1000   3  only ref  6  p=0.5078  Holm 1.0000  (same machine)
+  ACT_old s2000                      n=40  only ACT_old s2000   7  only ref  6  p=1.0000  Holm 1.0000  (same machine)
+  ACT_W s1000                        n=40  only ACT_W s1000     4  only ref  4  p=1.0000  Holm 1.0000  (same machine)
+  ACT_W s2000                        n=40  only ACT_W s2000     5  only ref  5  p=1.0000  Holm 1.0000  (same machine)
+  ACT_W s3000                        n=40  only ACT_W s3000     5  only ref  4  p=1.0000  Holm 1.0000  (same machine)
+  ACT_W_slow s1000                   n=40  only ACT_W_slow s10  6  only ref  6  p=1.0000  Holm 1.0000  (same machine)
+  DP_W s1000                         n=40  only DP_W s1000      5  only ref 14  p=0.0636  Holm 0.7628  (same machine)
+  DP_W s2000                         n=40  only DP_W s2000      5  only ref 12  p=0.1435  Holm 1.0000  (same machine)
+  DP_W s3000                         n=40  only DP_W s3000      5  only ref  9  p=0.4240  Holm 1.0000  (same machine)
+  bench CL0                          n=40  only bench CL0       4  only ref  1  p=0.3750  Holm 1.0000  (x-machine)
+  bench ORACLE                       n=40  only bench ORACLE    8  only ref  0  p=0.0078  Holm 0.1206  (x-machine)
+  P05 CNS frontend                   n=40  only P05 CNS fronte  2  only ref 16  p=0.0013  Holm 0.0236  (x-machine)
+  P07 ViT-VS                         n=40  only P07 ViT-VS      1  only ref 21  p=0.0000  Holm 0.0002  (x-machine)
+  P17 ODIL stage1                    n=40  only P17 ODIL stage  5  only ref 12  p=0.1435  Holm 1.0000  (x-machine)
+  P18 FlowControl                    n=12  only P18 FlowContro  0  only ref  9  p=0.0039  Holm 0.0664  (x-machine)
+  P19 ACT                            n=40  only P19 ACT         3  only ref 15  p=0.0075  Holm 0.1206  (x-machine)
+
+paired vs CL0 (exact McNemar two-sided; Holm within this table):
+  CL0_W (W1)                         n=40  only CL0_W           2  only ref  2  p=1.0000  Holm 1.0000  (same machine)
+  ORACLE                             n=40  only ORACLE          8  only ref  0  p=0.0078  Holm 0.1250  (same machine)
+  ORACLE_W (W1)                      n=40  only ORACLE_W        8  only ref  0  p=0.0078  Holm 0.1250  (same machine)
+  ACT_old s1000                      n=40  only ACT_old s1000   3  only ref  6  p=0.5078  Holm 1.0000  (same machine)
+  ACT_old s2000                      n=40  only ACT_old s2000   6  only ref  5  p=1.0000  Holm 1.0000  (same machine)
+  ACT_W s1000                        n=40  only ACT_W s1000     5  only ref  5  p=1.0000  Holm 1.0000  (same machine)
+  ACT_W s2000                        n=40  only ACT_W s2000     5  only ref  5  p=1.0000  Holm 1.0000  (same machine)
+  ACT_W s3000                        n=40  only ACT_W s3000     5  only ref  4  p=1.0000  Holm 1.0000  (same machine)
+  ACT_W_slow s1000                   n=40  only ACT_W_slow s10  6  only ref  6  p=1.0000  Holm 1.0000  (same machine)
+  DP_W s1000                         n=40  only DP_W s1000      5  only ref 14  p=0.0636  Holm 0.7628  (same machine)
+  DP_W s2000                         n=40  only DP_W s2000      4  only ref 11  p=0.1185  Holm 1.0000  (same machine)
+  DP_W s3000                         n=40  only DP_W s3000      4  only ref  8  p=0.3877  Holm 1.0000  (same machine)
+  bench CL0                          n=40  only bench CL0       3  only ref  0  p=0.2500  Holm 1.0000  (x-machine)
+  bench ORACLE                       n=40  only bench ORACLE    8  only ref  0  p=0.0078  Holm 0.1250  (x-machine)
+  P05 CNS frontend                   n=40  only P05 CNS fronte  1  only ref 15  p=0.0005  Holm 0.0093  (x-machine)
+  P07 ViT-VS                         n=40  only P07 ViT-VS      1  only ref 21  p=0.0000  Holm 0.0002  (x-machine)
+  P17 ODIL stage1                    n=40  only P17 ODIL stage  4  only ref 11  p=0.1185  Holm 1.0000  (x-machine)
+  P18 FlowControl                    n=12  only P18 FlowContro  0  only ref  9  p=0.0039  Holm 0.0664  (x-machine)
+  P19 ACT                            n=40  only P19 ACT         4  only ref 16  p=0.0118  Holm 0.1536  (x-machine)
+
+paired vs bench CL0 (exact McNemar two-sided; Holm within this table):
+  CL0                                n=40  only CL0             0  only ref  3  p=0.2500  Holm 1.0000  (x-machine)
+  CL0_W (W1)                         n=40  only CL0_W           1  only ref  4  p=0.3750  Holm 1.0000  (x-machine)
+  ORACLE                             n=40  only ORACLE          5  only ref  0  p=0.0625  Holm 0.6875  (x-machine)
+  ORACLE_W (W1)                      n=40  only ORACLE_W        5  only ref  0  p=0.0625  Holm 0.6875  (x-machine)
+  ACT_old s1000                      n=40  only ACT_old s1000   0  only ref  6  p=0.0312  Holm 0.3750  (x-machine)
+  ACT_old s2000                      n=40  only ACT_old s2000   4  only ref  6  p=0.7539  Holm 1.0000  (x-machine)
+  ACT_W s1000                        n=40  only ACT_W s1000     3  only ref  6  p=0.5078  Holm 1.0000  (x-machine)
+  ACT_W s2000                        n=40  only ACT_W s2000     3  only ref  6  p=0.5078  Holm 1.0000  (x-machine)
+  ACT_W s3000                        n=40  only ACT_W s3000     3  only ref  5  p=0.7266  Holm 1.0000  (x-machine)
+  ACT_W_slow s1000                   n=40  only ACT_W_slow s10  3  only ref  6  p=0.5078  Holm 1.0000  (x-machine)
+  DP_W s1000                         n=40  only DP_W s1000      3  only ref 15  p=0.0075  Holm 0.1131  (x-machine)
+  DP_W s2000                         n=40  only DP_W s2000      3  only ref 13  p=0.0213  Holm 0.2978  (x-machine)
+  DP_W s3000                         n=40  only DP_W s3000      2  only ref  9  p=0.0654  Holm 0.6875  (x-machine)
+  bench ORACLE                       n=40  only bench ORACLE    5  only ref  0  p=0.0625  Holm 0.6875  (same machine)
+  P05 CNS frontend                   n=40  only P05 CNS fronte  0  only ref 17  p=0.0000  Holm 0.0003  (same machine)
+  P07 ViT-VS                         n=40  only P07 ViT-VS      1  only ref 24  p=0.0000  Holm 0.0000  (same machine)
+  P17 ODIL stage1                    n=40  only P17 ODIL stage  3  only ref 13  p=0.0213  Holm 0.2978  (same machine)
+  P18 FlowControl                    n=12  only P18 FlowContro  0  only ref  9  p=0.0039  Holm 0.0625  (same machine)
+  P19 ACT                            n=40  only P19 ACT         3  only ref 18  p=0.0015  Holm 0.0253  (same machine)
+
+reproducibility (same method: this machine vs benchmark machine; and the E14 run of ACT_old s1000 on older code):
+  CL0 vs bench CL0: 32/40 vs 35/40, same outcome on 37/40 pairs
+  ORACLE vs bench ORACLE: 40/40 vs 40/40, same outcome on 40/40 pairs
+  ACT_old s1000 vs ACT_old s1000 (E14, older code): 29/40 vs 30/40, same outcome on 39/40 pairs

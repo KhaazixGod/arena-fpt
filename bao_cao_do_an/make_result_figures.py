@@ -27,18 +27,18 @@ def wilson(s, n, z=1.959964):
     return max(0, c - h), min(1, c + h)
 
 
-def dotplot(rows, fname, xlabel="Tỉ lệ thành công (%) — chấm: điểm ước lượng, vạch: Wilson 95%", legend=None):
+def dotplot(rows, fname, xlabel="Tỉ lệ thành công (%) — chấm: điểm ước lượng, vạch: Wilson 95%", legend=None, width=7.2, row_h=0.42):
     """rows: list of (label, s, n, kind), drawn top to bottom; a row (label, None, None, None) is a group heading."""
-    h = 0.42 * len(rows) + 1.3
-    fig, ax = plt.subplots(figsize=(7.2, h))
-    for i, (lab, s, n, kind) in enumerate(rows):
+    h = row_h * len(rows) + 1.3
+    fig, ax = plt.subplots(figsize=(width, h))
+    for i, (lab, s, n, kind) in enumerate(rows):   # percentages round half up, like pct() in fill.js
         y = len(rows) - 1 - i
         if s is None:
             continue
         lo, hi = wilson(s, n)
         ax.plot([100 * lo, 100 * hi], [y, y], color=C[kind], lw=2, solid_capstyle="round", zorder=2)
         ax.scatter([100 * s / n], [y], s=64, color=C[kind], edgecolor="white", linewidth=1.5, zorder=3)
-        ax.text(104, y, f"{s}/{n} ({100 * s / n:.0f}%)", va="center", ha="left", color=INK, fontsize=9)
+        ax.text(104, y, f"{s}/{n} ({int(100 * s / n + 0.5)}%)", va="center", ha="left", color=INK, fontsize=9)
     ax.set_yticks(range(len(rows))); ax.set_yticklabels([r[0] for r in rows][::-1])
     for t, r in zip(ax.get_yticklabels(), rows[::-1]):
         if r[1] is None:
@@ -93,5 +93,16 @@ if os.path.exists(p7_path) and chain_done:
     rows += [(lab, S[k]["s"], S[k]["n"], kind) for k, lab, kind in (("bench CL0", "CL0 (benchmark)", "modular"), ("bench ORACLE", "ORACLE (benchmark)", "priv")) if ok(k)]
     dotplot(rows, "fig_p7_bench.png",
             legend=[("modular", "Mô-đun"), ("act", "ACT"), ("dp", "DP"), ("paper", "Bài báo tái lập"), ("priv", "Đặc quyền")])
+    # compact version for the 5-page summary: seeds of one method summed (descriptive; the interval treats the pooled trials as independent)
+    fams = [("CL0_W", ["CL0_W (W1)"], "modular"), ("ORACLE_W", ["ORACLE_W (W1)"], "priv"),
+            ("ACT_old (2 hạt giống)", ["ACT_old s1000", "ACT_old s2000"], "act"), ("ACT_W (3 hạt giống)", ["ACT_W s1000", "ACT_W s2000", "ACT_W s3000"], "act"),
+            ("DP_W (3 hạt giống)", ["DP_W s1000", "DP_W s2000", "DP_W s3000"], "dp")]
+    short = [("Đồ án, máy này (P7)", None, None, None)]
+    short += [(lab, sum(S[k]["s"] for k in ks), sum(S[k]["n"] for k in ks), kind) for lab, ks, kind in fams if all(ok(k) for k in ks)]
+    short += [("Máy benchmark", None, None, None)]
+    short += [(lab, S[k]["s"], S[k]["n"], kind) for k, lab, kind in (("bench CL0", "CL0 (benchmark)", "modular"),) if ok(k)]
+    short += [(lab, S[k]["s"], S[k]["n"], "paper") for k, lab in papers if ok(k)]
+    dotplot(short, "fig_p7_bench_gon.png",
+            legend=[("modular", "Mô-đun"), ("act", "ACT"), ("dp", "DP"), ("paper", "Bài báo"), ("priv", "Đặc quyền")], width=6.0, row_h=0.3)
 else:
     print("skip fig_p7_bench.png:", p7_path, "missing or the P7 chain is not done")

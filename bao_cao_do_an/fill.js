@@ -221,6 +221,27 @@ const P7 = {
         const L = LEARNED.filter(l => has(l) && S7[l].n === N7).sort((a, b) => S7[b].s - S7[a].s);
         return L.length ? L[0] : null;
     },
+    bestTies() {   // every learned checkpoint with the best count, e.g. "ACT_old s2000 và ACT_W s3000"
+        const b = this.best(); if (!b) return null;
+        const L = LEARNED.filter(l => has(l) && S7[l].n === N7 && S7[l].s === S7[b].s);
+        return L.length > 1 ? L.slice(0, -1).join(", ") + " và " + L[L.length - 1] : L[0];
+    },
+    learnedBeatsMod() {   // a learned checkpoint clearly above CL0_W (more successes and p < 0.05): the "modular ahead / tie" sentences would be wrong
+        const w = this.count(REF); if (!p7 || w === null) return false;
+        return LEARNED.some(l => { const q = p7.pairs[`${l} | ${REF}`]; return has(l) && S7[l].n === N7 && S7[l].s > w && q && q.p < 0.05; });
+    },
+    fam(labs) { const t = pooled7(labs); return t.n ? pct(t.s, t.n) : "—"; },
+    // P7 grid = belt stopped and 37.5 mm/s; one sentence comparing the ACT checkpoints with CL0_W there (tie only if no ACT checkpoint differs at p < 0.05)
+    slowVsMod() {
+        if (!p7 || !has(REF)) return null;
+        const acts = LEARNED.filter(l => l.startsWith("ACT") && has(l) && S7[l].n === N7);
+        const ps = acts.map(l => p7.pairs[`${l} | ${REF}`]).filter(q => q).map(q => q.p);
+        const dps = ["DP_W s1000", "DP_W s2000", "DP_W s3000"].filter(has);
+        const dpTxt = dps.length ? `; DP_W thấp hơn (${this.fam(dps)} gộp ba hạt giống, ${dps.map(l => S7[l].s).join(", ")}/${N7})` : "";
+        const actW = `ACT_W ${this.fam(["ACT_W s1000", "ACT_W s2000", "ACT_W s3000"])} gộp ba hạt giống, CL0_W ${pct(S7[REF].s, N7)}`;
+        if (ps.length && Math.min(...ps) >= 0.05) return `ACT ngang CL0_W (${actW}; không bản ACT nào khác CL0_W, McNemar p ≥ ${fp(Math.min(...ps))})${dpTxt}`;
+        return `${actW}${dpTxt} {{cần xem lại: có bản ACT khác CL0_W ở P7 (p < 0,05)}}`;
+    },
     bestPaper() { const L = PAPERS7.filter(has).sort((a, b) => S7[b].s - S7[a].s); return L.length ? L[0] : null; },
     count(lab) { return has(lab) ? S7[lab].s : null; },
     incomplete() { return Object.keys(S7).filter(k => !k.startsWith("bench") && !k.includes("E14") && !PAPERS7.includes(k) && k !== "P18 FlowControl" && S7[k].n < N7); },
@@ -232,15 +253,18 @@ const P7 = {
     bullets() {
         if (!p7) return [];
         const out = [], b = this.best(), bp = this.bestPaper(), w = this.count(REF);
-        if (b && w !== null) {
-            const q = p7.pairs[`${b} | ${REF}`];
-            out.push(`**Chính sách học tốt nhất trên cùng máy:** ${b} ${S7[b].s}/${N7} (${pct(S7[b].s, N7)}), so với CL0_W ${w}/${N7} (${pct(w, N7)})` +
-                (q ? `; chỉ ${b} đạt ở ${q.only_a} lượt, chỉ CL0_W đạt ở ${q.only_b} lượt, McNemar hai phía p = ${fp(q.p)} (Holm trong bảng: ${fp(q.holm)}).` : "."));
-        }
+        const sv = this.slowVsMod();
+        if (sv) out.push(`**Ở băng đứng yên và 37,5 mm/s:** ${sv}.` +
+            (b ? ` Tốt nhất là ${this.bestTies()} với ${S7[b].s}/${N7}.` : ""));
         const fam = (lab, labs) => { const t = pooled7(labs); return t.n ? `${lab} ${pct(t.s, t.n)}` : null; };
         const f = [fam("ACT_old", ["ACT_old s1000", "ACT_old s2000"]), fam("ACT_W", ["ACT_W s1000", "ACT_W s2000", "ACT_W s3000"]), fam("DP_W", ["DP_W s1000", "DP_W s2000", "DP_W s3000"])].filter(x => x);
-        if (f.length) out.push(`**Trung bình theo họ (gộp hạt giống):** ${f.join(", ")}; ORACLE_W ${has("ORACLE_W (W1)") ? pct(S7["ORACLE_W (W1)"].s, N7) : "—"}.`);
-        if (b && bp) out.push(`**So với bài báo tái lập** (bài báo chạy trên máy benchmark, nên đây vẫn là so khác máy): tốt nhất trong các bài báo là ${bp} ${S7[bp].s}/${N7}; ${b} hơn ${S7[b].s - S7[bp].s >= 0 ? S7[b].s - S7[bp].s : "−" + (S7[bp].s - S7[b].s)} lượt.`);
+        if (f.length) out.push(`**Trung bình theo họ (gộp hạt giống):** ${f.join(", ")}; CL0 và CL0_W ${has("CL0") ? pct(S7["CL0"].s, N7) : "—"} và ${w !== null ? pct(w, N7) : "—"}; ORACLE_W ${has("ORACLE_W (W1)") ? pct(S7["ORACLE_W (W1)"].s, N7) : "—"}.`);
+        if (sv && P6.ok && has("CL0")) out.push(`**Khác với TEST ở 75 mm/s**, nơi ${P6.modVsAct()}. W1 cũng không đổi gì ở lưới này (CL0 ${S7["CL0"].s}/${N7}, CL0_W ${w}/${N7}), khớp với việc lỗi cổ tay chủ yếu xảy ra ở băng nhanh. Lưới P7 khác TEST cả tốc độ băng lẫn tập cảnh (DEV), nên đây là mô tả, chưa tách riêng được tác động của tốc độ.`);
+        if (b && bp) {
+            const p19 = has("P19 ACT") ? `, bản port ACT gốc P19 ${S7["P19 ACT"].s}/${N7} (${pct(S7["P19 ACT"].s, N7)})` : "";
+            out.push(`**So với bài báo tái lập** (bài báo chạy trên máy benchmark, nên đây là so khác máy, chỉ mô tả): bài báo tốt nhất là ${bp} ${S7[bp].s}/${N7} (${pct(S7[bp].s, N7)})${p19}; ` +
+                `mọi bản ACT của đồ án đạt ${Math.min(...LEARNED.filter(l => l.startsWith("ACT") && has(l)).map(l => S7[l].s))}–${S7[b].s}/${N7}.`);
+        }
         const r = this.repro(); if (r) out.push(`**Độ lặp lại giữa hai máy:** ${r}.`);
         const inc = this.incomplete(); if (inc.length) out.push(`{{Chưa đủ 40 lượt: ${inc.join(", ")} — xem log P7}}`);
         return out;
@@ -249,12 +273,12 @@ const P7 = {
         if (!p7) return null;
         const b = this.best(), f = (labs) => { const t = pooled7(labs); return t.n ? pct(t.s, t.n) : "—"; };
         return `CL0_W ${cnt(REF)}, CL0 ${cnt("CL0")}, ORACLE_W ${cnt("ORACLE_W (W1)")}; ACT_old ${f(["ACT_old s1000", "ACT_old s2000"])}, ACT_W ${f(["ACT_W s1000", "ACT_W s2000", "ACT_W s3000"])}, DP_W ${f(["DP_W s1000", "DP_W s2000", "DP_W s3000"])} (gộp hạt giống)` +
-            (b ? `; tốt nhất ${b} ${S7[b].s}/${N7}, vs CL0_W p = ${pv(b, REF)}` : "");
+            (b ? `; tốt nhất ${this.bestTies()} ${S7[b].s}/${N7}, vs CL0_W p = ${pv(b, REF)}` : "");
     },
     sentence() {
         if (!p7) return null;
-        const b = this.best(), w = this.count(REF);
-        return b ? `chạy cùng máy (P7, ${this.doneText}), chính sách học tốt nhất là ${b} với ${S7[b].s}/${N7}, CL0_W đạt ${w}/${N7} (McNemar p = ${pv(b, REF)})` : "P7 xong nhưng chưa có chính sách học nào đủ 40 lượt";
+        const sv = this.slowVsMod();
+        return sv ? `chạy cùng máy (P7, ${this.doneText}) ở băng đứng yên và 37,5 mm/s, ${sv}` : "P7 xong nhưng chưa có chính sách học nào đủ 40 lượt";
     },
 };
 

@@ -339,7 +339,9 @@ if (F.P6.ok) {
     NOTE(F.P6.statusNote());
     if (F.figIf("fig_p6_test.png")) FIG(F.figIf("fig_p6_test.png"), 15, "TEST mới: mọi phương pháp trên test_C2 mới ở L0,5 (60 cảnh, vật chưa thấy); chỉ H1, H1b, H2 quyết định, phần còn lại là mô tả");
     P("**Phần mô tả** (không tham gia quyết định, theo mục 4 của tiền đăng ký):", { noIndent: true });
-    BL(F.P6.descBullets());
+    BL([...F.P6.descBullets(),
+        // checked against logs/2026-11-19_122405_p6_w1_compare.txt (commit c8b3449), test_C2 L0.5 blocks
+        "**Cơ chế của W1 trên TEST** (L0,5, mô tả; `logs/2026-11-19_122405_p6_w1_compare.txt`): số lượt bị giữ lệnh ở biên khớp cổ tay xoay giảm từ 19 xuống 0 với CL0 và từ 16 xuống 0 với ORACLE; tổng số nhịp giữ lệnh giảm từ 3482 xuống 266 và từ 1548 xuống 0. W1 đổi nhánh ở 27 lượt CL0 và 18 lượt ORACLE; cả 7 lượt được của ORACLE và 20 trong 22 lượt được của CL0 nằm trong các lượt này, và không lượt đổi nhánh nào bị kém đi. Hai lượt được và một lượt mất còn lại của CL0 thuộc các lượt W1 không đổi nhánh (cùng đường mã với bản gốc), tức là nhiễu giữa hai lần chạy."]);
 } else {
     NOTE("Tình trạng lúc viết (18/11/2026, 20:44): 7/17 lần chạy đã xong với 60/60 lượt hợp lệ mỗi lần, 0 lượt không hợp lệ; tỉ lệ thành công chưa được xem, theo đúng tiền đăng ký. Dự kiến xong khoảng 14:30 ngày 19/11/2026.");
 }

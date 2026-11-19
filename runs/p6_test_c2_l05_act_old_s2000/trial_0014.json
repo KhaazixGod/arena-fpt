@@ -1,0 +1,117 @@
+{
+ "trial_id": 14,
+ "method": "REMOTE:ACT_OLD_S2000",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_015",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl33",
+   "a_mm": -209.8,
+   "b_mm": -182.5,
+   "yaw_deg": 42.8
+  },
+  {
+   "name": "box35",
+   "a_mm": -279.6,
+   "b_mm": -200.7,
+   "yaw_deg": 270.5
+  },
+  {
+   "name": "mug29",
+   "a_mm": -150.0,
+   "b_mm": -197.5,
+   "yaw_deg": 0.4
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl33": 20.8,
+    "box35": 0.0,
+    "mug29": 35.6
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s2000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": null
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 488.0,
+  "ik_fail_ticks_lt6s": 4.0,
+  "ik_fail_first_t": 1.18,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [210.2, -74.4, 41.4], 'yaw': 1.5, 'pos_err_mm': 0.0, 'q': [21.0, 7.8, 4.6, 77.7, -154.7], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl33.a",
+  "cyl33.b",
+  "cyl33.z",
+  "cyl33.yaw",
+  "cyl33.tilt",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt"
+ ],
+ "ms_step_p50": 4.989701905287802,
+ "ms_step_p95": 73.56638403143734,
+ "n_steps": 1001,
+ "wall_s": 135.77,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 48.89
+}

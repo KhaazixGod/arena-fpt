@@ -1,0 +1,40 @@
+DECISION (PREREGISTRATION_PAPER.md section 4), test_C2 L0.5, n = 60 paired arrangements, Holm over 3 tests at alpha = 0.05
+  H1  CL0_W > CL0: 52/60 vs 31/60, gap +35.0 pts (needs >= +15), gained 22, lost 1, one-sided exact McNemar p = 2.86e-06 (Holm threshold 0.0167, adjusted p 8.58e-06) -> SUPPORTED
+  H1b ORACLE_W > ORACLE: 44/60 vs 37/60, gap +11.7 pts (needs >= +5), gained 7, lost 0, one-sided exact McNemar p = 0.00781 (Holm threshold 0.0500, adjusted p 0.00781) -> SUPPORTED
+  H2  ACT_W (3 seeds) vs ACT_old (2 seeds): mean d = +22.8 pts (scenes W better 35, old better 12, tie 13), two-sided sign-flip p = 8e-05 (Holm threshold 0.0250, adjusted p 0.00016) -> SUPPORTED (ACT_W better)
+
+DESCRIPTIVE (decides nothing)
+ test_C2 L0.5, success rate, Wilson 95 % CI:
+  cl0                31/60 =  51.7%  [39.3, 63.8]  valid=0: 0  fails: {'collision': 18, 'slip': 6, 'other': 3, 'grasp_point': 1, 'timing': 1}
+  cl0_w              52/60 =  86.7%  [75.8, 93.1]  valid=0: 0  fails: {'collision': 6, 'grasp_point': 1, 'slip': 1}
+  oracle             37/60 =  61.7%  [49.0, 72.9]  valid=0: 0  fails: {'slip': 14, 'collision': 5, 'other': 2, 'grasp_point': 1, 'timing': 1}
+  oracle_w           44/60 =  73.3%  [61.0, 82.9]  valid=0: 0  fails: {'slip': 12, 'timing': 3, 'grasp_point': 1}
+  act_old_s1000      24/60 =  40.0%  [28.6, 52.6]  valid=0: 0  fails: {'collision': 28, 'other': 8}
+  act_old_s2000      14/60 =  23.3%  [14.4, 35.4]  valid=0: 0  fails: {'collision': 40, 'other': 6}
+  act_w_s1000        39/60 =  65.0%  [52.4, 75.8]  valid=0: 0  fails: {'collision': 16, 'other': 5}
+  act_w_s2000        22/60 =  36.7%  [25.6, 49.3]  valid=0: 0  fails: {'collision': 33, 'other': 5}
+  act_w_s3000        37/60 =  61.7%  [49.0, 72.9]  valid=0: 0  fails: {'collision': 17, 'other': 6}
+  dp_w_s1000         27/60 =  45.0%  [33.1, 57.5]  valid=0: 0  fails: {'collision': 20, 'other': 13}
+  dp_w_s2000         28/60 =  46.7%  [34.6, 59.1]  valid=0: 0  fails: {'collision': 19, 'other': 13}
+  dp_w_s3000         35/60 =  58.3%  [45.7, 69.9]  valid=0: 0  fails: {'collision': 13, 'other': 12}
+  act_w_slow_s1000   31/60 =  51.7%  [39.3, 63.8]  valid=0: 0  fails: {'collision': 24, 'other': 5}
+  ACT_old pooled     38/120 =  31.7%  [24.0, 40.4]  per seed [24, 14]
+  ACT_W pooled       98/180 =  54.4%  [47.2, 61.6]  per seed [39, 22, 37]
+  DP_W pooled        90/180 =  50.0%  [42.8, 57.2]  per seed [27, 28, 35]
+ paired, pooled seeds (A - B):
+  CL0_W - ACT_W                      mean d =  +32.2 pts  (scenes A better 37, B better 4, tie 19)  sign-flip p = 1e-05
+  CL0_W - DP_W                       mean d =  +36.7 pts  (scenes A better 39, B better 4, tie 17)  sign-flip p = 1e-05
+  ORACLE_W - ACT_W                   mean d =  +18.9 pts  (scenes A better 31, B better 7, tie 22)  sign-flip p = 0.00361
+  ACT_W - DP_W                       mean d =   +4.4 pts  (scenes A better 21, B better 18, tie 21)  sign-flip p = 0.526
+  CL0 - ACT_old                      mean d =  +20.0 pts  (scenes A better 28, B better 14, tie 18)  sign-flip p = 0.0219
+  ACT_W_slow - ACT_W                 mean d =   -2.8 pts  (scenes A better 19, B better 17, tie 24)  sign-flip p = 0.725
+  ACT_W_slow s1000 vs ACT_W s1000 (same seed): 31 vs 39, gained 5, lost 13, two-sided McNemar p = 0.0963
+ test_C2 L0.25 (H3, modular methods only):
+  cl0                43/60 =  71.7%  [59.2, 81.5]  valid=0: 0  fails: {'collision': 10, 'slip': 5, 'grasp_point': 2}
+  cl0_w              49/60 =  81.7%  [70.1, 89.4]  valid=0: 0  fails: {'collision': 8, 'slip': 2, 'grasp_point': 1}
+  oracle             43/60 =  71.7%  [59.2, 81.5]  valid=0: 0  fails: {'slip': 14, 'grasp_point': 2, 'timing': 1}
+  oracle_w           46/60 =  76.7%  [64.6, 85.6]  valid=0: 0  fails: {'slip': 13, 'timing': 1}
+  cl0_w vs cl0: 49 vs 43, gap +10.0 pts, gained 7, lost 1, two-sided McNemar p = 0.0703
+  oracle_w vs oracle: 46 vs 43, gap +5.0 pts, gained 4, lost 1, two-sided McNemar p = 0.375
+
+written runs/p6_test_decision.json

@@ -1,8 +1,8 @@
-# Báo cáo: kết quả nhánh `paper-dev` (14–18/11/2026)
+# Báo cáo: kết quả nhánh `paper-dev` (14–19/11/2026)
 
-Ngày 18/11/2026, 14:30.
+Ngày 18/11/2026, 14:30; mục 8 (kết quả TEST mới) bổ sung 19/11/2026, 12:40.
 - Mọi số là mô phỏng (`engine=isaac`, Isaac Sim 6.0.0.1, RTX 3070 Ti 8 GB). Không có số của robot thật.
-- Các số dưới đây lấy trên sheet huấn luyện và DEV, **không phải kết quả TEST**. TEST mới đang chạy (mục 8).
+- Mục 1–7 lấy trên sheet huấn luyện và DEV, **không phải kết quả TEST**. Kết quả TEST mới (có tiền đăng ký) ở mục 8.
 - Mỗi số được tính lại từ `trials.csv` lúc viết báo cáo. Đường dẫn tương đối với `arena/`.
 
 ## 1. Kết luận
@@ -18,9 +18,9 @@ Ngày 18/11/2026, 14:30.
    - L0,5: lớn.
    - L1,0: mọi phương pháp đều 0/60, vì vật ra khỏi tầm với trước khi kịp kẹp. Đây không phải lỗi cổ tay.
 4. **Sau khi sửa, pipeline mô-đun ngang hoặc hơn chính sách học trên DEV** (20 cảnh): CL0_W 17/20, ACT 13–15/20, Diffusion Policy 13–16/20. ACT và DP thất bại chủ yếu do va chạm và gần như không gặp lỗi cổ tay.
-5. **Thầy đã sửa không giúp học sinh trên DEV (H2).** ACT_W được 15/15/13 (3 hạt giống), ACT_old được 15/20.
-6. **Kết quả G2 của đồ án (ACT ≈ CL0) có thể bị lẫn bởi lỗi này** [suy luận]. Trên DEV, lỗi chạm CL0 rất nặng nhưng hầu như không chạm ACT. TEST mới sẽ kiểm điều này.
-7. **TEST mới đã khóa tiền đăng ký và đang chạy** từ 14:12 ngày 18/11, khoảng 25 giờ.
+5. **Thầy đã sửa không giúp học sinh trên DEV (H2).** ACT_W được 15/15/13 (3 hạt giống), ACT_old được 15/20. **TEST mới cho kết quả ngược lại:** ACT_W hơn ACT_old +22,8 điểm (H2 được ủng hộ, mục 8); 20 cảnh DEV không đủ để thấy.
+6. **Kết quả G2 của đồ án (ACT ≈ CL0) có thể bị lẫn bởi lỗi này** [suy luận]. Trên DEV, lỗi chạm CL0 rất nặng nhưng hầu như không chạm ACT. TEST mới ủng hộ suy luận này (trên tờ TEST mới, không chạy lại tờ G2): W1 nâng CL0 từ 31 lên 52/60, còn CL0_W hơn ACT_W 32,2 điểm.
+7. **TEST mới xong 12:24 ngày 19/11: cả ba giả thuyết đều được ủng hộ** (H1, H1b, H2; Holm, α = 0,05). Chi tiết ở mục 8.
 
 ## 2. Bối cảnh và thuật ngữ
 
@@ -115,23 +115,40 @@ Ngày 18/11/2026, 14:30.
 - **Thầy đã sửa và demo L0,5 không tạo khác biệt trên DEV.** ACT_W s1000 so với ACT_old s1000: mất 3, được 3. ACT_W_slow cũng 15/20. Điều này khớp với E15 trước đây.
 - **Không có lượt `valid=0` nào** trong mọi lần chạy của `paper-dev` (P1–P5).
 
-## 8. TEST mới (đang chạy)
+## 8. TEST mới (xong 19/11/2026, 12:24)
 
 - **Tiền đăng ký.** `PREREGISTRATION_PAPER.md`, khóa ở commit `248c7e8`. Bạn duyệt nguyên bản ngày 18/11.
   - Sheet mới `locked/paper/test_C2.csv`: 60 cảnh, hạt giống 1611, 10 vật TEST cũ.
-  - Mã, checkpoint và sheet đều có băm. Mã TEST trùng mã của mọi lượt DEV từ 16/11.
-- **Giả thuyết.** Holm trên 3 phép kiểm, α = 0,05.
+  - Mã, checkpoint và sheet đều có băm; `p6_decide.py` kiểm lại mọi băm trước khi in quyết định.
+- **Chạy.** Unit `arena-p6test`, 14:12 ngày 18/11 → 12:24 ngày 19/11. 17 lần chạy, mỗi lần đủ 60/60 lượt hợp lệ, **0 dòng `valid=0`** (`logs/2026-11-18_141151_p6_test_chain.log`).
+- **Quyết định** (`logs/2026-11-19_122404_p6_decision.txt`, `runs/p6_test_decision.json`; Holm trên 3 phép kiểm, α = 0,05):
 
-| | Giả thuyết | Ngưỡng |
-|---|---|---|
-| H1 (chính) | CL0_W > CL0 ở L0,5 | McNemar một phía, và hiệu ≥ +15 điểm |
-| H1b | ORACLE_W > ORACLE ở L0,5 | McNemar một phía, và hiệu ≥ +5 điểm |
-| H2 (phụ) | ACT_W khác ACT_old | hoán vị dấu hai phía trên trung bình hạt giống |
+| Giả thuyết | Kết quả | p thô | p Holm | Kết luận |
+|---|---|---|---|---|
+| H1: CL0_W > CL0 (cần ≥ +15 điểm) | 52/60 so với 31/60, +35,0 điểm; được 22, mất 1 | 2,86·10⁻⁶ | 8,58·10⁻⁶ | **ủng hộ** |
+| H1b: ORACLE_W > ORACLE (cần ≥ +5 điểm) | 44/60 so với 37/60, +11,7 điểm; được 7, mất 0 | 0,0078 | 0,0078 | **ủng hộ** |
+| H2: ACT_W ≠ ACT_old | d trung bình +22,8 điểm; W hơn ở 35 cảnh, old hơn ở 12, hòa 13 | 8·10⁻⁵ | 1,6·10⁻⁴ | **ủng hộ (ACT_W tốt hơn)** |
 
-  DP, ablation, so sánh học với mô-đun và ô L0,25 chỉ để mô tả.
-- **Đang chạy.** Unit `arena-p6test`, bắt đầu 14:12 ngày 18/11, dự kiến xong khoảng 15:00 ngày 19/11.
-  - Lúc 14:24 đã có CL0 11/60 và ORACLE 20/60 lượt hợp lệ, 0 lượt `valid=0`. Chỉ đếm số lượt, chưa xem tỉ lệ thành công.
-  - Khi xong, quyết định tự in ra `logs/*_p6_decision.txt`.
+- **Mô tả** (không tham gia quyết định), test_C2 L0,5, n = 60:
+
+| Phương pháp | Thành công | Wilson 95% | Nguyên nhân hỏng chính |
+|---|---|---|---|
+| CL0 / CL0_W | 31 / 52 | 39–64% / 76–93% | collision 18, slip 6 / collision 6 |
+| ORACLE / ORACLE_W | 37 / 44 | 49–73% / 61–83% | slip 14 / slip 12 |
+| ACT_old s1000 / s2000 | 24 / 14 (gộp 38/120 = 32%) | gộp 24–40% | collision 28 / 40 |
+| ACT_W s1000 / s2000 / s3000 | 39 / 22 / 37 (gộp 98/180 = 54%) | gộp 47–62% | collision 16 / 33 / 17 |
+| ACT_W_slow s1000 | 31 | 39–64% | collision 24 |
+| DP_W s1000 / s2000 / s3000 | 27 / 28 / 35 (gộp 90/180 = 50%) | gộp 43–57% | collision 20 / 19 / 13 |
+
+  - Ghép cặp theo cảnh, gộp hạt giống (đổi dấu, không hiệu chỉnh): CL0_W − ACT_W +32,2 điểm (p = 1·10⁻⁵); CL0_W − DP_W +36,7 (p = 1·10⁻⁵); ORACLE_W − ACT_W +18,9 (p = 0,0036); ACT_W − DP_W +4,4 (p = 0,53); CL0 − ACT_old +20,0 (p = 0,022); ACT_W_slow − ACT_W −2,8 (p = 0,73).
+  - L0,25 (H3, chỉ mô-đun): CL0_W 49 so với CL0 43/60 (p = 0,070); ORACLE_W 46 so với ORACLE 43/60 (p = 0,38).
+- **Đọc kết quả.**
+  - W1 sửa đúng lỗi: ở L0,5 nó nâng cả CL0 (+35 điểm) và ORACLE (+11,7 điểm) trên vật và cảnh chưa thấy.
+  - Sau khi sửa, pipeline mô-đun dẫn rõ mọi chính sách học (CL0_W 87%, ACT_W 54%, DP_W 50%). ACT và DP ngang nhau.
+  - Học từ chuyên gia đã sửa làm ACT tốt lên (H2). Bỏ demo L0,5 không làm kém đi rõ, nên nguồn lợi nhiều khả năng là chuyên gia/bộ demo chứ không phải tốc độ demo [suy luận; H2 so hai bộ demo khác cả chuyên gia lẫn số tập, 677 so với 444].
+  - Phương sai giữa hạt giống của ACT_W rất lớn (22–39/60).
+  - Khác G2: trên tờ mới, CL0 gốc cũng hơn ACT_old (+20 điểm, mô tả). Hai tờ khác cảnh nên không so trực tiếp với G2.
+- **Báo cáo đồ án** (`bao_cao_do_an/`) đã được điền tự động từ `runs/p6_test_decision.json` lúc 12:24:58.
 
 ## 9. Sự cố và cách xử lý
 
@@ -146,10 +163,10 @@ Ngày 18/11/2026, 14:30.
 - **W1 chỉ áp cho bộ thực thi CL-0.** Bộ thực thi của ACT và DP giữ nguyên như G2.
 - **DEV của chính sách học chỉ có 20 cảnh**, và ACT_old trên DEV chỉ có 1 hạt giống.
 - **Ở L1,0 mọi phương pháp thất bại do tầm với và thời gian.** Một cách sửa ứng viên (W2, kiểm khả thi lúc chọn vật khi băng còn tăng tốc) chưa làm. Đó là thay đổi logic chọn vật nên cần bạn duyệt.
-- **"G2 bị lẫn bởi lỗi cổ tay" vẫn là suy luận** từ DEV, chờ TEST mới.
+- **"G2 bị lẫn bởi lỗi cổ tay" được TEST mới ủng hộ trên tờ mới**, nhưng tờ G2 không được chạy lại với CL0_W.
 
 ## 11. Việc bạn cần làm
 
-1. Không cần làm gì cho TEST. Tôi sẽ báo quyết định khi chạy xong (~15:00 ngày 19/11).
-2. Nếu muốn tiền đăng ký có dấu thời gian kiểm chứng được, hãy bảo tôi đẩy `paper-dev` lên `origin`. Nên làm trước khi có kết quả TEST. Hiện chưa đẩy.
-3. Sau TEST: chọn hội nghị hoặc tạp chí đích (hiện chưa có), để bản thảo viết theo đúng khuôn.
+1. TEST đã xong; không cần làm gì thêm cho TEST. So sánh benchmark-DEV (P7, thăm dò) đang chạy ngay sau TEST.
+2. Nếu muốn đẩy `paper-dev` lên `origin`, hãy bảo tôi (hiện chưa đẩy).
+3. Chọn hội nghị hoặc tạp chí đích (hiện chưa có), để bản thảo viết theo đúng khuôn.

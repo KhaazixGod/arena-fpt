@@ -29,7 +29,7 @@ const vn = (x, d = 1) => x.toFixed(d).replace(".", ",");
 const SUP = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
 function fp(p) {
     if (p >= 0.9995) return "1,0";
-    if (p < 0.001) { const [m, e] = p.toExponential(0).split("e"); return `${m}·10${String(parseInt(e)).split("").map(c => SUP[c]).join("")}`; }
+    if (p < 0.001) { const [m, e] = p.toExponential(1).split("e"); return `${m.replace(".", ",")}·10${String(parseInt(e)).split("").map(c => SUP[c]).join("")}`; }
     return Number(p.toPrecision(2)).toString().replace(".", ",");
 }
 const pts = x => (x > 0 ? "+" : x < 0 ? "−" : "±") + vn(Math.abs(x)) + " điểm";
@@ -87,7 +87,7 @@ function p6sum(names) { const s = names.reduce((a, k) => a + p6.success[k], 0); 
 function verdict(k) {
     const h = p6[k];
     if (k === "H2") {
-        if (h.supported) return "ủng hộ (ACT_W tốt hơn)";
+        if (h.supported) return "được ủng hộ (ACT_W tốt hơn)";
         return h.holm[2] ? "khác biệt, nhưng ACT_old tốt hơn (H2 không được ủng hộ)" : "không được ủng hộ (không thấy khác biệt)";
     }
     if (h.supported) return "được ủng hộ";
@@ -154,6 +154,12 @@ const P6 = {
         return `H1: CL0_W ${p6.H1.kx} vs CL0 ${p6.H1.ky}, p Holm ${fp(p6.H1.holm[1])} → **${short("H1")}**; H1b: ORACLE_W ${p6.H1b.kx} vs ORACLE ${p6.H1b.ky}, p Holm ${fp(p6.H1b.holm[1])} → **${short("H1b")}**; ` +
             `H2: d = ${pts(p6.H2.mean_d_pts)}, p Holm ${fp(p6.H2.holm[1])} → **${short("H2")}**; gộp hạt giống: ACT_W ${T.s}/${T.n}, ACT_old ${O.s}/${O.n}, DP_W ${Dd.s}/${Dd.n}`;
     },
+    // short phrases for sentences that interpret the result (all numbers from the JSON / decision log)
+    seedsACTW() { return p6 ? `${ACT_W.map(k => p6.success[k]).slice(0, -1).join(", ")} và ${p6.success[ACT_W[2]]}/${p6.n}` : null; },
+    h2Text() { return p6 ? `${pts(p6.H2.mean_d_pts)}, p Holm = ${fp(p6.H2.holm[1])}` : null; },
+    modVsAct() { const q = this.pair("CL0_W - ACT_W"), T = p6 && p6sum(ACT_W); return p6 && q ? `CL0_W ${pct(p6.success.cl0_w, p6.n)} so với ACT_W ${pct(T.s, T.n)} gộp ba hạt giống, ${pts(q.d)} theo cảnh, p = ${fp(q.p)}` : null; },
+    actVsDp() { const q = this.pair("ACT_W - DP_W"), T = p6 && p6sum(ACT_W), Dd = p6 && p6sum(DP_W); return p6 && q ? `ACT_W ${pct(T.s, T.n)}, DP_W ${pct(Dd.s, Dd.n)} gộp; ${pts(q.d)} theo cảnh, p = ${fp(q.p)}` : null; },
+    slowText() { const q = this.pair("ACT_W_slow - ACT_W"); return q ? `ACT_W_slow so với ACT_W ${pts(q.d)}, p = ${fp(q.p)}` : null; },
     statusNote() {
         if (!p6) return null;
         const inv = this.invalidTotal();

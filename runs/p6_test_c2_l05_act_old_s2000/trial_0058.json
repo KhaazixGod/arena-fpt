@@ -1,0 +1,129 @@
+{
+ "trial_id": 58,
+ "method": "REMOTE:ACT_OLD_S2000",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_059",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box35",
+   "a_mm": -282.2,
+   "b_mm": -200.0,
+   "yaw_deg": 7.1
+  },
+  {
+   "name": "cyl36",
+   "a_mm": -213.29999999999998,
+   "b_mm": -220.5,
+   "yaw_deg": 131.0
+  },
+  {
+   "name": "mug29",
+   "a_mm": -150.0,
+   "b_mm": -221.8,
+   "yaw_deg": 173.7
+  },
+  {
+   "name": "ring28",
+   "a_mm": -347.5,
+   "b_mm": -186.5,
+   "yaw_deg": 154.1
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "box35": 0.1,
+    "cyl36": 14.9,
+    "mug29": 62.0,
+    "ring28": 0.6
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_i2_s2000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": null
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 495.0,
+  "ik_fail_ticks_lt6s": 4.0,
+  "ik_fail_first_t": 1.1,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [238.6, -82.9, 47.5], 'yaw': 2.1, 'pos_err_mm': 0.01, 'q': [20.4, 23.4, -20.3, 86.9, -154.7], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt",
+  "ring28.a",
+  "ring28.b",
+  "ring28.z",
+  "ring28.yaw",
+  "ring28.tilt"
+ ],
+ "ms_step_p50": 4.5942270662635565,
+ "ms_step_p95": 70.83396904636174,
+ "n_steps": 1001,
+ "wall_s": 123.85,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 43.34
+}

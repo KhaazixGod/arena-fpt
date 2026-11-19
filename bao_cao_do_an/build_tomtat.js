@@ -65,11 +65,11 @@ if (F.P7.ok && F.figIf("fig_p7_bench.png")) FIG(F.figIf("fig_p7_bench.png"), 12,
 else FIG(fig("fig_benchmark_dev.png"), 14, "ACT của đồ án so với các bài báo tái lập trên 40 lượt DEV chung của benchmark");
 
 H2("6. Phương pháp đề xuất và hạn chế");
-P("**Phương pháp đề xuất cho nền tảng giá rẻ:** ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia. Cấu hình này mạnh hơn mọi phương pháp đã công bố mà nhóm tái lập được trên cùng arena. Tuy vậy, ACT chưa vượt pipeline mô-đun khi bộ thực thi của pipeline đã được sửa." + FLAG_MOD + " Lợi thế của ACT là không cần nhận thức thủ công và học được nhiều kỹ năng trong một mô hình (E18).");
+P("**Phương pháp đề xuất cho nền tảng giá rẻ:** ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia" + (F.P6.ok ? ` đã được sửa lỗi bộ thực thi (TEST mới: ACT_W hơn ACT_old ${F.P6.h2Text()})` : "") + ". Cấu hình này mạnh hơn mọi phương pháp đã công bố mà nhóm tái lập được trên cùng arena. Tuy vậy, ACT chưa vượt pipeline mô-đun khi bộ thực thi của pipeline đã được sửa" + (F.P6.ok ? ` (TEST mới: ${F.P6.modVsAct()})` : "") + "." + FLAG_MOD + " Lợi thế của ACT là không cần nhận thức thủ công và học được nhiều kỹ năng trong một mô hình (E18).");
 BL([
     "Chỉ mô phỏng (lockstep, không có trễ suy luận thật); chưa có số trên robot thật.",
     "Demo sinh bởi chuyên gia có đặc quyền; demo người ở 75 mm/s khó hơn nhiều.",
-    "Lỗi chính của ACT: va chạm và đóng kẹp vào chỗ trống (lệch ngang khoảng −9 mm). Phương sai giữa các hạt giống (13–16/20) và giữa các lần chạy (3/20 lượt đổi kết quả) lớn.",
+    "Lỗi chính của ACT: va chạm và đóng kẹp vào chỗ trống (lệch ngang khoảng −9 mm). Phương sai giữa các hạt giống" + (F.P6.ok ? ` (TEST mới: ba hạt giống ACT_W đạt ${F.P6.seedsACTW()})` : " (13–16/20)") + " và giữa các lần chạy (3/20 lượt đổi kết quả) lớn.",
     F.P7.ok ? "So sánh với bài báo vẫn là khác máy: phương pháp của đồ án đã chạy lại cùng máy (P7), các bản port bài báo chỉ có số từ máy benchmark; chênh lệch khoảng ±5 lượt có thể chỉ do máy." : "So sánh với benchmark là khác máy: chênh lệch khoảng ±5 lượt có thể chỉ do máy. Chuỗi P7 chạy lại cùng máy.",
     "Ở 150 mm/s mọi phương pháp đều thất bại vì tầm với và thời gian.",
 ]);

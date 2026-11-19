@@ -1,0 +1,64 @@
+
+== runs/p6_test_c2_l05_cl0_w  vs  runs/p6_test_c2_l05_cl0   (speed 75.0 mm/s, paired n = 60; valid rows base 60, W1 60)
+  success  base 31/60 = 51.7%   W1 52/60 = 86.7%
+  paired   W1 lost 1, gained 22; exact McNemar p = 0.0000
+  lost:   ['test_C2_014']
+  gained: ['test_C2_003', 'test_C2_005', 'test_C2_008', 'test_C2_012', 'test_C2_015', 'test_C2_018', 'test_C2_023', 'test_C2_024', 'test_C2_027', 'test_C2_028', 'test_C2_031', 'test_C2_033', 'test_C2_035', 'test_C2_039', 'test_C2_041', 'test_C2_042', 'test_C2_047', 'test_C2_052', 'test_C2_056', 'test_C2_058', 'test_C2_059', 'test_C2_060']
+  base outcomes {'picked_hold_complete': 30, 'ik_fail': 19, 'dropped_in_hold': 8, 'late': 2, 'empty_grasp': 1}
+       fail causes {'collision': 18, 'grasp_point': 1, 'slip': 6, 'other': 3, 'timing': 1}
+       trials with >= 10 held ticks: 31; with a held tick at the wrist-roll margin: 19; held ticks total 3482
+  W1   outcomes {'picked_hold_complete': 50, 'dropped_in_hold': 4, 'ik_fail': 6}
+       fail causes {'grasp_point': 1, 'slip': 1, 'collision': 6}
+       trials with >= 10 held ticks: 6; with a held tick at the wrist-roll margin: 0; held ticks total 266
+       W1 switched branch in 27 trials: base->W1 success 1->1 7, 0->1 20, 1->0 0, 0->0 0
+       switched: ['test_C2_003', 'test_C2_005', 'test_C2_008', 'test_C2_009', 'test_C2_010', 'test_C2_012', 'test_C2_015', 'test_C2_017', 'test_C2_020', 'test_C2_023', 'test_C2_024', 'test_C2_026', 'test_C2_027', 'test_C2_028', 'test_C2_031', 'test_C2_033', 'test_C2_035', 'test_C2_039', 'test_C2_042', 'test_C2_043', 'test_C2_047', 'test_C2_051', 'test_C2_052', 'test_C2_056', 'test_C2_058', 'test_C2_059', 'test_C2_060']
+       not switched (33): 1->1 23, 0->1 2, 1->0 1, 0->0 7  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 195 ms, max 354 ms
+
+== runs/p6_test_c2_l05_oracle_w  vs  runs/p6_test_c2_l05_oracle   (speed 75.0 mm/s, paired n = 60; valid rows base 60, W1 60)
+  success  base 37/60 = 61.7%   W1 44/60 = 73.3%
+  paired   W1 lost 0, gained 7; exact McNemar p = 0.0156
+  lost:   []
+  gained: ['test_C2_015', 'test_C2_024', 'test_C2_035', 'test_C2_037', 'test_C2_039', 'test_C2_042', 'test_C2_047']
+  base outcomes {'picked_hold_complete': 42, 'ik_fail': 7, 'dropped_in_hold': 9, 'empty_grasp': 1, 'late': 1}
+       fail causes {'collision': 5, 'slip': 14, 'other': 2, 'grasp_point': 1, 'timing': 1}
+       trials with >= 10 held ticks: 13; with a held tick at the wrist-roll margin: 16; held ticks total 1548
+  W1   outcomes {'picked_hold_complete': 48, 'dropped_in_hold': 8, 'late': 3, 'empty_grasp': 1}
+       fail causes {'slip': 12, 'timing': 3, 'grasp_point': 1}
+       trials with >= 10 held ticks: 0; with a held tick at the wrist-roll margin: 0; held ticks total 0
+       W1 switched branch in 18 trials: base->W1 success 1->1 6, 0->1 7, 1->0 0, 0->0 5
+       switched: ['test_C2_002', 'test_C2_015', 'test_C2_016', 'test_C2_017', 'test_C2_020', 'test_C2_024', 'test_C2_028', 'test_C2_029', 'test_C2_034', 'test_C2_035', 'test_C2_037', 'test_C2_039', 'test_C2_042', 'test_C2_043', 'test_C2_047', 'test_C2_051', 'test_C2_058', 'test_C2_060']
+       not switched (42): 1->1 31, 0->1 0, 1->0 0, 0->0 11  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 200 ms, max 294 ms
+
+== runs/p6_test_c2_l025_cl0_w  vs  runs/p6_test_c2_l025_cl0   (speed 37.5 mm/s, paired n = 60; valid rows base 60, W1 60)
+  success  base 43/60 = 71.7%   W1 49/60 = 81.7%
+  paired   W1 lost 1, gained 7; exact McNemar p = 0.0703
+  lost:   ['test_C2_041']
+  gained: ['test_C2_003', 'test_C2_015', 'test_C2_023', 'test_C2_028', 'test_C2_035', 'test_C2_051', 'test_C2_059']
+  base outcomes {'picked_hold_complete': 44, 'dropped_in_hold': 9, 'ik_fail': 7}
+       fail causes {'slip': 5, 'collision': 10, 'grasp_point': 2}
+       trials with >= 10 held ticks: 21; with a held tick at the wrist-roll margin: 14; held ticks total 1222
+  W1   outcomes {'picked_hold_complete': 49, 'dropped_in_hold': 5, 'ik_fail': 6}
+       fail causes {'slip': 2, 'collision': 8, 'grasp_point': 1}
+       trials with >= 10 held ticks: 6; with a held tick at the wrist-roll margin: 0; held ticks total 332
+       W1 switched branch in 25 trials: base->W1 success 1->1 17, 0->1 7, 1->0 0, 0->0 1
+       switched: ['test_C2_003', 'test_C2_005', 'test_C2_008', 'test_C2_010', 'test_C2_012', 'test_C2_015', 'test_C2_017', 'test_C2_020', 'test_C2_023', 'test_C2_024', 'test_C2_027', 'test_C2_028', 'test_C2_031', 'test_C2_033', 'test_C2_035', 'test_C2_039', 'test_C2_042', 'test_C2_043', 'test_C2_047', 'test_C2_051', 'test_C2_052', 'test_C2_056', 'test_C2_058', 'test_C2_059', 'test_C2_060']
+       not switched (35): 1->1 25, 0->1 0, 1->0 1, 0->0 9  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 159 ms, max 540 ms
+
+== runs/p6_test_c2_l025_oracle_w  vs  runs/p6_test_c2_l025_oracle   (speed 37.5 mm/s, paired n = 60; valid rows base 60, W1 60)
+  success  base 43/60 = 71.7%   W1 46/60 = 76.7%
+  paired   W1 lost 1, gained 4; exact McNemar p = 0.3750
+  lost:   ['test_C2_002']
+  gained: ['test_C2_016', 'test_C2_028', 'test_C2_035', 'test_C2_060']
+  base outcomes {'picked_hold_complete': 48, 'dropped_in_hold': 11, 'late': 1}
+       fail causes {'slip': 14, 'grasp_point': 2, 'timing': 1}
+       trials with >= 10 held ticks: 6; with a held tick at the wrist-roll margin: 6; held ticks total 286
+  W1   outcomes {'picked_hold_complete': 51, 'dropped_in_hold': 8, 'late': 1}
+       fail causes {'slip': 13, 'timing': 1}
+       trials with >= 10 held ticks: 0; with a held tick at the wrist-roll margin: 0; held ticks total 0
+       W1 switched branch in 10 trials: base->W1 success 1->1 4, 0->1 4, 1->0 1, 0->0 1
+       switched: ['test_C2_002', 'test_C2_015', 'test_C2_016', 'test_C2_028', 'test_C2_034', 'test_C2_035', 'test_C2_037', 'test_C2_039', 'test_C2_042', 'test_C2_060']
+       not switched (50): 1->1 38, 0->1 0, 1->0 0, 0->0 12  (same code path as the base: changes here are run-to-run noise)
+       planner wall time per attempt: median 199 ms, max 285 ms

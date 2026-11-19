@@ -178,4 +178,8 @@ Môi trường lúc khoá: Isaac Sim 6.0.0.1, NVIDIA GeForce RTX 3070 Ti 8 GB, `
 
 ## 8. Sai lệch
 
-_(chưa có)_
+1. **Lộ kết quả 2 lượt CL0 trong lúc TEST chạy** (18/11/2026 14:14; ghi ngày 19/11, sau khi TEST xong).
+   - Mục 6 quy định: trong lúc TEST chạy chỉ xem tiến độ bằng `p6_decide.py status`.
+   - Lệnh kiểm lượt đầu, do Claude chạy ngay sau khi khởi động chuỗi, in thêm đuôi `logs/2026-11-18_141159_p6_l05_cl0.log`. Đuôi log có kết quả 2 lượt CL0 đầu ở L0,5: `test_C2_001` và `test_C2_002`, cả hai thành công.
+   - Không có gì được đổi vì việc này. Chuỗi không bị dừng hay chạy lại. Mã, sheet, checkpoint, thiết lập và phân tích giữ nguyên như lúc khóa.
+   - Người dùng được báo ngay lúc đó. Từ đó chỉ xem tiến độ bằng `status`.

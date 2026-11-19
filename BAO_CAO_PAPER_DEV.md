@@ -121,6 +121,7 @@ Ngày 18/11/2026, 14:30; mục 8 (kết quả TEST mới) bổ sung 19/11/2026, 
   - Sheet mới `locked/paper/test_C2.csv`: 60 cảnh, hạt giống 1611, 10 vật TEST cũ.
   - Mã, checkpoint và sheet đều có băm; `p6_decide.py` kiểm lại mọi băm trước khi in quyết định.
 - **Chạy.** Unit `arena-p6test`, 14:12 ngày 18/11 → 12:24 ngày 19/11. 17 lần chạy, mỗi lần đủ 60/60 lượt hợp lệ, **0 dòng `valid=0`** (`logs/2026-11-18_141151_p6_test_chain.log`).
+- **Sai lệch: 1**, ghi ở mục 8 của `PREREGISTRATION_PAPER.md`. Lúc 14:14 ngày 18/11, một lệnh kiểm in đuôi log và làm lộ kết quả 2 lượt CL0 đầu (cả hai thành công). Không có gì được đổi vì việc này.
 - **Quyết định** (`logs/2026-11-19_122404_p6_decision.txt`, `runs/p6_test_decision.json`; Holm trên 3 phép kiểm, α = 0,05):
 
 | Giả thuyết | Kết quả | p thô | p Holm | Kết luận |
@@ -140,10 +141,14 @@ Ngày 18/11/2026, 14:30; mục 8 (kết quả TEST mới) bổ sung 19/11/2026, 
 | ACT_W_slow s1000 | 31 | 39–64% | collision 24 |
 | DP_W s1000 / s2000 / s3000 | 27 / 28 / 35 (gộp 90/180 = 50%) | gộp 43–57% | collision 20 / 19 / 13 |
 
-  - Ghép cặp theo cảnh, gộp hạt giống (đổi dấu, không hiệu chỉnh): CL0_W − ACT_W +32,2 điểm (p = 1·10⁻⁵); CL0_W − DP_W +36,7 (p = 1·10⁻⁵); ORACLE_W − ACT_W +18,9 (p = 0,0036); ACT_W − DP_W +4,4 (p = 0,53); CL0 − ACT_old +20,0 (p = 0,022); ACT_W_slow − ACT_W −2,8 (p = 0,73).
+  - Ghép cặp theo cảnh, gộp hạt giống (đổi dấu, không hiệu chỉnh; "p ≤ 1·10⁻⁵" là giới hạn của 100 000 hoán vị): CL0_W − ACT_W +32,2 điểm (p ≤ 1·10⁻⁵); CL0_W − DP_W +36,7 (p ≤ 1·10⁻⁵); ORACLE_W − ACT_W +18,9 (p = 0,0036); ACT_W − DP_W +4,4 (p = 0,53); CL0 − ACT_old +20,0 (p = 0,022); ACT_W_slow − ACT_W −2,8 (p = 0,73).
   - L0,25 (H3, chỉ mô-đun): CL0_W 49 so với CL0 43/60 (p = 0,070); ORACLE_W 46 so với ORACLE 43/60 (p = 0,38).
 - **Đọc kết quả.**
   - W1 sửa đúng lỗi: ở L0,5 nó nâng cả CL0 (+35 điểm) và ORACLE (+11,7 điểm) trên vật và cảnh chưa thấy.
+    - Cơ chế, L0,5 (`logs/2026-11-19_122405_p6_w1_compare.txt`, mô tả): số lượt bị giữ lệnh ở biên cổ tay xoay giảm 19 → 0 (CL0) và 16 → 0 (ORACLE). Tổng nhịp giữ lệnh giảm 3482 → 266 (CL0) và 1548 → 0 (ORACLE).
+    - W1 đổi nhánh ở 27 lượt CL0 và 18 lượt ORACLE. Cả 7 lượt được của ORACLE và 20/22 lượt được của CL0 nằm trong số đó. Không lượt đổi nhánh nào bị kém đi.
+    - 2 lượt được và 1 lượt mất còn lại của CL0 rơi vào lượt W1 không đổi nhánh, tức chạy cùng đường mã với bản gốc. Đó là nhiễu giữa hai lần chạy.
+    - Ở L0,25, số lượt chạm biên ít hơn (CL0 14, ORACLE 6). W1 cũng đưa về 0, nên lợi nhỏ hơn.
   - Sau khi sửa, pipeline mô-đun dẫn rõ mọi chính sách học (CL0_W 87%, ACT_W 54%, DP_W 50%). ACT và DP ngang nhau.
   - Học từ chuyên gia đã sửa làm ACT tốt lên (H2). Bỏ demo L0,5 không làm kém đi rõ, nên nguồn lợi nhiều khả năng là chuyên gia/bộ demo chứ không phải tốc độ demo [suy luận; H2 so hai bộ demo khác cả chuyên gia lẫn số tập, 677 so với 444].
   - Phương sai giữa hạt giống của ACT_W rất lớn (22–39/60).

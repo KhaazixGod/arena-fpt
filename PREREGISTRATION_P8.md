@@ -1,0 +1,61 @@
+# PREREGISTRATION_P8 — các bài báo tái hiện (P05, P07, P17, P19) trên TEST của đồ án
+
+Trạng thái: **NHÁP** (viết 20/11/2026 ~02:30, trước khi có bất kỳ kết quả DEV nào của P8). Khóa ở §7 trước lượt TEST đầu tiên. Sau khi khóa chỉ được thêm vào §8.
+File này không sửa và không thay `PREREGISTRATION_PAPER.md`, vốn đã khóa. P8 là phần mở rộng thăm dò của paper-dev.
+
+## 1. Lý do và phạm vi
+- Số của 4 bài báo trong đồ án (Bảng 2.2, 4.8, 4.9) lấy từ máy benchmark: Windows, mã 4963d40, hiệu chuẩn khác. Số đó chỉ có trên 40 lượt DEV ở L0 và L0,25. Ba bài là "component_only" chạy trên bộ thực thi CL0 còn lỗi W1, và chưa có số TEST nào.
+- Người dùng yêu cầu dựng lại các bài báo trên máy này và chạy trên đúng TEST của đồ án (tin nhắn 20/11/2026).
+- **Lệnh TEST** (luật 5): người dùng, 20/11/2026 khoảng 02:16: "sau khi lên kế hoạch xong thì chạy luôn nhé, t đi ngủ đây", sau khi kế hoạch gồm bước TEST đã được trình bày.
+
+## 2. Phương pháp (đều là tái hiện của đồ án, không phải mã gốc của benchmark)
+| Tên trong trials.csv | Là gì | Mã |
+|---|---|---|
+| P05_CNS, P05_CNS_W | Phần nhận thức của CNS (SIFT, FLANN, tỉ số 0,75, RANSAC 5 px, theo `hhcaz/CNS` commit 6b42138, MIT). Ghép ảnh mẫu và chuyển điểm gắp mẫu. | `ports/p05_cns.py` |
+| P07_VITVS, P07_VITVS_W | Phần nhận thức của ViT-VS (DINOv2 ViT-S/14 lớp 11, ghép best-buddy). Cửa sổ băng được đưa về 518 px. | `ports/p07_vitvs.py` |
+| P17_ODIL, P17_ODIL_W | ODIL bước 1 (FPFH + FGR + ICP của Open3D trên ảnh độ sâu lý tưởng). Ghép đám mây điểm mẫu và chuyển điểm gắp mẫu. | `ports/p17_odil.py` |
+| REMOTE:P19_ACT_TE_S1000/2000/3000 | P19 = ACT của LeRobot theo đúng cấu hình `p19_act.yaml` của benchmark. Dùng checkpoint ACT_J0 (học trên 444 demo E6 của ORACLE, cùng thiết kế 480 lượt với benchmark) cộng temporal ensembling 0,01 và `n_action_steps` 1. Seed 3000 được huấn luyện ngày 20/11. | `arena/methods/act_lerobot.py` (`ACT_TE_COEFF`) |
+
+- Ba bài nhận thức dùng chung bộ bám, chọn vật và thực thi của CL0, qua `arena/methods/ports.py` (YawFeasibleController, giống nhóm rgb/rgbd_perception của benchmark). Hậu tố `_W` thêm W1.
+- **Ảnh mẫu** do REFCAP render: một vật nằm một mình trên băng đứng yên, kèm điểm gắp tốt đã lưu của vật, tức lựa chọn của ORACLE. Tập chính gồm vật train và dev (26 vật), giống benchmark; như vậy vật TEST là vật lạ với mọi phương pháp. Tập phụ "có mẫu vật TEST" (36 vật) chỉ dùng cho các lượt `_t` ở §3 và luôn được ghi nhãn là biết trước mẫu vật.
+
+## 3. Dữ liệu và lượt chạy TEST
+- Tờ: `locked/paper/test_C2.csv`, 60 cảnh (cùng tờ và cùng sha256 với P6), n = 60, mỗi (cảnh, tốc độ, phương pháp) một lượt.
+- **L0,5 (chính):** P05_CNS_W, P07_VITVS_W, P17_ODIL_W, P05_CNS, P07_VITVS, P17_ODIL, P19 ba seed.
+- **L0,25 (phụ):** cùng 9 lượt chạy trên, cộng ACT_W ba seed (suy luận như P6: `serve_i2`, ACT_REPLAN=0, ACT_COMMIT=0).
+- **L0,5 với tập mẫu có vật TEST (nhãn riêng):** P05_CNS_W, P07_VITVS_W, P17_ODIL_W, ở `runs/p8_test_c2_l05_<tên>_t`.
+- **Dùng lại lượt chạy P6** (cùng tờ, cùng máy): CL0_W và ACT_W ba seed ở L0,5; CL0_W ở L0,25. Điều kiện để ghép cặp hợp lệ là bước kiểm lặp lại ở §4.
+- Thư mục: `runs/p8_test_c2_<l05|l025>_<tên>`. Chạy bằng `scripts/p8_test.sh` (cần CONFIRM_TEST=yes). Quyết định bằng `scripts/p8_decide.py`.
+
+## 4. Cổng DEV (trước khi khóa; kết quả ghi ở §8)
+1. Mỗi lượt chạy DEV của `scripts/p8_dev.sh` xong đủ lượt hợp lệ, `valid=0` ≤ 10%, và lỗi của bộ nhận diện (method_exception) dưới 5% số lượt.
+2. CL0_W chạy lại trên dev_C2, L0,5, 20 cảnh đầu phải cho **cùng kết quả 20/20** với `runs/p2_cl0w_dev_c2_l05`. Nếu không, tức là môi trường đã đổi: dừng, không chạy TEST.
+3. So với máy benchmark trên lưới P7 chỉ để mô tả, không phải điều kiện. Một bài được tái hiện mà đạt dưới 10% trên lưới P7 thì phải kiểm lỗi phần nối. Chỉ được sửa lỗi phần nối (không chỉnh thuật toán, không chỉnh ngưỡng theo kết quả DEV) rồi chạy lại DEV. Mọi thay đổi ghi vào §8.
+4. Bài nào không qua mục 1 thì không chạy TEST và được ghi ở §8.
+
+## 5. So sánh và luật quyết định (TEST, α = 0,05, hai phía)
+**Họ F1 (chính, Holm trên 4 phép), L0,5:** ACT_W (gộp 3 seed) so với từng bài: P05_CNS_W, P07_VITVS_W, P17_ODIL_W, P19 (gộp 3 seed).
+- Thống kê: hiệu trung bình theo cảnh của tỉ lệ thành công trung bình qua các seed (như H2 của P6). Kiểm định hoán vị dấu hai phía, 100 000 hoán vị, seed 0.
+- "ACT_W hơn bài k" được ủng hộ khi bị bác bỏ sau Holm và d > 0. "Bài k hơn ACT_W" được ủng hộ khi bị bác bỏ sau Holm và d < 0.
+
+**Họ F2 (phụ, Holm trên 3 phép), L0,5:** CL0_W so với P05_CNS_W, P07_VITVS_W, P17_ODIL_W. Cùng bộ thực thi, chỉ khác phần nhận thức. Dùng McNemar chính xác hai phía.
+
+**Chỉ mô tả, không có claim:**
+- tác động của W1 với từng bài (bài_W so với bài);
+- mọi số ở L0,25, gồm ACT_W so với CL0_W ở L0,25 (câu hỏi về tốc độ băng);
+- các lượt `_t`;
+- P19 so với ACT_old (giao diện I2 so với J0 + TE, cùng bộ demo E6);
+- khoảng Wilson 95%, nguyên nhân thất bại, ms/bước.
+
+Không gộp số TEST mới với số của máy benchmark.
+
+## 6. Luật chạy
+- `valid=0` chỉ dành cho lỗi mô phỏng (luật 7). Ngoại lệ của bộ nhận diện hay server là thất bại của phương pháp.
+- Lượt chạy nào có trên 10% `valid=0` thì dừng.
+- Đã ra TEST thì không đổi mã, ảnh mẫu, ngưỡng hay checkpoint. Chạy lại chỉ để bù lượt `valid=0` (run_until tiếp tục chạy).
+
+## 7. Khóa
+Điền khi khóa, trước lượt TEST đầu tiên: lock_commit, sha256 của mã `ports/*.py`, `arena/methods/ports.py`, `arena/methods/act_lerobot.py`, hai thư mục ảnh mẫu, ba checkpoint ACT_J0 và ba checkpoint ACT_W.
+
+## 8. Sai lệch và kết quả DEV
+(trống)

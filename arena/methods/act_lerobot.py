@@ -35,7 +35,14 @@ class ACTMethod:
         from lerobot.policies.act.modeling_act import ACTPolicy
         from lerobot.policies.factory import make_pre_post_processors
 
-        self.policy = ACTPolicy.from_pretrained(ckpt)
+        te = os.environ.get("ACT_TE_COEFF", "")   # P8: P19 = the same LeRobot ACT with the paper's inference setting (temporal ensembling,
+        if te:                                     # n_action_steps 1); both are inference-only fields of the config, the weights are unchanged
+            from lerobot.configs.policies import PreTrainedConfig
+            cfg = PreTrainedConfig.from_pretrained(ckpt)
+            cfg.temporal_ensemble_coeff, cfg.n_action_steps = float(te), 1
+            self.policy = ACTPolicy.from_pretrained(ckpt, config=cfg)
+        else:
+            self.policy = ACTPolicy.from_pretrained(ckpt)
         self.policy.to(device).eval()
         self.pre, self.post = make_pre_post_processors(self.policy.config, pretrained_path=ckpt,
                                                        preprocessor_overrides={"device_processor": {"device": device}})

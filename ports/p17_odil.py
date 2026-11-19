@@ -50,9 +50,11 @@ class Detector:
             pc, f = self._prep(pts)
             zb = belt_depth_mm(r.depth, cv2.dilate(r.mask, np.ones((41, 41), np.uint8)))
             g = r.grasp
-            zg = float(np.nanmin(r.depth[r.mask > 0]))                    # grasp point on the top of the object (below the grasp pixel)
+            zg = float(np.nanmin(r.depth[r.mask > 0]))                    # top of the object (height cue)
             a = math.radians(g.angle_deg)
-            gp = backproject_pts(np.array([[g.u, g.v], [g.u + 10 * math.cos(a), g.v - 10 * math.sin(a)]]), zg)
+            # the grasp pixel is the BELT-PLANE point of the grasp (pixel_grasp maps pixels with the belt homography), so it is lifted at the belt
+            # depth; attached to the object, it moves with the object's rigid transform and projects back to the moved grasp's belt-plane pixel
+            gp = backproject_pts(np.array([[g.u, g.v], [g.u + 10 * math.cos(a), g.v - 10 * math.sin(a)]]), zb)
             self.rdata.append(dict(pc=pc, f=f, h=zb - zg, ext=self._extent(pts), gp=gp))
 
     def _prep(self, pts: np.ndarray):

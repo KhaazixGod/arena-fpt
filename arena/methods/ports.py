@@ -134,7 +134,10 @@ class RefCapture:
             depth = getattr(frame, "depth_mm", None)
             if depth is None:
                 depth = getattr(frame.img, "depth_mm", None)
-            snap = self.det.gt.objects_at_capture(frame.img)
+            gt, win = self.det.gt, self.det.win
+            snap = {n: o for n, o in gt.objects_at_capture(frame.img).items()       # the scene parks the unused objects off the belt
+                    if abs(o["pos_mm"][2] - (gt.belt_top_mm + gt.spec(n).height_mm / 2.0)) <= 5.0
+                    and win.a_min <= o["a_mm"] <= win.a_max and win.b_min <= o["b_mm"] <= win.b_max}
             dets = list(self.det.detect(frame.img, 0.0).dets)
             if len(snap) != 1 or len(dets) != 1:
                 self.finished, self.outcome = True, f"refcap_bad:{len(snap)}obj/{len(dets)}det"

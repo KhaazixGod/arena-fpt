@@ -103,8 +103,9 @@ def load_refs(ref_dir: str, pad_mm: float = 15.0) -> List[Ref]:
         depth = np.load(os.path.join(ref_dir, m["depth"])) if m.get("depth") else None
         g = m["grasp_px"]
         grasp = Grasp(g["u"], g["v"], g["angle_deg"], g["width_mm"])
-        px_per_mm = FX / max(1.0, float(np.nanmedian(depth))) if depth is not None else 1.85
-        r = int((m["footprint_radius_mm"] + pad_mm) * px_per_mm)
+        dd = depth[np.isfinite(depth) & (depth > 0)] if depth is not None else None       # the depth image is inf where nothing is hit
+        px_per_mm = FX / max(1.0, float(np.median(dd))) if dd is not None and len(dd) else 1.85
+        r = int((2.0 * m["footprint_radius_mm"] + pad_mm) * px_per_mm)      # the grasp is not the object centre; one object per view, so be generous
         roi = np.zeros(img.shape[:2], np.uint8)
         cv2.circle(roi, (int(round(g["u"])), int(round(g["v"]))), r, 255, -1)
         if depth is not None:

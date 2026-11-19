@@ -76,7 +76,7 @@ refs() {   # reference views, one lane, before anything else
     for d in train_dev testobj; do
         local cells=refs_train,refs_dev n=20; [ $d = testobj ] && cells=refs_testobj n=10
         local exp=26; [ $d = testobj ] && exp=10
-        local out=runs/p8_refs/run_$d views=runs/p8_refs/$d
+        local out=runs/p8_refs/run${REFS_TRY:-2}_$d views=runs/p8_refs/$d   # try 1 (runs/p8_refs/run_*) wrote no views: parked objects counted (fixed)
         if [ "${DRY:-}" = "1" ]; then echo "DRY refs $d: REFCAP $cells -> $views"; continue; fi
         [ "$(ls $views/*.json 2>/dev/null | wc -l)" -ge $exp ] && continue
         run "$out" $exp --methods REFCAP --method-arg refcap_out=$views --depth --arrangements-dir arrangements/p8_refs --cells $cells --n $n --speeds L0 \

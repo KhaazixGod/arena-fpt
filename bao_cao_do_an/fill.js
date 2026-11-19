@@ -32,6 +32,8 @@ function fp(p) {
     if (p < 0.001) { const [m, e] = p.toExponential(1).split("e"); return `${m.replace(".", ",")}·10${String(parseInt(e)).split("").map(c => SUP[c]).join("")}`; }
     return Number(p.toPrecision(2)).toString().replace(".", ",");
 }
+// sign-flip p with 100 000 permutations cannot go below 1/100 001; scripts print that floor as 1e-05, so write it as an upper bound
+const peq = p => (p <= 1.00001e-5 ? "p ≤ 1·10⁻⁵" : `p = ${fp(p)}`);
 const pts = x => (x > 0 ? "+" : x < 0 ? "−" : "±") + vn(Math.abs(x)) + " điểm";
 function wilson(s, n, z = 1.959964) {
     if (!n) return [NaN, NaN];
@@ -129,7 +131,7 @@ const P6 = {
         const T = p6sum(ACT_W), O = p6sum(ACT_OLD), Dd = p6sum(DP_W), n = p6.n;
         const out = [`**Gộp hạt giống (mô tả):** ACT_W ${T.s}/${T.n} (${pct(T.s, T.n)}), ACT_old ${O.s}/${O.n} (${pct(O.s, O.n)}), DP_W ${Dd.s}/${Dd.n} (${pct(Dd.s, Dd.n)}); CL0_W ${p6.success.cl0_w}/${n} (${pct(p6.success.cl0_w, n)}), ORACLE_W ${p6.success.oracle_w}/${n} (${pct(p6.success.oracle_w, n)}).`];
         const lines = [["CL0_W - ACT_W", "CL0_W so với ACT_W"], ["CL0_W - DP_W", "CL0_W so với DP_W"], ["ACT_W - DP_W", "ACT_W so với DP_W"], ["ORACLE_W - ACT_W", "ORACLE_W so với ACT_W"], ["CL0 - ACT_old", "CL0 so với ACT_old"]]
-            .map(([tag, lab]) => { const q = this.pair(tag); return q ? `${lab}: ${pts(q.d)} (bên trước hơn ở ${q.a} cảnh, bên sau hơn ở ${q.b}; đổi dấu p = ${fp(q.p)})` : null; }).filter(x => x);
+            .map(([tag, lab]) => { const q = this.pair(tag); return q ? `${lab}: ${pts(q.d)} (bên trước hơn ở ${q.a} cảnh, bên sau hơn ở ${q.b}; đổi dấu ${peq(q.p)})` : null; }).filter(x => x);
         if (lines.length) out.push("**Ghép cặp theo cảnh, gộp hạt giống (mô tả, không hiệu chỉnh):** " + lines.join("; ") + ".");
         if (p6txt && p6txt.slow) { const s = p6txt.slow; out.push(`**ACT_W_slow s1000 so với ACT_W s1000** (cùng hạt giống, không có demo L0,5): ${s.kx} so với ${s.ky}/${n}, được ${s.gained}, mất ${s.lost}, McNemar hai phía p = ${fp(s.p)}.`); }
         const l = p6.l025_pairs;
@@ -157,9 +159,9 @@ const P6 = {
     // short phrases for sentences that interpret the result (all numbers from the JSON / decision log)
     seedsACTW() { return p6 ? `${ACT_W.map(k => p6.success[k]).slice(0, -1).join(", ")} và ${p6.success[ACT_W[2]]}/${p6.n}` : null; },
     h2Text() { return p6 ? `${pts(p6.H2.mean_d_pts)}, p Holm = ${fp(p6.H2.holm[1])}` : null; },
-    modVsAct() { const q = this.pair("CL0_W - ACT_W"), T = p6 && p6sum(ACT_W); return p6 && q ? `CL0_W ${pct(p6.success.cl0_w, p6.n)} so với ACT_W ${pct(T.s, T.n)} gộp ba hạt giống, ${pts(q.d)} theo cảnh, p = ${fp(q.p)}` : null; },
-    actVsDp() { const q = this.pair("ACT_W - DP_W"), T = p6 && p6sum(ACT_W), Dd = p6 && p6sum(DP_W); return p6 && q ? `ACT_W ${pct(T.s, T.n)}, DP_W ${pct(Dd.s, Dd.n)} gộp; ${pts(q.d)} theo cảnh, p = ${fp(q.p)}` : null; },
-    slowText() { const q = this.pair("ACT_W_slow - ACT_W"); return q ? `ACT_W_slow so với ACT_W ${pts(q.d)}, p = ${fp(q.p)}` : null; },
+    modVsAct() { const q = this.pair("CL0_W - ACT_W"), T = p6 && p6sum(ACT_W); return p6 && q ? `CL0_W ${pct(p6.success.cl0_w, p6.n)} so với ACT_W ${pct(T.s, T.n)} gộp ba hạt giống, ${pts(q.d)} theo cảnh, ${peq(q.p)}` : null; },
+    actVsDp() { const q = this.pair("ACT_W - DP_W"), T = p6 && p6sum(ACT_W), Dd = p6 && p6sum(DP_W); return p6 && q ? `ACT_W ${pct(T.s, T.n)}, DP_W ${pct(Dd.s, Dd.n)} gộp; ${pts(q.d)} theo cảnh, ${peq(q.p)}` : null; },
+    slowText() { const q = this.pair("ACT_W_slow - ACT_W"); return q ? `ACT_W_slow so với ACT_W ${pts(q.d)}, ${peq(q.p)}` : null; },
     statusNote() {
         if (!p6) return null;
         const inv = this.invalidTotal();

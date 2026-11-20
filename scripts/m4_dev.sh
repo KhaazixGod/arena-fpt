@@ -38,15 +38,15 @@ PY
 fi
 declare -A CFG=(
   [c1_default]=""
-  [c2_posonly]="VS_YAW=0"
-  [c3_yawonly]="VS_KXY=0 VS_EPS_XY=1000"
-  [c4_noauth]="VS_AUTH=0"
-  [c5_k5]="VS_KXY=5 VS_KYAW=5"
-  [c6_lam05]="VS_LAMBDA=0.5"
-  [c7_tight]="VS_EPS_XY=2 VS_EPS_YAW=10"
-  [c8_gate50]="VS_GATE=50 VS_RALIGN=60"
+  [c2_nodesc]="VS_DESC=0"
+  [c3_posonly]="VS_YAW=0"
+  [c4_yawonly]="VS_KXY=0 VS_EPS_XY=1000 VS_EPS_DESC_XY=1000"
+  [c5_noauth]="VS_AUTH=0 VS_DESC=0"
+  [c6_k5]="VS_KXY=5 VS_KYAW=5"
+  [c7_lam05]="VS_LAMBDA=0.5"
+  [c8_tight]="VS_EPS_XY=2 VS_EPS_YAW=10 VS_EPS_DESC_XY=5 VS_EPS_DESC_YAW=20"
 )
-ORDER=${CONFIGS:-"c1_default c2_posonly c3_yawonly c4_noauth c5_k5 c6_lam05 c7_tight c8_gate50"}
+ORDER=${CONFIGS:-"c1_default c2_nodesc c3_posonly c4_yawonly c5_noauth c6_k5 c7_lam05 c8_tight"}
 export RUN_UNTIL_ATTEMPTS=${RUN_UNTIL_ATTEMPTS:-30} RUN_UNTIL_STALL_S=${RUN_UNTIL_STALL_S:-360}
 port=7601
 for c in $ORDER; do

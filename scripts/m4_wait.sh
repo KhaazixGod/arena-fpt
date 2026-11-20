@@ -12,6 +12,7 @@ m4_wait_gpu() {
             n=$(pgrep -fc 'arena.run_arena'); free=$(nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits | head -1)
             a=$(valid_rows runs/p8_test_c2_l05_p17_odil_w_t/trials.csv)
             if [ "$n" -le 1 ] && [ "$free" -ge "${GPU_SHARE_MIN_FREE_MB:-3800}" ] && { [ "$a" -ge 60 ] || ! systemctl --user is-active -q arena-p8test; }; then ok=$((ok + 1)); else ok=0; fi
+            [ "$a" -ge 60 ] && [ "$n" -le 1 ] && [ "$free" -ge "${GPU_SHARE_MIN_FREE_MB:-3800}" ] && break     # lane A is finished: no pause to wait for
             [ $ok -ge 10 ] && break
             sleep 60
         done

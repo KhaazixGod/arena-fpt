@@ -1,0 +1,64 @@
+#!/bin/bash
+# M4 (thesis Chapter 6) DEV tuning: DP_W seed 1000 + the corrector of m4/diffusion_vs.py on dev_C2, L0.5 (75 mm/s), the same 20 scenes as the DP_W DEV check
+# (runs/p4_dev_dp_w_s1000_dev_c2_l05: 16/20).  DEV only (rule 4); nothing here touches a locked sheet.  One configuration = one run of 20 scenes (about 37 min).
+#   bash scripts/m4_dev.sh                      all configurations below, in order
+#   CONFIGS="c1_default c4_noauth" bash scripts/m4_dev.sh
+#   WAIT_FOR_GPU=1 bash scripts/m4_dev.sh       first waits until no arena.run_arena is running (e.g. another chain), then starts
+#   DRY=1 bash scripts/m4_dev.sh                prints the plan
+# Every parameter change is a configuration here (one at a time vs c1_default); results: scripts/m4_dev_summary.py.  Log the outcome in ARENA_TUNING_LOG.md.
+source "$(dirname "$(readlink -f "$0")")/lib_chain.sh"
+need_no_training
+gpu_busy() { pgrep -f 'arena.run_arena' >/dev/null || systemctl --user list-units 'arena-*' --state=running --no-legend 2>/dev/null | grep -v 'arena-m4' | grep -q .; }
+if [ "${WAIT_FOR_GPU:-}" = "1" ]; then echo "$(date +%T) waiting for the GPU (arena.run_arena or another arena-* unit is running)"; while gpu_busy; do sleep 60; done; echo "$(date +%T) GPU free"; fi
+[ "${DRY:-}" = "1" ] || need_no_isaac
+CK=runs/dp_w_s1000/checkpoints/last/pretrained_model
+need_ckpt $CK
+
+# ---- stage 0: smoke test, 3 dev scenes with the default parameters; the chain stops if the corrector did not run (detector frames, ALIGN ticks) or a trial is invalid
+if [ "${DRY:-}" != "1" ] && [ "${SKIP_SMOKE:-}" != "1" ]; then
+    out=runs/m4_smoke_dev_c2_l05; port=7600
+    srv=$( (set -a; source m4/m4_vs.env; set +a
+        DP_CKPT=$CK DP_REPLAN=0 DP_STEPS=0 env -u PYTHONPATH "$LR_PY" remote_server.py --factory diffusion_vs:make_method --name "DPVS_smoke" \
+            --port $port --path m4 --path . --path ../cl0 --repeat > "logs/$(date +%F_%H%M%S)_server_m4_smoke_$port.log" 2>&1 &
+        echo $!) )
+    for i in $(seq 1 90); do ss -ltn "sport = :$port" | grep -q LISTEN && break; sleep 2; done
+    run_until m4_smoke "$out" 3 $(remote_args $port) --cells dev_C2 --speeds L0.5 --n 3 --arrangements-dir arrangements/sim
+    kill $srv 2>/dev/null; sleep 3; kill -9 $srv 2>/dev/null
+    python3 - "$out" <<'PY' || { echo "$(date +%T) SMOKE FAILED: the chain stops here (look at $out and logs/*m4_smoke*)"; exit 1; }
+import csv, json, sys
+out = sys.argv[1]
+rows = [r for r in csv.DictReader(open(out + "/trials.csv")) if r["valid"] == "1"]
+agg = {"vs_frames": 0, "vs_align_ticks": 0, "vs_blind_ticks": 0, "vs_wait_ticks": 0, "vs_auth_timeout": 0, "vs_fallback": 0, "plans": 0}
+for r in rows:
+    dg = json.load(open(f"{out}/trial_{int(r['trial_id']):04d}.json")).get("diag", {})
+    for k in agg: agg[k] += dg.get(k, 0)
+print("smoke:", len(rows), "valid trials;", "success", sum(int(r["success"]) for r in rows), "; diag", agg, "; outcomes", [r["outcome"] for r in rows])
+sys.exit(0 if len(rows) == 3 and agg["vs_frames"] > 0 and agg["plans"] > 0 else 1)
+PY
+fi
+declare -A CFG=(
+  [c1_default]=""
+  [c2_posonly]="VS_YAW=0"
+  [c3_yawonly]="VS_KXY=0 VS_EPS_XY=1000"
+  [c4_noauth]="VS_AUTH=0"
+  [c5_k5]="VS_KXY=5 VS_KYAW=5"
+  [c6_lam05]="VS_LAMBDA=0.5"
+  [c7_tight]="VS_EPS_XY=2 VS_EPS_YAW=10"
+  [c8_gate50]="VS_GATE=50 VS_RALIGN=60"
+)
+ORDER=${CONFIGS:-"c1_default c2_posonly c3_yawonly c4_noauth c5_k5 c6_lam05 c7_tight c8_gate50"}
+export RUN_UNTIL_ATTEMPTS=${RUN_UNTIL_ATTEMPTS:-30} RUN_UNTIL_STALL_S=${RUN_UNTIL_STALL_S:-360}
+port=7601
+for c in $ORDER; do
+    port=$((port + 1))
+    out=runs/m4_dev_${c}_dev_c2_l05
+    if [ "${DRY:-}" = "1" ]; then echo "DRY $c: $(set -a; source m4/m4_vs.env; set +a; echo ${CFG[$c]}) -> $out"; continue; fi
+    srv=$( (set -a; source m4/m4_vs.env; set +a; [ -n "${CFG[$c]}" ] && eval "export ${CFG[$c]}"
+        DP_CKPT=$CK DP_REPLAN=0 DP_STEPS=0 env -u PYTHONPATH "$LR_PY" remote_server.py --factory diffusion_vs:make_method --name "DPVS_${c}" \
+            --port $port --path m4 --path . --path ../cl0 --repeat > "logs/$(date +%F_%H%M%S)_server_m4_${c}_$port.log" 2>&1 &
+        echo $!) )
+    for i in $(seq 1 90); do ss -ltn "sport = :$port" | grep -q LISTEN && break; sleep 2; done
+    run_until "m4_dev_$c" "$out" 20 $(remote_args $port) --cells dev_C2 --speeds L0.5 --n 20 --arrangements-dir arrangements/sim
+    kill $srv 2>/dev/null; sleep 3; kill -9 $srv 2>/dev/null
+done
+echo "$(date +%T) M4 DEV chain done: python3 scripts/m4_dev_summary.py"

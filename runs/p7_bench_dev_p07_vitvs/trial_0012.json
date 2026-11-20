@@ -1,0 +1,143 @@
+{
+ "trial_id": 12,
+ "method": "P07_VITVS",
+ "cell": "dev_C0",
+ "arrangement_id": "dev_C0_007",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l23",
+   "a_mm": -40.0,
+   "b_mm": -211.8,
+   "yaw_deg": 109.8
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "calib",
+  "target": "l23",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "l23": 8.6
+   },
+   "max_lift_target_mm": 0.0,
+   "select_err_mm": 12.5,
+   "estimate_err_mm": 17.7
+  }
+ },
+ "outcome": "timeout",
+ "finished": true,
+ "t_end_s": 22.38,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.32,
+   "DESCEND"
+  ],
+  [
+   20.02,
+   "RELEASE"
+  ],
+  [
+   20.62,
+   "RETURN"
+  ],
+  [
+   22.38,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 2,
+    "a_b": -47.72076552911183,
+    "b": -201.9773761583947,
+    "theta": 101.43766387691866,
+    "width": 31.53,
+    "std": 3.8870068649658096
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.62,
+   "name": "freeze",
+   "data": {
+    "est": "(-54.309807389071366, -201.29026358671283, 113.78077538796569)"
+   }
+  },
+  {
+   "t": 1.32,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 20.02,
+   "name": "abort",
+   "data": {
+    "reason": "timeout"
+   }
+  },
+  {
+   "t": 20.02,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 20.62,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 22.38,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 37.0,
+  "reject_wide": 0.0,
+  "reject_other": 1.0,
+  "n_ok_dets": 36.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "l23.tilt"
+ ],
+ "ms_step_p50": 1.1100245756097138,
+ "ms_step_p95": 2.86837836611084,
+ "n_steps": 1120,
+ "wall_s": 174.77,
+ "method_exception": null,
+ "renders": 671,
+ "render_wall_s": 86.88
+}

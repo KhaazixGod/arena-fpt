@@ -1,0 +1,158 @@
+{
+ "trial_id": 3,
+ "method": "P07_VITVS",
+ "cell": "dev_C2",
+ "arrangement_id": "dev_C2_004",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug24",
+   "a_mm": -150.0,
+   "b_mm": -217.9,
+   "yaw_deg": 185.1
+  },
+  {
+   "name": "box21",
+   "a_mm": -201.9,
+   "b_mm": -175.9,
+   "yaw_deg": 78.3
+  },
+  {
+   "name": "l23",
+   "a_mm": -276.5,
+   "b_mm": -192.9,
+   "yaw_deg": 46.1
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "other",
+  "target": "mug24",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "mug24": 0.0,
+    "box21": 0.1,
+    "l23": 1.2
+   },
+   "max_lift_target_mm": 0.0,
+   "select_err_mm": 8.7,
+   "estimate_err_mm": 3.2
+  }
+ },
+ "outcome": "ik_fail",
+ "finished": true,
+ "t_end_s": 6.62,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   4.52,
+   "RELEASE"
+  ],
+  [
+   5.12,
+   "RETURN"
+  ],
+  [
+   6.62,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -141.3211501411285,
+    "b": -217.4571525093988,
+    "theta": 91.92187650982787,
+    "width": 31.35,
+    "std": 3.3640666733973443
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.62,
+   "name": "freeze",
+   "data": {
+    "est": "(-146.95512529464722, -218.6958877268726, 91.63003657451927)"
+   }
+  },
+  {
+   "t": 4.52,
+   "name": "abort",
+   "data": {
+    "reason": "ik_fail"
+   }
+  },
+  {
+   "t": 4.52,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 5.12,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 6.62,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 133.0,
+  "reject_wide": 0.0,
+  "reject_other": 69.0,
+  "n_ok_dets": 148.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw",
+  "mug24.tilt",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "box21.tilt",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "l23.tilt"
+ ],
+ "ms_step_p50": 17.050213005859405,
+ "ms_step_p95": 131.05866216355935,
+ "n_steps": 332,
+ "wall_s": 66.18,
+ "method_exception": null,
+ "renders": 198,
+ "render_wall_s": 24.9
+}

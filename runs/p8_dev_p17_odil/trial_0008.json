@@ -1,0 +1,177 @@
+{
+ "trial_id": 8,
+ "method": "P17_ODIL",
+ "cell": "dev_C2",
+ "arrangement_id": "dev_C2_009",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug24",
+   "a_mm": -260.7,
+   "b_mm": -227.8,
+   "yaw_deg": 310.5
+  },
+  {
+   "name": "cyl26",
+   "a_mm": -197.79999999999998,
+   "b_mm": -222.4,
+   "yaw_deg": 111.8
+  },
+  {
+   "name": "box25",
+   "a_mm": -150.0,
+   "b_mm": -189.4,
+   "yaw_deg": 310.8
+  },
+  {
+   "name": "l23",
+   "a_mm": -326.29999999999995,
+   "b_mm": -189.4,
+   "yaw_deg": 119.6
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "cyl26",
+  "t_success_s": null,
+  "t_detect_s": 0.48,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "mug24": 63.5,
+    "cyl26": 0.0,
+    "box25": 0.1,
+    "l23": 263.4
+   },
+   "max_lift_target_mm": 0.0
+  }
+ },
+ "outcome": "ik_fail",
+ "finished": true,
+ "t_end_s": 8.5,
+ "phases": [
+  [
+   0.48,
+   "APPROACH"
+  ],
+  [
+   1.68,
+   "DESCEND"
+  ],
+  [
+   6.08,
+   "RELEASE"
+  ],
+  [
+   6.7,
+   "RETURN"
+  ],
+  [
+   8.5,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.48,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -197.4030541075762,
+    "b": -222.3545219663837,
+    "theta": 93.53909140444682,
+    "width": 38.58,
+    "std": 0.020581495614816554
+   }
+  },
+  {
+   "t": 0.48,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.94,
+   "name": "freeze",
+   "data": {
+    "est": "(-197.43435642394172, -222.38597514824446, 93.41395990583942)"
+   }
+  },
+  {
+   "t": 1.68,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 6.08,
+   "name": "abort",
+   "data": {
+    "reason": "ik_fail"
+   }
+  },
+  {
+   "t": 6.08,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 6.7,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 8.5,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 48.0,
+  "reject_wide": 0.0,
+  "reject_other": 39.0,
+  "n_ok_dets": 141.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw",
+  "mug24.tilt",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw",
+  "cyl26.tilt",
+  "box25.a",
+  "box25.b",
+  "box25.z",
+  "box25.yaw",
+  "box25.tilt",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "l23.tilt"
+ ],
+ "ms_step_p50": 15.879327023867518,
+ "ms_step_p95": 202.36556002055295,
+ "n_steps": 426,
+ "wall_s": 84.64,
+ "method_exception": null,
+ "renders": 255,
+ "render_wall_s": 32.54
+}

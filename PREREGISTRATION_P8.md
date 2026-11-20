@@ -58,4 +58,28 @@ Không gộp số TEST mới với số của máy benchmark.
 Điền khi khóa, trước lượt TEST đầu tiên: lock_commit, sha256 của mã `ports/*.py`, `arena/methods/ports.py`, `arena/methods/act_lerobot.py`, hai thư mục ảnh mẫu, ba checkpoint ACT_J0 và ba checkpoint ACT_W.
 
 ## 8. Sai lệch và kết quả DEV
-(trống)
+### 8.1 Trước lượt chạy arena đầu tiên của các bộ nhận diện (20/11, trước mọi kết quả DEV có điểm số)
+- Lần render ảnh mẫu đầu (`runs/p8_refs/run_train_dev`, 04:25) không ghi được ảnh nào. Nguyên nhân: REFCAP đếm cả các vật đỗ ngoài băng. Đã sửa ở commit 7cf068a để chỉ đếm vật trên băng và trong cửa sổ, render lại ở `runs/p8_refs/run2_*`. Lượt cũ được giữ.
+- Mặt nạ của ảnh mẫu bị trống, vì ảnh độ sâu là inf ở chỗ không có vật. Đã sửa tỉ lệ và nới vùng tìm (7cf068a).
+- P17 nâng điểm gắp lên ở độ sâu của mặt băng, vì pixel điểm gắp là điểm trên mặt băng (7cf068a).
+- P05: số cặp khớp tối thiểu đổi từ 8 xuống 3, bằng mức tối thiểu của chính CNS (commit 014e8b6). Quyết định dựa trên ảnh mẫu, vì vật sim trơn chỉ có 0–20 điểm SIFT. Lượt chạy thử đầu `runs/p8_smoke_p05_w` (0/2, no_target) có thể đã dùng ngưỡng 8, vì server khởi động cùng lúc với lần sửa. Đã chạy lại ở `runs/p8_smoke2_p05_w` với ngưỡng 3: 0/2, nhưng có phát hiện và có thử gắp.
+
+### 8.2 Kết quả DEV (`scripts/p8_dev.sh`, HEAD 014e8b6, 04:46 → 11:24 ngày 20/11; chỉ để mô tả)
+Cổng §4: cả 16 lượt chạy DEV đủ lượt, 0 dòng valid=0, 0 ngoại lệ của bộ nhận diện. CL0_W trên dev_C2, L0,5, 20 cảnh cho **cùng kết quả 20/20** với `runs/p2_cl0w_dev_c2_l05` (17/20 cả hai). **Mọi phương pháp qua cổng.**
+
+| Lưới P7 (40 lượt, L0 và L0,25; bài nhận thức không có W1) | Máy này | Máy benchmark |
+|---|---|---|
+| P05_CNS | 17/40 | 18/40 |
+| P07_VITVS | 29/40 | 12/40 |
+| P17_ODIL | 30/40 | 25/40 |
+| P19, seed 1000 / 2000 / 3000 | 25 / 24 / 24 | 20/40 (một checkpoint của họ) |
+
+| dev_C2, L0,5, 20 cảnh | Không W1 | Có W1 |
+|---|---|---|
+| P05_CNS | 7 | 11 |
+| P07_VITVS | 8 | 13 |
+| P17_ODIL | 7 | 15 |
+| P19, seed 1000 / 2000 / 3000 | 2 / 2 / 2 | – |
+| CL0_W | – | 17 |
+
+Không có tham số, mã, ảnh mẫu hay checkpoint nào được đổi sau khi có các kết quả DEV này.

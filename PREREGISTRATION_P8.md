@@ -1,6 +1,6 @@
 # PREREGISTRATION_P8 — các bài báo tái hiện (P05, P07, P17, P19) trên TEST của đồ án
 
-Trạng thái: **NHÁP** (viết 20/11/2026 ~02:30, trước khi có bất kỳ kết quả DEV nào của P8). Khóa ở §7 trước lượt TEST đầu tiên. Sau khi khóa chỉ được thêm vào §8.
+Trạng thái: **ĐÃ KHÓA** (§7) (viết 20/11/2026 ~02:30, trước khi có bất kỳ kết quả DEV nào của P8). Khóa ở §7 trước lượt TEST đầu tiên. Sau khi khóa chỉ được thêm vào §8.
 File này không sửa và không thay `PREREGISTRATION_PAPER.md`, vốn đã khóa. P8 là phần mở rộng thăm dò của paper-dev.
 
 ## 1. Lý do và phạm vi
@@ -55,7 +55,29 @@ Không gộp số TEST mới với số của máy benchmark.
 - Đã ra TEST thì không đổi mã, ảnh mẫu, ngưỡng hay checkpoint. Chạy lại chỉ để bù lượt `valid=0` (run_until tiếp tục chạy).
 
 ## 7. Khóa
-Điền khi khóa, trước lượt TEST đầu tiên: lock_commit, sha256 của mã `ports/*.py`, `arena/methods/ports.py`, `arena/methods/act_lerobot.py`, hai thư mục ảnh mẫu, ba checkpoint ACT_J0 và ba checkpoint ACT_W.
+```
+lock_commit: edb331cd14b264bcdb15f737ff65b454d240d276
+locked/paper/test_C2.csv: 29aa1c3beb50847f04f73918044256afe7c733d38d420b158b8bd7b5e142b4ca
+act_j0_s1000: a52cd166c22826e484f88331bedf3287918cc84e605d6aea161d6475af298e84
+act_j0_s2000: 948ea82e01760762aea7a65e07cdc4927a6faecf707a5c86f8a561cc3252944c
+act_j0_s3000: e6c8dea7f0070df08675de03ac8b0f84e3b259902bee4b9fe2ddcaae75e5b09c
+act_w_s1000: abd7cb0a154dc8a541fbb6a9bb03ce803e37e0abb1a8703ded41e9aa43f8115f
+act_w_s2000: c07a917d9d125bca4f2e0585368c04d24400ca2b1743fb3bd2590894bf3cbb6c
+act_w_s3000: 37d2e0d9e1ebf46a74e253696ddb8ae89ab1657386e786c9919be3324ec145a5
+refs/train_dev: c2d7b9a3948609fdf5f61703631d7a29860c20dd78d398426ad35894261f1131
+refs/testobj: 8e1fc3dc905c0d433f02f570bf7c307b98adcb3cd32c5e2d6079ec40030670b2
+ports/common.py: 86559c608c49bd22a43b6b10e9973122efe0317bc14f2bb0df46a2a9b461fb14
+ports/detector_server.py: 5ab912f7d171497a8b766b1b641c903807ac3cec169af45ad97b4432a254aa93
+ports/p05_cns.py: d2aed5ae37d87766abe82bcde76e29b32e3c46200e0b64392a68412ccaf7e2a9
+ports/p07_vitvs.py: 1abe5b65a8bdb74c3c2b37eee2405c7aaa6262b52e9338b62d49605ca5bceddf
+ports/p17_odil.py: bcff4b479cf81f445b4b4076df1a5363c7ee0d5a6441309e34380d403f76d5df
+arena/methods/ports.py: a72753a66c1011093f1f243370e13d5a801dfcb17d069407e3009d8f0a1bf0d2
+arena/methods/act_lerobot.py: bce19a4363a96a0248b88d49c5aea913085cee0a7064e4f521164f7046834f3f
+arena/methods/act_i2.py: 37b63ced1f4f67e0ff7c1acbeae5431bc64dfc47934e31df4ac4dc2d6dca55e9
+scripts/p8_test.sh: 3daf13913529b74418fc488e0d3c34dfcaeee63e2a937888afb19a953c331d21
+scripts/p8_decide.py: e5faa2ef2529970a88236521b2991199e9c753bc057f173bf7e95206ba7e241d
+```
+Khóa lúc 2026-11-20 11:25:56. Từ đây chỉ được thêm vào §8.
 
 ## 8. Sai lệch và kết quả DEV
 ### 8.1 Trước lượt chạy arena đầu tiên của các bộ nhận diện (20/11, trước mọi kết quả DEV có điểm số)

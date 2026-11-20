@@ -8,9 +8,9 @@
 # Every parameter change is a configuration here (one at a time vs c1_default); results: scripts/m4_dev_summary.py.  Log the outcome in ARENA_TUNING_LOG.md.
 source "$(dirname "$(readlink -f "$0")")/lib_chain.sh"
 need_no_training
-gpu_busy() { pgrep -f 'arena.run_arena' >/dev/null || systemctl --user list-units 'arena-*' --state=running --no-legend 2>/dev/null | grep -v 'arena-m4' | grep -q .; }
-if [ "${WAIT_FOR_GPU:-}" = "1" ]; then echo "$(date +%T) waiting for the GPU (arena.run_arena or another arena-* unit is running)"; while gpu_busy; do sleep 60; done; echo "$(date +%T) GPU free"; fi
-[ "${DRY:-}" = "1" ] || need_no_isaac
+source "$(dirname "$(readlink -f "$0")")/m4_wait.sh"
+if [ "${WAIT_FOR_GPU:-}" = "1" ]; then m4_wait_gpu; fi
+[ "${DRY:-}" = "1" ] || [ "${GPU_SHARE:-}" = "1" ] || need_no_isaac
 CK=runs/dp_w_s1000/checkpoints/last/pretrained_model
 need_ckpt $CK
 

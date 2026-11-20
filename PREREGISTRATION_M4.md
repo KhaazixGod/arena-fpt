@@ -57,4 +57,4 @@ dp_w_s3000/pretrained_model: FILL AT LOCK
 lock_commit: FILL AT LOCK
 ```
 
-Frozen files: `m4 arena/methods/diffusion_i2.py arena/methods/act_i2.py arena/i2.py arena/dp_i2.py remote_server.py locked/m4/test_C2.csv scripts/lib_chain.sh scripts/m4_test.sh scripts/m4_decide.py`.
+Frozen files: `m4 arena/methods/diffusion_i2.py arena/methods/act_i2.py arena/i2.py arena/dp_i2.py remote_server.py locked/m4/test_C2.csv scripts/lib_chain.sh scripts/m4_wait.sh scripts/m4_test.sh scripts/m4_decide.py`.

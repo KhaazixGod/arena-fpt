@@ -9,7 +9,7 @@ source "$(dirname "$(readlink -f "$0")")/lib_chain.sh"
 PREREG=PREREGISTRATION_M4.md
 SHEET=locked/m4/test_C2.csv
 STOP=runs/m4_test_STOP
-FROZEN="m4 arena/methods/diffusion_i2.py arena/methods/act_i2.py arena/i2.py arena/dp_i2.py remote_server.py $SHEET scripts/lib_chain.sh scripts/m4_test.sh scripts/m4_decide.py"
+FROZEN="m4 arena/methods/diffusion_i2.py arena/methods/act_i2.py arena/i2.py arena/dp_i2.py remote_server.py $SHEET scripts/lib_chain.sh scripts/m4_wait.sh scripts/m4_test.sh scripts/m4_decide.py"
 export RUN_UNTIL_ATTEMPTS=${RUN_UNTIL_ATTEMPTS:-30} RUN_UNTIL_STALL_S=${RUN_UNTIL_STALL_S:-360}
 LK="--cells test_C2 --n 60 --arrangements-dir locked/m4 --allow-locked"
 die() { echo "REFUSED: $*"; exit 2; }
@@ -29,9 +29,9 @@ for d in dp_w_s1000 dp_w_s2000 dp_w_s3000; do
     [ "$(dir_hash $ck)" = "$(prereg_hash "$d/pretrained_model")" ] || die "files of $ck differ from $PREREG"
 done
 need_no_training
-gpu_busy() { pgrep -f 'arena.run_arena' >/dev/null || systemctl --user list-units 'arena-*' --state=running --no-legend 2>/dev/null | grep -v 'arena-m4' | grep -q .; }
-if [ "${WAIT_FOR_GPU:-}" = "1" ]; then echo "$(date +%T) waiting for the GPU"; while gpu_busy; do sleep 60; done; echo "$(date +%T) GPU free"; fi
-[ "${DRY:-}" = "1" ] || need_no_isaac
+source "$(dirname "$(readlink -f "$0")")/m4_wait.sh"
+if [ "${WAIT_FOR_GPU:-}" = "1" ]; then m4_wait_gpu; fi
+[ "${DRY:-}" = "1" ] || [ "${GPU_SHARE:-}" = "1" ] || need_no_isaac
 [ -f $STOP ] && die "$STOP exists (an earlier run exceeded 10 % valid=0): decide by hand first"
 invalid_share_ok() {
     python3 - "$1/trials.csv" <<'PY'

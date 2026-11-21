@@ -1,0 +1,117 @@
+{
+ "trial_id": 55,
+ "method": "REMOTE:ACT_W_S1000",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_056",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "plate31",
+   "a_mm": -277.5,
+   "b_mm": -218.8,
+   "yaw_deg": 248.7
+  },
+  {
+   "name": "box35",
+   "a_mm": -199.2,
+   "b_mm": -217.6,
+   "yaw_deg": 105.1
+  },
+  {
+   "name": "cyl36",
+   "a_mm": -150.0,
+   "b_mm": -179.8,
+   "yaw_deg": 323.5
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "plate31": 0.0,
+    "box35": 0.1,
+    "cyl36": 611.9
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT_I2",
+   "data": {
+    "ckpt": "runs/act_w_s1000/checkpoints/last/pretrained_model",
+    "replan": 100,
+    "task_vec": null
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 6.0,
+  "ik_fail_ticks": 501.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 8.1,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [47.3, -114.8, 59.8], 'yaw': 84.8, 'pos_err_mm': 0.02, 'q': [83.4, -51.4, 49.2, 92.2, -9.0], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "plate31.a",
+  "plate31.b",
+  "plate31.z",
+  "plate31.yaw",
+  "plate31.tilt",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt"
+ ],
+ "ms_step_p50": 4.120147088542581,
+ "ms_step_p95": 87.64939405955374,
+ "n_steps": 1001,
+ "wall_s": 178.83,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 76.1
+}

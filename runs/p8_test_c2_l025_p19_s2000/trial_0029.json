@@ -1,0 +1,108 @@
+{
+ "trial_id": 29,
+ "method": "REMOTE:P19_ACT_TE_S2000",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_030",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box35",
+   "a_mm": -232.4,
+   "b_mm": -193.2,
+   "yaw_deg": 304.6
+  },
+  {
+   "name": "u27",
+   "a_mm": -150.0,
+   "b_mm": -199.0,
+   "yaw_deg": 331.9
+  },
+  {
+   "name": "t34",
+   "a_mm": -303.9,
+   "b_mm": -217.7,
+   "yaw_deg": 306.1
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "box35": 0.1,
+    "u27": 12.7,
+    "t34": 4.1
+   }
+  }
+ },
+ "outcome": "act_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "ACT"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:ACT",
+   "data": {
+    "ckpt": "runs/act_j0_s2000/checkpoints/last/pretrained_model"
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {},
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt",
+  "u27.a",
+  "u27.b",
+  "u27.z",
+  "u27.yaw",
+  "u27.tilt",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt"
+ ],
+ "ms_step_p50": 14.932456077076495,
+ "ms_step_p95": 25.448521017096937,
+ "n_steps": 1001,
+ "wall_s": 160.82,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 74.99
+}

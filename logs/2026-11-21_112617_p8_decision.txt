@@ -1,0 +1,62 @@
+P8 TEST (PREREGISTRATION_P8.md), sheet locked/paper/test_C2.csv n = 60 engine=isaac
+
+success at l05 (Wilson 95 %):
+  cl0_w              52/60 =  86.7%  [75.8, 93.1]  valid=0: 0  fails: {'collision': 6, 'grasp_point': 1, 'slip': 1}
+  act_w_s1000        39/60 =  65.0%  [52.4, 75.8]  valid=0: 0  fails: {'collision': 16, 'other': 5}
+  act_w_s2000        22/60 =  36.7%  [25.6, 49.3]  valid=0: 0  fails: {'collision': 33, 'other': 5}
+  act_w_s3000        37/60 =  61.7%  [49.0, 72.9]  valid=0: 0  fails: {'collision': 17, 'other': 6}
+  p19_s1000          10/60 =  16.7%  [ 9.3, 28.0]  valid=0: 0  fails: {'collision': 45, 'other': 5}
+  p19_s2000          15/60 =  25.0%  [15.8, 37.2]  valid=0: 0  fails: {'collision': 40, 'other': 5}
+  p19_s3000          13/60 =  21.7%  [13.1, 33.6]  valid=0: 0  fails: {'collision': 38, 'other': 9}
+  p05_cns_w          15/60 =  25.0%  [15.8, 37.2]  valid=0: 0  fails: {'grasp_point': 17, 'timing': 14, 'slip': 11, 'collision': 3}
+  p05_cns            10/60 =  16.7%  [ 9.3, 28.0]  valid=0: 0  fails: {'timing': 17, 'grasp_point': 16, 'collision': 8, 'slip': 7, 'other': 2}
+  p07_vitvs_w        40/60 =  66.7%  [54.1, 77.3]  valid=0: 0  fails: {'slip': 10, 'timing': 5, 'collision': 4, 'grasp_point': 1}
+  p07_vitvs          20/60 =  33.3%  [22.7, 45.9]  valid=0: 0  fails: {'collision': 17, 'timing': 11, 'slip': 6, 'grasp_point': 6}
+  p17_odil_w         30/60 =  50.0%  [37.7, 62.3]  valid=0: 0  fails: {'slip': 17, 'collision': 6, 'timing': 4, 'grasp_point': 3}
+  p17_odil           21/60 =  35.0%  [24.2, 47.6]  valid=0: 0  fails: {'collision': 19, 'grasp_point': 7, 'slip': 7, 'timing': 4, 'other': 2}
+  p05_cns_w_t        22/60 =  36.7%  [25.6, 49.3]  valid=0: 0  fails: {'grasp_point': 17, 'timing': 10, 'slip': 10, 'collision': 1}
+  p07_vitvs_w_t      34/60 =  56.7%  [44.1, 68.4]  valid=0: 0  fails: {'timing': 9, 'slip': 8, 'collision': 5, 'grasp_point': 4}
+  p17_odil_w_t       38/60 =  63.3%  [50.7, 74.4]  valid=0: 0  fails: {'slip': 11, 'grasp_point': 5, 'collision': 4, 'timing': 2}
+
+success at l025 (Wilson 95 %):
+  cl0_w              49/60 =  81.7%  [70.1, 89.4]  valid=0: 0  fails: {'collision': 8, 'slip': 2, 'grasp_point': 1}
+  act_w_s1000        43/60 =  71.7%  [59.2, 81.5]  valid=0: 0  fails: {'collision': 12, 'other': 5}
+  act_w_s2000        33/60 =  55.0%  [42.5, 66.9]  valid=0: 0  fails: {'collision': 22, 'other': 5}
+  act_w_s3000        39/60 =  65.0%  [52.4, 75.8]  valid=0: 0  fails: {'collision': 15, 'other': 6}
+  p19_s1000          10/60 =  16.7%  [ 9.3, 28.0]  valid=0: 0  fails: {'collision': 39, 'other': 11}
+  p19_s2000          22/60 =  36.7%  [25.6, 49.3]  valid=0: 0  fails: {'collision': 28, 'other': 10}
+  p19_s3000          16/60 =  26.7%  [17.1, 39.0]  valid=0: 0  fails: {'collision': 36, 'other': 8}
+  p05_cns_w          17/60 =  28.3%  [18.5, 40.8]  valid=0: 0  fails: {'timing': 19, 'grasp_point': 12, 'slip': 10, 'collision': 2}
+  p05_cns            13/60 =  21.7%  [13.1, 33.6]  valid=0: 0  fails: {'timing': 19, 'grasp_point': 14, 'slip': 9, 'collision': 5}
+  p07_vitvs_w        39/60 =  65.0%  [52.4, 75.8]  valid=0: 0  fails: {'slip': 8, 'timing': 7, 'collision': 4, 'grasp_point': 2}
+  p07_vitvs          35/60 =  58.3%  [45.7, 69.9]  valid=0: 0  fails: {'slip': 10, 'collision': 6, 'timing': 5, 'grasp_point': 3, 'other': 1}
+  p17_odil_w         41/60 =  68.3%  [55.8, 78.7]  valid=0: 0  fails: {'collision': 8, 'slip': 7, 'grasp_point': 3, 'timing': 1}
+  p17_odil           34/60 =  56.7%  [44.1, 68.4]  valid=0: 0  fails: {'slip': 11, 'collision': 10, 'grasp_point': 4, 'timing': 1}
+
+F1 (Holm over 4, L0.5): ACT_W (3 seeds) vs each paper; per-scene mean difference, two-sided sign-flip permutation
+  ACT_W vs P05_CNS_W      d =  +29.4 pts  (ACT_W better 34, paper better 10, tie 16)  p = 0.00012  Holm 0.00036  -> ACT_W better
+  ACT_W vs P07_VITVS_W    d =  -12.2 pts  (ACT_W better 14, paper better 30, tie 16)  p = 0.134  Holm 0.269  -> no difference shown
+  ACT_W vs P17_ODIL_W     d =   +4.4 pts  (ACT_W better 20, paper better 21, tie 19)  p = 0.595  Holm 0.595  -> no difference shown
+  ACT_W vs P19 (3 seeds)  d =  +33.3 pts  (ACT_W better 37, paper better 9, tie 14)  p = 1e-05  Holm 4e-05  -> ACT_W better
+
+F2 (Holm over 3, L0.5): CL0_W vs each port with W1 (same executor, perception only); exact McNemar two-sided
+  CL0_W vs P05_CNS_W    52/60 vs 15/60  gap +61.7 pts  (only CL0_W 38, only port 1)  p = 1.46e-10  Holm 4.37e-10  -> CL0_W better
+  CL0_W vs P07_VITVS_W  52/60 vs 40/60  gap +20.0 pts  (only CL0_W 16, only port 4)  p = 0.0118  Holm 0.0118  -> CL0_W better
+  CL0_W vs P17_ODIL_W   52/60 vs 30/60  gap +36.7 pts  (only CL0_W 24, only port 2)  p = 1.05e-05  Holm 2.1e-05  -> CL0_W better
+
+descriptive (no claims):
+  l05 W1 effect p05_cns    15 vs 10  gap +8.3  (gained 11, lost 6)  McNemar p = 0.332
+  l05 W1 effect p07_vitvs  40 vs 20  gap +33.3  (gained 23, lost 3)  McNemar p = 8.8e-05
+  l05 W1 effect p17_odil   30 vs 21  gap +15.0  (gained 13, lost 4)  McNemar p = 0.049
+  l05 +test refs p05_cns    22 vs 15  gap +11.7  McNemar p = 0.0654  (knows the TEST objects: labelled)
+  l05 +test refs p07_vitvs  34 vs 40  gap -10.0  McNemar p = 0.109  (knows the TEST objects: labelled)
+  l05 +test refs p17_odil   38 vs 30  gap +13.3  McNemar p = 0.0768  (knows the TEST objects: labelled)
+  l05 ACT_W (3) vs CL0_W             mean d =  -32.2 pts  (scenes A better 4, B better 37, tie 19)  sign-flip p = 1e-05
+  l05 ACT_W (3) vs P19 (3)           mean d =  +33.3 pts  (scenes A better 37, B better 9, tie 14)  sign-flip p = 1e-05
+  l025 W1 effect p05_cns    17 vs 13  gap +6.7  (gained 7, lost 3)  McNemar p = 0.344
+  l025 W1 effect p07_vitvs  39 vs 35  gap +6.7  (gained 11, lost 7)  McNemar p = 0.481
+  l025 W1 effect p17_odil   41 vs 34  gap +11.7  (gained 10, lost 3)  McNemar p = 0.0923
+  l025 ACT_W (3) vs CL0_W            mean d =  -17.8 pts  (scenes A better 10, B better 29, tie 21)  sign-flip p = 0.01
+  l025 ACT_W (3) vs P19 (3)          mean d =  +37.2 pts  (scenes A better 40, B better 3, tie 17)  sign-flip p = 1e-05
+
+wrote runs/p8_test_decision.json

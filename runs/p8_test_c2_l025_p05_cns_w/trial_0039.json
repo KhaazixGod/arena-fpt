@@ -1,0 +1,260 @@
+{
+ "trial_id": 39,
+ "method": "P05_CNS_W",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_040",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t34",
+   "a_mm": -306.3,
+   "b_mm": -222.9,
+   "yaw_deg": 258.1
+  },
+  {
+   "name": "u27",
+   "a_mm": -225.8,
+   "b_mm": -199.9,
+   "yaw_deg": 159.2
+  },
+  {
+   "name": "mug29",
+   "a_mm": -359.5,
+   "b_mm": -188.3,
+   "yaw_deg": 345.3
+  },
+  {
+   "name": "box35",
+   "a_mm": -150.0,
+   "b_mm": -212.9,
+   "yaw_deg": 76.7
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "timing",
+  "target": "box35",
+  "t_success_s": null,
+  "t_detect_s": 0.5,
+  "t_lift_s": 2.92,
+  "details": {
+   "moved_before_close_mm": {
+    "t34": 0.2,
+    "u27": 0.1,
+    "mug29": 0.0,
+    "box35": 4.6
+   },
+   "max_lift_target_mm": 4.7,
+   "select_err_mm": 8.4,
+   "estimate_err_mm": 8.3,
+   "delta_close_mm": 9.3,
+   "delta_a_mm": -9.2,
+   "delta_b_mm": 1.6
+  }
+ },
+ "outcome": "dropped_in_hold",
+ "finished": true,
+ "t_end_s": 8.66,
+ "phases": [
+  [
+   0.5,
+   "APPROACH"
+  ],
+  [
+   1.66,
+   "DESCEND"
+  ],
+  [
+   2.2,
+   "CLOSE"
+  ],
+  [
+   2.92,
+   "LIFT"
+  ],
+  [
+   3.52,
+   "MOVE_HOLD"
+  ],
+  [
+   4.54,
+   "HOLD"
+  ],
+  [
+   6.54,
+   "RELEASE"
+  ],
+  [
+   7.16,
+   "RETURN"
+  ],
+  [
+   8.66,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.5,
+   "name": "select",
+   "data": {
+    "tid": 8,
+    "a_b": -157.90134082288264,
+    "b": -215.8540791086962,
+    "theta": 95.77989765721482,
+    "width": 32.07,
+    "std": 0.11318797916156872
+   }
+  },
+  {
+   "t": 0.5,
+   "name": "w1_branch",
+   "data": {
+    "k0": -1,
+    "k": 0,
+    "switched": true,
+    "at_risk": true,
+    "m0": 0,
+    "th_plan": 95.78,
+    "ttv": "{'-2': 0.0, '-1': 1.1, '0': 4.2}",
+    "why": "{'-2': 'roll', '-1': 'roll', '0': ''}",
+    "h5_min": "{'-2': -197.16, '-1': -18.28, '0': 61.18}",
+    "q5_span": "{'-2': [-351.38, -261.39], '-1': [-172.49, -81.39], '0': [8.62, 98.61]}",
+    "v_now": 37.4,
+    "v_cmd": 37.5,
+    "ms": 192.78
+   }
+  },
+  {
+   "t": 0.5,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.98,
+   "name": "freeze",
+   "data": {
+    "est": "(-157.8209918793132, -215.8360867573727, 95.76787040106558)"
+   }
+  },
+  {
+   "t": 1.66,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 2.2,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 2.92,
+   "name": "close_done",
+   "data": {
+    "gripper": 39.500637450887005,
+    "held": true,
+    "err_meas": 0.051719565126172616
+   }
+  },
+  {
+   "t": 2.92,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 3.32,
+   "name": "lost_object",
+   "data": {
+    "gripper": 0.039634765593559766,
+    "phase": "LIFT"
+   }
+  },
+  {
+   "t": 3.52,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 4.54,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 4.54,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 6.54,
+   "name": "hold_done",
+   "data": {
+    "gripper": -3.616328319628275e-06,
+    "lost": true
+   }
+  },
+  {
+   "t": 6.54,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 7.16,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 8.66,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 47.0,
+  "reject_wide": 0.0,
+  "reject_other": 4.0,
+  "n_ok_dets": 93.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt",
+  "u27.a",
+  "u27.b",
+  "u27.z",
+  "u27.yaw",
+  "u27.tilt",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt"
+ ],
+ "ms_step_p50": 0.6897694547660649,
+ "ms_step_p95": 120.00374352792275,
+ "n_steps": 434,
+ "wall_s": 74.93,
+ "method_exception": null,
+ "renders": 259,
+ "render_wall_s": 32.54
+}

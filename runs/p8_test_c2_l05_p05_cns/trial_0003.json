@@ -1,0 +1,241 @@
+{
+ "trial_id": 3,
+ "method": "P05_CNS",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_004",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl36",
+   "a_mm": -279.3,
+   "b_mm": -203.7,
+   "yaw_deg": 87.2
+  },
+  {
+   "name": "plate30",
+   "a_mm": -343.4,
+   "b_mm": -214.5,
+   "yaw_deg": 265.3
+  },
+  {
+   "name": "mug29",
+   "a_mm": -225.8,
+   "b_mm": -230.8,
+   "yaw_deg": 296.7
+  },
+  {
+   "name": "u27",
+   "a_mm": -150.0,
+   "b_mm": -202.0,
+   "yaw_deg": 248.9
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "grasp_point",
+  "target": "mug29",
+  "t_success_s": null,
+  "t_detect_s": 0.7,
+  "t_lift_s": 3.1,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl36": 0.0,
+    "plate30": 0.0,
+    "mug29": 0.0,
+    "u27": 0.1
+   },
+   "max_lift_target_mm": 1.1,
+   "select_err_mm": 19.1,
+   "estimate_err_mm": 19.7,
+   "delta_close_mm": 19.9,
+   "delta_a_mm": -2.7,
+   "delta_b_mm": 19.8
+  }
+ },
+ "outcome": "dropped_in_hold",
+ "finished": true,
+ "t_end_s": 8.88,
+ "phases": [
+  [
+   0.7,
+   "APPROACH"
+  ],
+  [
+   1.86,
+   "DESCEND"
+  ],
+  [
+   2.4,
+   "CLOSE"
+  ],
+  [
+   3.1,
+   "LIFT"
+  ],
+  [
+   3.7,
+   "MOVE_HOLD"
+  ],
+  [
+   4.74,
+   "HOLD"
+  ],
+  [
+   6.74,
+   "RELEASE"
+  ],
+  [
+   7.36,
+   "RETURN"
+  ],
+  [
+   8.88,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.7,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -230.88866630562444,
+    "b": -212.42262152969994,
+    "theta": 25.09128657943606,
+    "width": 36.15,
+    "std": 0.7070589810217939
+   }
+  },
+  {
+   "t": 0.7,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 1.22,
+   "name": "freeze",
+   "data": {
+    "est": "(-227.96367631560548, -211.16506855229076, 21.823871737628625)"
+   }
+  },
+  {
+   "t": 1.86,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 2.4,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 3.1,
+   "name": "close_done",
+   "data": {
+    "gripper": 26.99726676689442,
+    "held": true,
+    "err_meas": 0.08920288408538019
+   }
+  },
+  {
+   "t": 3.1,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 3.32,
+   "name": "lost_object",
+   "data": {
+    "gripper": 0.23784297451802933,
+    "phase": "LIFT"
+   }
+  },
+  {
+   "t": 3.7,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 4.74,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 4.74,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 6.74,
+   "name": "hold_done",
+   "data": {
+    "gripper": -4.392486180842587e-06,
+    "lost": true
+   }
+  },
+  {
+   "t": 6.74,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 7.36,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 8.88,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 53.0,
+  "reject_wide": 0.0,
+  "reject_other": 17.0,
+  "n_ok_dets": 51.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt",
+  "plate30.a",
+  "plate30.b",
+  "plate30.z",
+  "plate30.yaw",
+  "plate30.tilt",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt",
+  "u27.a",
+  "u27.b",
+  "u27.z",
+  "u27.yaw",
+  "u27.tilt"
+ ],
+ "ms_step_p50": 0.6704209372401237,
+ "ms_step_p95": 115.05524793174118,
+ "n_steps": 445,
+ "wall_s": 79.79,
+ "method_exception": null,
+ "renders": 266,
+ "render_wall_s": 36.21
+}

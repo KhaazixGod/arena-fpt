@@ -1,0 +1,263 @@
+{
+ "trial_id": 24,
+ "method": "P05_CNS_W",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_025",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl36",
+   "a_mm": -204.2,
+   "b_mm": -229.4,
+   "yaw_deg": 333.5
+  },
+  {
+   "name": "u27",
+   "a_mm": -273.0,
+   "b_mm": -208.6,
+   "yaw_deg": 249.1
+  },
+  {
+   "name": "plate31",
+   "a_mm": -358.9,
+   "b_mm": -194.0,
+   "yaw_deg": 225.5
+  },
+  {
+   "name": "t34",
+   "a_mm": -150.0,
+   "b_mm": -203.6,
+   "yaw_deg": 168.7
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "slip",
+  "target": "t34",
+  "t_success_s": null,
+  "t_detect_s": 0.68,
+  "t_lift_s": 3.08,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl36": 0.0,
+    "u27": 0.2,
+    "plate31": 0.0,
+    "t34": 3.9
+   },
+   "max_lift_target_mm": 19.9
+  }
+ },
+ "outcome": "dropped_in_hold",
+ "finished": true,
+ "t_end_s": 10.14,
+ "phases": [
+  [
+   0.68,
+   "APPROACH"
+  ],
+  [
+   1.82,
+   "DESCEND"
+  ],
+  [
+   2.38,
+   "CLOSE"
+  ],
+  [
+   3.08,
+   "LIFT"
+  ],
+  [
+   4.24,
+   "MOVE_HOLD"
+  ],
+  [
+   6.02,
+   "HOLD"
+  ],
+  [
+   8.02,
+   "RELEASE"
+  ],
+  [
+   8.64,
+   "RETURN"
+  ],
+  [
+   10.14,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.68,
+   "name": "select",
+   "data": {
+    "tid": 5,
+    "a_b": -139.03395171582125,
+    "b": -210.0854247955723,
+    "theta": 170.50037057238347,
+    "width": 31.61,
+    "std": 4.400584643862153
+   }
+  },
+  {
+   "t": 0.68,
+   "name": "w1_branch",
+   "data": {
+    "k0": -1,
+    "k": -1,
+    "switched": false,
+    "at_risk": true,
+    "m0": 0,
+    "th_plan": null,
+    "ttv": "{'-2': 0.0, '-1': 3.3, '0': 0.0}",
+    "why": "{'-2': 'roll', '-1': 'joint', '0': 'roll'}",
+    "h5_min": "{'-2': -167.21, '-1': 7.64, '0': -13.54}",
+    "q5_span": "{'-2': [-321.42, -186.67], '-1': [-146.57, -6.67], '0': [38.58, 173.33]}",
+    "v_now": 75.0,
+    "v_cmd": 75.0,
+    "ms": 317.87
+   }
+  },
+  {
+   "t": 0.68,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 1.12,
+   "name": "freeze",
+   "data": {
+    "est": "(-141.40168887113495, -208.66503003107545, 138.67101079246746)"
+   }
+  },
+  {
+   "t": 1.82,
+   "name": "phase:DESCEND",
+   "data": {}
+  },
+  {
+   "t": 2.38,
+   "name": "phase:CLOSE",
+   "data": {}
+  },
+  {
+   "t": 3.08,
+   "name": "close_done",
+   "data": {
+    "gripper": 33.803598396599455,
+    "held": true,
+    "err_meas": 0.07807915413925001
+   }
+  },
+  {
+   "t": 3.08,
+   "name": "phase:LIFT",
+   "data": {}
+  },
+  {
+   "t": 3.8,
+   "name": "lost_object",
+   "data": {
+    "gripper": 0.1622560651417954,
+    "phase": "LIFT"
+   }
+  },
+  {
+   "t": 4.24,
+   "name": "lift_stuck",
+   "data": {
+    "z": 43.22586881757727,
+    "ik_fail_t": 0.3200000000000003
+   }
+  },
+  {
+   "t": 4.24,
+   "name": "phase:MOVE_HOLD",
+   "data": {}
+  },
+  {
+   "t": 6.02,
+   "name": "hold_start",
+   "data": {}
+  },
+  {
+   "t": 6.02,
+   "name": "phase:HOLD",
+   "data": {}
+  },
+  {
+   "t": 8.02,
+   "name": "hold_done",
+   "data": {
+    "gripper": -5.94480190165634e-06,
+    "lost": true
+   }
+  },
+  {
+   "t": 8.02,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 8.64,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 10.14,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 52.0,
+  "reject_wide": 0.0,
+  "reject_other": 34.0,
+  "n_ok_dets": 74.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt",
+  "u27.a",
+  "u27.b",
+  "u27.z",
+  "u27.yaw",
+  "u27.tilt",
+  "plate31.a",
+  "plate31.b",
+  "plate31.z",
+  "plate31.yaw",
+  "plate31.tilt",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt"
+ ],
+ "ms_step_p50": 0.6725540151819587,
+ "ms_step_p95": 124.8132370528765,
+ "n_steps": 508,
+ "wall_s": 87.29,
+ "method_exception": null,
+ "renders": 304,
+ "render_wall_s": 36.85
+}

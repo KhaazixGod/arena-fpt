@@ -123,6 +123,12 @@ const P6 = {
             ["H2: ACT_W ≠ ACT_old", `d trung bình ${pts(h.mean_d_pts)} (W hơn ở ${h.better_w} cảnh, old hơn ở ${h.better_old}, hòa ${h.ties})`, fp(h.p), fp(h.holm[1]), verdict("H2")]];
     },
     invalidTotal() { return p6 ? Object.values(p6.invalid_rows).reduce((a, b) => a + b, 0) : null; },
+    // numbers for the plain-language table of the short report (build_tomtat.js section 5); null until the P6 JSON exists
+    plain() {
+        if (!p6) return null;
+        return { d: p6, n: p6.n, actW: p6sum(ACT_W), actOld: p6sum(ACT_OLD), dpW: p6sum(DP_W),
+            verdict: { H1: short("H1"), H1b: short("H1b"), H2: short("H2") } };
+    },
     pair(tag) { return p6txt && p6txt.pairs[tag] ? p6txt.pairs[tag] : null; },
     // CL0_W minus pooled ACT_W, sign-flip (descriptive); used to check DEV-based sentences ("ACT chưa vượt mô-đun đã sửa")
     modularAhead() { const q = this.pair("CL0_W - ACT_W"); return q ? q.d > 0 : null; },
@@ -217,6 +223,8 @@ const P7 = {
         rows.push(["P05 / P07 / P17 / P19 (máy benchmark)", PAPERS7.map(cnt).join(" / "), "—", "—", PAPERS7.map(l => pv(l, REF)).join(" / ") + " (khác máy)"]);
         return rows;
     },
+    // numbers for the paper-comparison table of the short report (build_tomtat.js section 5.1); null until the P7 chain is done
+    plain() { return p7 ? { N: N7, S: S7, has, pooled: pooled7 } : null; },
     best() {   // best learned policy (single checkpoint) on the 40 pairs
         const L = LEARNED.filter(l => has(l) && S7[l].n === N7).sort((a, b) => S7[b].s - S7[a].s);
         return L.length ? L[0] : null;

@@ -2,7 +2,7 @@
 // Run from arena/:  NODE_PATH=<dir with node_modules> node bao_cao_do_an/build_tomtat.js     {{...}} = filled after P6 (TEST) / P7 (benchmark-DEV).
 const fs = require("fs"), path = require("path");
 const L = require("./lib.js");
-const { D, FONT, H1, H2, P, NOTE, BL, EQ, TABLE, FIG, out, push, runs } = L;
+const { D, FONT, H1, H2, H3, P, NOTE, BL, EQ, TABLE, FIG, out, push, runs } = L;
 const { Document, Packer, Paragraph, TextRun, AlignmentType, Footer, PageNumber, LevelFormat } = D;
 const ALL = require("./refs.js");
 L.setRefs(["act", "dp", "lerobot", "so101", "isaac", "mcnemar", "wilson", "holm"].map(k => ALL.find(r => r.key === k)));
@@ -52,20 +52,76 @@ BL([
 ]);
 
 H2("5. Kết quả chính");
-TABLE("Kết quả chính (số lượt thành công; ghép cặp trên cùng cảnh)", ["Thí nghiệm", "Điều kiện", "Kết quả", "Nguồn"], [
-    ["I2 so với ACT mặc định (E14)", "dev_C2, L0,5, n = 20", "ACT_I2 13, ACT_J0 4, CL0 6, ORACLE 16; I2 vs J0 p = 0,022", "`runs/e14_*`, `runs/e10_base_L05`"],
-    ["Biến thể suy luận/dữ liệu (E15, E16)", "dev_C2, dev_C3 × L0,25, L0,5; n = 80", "/100: 48, thêm demo L0,5: 50, COMMIT: 41, /10: 39 (CL0 43, ORACLE 61) → giữ /100", "`logs/2026-11-08_175431_e16_pair_final.txt`"],
-    ["**TEST G2** (đồ án, tiền đăng ký)", "test_C2, L0,5, n = 60, vật lạ", "ACT 21/60 và 18/60, CL0 22/60, ORACLE 28/60; p = 1,0 và 0,48 → **NO-GO**", "`logs/2026-11-10_210822_g2_decision.txt`"],
-    ["40 nhiệm vụ (E18, tiền đăng ký)", "gắp/đặt/kéo/lật, băng đứng yên", "Đã học 122/160 (76,2%); 8 nhiệm vụ chưa thấy 58/80 (72,5%)", "`logs/2026-11-12_204650_e18_decision.txt`"],
-    ["W1 (sau đóng băng)", "dev_C2, L0,5, n = 60", "CL0 25 → 52 (p = 5·10⁻⁷); ORACLE 45 → 58 (p = 2·10⁻⁴)", "`BAO_CAO_PAPER_DEV.md` mục 5"],
-    ["Chính sách học mới (sau đóng băng)", "dev_C2, L0,5, n = 20", "ACT 13–15, DP 13–16, CL0 7, CL0_W 17, ORACLE_W 19", "`runs/p4_dev_*`, `runs/p2_*`, `runs/p5_*`"],
-    ["So với bài báo (benchmark)", "40 lượt DEV chung, khác máy", "ACT 30/40; P17 25, P19 20, P05 18, P07 12; CL0 35, ORACLE 40", "`Benmark_Capstone/results/raw`, `runs/e14_*`"],
-    ["**TEST mới** (tiền đăng ký)", "test_C2 mới, L0,5, n = 60", F.P6.shortCell() || "H1 CL0_W > CL0: {{…}}; H1b ORACLE_W > ORACLE: {{…}}; H2 ACT_W vs ACT_old: {{…}}; DP: {{…}}", F.P6.ok ? F.P6.src : "`logs/*_p6_decision.txt`"],
-    ["So sánh cùng máy (P7)", "40 lượt DEV của benchmark", F.P7.shortCell() || "9 chính sách học + CL0/CL0_W/ORACLE/ORACLE_W: {{…}}", F.P7.ok ? F.P7.src : "`logs/*_p7_bench_compare.txt`"],
-], [22, 20, 36, 22]);
+P("Mọi con số bên dưới là **số lượt thành công / số lượt thử**; ví dụ 13/20 nghĩa là thành công 13 trong 20 lượt. Mục 5.1 so với các bài báo, mục 5.2 là kết quả đánh giá nội bộ của đồ án. Các ký hiệu được giải thích ở Bảng 2.");
+TABLE("Chú giải ký hiệu dùng trong mục 5", ["Ký hiệu", "Nghĩa"], [
+    ["**DEV / TEST**", "DEV: tập cảnh dùng để thử và tinh chỉnh. TEST: tập cảnh khóa, chỉ chạy một lần theo tiền đăng ký, dùng để kết luận."],
+    ["**C0, C1, C2, C3**", "Độ lộn xộn của cảnh. C0: 1 vật. C1: 2 vật cách xa. C2: 3–4 vật cách nhau 10–25 mm. C3: 4–5 vật gần như chạm nhau (0–3 mm). Ví dụ “DEV, C2” là cảnh DEV mức C2."],
+    ["**L0 … L1,0**", "Tốc độ băng. L0: đứng yên. L0,25: 37,5 mm/s. L0,5: 75 mm/s. L1,0: 150 mm/s."],
+    ["**ACT_J0**", "ACT mặc định của LeRobot: xuất góc khớp, không biết băng đang chạy."],
+    ["**ACT_I2**", "ACT với giao diện hệ băng I2 (mục 4). Có ba cách chạy: **/100** (lập kế hoạch lại sau mỗi 100 khung, tức trọn một chunk), **/10** (lập lại sau mỗi 10 khung) và **COMMIT** (lập lại mỗi 10 khung khi kẹp còn mở, rồi chạy hết chunk khi có lệnh đóng kẹp)."],
+    ["**ACT_old, ACT_W, DP_W**", "ACT_I2 hoặc Diffusion Policy học từ demo của ORACLE chưa sửa lỗi (old) hoặc đã sửa lỗi cổ tay W1 (W). Hậu tố s1000, s2000, s3000 là **hạt giống**: mỗi lần huấn luyện lại với số ngẫu nhiên khác. “Gộp” là cộng lượt của các hạt giống."],
+    ["**CL0, CL0_W**", "Pipeline mô-đun không huấn luyện (mục 4). CL0_W là CL0 có thêm sửa lỗi W1."],
+    ["**ORACLE, ORACLE_W**", "Phương pháp dùng thông tin thật của mô phỏng (ground truth); cho biết trần của môi trường và sinh demo. ORACLE_W có thêm W1."],
+    ["**W1**", "Sửa bộ thực thi: chọn hướng kẹp sao cho cổ tay không chạm giới hạn khớp khi bám theo băng chạy nhanh."],
+    ["**p, p Holm**", "Xác suất thấy chênh lệch lớn như vậy nếu hai phương pháp thật ra ngang nhau (kiểm định ghép cặp). p < 0,05 nghĩa là chênh lệch có ý nghĩa thống kê. p Holm là p đã hiệu chỉnh khi kiểm nhiều giả thuyết cùng lúc."],
+    ["**H1, H1b, H2**", "Các giả thuyết ghi trước khi chạy TEST mới. H1: CL0_W hơn CL0 ít nhất 15 điểm phần trăm. H1b: ORACLE_W hơn ORACLE ít nhất 5 điểm. H2: ACT_W khác ACT_old."],
+    ["**NO-GO**", "Giả thuyết đặt trước bị bác bỏ."],
+], [24, 76], { source: "định nghĩa theo `arena/README.md`, `PREREGISTRATION_PAPER.md` và mục 4 báo cáo này." });
+
+
+const ph = t => `{{${t}}}`;
+H3("5.1. So với các bài báo", { pageBreak: true });
+P("**Lưu ý khi đọc:** con số các bài báo tự công bố (cột 2) được đo trên bài toán khác (robot thật hai tay, mô phỏng khác, nhiệm vụ khác), và benchmark của nhóm đánh dấu mọi cặp đó là “không so trực tiếp được”. Vì vậy so sánh công bằng là **cột 3**: bài báo được chạy lại trên **cùng arena và cùng 40 lượt DEV** với phương pháp của đồ án. Các bài báo (P05, P07, P17, P19) chạy trên máy benchmark còn phương pháp của đồ án chạy trên máy này, nên chênh khoảng ±5 lượt có thể chỉ do máy. P05, P07, P17 chỉ chạy một thành phần của bài báo, không phải cả phương pháp.");
+const P7p = F.P7.plain();
+const fr = (s, n) => `${s}/${n} (${Number((100 * s / n).toFixed(1)).toString().replace(".", ",")}%)`;
+const one = l => (P7p && P7p.has(l) ? fr(P7p.S[l].s, P7p.S[l].n) : ph("…"));
+const many = labs => { if (!P7p) return ph("…"); const t = P7p.pooled(labs); return t.n ? fr(t.s, t.n) : ph("…"); };
+TABLE("So sánh với các bài báo trên cùng 40 lượt DEV", ["Phương pháp", "Bài báo tự công bố (bài toán gốc, không so trực tiếp)", "Chạy trên arena, 40 lượt DEV", "Ghi chú"], [
+    ["**Bài báo tái lập (máy benchmark)**", "", "", ""],
+    ["P19 – ACT (port nguyên phương pháp)", "Mô phỏng hai tay: 86% (chuyển khối), 32% (lắp khớp); robot thật: 20–96% tùy nhiệm vụ", one("P19 ACT"), "Port cả phương pháp"],
+    ["P17 – ODIL (chỉ giai đoạn 1)", "Robot thật hai tay: 77,2% trung bình", one("P17 ODIL stage1"), "Một thành phần"],
+    ["P05 – CNS (chỉ phần nhận thức)", "Robot thật: 100% (cảnh dễ, có RANSAC); mô phỏng: 100%", one("P05 CNS frontend"), "Một thành phần"],
+    ["P07 – ViT-VS", "Mô phỏng: 100% (không nhiễu), 76,6% (có nhiễu)", one("P07 ViT-VS"), "Một thành phần"],
+    ["P18 – FlowControl", "Robot thật: 19/20 (Pick-Stow)", "0/12 (chạy dở, ~22 phút mỗi lượt)", "Một thành phần, chưa đủ 40 lượt"],
+    ["**Đồ án (máy này)**", "", "", ""],
+    ["ACT_old (2 hạt giống)", "—", many(["ACT_old s1000", "ACT_old s2000"]), "ACT_I2, demo từ ORACLE chưa sửa"],
+    ["ACT_W (3 hạt giống)", "—", many(["ACT_W s1000", "ACT_W s2000", "ACT_W s3000"]), "ACT_I2, demo từ ORACLE đã sửa W1"],
+    ["DP_W (3 hạt giống)", "—", many(["DP_W s1000", "DP_W s2000", "DP_W s3000"]), "Diffusion Policy, giao diện I2"],
+    ["CL0_W", "—", one("CL0_W (W1)"), "Mô-đun, đã sửa W1"],
+    ["CL0", "—", one("CL0"), "Mô-đun, chưa sửa W1"],
+    ["ORACLE", "—", one("ORACLE"), "Trần của môi trường"],
+], [24, 31, 19, 26], { source: "cột 2: `arena_mectrics/new1/paper_reported_metrics.csv`; cột 3: `Benmark_Capstone/reports/deadline/latest/coverage_30.csv` (bài báo) và " + (F.P7.ok ? F.P7.src : "`runs/p7_bench_compare.json`") + " (đồ án)." });
+P(F.P7.ok && F.P7.slowVsMod() && !F.P7.learnedBeatsMod()
+    ? "**Kết luận:** trên cùng 40 lượt, ACT của đồ án đạt khoảng 78–81%, cao hơn mọi bài báo tái lập (30–62,5%), kể cả bản port ACT gốc (50%). Tuy vậy ACT chưa vượt pipeline mô-đun CL0_W (80%): hai bên ngang nhau ở băng đứng yên và 37,5 mm/s."
+    : "**Kết luận:** " + ph("điền sau khi so sánh cùng máy (P7) xong, hoặc cần xem lại vì có chính sách học vượt CL0_W") + ".");
 if (F.P7.ok && (F.figIf("fig_p7_bench_gon.png") || F.figIf("fig_p7_bench.png"))) FIG(F.figIf("fig_p7_bench_gon.png") || F.figIf("fig_p7_bench.png"), F.figIf("fig_p7_bench_gon.png") ? 11 : 12, "Mọi phương pháp trên 40 lượt DEV chung của benchmark: phương pháp của đồ án chạy cùng máy (P7" + (F.figIf("fig_p7_bench_gon.png") ? "; các hạt giống của một phương pháp được cộng gộp" : "") + "), bài báo tái lập lấy từ máy benchmark");
 else FIG(fig("fig_benchmark_dev.png"), 14, "ACT của đồ án so với các bài báo tái lập trên 40 lượt DEV chung của benchmark");
 
+H3("5.2. Kết quả đánh giá nội bộ của đồ án");
+const P6p = F.P6.plain();
+const dpt = x => F.pts(x).replace(" điểm", " điểm phần trăm");
+const h6 = (k, lab) => {       // one pre-registered hypothesis -> table row
+    if (!P6p) return [lab, "test_C2 mới, L0,5, 60 lượt", ph("kết quả TEST mới"), ph("kết luận")];
+    const h = P6p.d[k], v = P6p.verdict[k];
+    return [lab, `test_C2 mới, L0,5, ${P6p.n} lượt`, k === "H2" ? "" : `${dpt(h.gap)}: ${h.kx}/${P6p.n} so với ${h.ky}/${P6p.n}`, `**${v}** (p Holm = ${F.fp(h.holm[1])})`];
+};
+const rowH1 = h6("H1", "**6. TEST mới – H1**\nCL0_W so với CL0");
+const rowH1b = h6("H1b", "**7. TEST mới – H1b**\nORACLE_W so với ORACLE");
+const rowH2 = h6("H2", "**8. TEST mới – H2**\nACT_W so với ACT_old");
+if (P6p) rowH2[2] = `ACT_W hơn ACT_old trung bình ${dpt(P6p.d.H2.mean_d_pts)} (hơn ở ${P6p.d.H2.better_w} cảnh, kém ở ${P6p.d.H2.better_old}, hòa ${P6p.d.H2.ties})`;
+const rowAll = P6p
+    ? ["**9. TEST mới – gộp hạt giống**\n(mô tả)", `test_C2 mới, L0,5, ${P6p.n} lượt mỗi hạt giống`,
+        `ACT_W: ${P6p.actW.s}/${P6p.actW.n} (${F.pct(P6p.actW.s, P6p.actW.n)})\nACT_old: ${P6p.actOld.s}/${P6p.actOld.n} (${F.pct(P6p.actOld.s, P6p.actOld.n)})\nDP_W: ${P6p.dpW.s}/${P6p.dpW.n} (${F.pct(P6p.dpW.s, P6p.dpW.n)})\nCL0_W: ${P6p.d.success.cl0_w}/${P6p.n} (${F.pct(P6p.d.success.cl0_w, P6p.n)})`, "Chỉ mô tả, chưa kiểm định"]
+    : ["**9. TEST mới – gộp hạt giống**", "test_C2 mới, L0,5", ph("ACT_W, ACT_old, DP_W, CL0_W"), ""];
+TABLE("Kết quả nội bộ của đồ án (thành công / số lượt thử; hai phương pháp so trên cùng các cảnh)", ["Thí nghiệm", "Điều kiện", "Kết quả", "Kết luận"], [
+    ["**1. Giao diện I2** so với ACT mặc định", "DEV, C2, L0,5, 20 lượt", "ACT_I2: 13/20\nACT_J0: 4/20\nCL0: 6/20\nORACLE: 16/20", "I2 hơn ACT mặc định (p = 0,022)"],
+    ["**2. Cách chạy ACT_I2** và thêm demo", "DEV, C2 và C3, L0,25 và L0,5, 80 lượt mỗi cách", "/100: 48/80\nThêm demo L0,5: 50/80\nCOMMIT: 41/80\n/10: 39/80\nCL0: 43/80, ORACLE: 61/80", "Giữ /100; không biến thể nào hơn"],
+    ["**3. TEST G2** (bản đóng băng)", "TEST, C2, L0,5, 60 lượt, vật lạ", "ACT_I2: 21/60 và 18/60 (hai hạt giống)\nCL0: 22/60\nORACLE: 28/60", "**NO-GO**: ACT không hơn CL0 (p = 1,0 và 0,48)"],
+    ["**4. 40 nhiệm vụ** (gắp, đặt, kéo, lật)", "Băng đứng yên; một mô hình ACT cho mọi nhiệm vụ", "Nhiệm vụ đã học: 122/160 (76,2%)\n8 nhiệm vụ chưa thấy: 58/80 (72,5%)", "Giả thuyết đặt trước được ủng hộ (một hạt giống)"],
+    ["**5. Sửa lỗi W1** (sau đóng băng)", "DEV, C2, L0,5, 60 lượt", "CL0: 25 → 52/60 (p = 5·10⁻⁷)\nORACLE: 45 → 58/60 (p = 2·10⁻⁴)\n(trước → sau khi sửa)", "W1 tăng mạnh thành công của cả hai"],
+    rowH1, rowH1b, rowH2, rowAll,
+], [24, 22, 33, 21]);
+P("**Nguồn dữ liệu theo số dòng.** (1) `runs/e14_*`, `runs/e10_base_L05`. (2) `logs/2026-11-08_175431_e16_pair_final.txt`. (3) `logs/2026-11-10_210822_g2_decision.txt`. (4) `logs/2026-11-12_204650_e18_decision.txt`. (5) `BAO_CAO_PAPER_DEV.md` mục 5. (6–9) " + (F.P6.ok ? F.P6.src : "`logs/*_p6_decision.txt`") + ".", { noIndent: true, align: AlignmentType.LEFT, run: { size: 20 } });
 H2("6. Phương pháp đề xuất và hạn chế");
 P("**Phương pháp đề xuất cho nền tảng giá rẻ:** ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia" + (F.P6.ok ? ` đã được sửa lỗi bộ thực thi (TEST mới: ACT_W hơn ACT_old ${F.P6.h2Text()})` : "") + ". Cấu hình này mạnh hơn mọi bài báo mà nhóm tái lập được. Tuy vậy, ACT chưa vượt pipeline mô-đun khi bộ thực thi của pipeline đã được sửa" + (F.P7.ok && F.P7.slowVsMod() ? ": hai bên ngang nhau khi băng đứng yên hoặc chậm (P7), còn ở 75 mm/s mô-đun hơn rõ" : "") + (F.P6.ok ? ` (TEST mới: ${F.P6.modVsAct()})` : "") + "." + FLAG_MOD + " Lợi thế của ACT là không cần nhận thức thủ công và học được nhiều kỹ năng trong một mô hình (E18).");
 BL([

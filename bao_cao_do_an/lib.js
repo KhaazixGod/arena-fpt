@@ -41,7 +41,7 @@ function H1(text, numbered = true, label = "", opts = {}) {
         children: [new TextRun({ text: numbered ? `CHƯƠNG ${chap}. ${text}` : text, font: FONT, size: 30, bold: true })] }));
 }
 function H2(text) { push(new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun({ text, font: FONT, size: 28, bold: true })] })); }
-function H3(text) { push(new Paragraph({ heading: HeadingLevel.HEADING_3, children: [new TextRun({ text, font: FONT, size: BODY, bold: true, italics: true })] })); }
+function H3(text, opts = {}) { push(new Paragraph({ heading: HeadingLevel.HEADING_3, pageBreakBefore: !!opts.pageBreak, children: [new TextRun({ text, font: FONT, size: BODY, bold: true, italics: true })] })); }
 function P(text, opt = {}) {
     push(new Paragraph({ children: runs(text, opt.run || {}), alignment: opt.align || AlignmentType.JUSTIFIED,
         indent: opt.noIndent ? undefined : { firstLine: 567 }, spacing: { after: 100, line: 360, lineRule: "auto" } }));

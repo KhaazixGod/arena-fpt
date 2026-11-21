@@ -8,6 +8,7 @@ const ALL = require("./refs.js");
 L.setRefs(["act", "dp", "lerobot", "so101", "isaac", "mcnemar", "wilson", "holm"].map(k => ALL.find(r => r.key === k)));
 const fig = f => path.join(__dirname, "figures", f);
 const F = require("./fill.js");   // P6 / P7 results, filled automatically once the chains have written them
+const { P8 } = require("./fill_p8.js");   // P8: the papers rebuilt here, on the TEST sheet
 const CAUGHT_UP = (F.P6.ok && F.P6.modularAhead() === false) || (F.P7.ok && F.P7.learnedBeatsMod());
 const FLAG_MOD = CAUGHT_UP ? " {{cần xem lại: TEST mới không cho thấy mô-đun dẫn trước, hoặc P7 có chính sách học vượt CL0_W}}" : "";
 
@@ -18,7 +19,9 @@ H2("1. Kết luận");
 BL([
     "**Chọn ACT** [@act] làm chính sách học: trong 30 bài báo mà nhóm thử tái lập trên cùng môi trường, ACT là phương pháp học duy nhất được port nguyên vẹn, có sẵn trong LeRobot [@lerobot] cho SO-101 [@so101] và huấn luyện được trong khoảng 2,3 giờ trên GPU 8 GB.",
     "**Giao diện I2 là điều chỉnh quyết định.** Cho ACT xuất mục tiêu đầu kẹp tương đối trong hệ quy chiếu băng: ở 75 mm/s đạt 13/20 so với 4/20 của ACT mặc định (p = 0,022), dù demo không có tốc độ này.",
-    F.P7.ok && F.P7.slowVsMod()
+    P8.ok
+        ? `**So với các bài báo, trên TEST và cùng máy (P8):** dựng lại P05 CNS, P07 ViT-VS, P17 ODIL và P19 ACT rồi chạy trên đúng TEST 60 cảnh: ${P8.sentence()}. Trên 40 lượt DEV khác máy, ACT từng hơn mọi bài báo (30–62,5%); kết luận đó không giữ được trên TEST.`
+        : F.P7.ok && F.P7.slowVsMod()
         ? `**Hơn mọi bài báo tái lập** trên cùng 40 lượt DEV của benchmark: các bài báo đạt 30–62,5%, bản port ACT gốc 50%. Chạy cùng máy (P7, băng đứng yên và 37,5 mm/s): ${F.P7.slowVsMod()}.`
         : "**Hơn mọi bài báo tái lập**, trên cùng 40 lượt DEV của benchmark: ACT đạt 75%, các bài báo đạt 30–62,5%. Bản port ACT gốc đạt 50% (p = 0,041). ACT vẫn **thấp hơn pipeline mô-đun CL0** (87,5%), dù chênh lệch chưa có ý nghĩa (p = 0,125).",
     "**TEST có tiền đăng ký của đồ án (G2):** ACT 35% và 30% (hai hạt giống), CL0 37% → giả thuyết “ACT hơn mô-đun ≥ 15 điểm” bị bác bỏ.",
@@ -71,30 +74,39 @@ TABLE("Chú giải ký hiệu dùng trong mục 5", ["Ký hiệu", "Nghĩa"], [
 
 const ph = t => `{{${t}}}`;
 H3("5.1. So với các bài báo", { pageBreak: true });
-P("**Lưu ý khi đọc:** con số các bài báo tự công bố (cột 2) được đo trên bài toán khác (robot thật hai tay, mô phỏng khác, nhiệm vụ khác), và benchmark của nhóm đánh dấu mọi cặp đó là “không so trực tiếp được”. Vì vậy so sánh công bằng là **cột 3**: bài báo được chạy lại trên **cùng arena và cùng 40 lượt DEV** với phương pháp của đồ án. Các bài báo (P05, P07, P17, P19) chạy trên máy benchmark còn phương pháp của đồ án chạy trên máy này, nên chênh khoảng ±5 lượt có thể chỉ do máy. P05, P07, P17 chỉ chạy một thành phần của bài báo, không phải cả phương pháp.");
+P(P8.ok ? "**Lưu ý khi đọc:** con số các bài báo tự công bố (cột 2) được đo trên bài toán khác (robot thật hai tay, mô phỏng khác, nhiệm vụ khác), nên không so trực tiếp được. Cột 3 là 40 lượt DEV, bài báo chạy trên máy benchmark (khác máy, chênh khoảng ±5 lượt có thể chỉ do máy). **So sánh công bằng nhất là cột 4**: cùng TEST 60 cảnh, cùng máy, các bài báo được đồ án dựng lại (P8; P05, P07, P17 chỉ là phần nhận thức, chạy trên bộ thực thi CL0 có W1), có tiền đăng ký riêng." : "**Lưu ý khi đọc:** con số các bài báo tự công bố (cột 2) được đo trên bài toán khác (robot thật hai tay, mô phỏng khác, nhiệm vụ khác), và benchmark của nhóm đánh dấu mọi cặp đó là “không so trực tiếp được”. Vì vậy so sánh công bằng là **cột 3**: bài báo được chạy lại trên **cùng arena và cùng 40 lượt DEV** với phương pháp của đồ án. Các bài báo (P05, P07, P17, P19) chạy trên máy benchmark còn phương pháp của đồ án chạy trên máy này, nên chênh khoảng ±5 lượt có thể chỉ do máy. P05, P07, P17 chỉ chạy một thành phần của bài báo, không phải cả phương pháp.");
 const P7p = F.P7.plain();
 const fr = (s, n) => `${s}/${n} (${Number((100 * s / n).toFixed(1)).toString().replace(".", ",")}%)`;
 const one = l => (P7p && P7p.has(l) ? fr(P7p.S[l].s, P7p.S[l].n) : ph("…"));
 const many = labs => { if (!P7p) return ph("…"); const t = P7p.pooled(labs); return t.n ? fr(t.s, t.n) : ph("…"); };
-TABLE("So sánh với các bài báo trên cùng 40 lượt DEV", ["Phương pháp", "Bài báo tự công bố (bài toán gốc, không so trực tiếp)", "Chạy trên arena, 40 lượt DEV", "Ghi chú"], [
-    ["**Bài báo tái lập (máy benchmark)**", "", "", ""],
-    ["P19 – ACT (port nguyên phương pháp)", "Mô phỏng hai tay: 86% (chuyển khối), 32% (lắp khớp); robot thật: 20–96% tùy nhiệm vụ", one("P19 ACT"), "Port cả phương pháp"],
-    ["P17 – ODIL (chỉ giai đoạn 1)", "Robot thật hai tay: 77,2% trung bình", one("P17 ODIL stage1"), "Một thành phần"],
-    ["P05 – CNS (chỉ phần nhận thức)", "Robot thật: 100% (cảnh dễ, có RANSAC); mô phỏng: 100%", one("P05 CNS frontend"), "Một thành phần"],
-    ["P07 – ViT-VS", "Mô phỏng: 100% (không nhiễu), 76,6% (có nhiễu)", one("P07 ViT-VS"), "Một thành phần"],
-    ["P18 – FlowControl", "Robot thật: 19/20 (Pick-Stow)", "0/12 (chạy dở, ~22 phút mỗi lượt)", "Một thành phần, chưa đủ 40 lượt"],
-    ["**Đồ án (máy này)**", "", "", ""],
-    ["ACT_old (2 hạt giống)", "—", many(["ACT_old s1000", "ACT_old s2000"]), "ACT_I2, demo từ ORACLE chưa sửa"],
-    ["ACT_W (3 hạt giống)", "—", many(["ACT_W s1000", "ACT_W s2000", "ACT_W s3000"]), "ACT_I2, demo từ ORACLE đã sửa W1"],
-    ["DP_W (3 hạt giống)", "—", many(["DP_W s1000", "DP_W s2000", "DP_W s3000"]), "Diffusion Policy, giao diện I2"],
-    ["CL0_W", "—", one("CL0_W (W1)"), "Mô-đun, đã sửa W1"],
-    ["CL0", "—", one("CL0"), "Mô-đun, chưa sửa W1"],
-    ["ORACLE", "—", one("ORACLE"), "Trần của môi trường"],
-], [24, 31, 19, 26], { source: "cột 2: `arena_mectrics/new1/paper_reported_metrics.csv`; cột 3: `Benmark_Capstone/reports/deadline/latest/coverage_30.csv` (bài báo) và " + (F.P7.ok ? F.P7.src : "`runs/p7_bench_compare.json`") + " (đồ án)." });
-P(F.P7.ok && F.P7.slowVsMod() && !F.P7.learnedBeatsMod()
+const P8J = P8.ok ? JSON.parse(require("fs").readFileSync(process.env.REPORT_P8_JSON || path.join(path.dirname(__dirname), "runs", "p8_test_decision.json"), "utf8")).success : null;   // TEST column: P8 runs
+const t8 = (names) => (P8J && names.every(n => P8J["l05/" + n] !== undefined) ? fr(names.reduce((a, n) => a + P8J["l05/" + n], 0), 60 * names.length) : "—");
+const P6p_early = F.P6.plain();
+const t6 = (names) => (P6p_early && names.every(n => P6p_early.d.success[n] !== undefined) ? fr(names.reduce((a, n) => a + P6p_early.d.success[n], 0), P6p_early.n * names.length) : "—");
+const withTest = P8.ok;
+const R5 = rows => (withTest ? rows : rows.map(r => r.slice(0, 4)));
+TABLE("So sánh với các bài báo: 40 lượt DEV và TEST 60 cảnh", ["Phương pháp", "Bài báo tự công bố (bài toán gốc, không so trực tiếp)", "Chạy trên arena, 40 lượt DEV", ...(withTest ? ["TEST 60 cảnh, 75 mm/s, cùng máy (P6, P8)"] : []), "Ghi chú"], R5([
+    ["**Bài báo tái lập** (DEV: máy benchmark; TEST: dựng lại trên máy này, có W1)", "", "", "", ""],
+    ["P19 – ACT (port nguyên phương pháp)", "Mô phỏng hai tay: 86% (chuyển khối), 32% (lắp khớp); robot thật: 20–96% tùy nhiệm vụ", one("P19 ACT"), t8(["p19_s1000", "p19_s2000", "p19_s3000"]), "Port cả phương pháp; TEST: 3 hạt giống"],
+    ["P17 – ODIL (chỉ giai đoạn 1)", "Robot thật hai tay: 77,2% trung bình", one("P17 ODIL stage1"), t8(["p17_odil_w"]), "Một thành phần"],
+    ["P05 – CNS (chỉ phần nhận thức)", "Robot thật: 100% (cảnh dễ, có RANSAC); mô phỏng: 100%", one("P05 CNS frontend"), t8(["p05_cns_w"]), "Một thành phần"],
+    ["P07 – ViT-VS", "Mô phỏng: 100% (không nhiễu), 76,6% (có nhiễu)", one("P07 ViT-VS"), t8(["p07_vitvs_w"]), "Một thành phần"],
+    ["P18 – FlowControl", "Robot thật: 19/20 (Pick-Stow)", "0/12 (chạy dở, ~22 phút mỗi lượt)", "—", "Một thành phần, chưa đủ 40 lượt; không chạy TEST"],
+    ["**Đồ án (máy này)**", "", "", "", ""],
+    ["ACT_old (2 hạt giống)", "—", many(["ACT_old s1000", "ACT_old s2000"]), t6(["act_old_s1000", "act_old_s2000"]), "ACT_I2, demo từ ORACLE chưa sửa"],
+    ["ACT_W (3 hạt giống)", "—", many(["ACT_W s1000", "ACT_W s2000", "ACT_W s3000"]), t6(["act_w_s1000", "act_w_s2000", "act_w_s3000"]), "ACT_I2, demo từ ORACLE đã sửa W1"],
+    ["DP_W (3 hạt giống)", "—", many(["DP_W s1000", "DP_W s2000", "DP_W s3000"]), t6(["dp_w_s1000", "dp_w_s2000", "dp_w_s3000"]), "Diffusion Policy, giao diện I2"],
+    ["CL0_W", "—", one("CL0_W (W1)"), t6(["cl0_w"]), "Mô-đun, đã sửa W1"],
+    ["CL0", "—", one("CL0"), t6(["cl0"]), "Mô-đun, chưa sửa W1"],
+    ["ORACLE", "—", one("ORACLE"), t6(["oracle"]), "Trần của môi trường"],
+]), withTest ? [20, 25, 16, 17, 22] : [24, 31, 19, 26], { source: "cột 2: `arena_mectrics/new1/paper_reported_metrics.csv`; cột 3: `Benmark_Capstone/reports/deadline/latest/coverage_30.csv` (bài báo) và " + (F.P7.ok ? F.P7.src : "`runs/p7_bench_compare.json`") + " (đồ án)" + (withTest ? "; cột 4: `runs/p8_test_decision.json` (bài báo, P8) và `runs/p6_test_decision.json` (đồ án, P6)" : "") + "." });
+P(P8.ok
+    ? `**Kết luận:** trên 40 lượt DEV (bài báo chạy ở máy khác), ACT của đồ án cao hơn mọi bài báo tái lập. Trên TEST, với các bài báo dựng lại trên cùng máy và tiền đăng ký riêng (P8): ${P8.sentence()}. Ở 37,5 mm/s trên TEST, ${P8.l025()}.`
+    : F.P7.ok && F.P7.slowVsMod() && !F.P7.learnedBeatsMod()
     ? "**Kết luận:** trên cùng 40 lượt, ACT của đồ án đạt khoảng 78–81%, cao hơn mọi bài báo tái lập (30–62,5%), kể cả bản port ACT gốc (50%). Tuy vậy ACT chưa vượt pipeline mô-đun CL0_W (80%): hai bên ngang nhau ở băng đứng yên và 37,5 mm/s."
     : "**Kết luận:** " + ph("điền sau khi so sánh cùng máy (P7) xong, hoặc cần xem lại vì có chính sách học vượt CL0_W") + ".");
-if (F.P7.ok && (F.figIf("fig_p7_bench_gon.png") || F.figIf("fig_p7_bench.png"))) FIG(F.figIf("fig_p7_bench_gon.png") || F.figIf("fig_p7_bench.png"), F.figIf("fig_p7_bench_gon.png") ? 11 : 12, "Mọi phương pháp trên 40 lượt DEV chung của benchmark: phương pháp của đồ án chạy cùng máy (P7" + (F.figIf("fig_p7_bench_gon.png") ? "; các hạt giống của một phương pháp được cộng gộp" : "") + "), bài báo tái lập lấy từ máy benchmark");
+if (P8.ok && F.figIf("fig_p8_test.png")) FIG(F.figIf("fig_p8_test.png"), 11, "TEST 60 cảnh, cùng máy: CL0_W và ACT_W (P6) so với các bài báo dựng lại (P8, bản có W1; hạt giống cộng gộp)");
+else if (F.P7.ok && (F.figIf("fig_p7_bench_gon.png") || F.figIf("fig_p7_bench.png"))) FIG(F.figIf("fig_p7_bench_gon.png") || F.figIf("fig_p7_bench.png"), F.figIf("fig_p7_bench_gon.png") ? 11 : 12, "Mọi phương pháp trên 40 lượt DEV chung của benchmark: phương pháp của đồ án chạy cùng máy (P7" + (F.figIf("fig_p7_bench_gon.png") ? "; các hạt giống của một phương pháp được cộng gộp" : "") + "), bài báo tái lập lấy từ máy benchmark");
 else FIG(fig("fig_benchmark_dev.png"), 14, "ACT của đồ án so với các bài báo tái lập trên 40 lượt DEV chung của benchmark");
 
 H3("5.2. Kết quả đánh giá nội bộ của đồ án");
@@ -123,11 +135,11 @@ TABLE("Kết quả nội bộ của đồ án (thành công / số lượt thử
 ], [24, 22, 33, 21]);
 P("**Nguồn dữ liệu theo số dòng.** (1) `runs/e14_*`, `runs/e10_base_L05`. (2) `logs/2026-11-08_175431_e16_pair_final.txt`. (3) `logs/2026-11-10_210822_g2_decision.txt`. (4) `logs/2026-11-12_204650_e18_decision.txt`. (5) `BAO_CAO_PAPER_DEV.md` mục 5. (6–9) " + (F.P6.ok ? F.P6.src : "`logs/*_p6_decision.txt`") + ".", { noIndent: true, align: AlignmentType.LEFT, run: { size: 20 } });
 H2("6. Phương pháp đề xuất và hạn chế");
-P("**Phương pháp đề xuất cho nền tảng giá rẻ:** ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia" + (F.P6.ok ? ` đã được sửa lỗi bộ thực thi (TEST mới: ACT_W hơn ACT_old ${F.P6.h2Text()})` : "") + ". Cấu hình này mạnh hơn mọi bài báo mà nhóm tái lập được. Tuy vậy, ACT chưa vượt pipeline mô-đun khi bộ thực thi của pipeline đã được sửa" + (F.P7.ok && F.P7.slowVsMod() ? ": hai bên ngang nhau khi băng đứng yên hoặc chậm (P7), còn ở 75 mm/s mô-đun hơn rõ" : "") + (F.P6.ok ? ` (TEST mới: ${F.P6.modVsAct()})` : "") + "." + FLAG_MOD + " Lợi thế của ACT là không cần nhận thức thủ công và học được nhiều kỹ năng trong một mô hình (E18).");
+P("**Phương pháp đề xuất cho nền tảng giá rẻ:** ACT với giao diện hệ băng I2, thực hiện trọn chunk 100 khung, học từ demo của một chuyên gia" + (F.P6.ok ? ` đã được sửa lỗi bộ thực thi (TEST mới: ACT_W hơn ACT_old ${F.P6.h2Text()})` : "") + "." + (P8.ok ? " Trên TEST, cấu hình này hơn ACT gốc (P19) và P05 CNS, ngang P07 ViT-VS và P17 ODIL đã dựng lại trên cùng máy." : " Cấu hình này mạnh hơn mọi bài báo mà nhóm tái lập được.") + " Tuy vậy, ACT chưa vượt pipeline mô-đun khi bộ thực thi của pipeline đã được sửa" + (P8.ok ? ": trên TEST, mô-đun hơn khoảng 32 điểm ở 75 mm/s và 18 điểm ở 37,5 mm/s, và hơn cả các bài báo nhận thức dùng chung bộ thực thi" : F.P7.ok && F.P7.slowVsMod() ? ": hai bên ngang nhau khi băng đứng yên hoặc chậm (P7), còn ở 75 mm/s mô-đun hơn rõ" : "") + (F.P6.ok ? ` (TEST mới: ${F.P6.modVsAct()})` : "") + "." + FLAG_MOD + " Lợi thế của ACT là không cần nhận thức thủ công và học được nhiều kỹ năng trong một mô hình (E18).");
 BL([
     "Chỉ mô phỏng (lockstep, không có trễ suy luận), demo từ chuyên gia có đặc quyền; chưa có số trên robot thật.",
     "Lỗi chính của ACT: va chạm và đóng kẹp vào chỗ trống (lệch ngang khoảng −9 mm); phương sai giữa các hạt giống lớn" + (F.P6.ok ? ` (TEST mới: ACT_W ${F.P6.seedsACTW()})` : " (13–16/20)") + ".",
-    F.P7.ok ? "Bài báo chỉ có số từ máy benchmark (khác máy; chênh khoảng ±5 lượt có thể chỉ do máy)." : "So sánh với benchmark là khác máy: chênh lệch khoảng ±5 lượt có thể chỉ do máy. Chuỗi P7 chạy lại cùng máy.",
+    P8.ok ? "Bài báo P05, P07, P17 là bản dựng lại phần nhận thức của đồ án, không phải mã gốc; trên cùng lưới DEV, số của bản dựng lại khác máy benchmark tới 17/40 lượt." : F.P7.ok ? "Bài báo chỉ có số từ máy benchmark (khác máy; chênh khoảng ±5 lượt có thể chỉ do máy)." : "So sánh với benchmark là khác máy: chênh lệch khoảng ±5 lượt có thể chỉ do máy. Chuỗi P7 chạy lại cùng máy.",
     "Ở 150 mm/s mọi phương pháp đều thất bại vì tầm với và thời gian.",
 ]);
 

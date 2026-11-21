@@ -105,3 +105,8 @@ Cổng §4: cả 16 lượt chạy DEV đủ lượt, 0 dòng valid=0, 0 ngoại
 | CL0_W | – | 17 |
 
 Không có tham số, mã, ảnh mẫu hay checkpoint nào được đổi sau khi có các kết quả DEV này.
+
+### 8.3 TEST (thêm sau khi khóa)
+- `scripts/p8_test.sh` chạy theo đúng §3, từ 11:28 ngày 20/11 đến 11:26 ngày 21/11/2026, HEAD 1dcac88. Cả 24 lượt chạy đủ 60/60 lượt hợp lệ, 0 dòng valid=0. Không có sai lệch nào so với §3–§6.
+- Quyết định: `logs/2026-11-21_112617_p8_decision.txt`, `runs/p8_test_decision.json`. Bằng chứng: commit cdc7f4f.
+- `logs/2026-11-20_112706_p8_decision.txt` là file rỗng, sinh ra từ một lần chạy khô (DRY) của script bị dừng giữa chừng. Không có lượt TEST nào trong lần đó.

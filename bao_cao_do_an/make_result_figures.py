@@ -106,3 +106,22 @@ if os.path.exists(p7_path) and chain_done:
             legend=[("modular", "Mô-đun"), ("act", "ACT"), ("dp", "DP"), ("paper", "Bài báo"), ("priv", "Đặc quyền")], width=6.0, row_h=0.3)
 else:
     print("skip fig_p7_bench.png:", p7_path, "missing or the P7 chain is not done")
+
+# ---------------------------------------------------------------- P8
+p8_path = os.environ.get("REPORT_P8_JSON") or os.path.join(ARENA, "runs", "p8_test_decision.json")
+if os.path.exists(p8_path):
+    S8 = json.load(open(p8_path))["success"]
+    def r8(sp, lab, names, kind):
+        if not all(f"{sp}/{n}" in S8 for n in names):
+            return None
+        return (lab, sum(S8[f"{sp}/{n}"] for n in names), 60 * len(names), kind)
+    rows = []
+    for sp, head in (("l05", "TEST, 75 mm/s (L0,5)"), ("l025", "TEST, 37,5 mm/s (L0,25)")):
+        rows.append((head, None, None, None))
+        rows += [x for x in (r8(sp, "CL0_W", ["cl0_w"], "modular"), r8(sp, "ACT_W (3 hạt giống)", ["act_w_s1000", "act_w_s2000", "act_w_s3000"], "act"),
+                             r8(sp, "P07 ViT-VS + W1", ["p07_vitvs_w"], "paper"), r8(sp, "P17 ODIL + W1", ["p17_odil_w"], "paper"),
+                             r8(sp, "P05 CNS + W1", ["p05_cns_w"], "paper"), r8(sp, "P19 ACT gốc (3 hạt giống)", ["p19_s1000", "p19_s2000", "p19_s3000"], "paper"))
+                 if x]
+    dotplot(rows, "fig_p8_test.png", legend=[("modular", "Mô-đun"), ("act", "ACT (đồ án)"), ("paper", "Bài báo dựng lại")], width=6.4, row_h=0.34)
+else:
+    print("skip fig_p8_test.png:", p8_path, "does not exist yet")

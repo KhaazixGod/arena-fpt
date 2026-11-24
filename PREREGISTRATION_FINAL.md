@@ -84,6 +84,7 @@ dp_w_s2000: 88b47f6aea835c4f9077f45dbbc58a1b2c7f16388c5c8567b76ddd948fed997a
 dp_w_s2000/pretrained_model: 094b26a7c60e55a4152bbbe10039edc69890f5e34f21a00583caf9c939ba9a37
 dp_w_s3000: 0ad63bf645a4f4548a0115958166861e3ff7615a9150ed7a2c130e60a0f59ef9
 dp_w_s3000/pretrained_model: 0f4bf3f4abad140795fb4c12239fae78049a77414787471aee56c669321f5dc5
+lock_commit: f96b80d776349f4064f9fe4cf7fbf74d19746c7a
 ```
 
 Frozen files: `m4 m4v2 arena/methods/diffusion_i2.py arena/i2.py arena/dp_i2.py remote_server.py locked/final/test_C2.csv scripts/lib_chain.sh scripts/final_test.sh scripts/final_decide.py`.

@@ -15,5 +15,7 @@ Run:
     # in another shell, the arena:
     source /opt/ros/jazzy/setup.bash; PYTHONPATH=.:../cl0:$PYTHONPATH ~/env_isaac/bin/python -m arena.run_arena --methods fptros.client:make_method --cells dev_C2 --speeds L0.5 --n 20 --objects sim --out runs/ros2_dev
 
+`fptros.emulated` (`make_dp`, `make_dpvs2`) makes the lockstep arena behave as if chunk sampling (about 0.55 s) and detection (about 36 ms per frame) ran asynchronously on the measured hardware: a new chunk is adopted only after its measured sampling time, a busy detector drops frames and delivers late (`EMU_SCALE` multiplies the measured times).
+
 `fptros.mock_arena` feeds recorded frames to a dummy method for a transport-only test (no Isaac, no GPU).
 Not done: a free-running (real-time, not lockstep) loop with the Isaac ROS 2 bridge, and a real robot.

@@ -11,7 +11,8 @@ need_no_training
 source "$(dirname "$(readlink -f "$0")")/m4_wait.sh"
 if [ "${WAIT_FOR_GPU:-}" = "1" ]; then m4_wait_gpu; fi
 [ "${DRY:-}" = "1" ] || [ "${GPU_SHARE:-}" = "1" ] || need_no_isaac
-CK=runs/dp_w_s1000/checkpoints/last/pretrained_model
+SEED=${SEED:-1000}                         # DP_W seed of the checkpoint (1000 = the seed the configurations were compared on)
+CK=runs/dp_w_s$SEED/checkpoints/last/pretrained_model
 need_ckpt $CK
 
 # ---- stage 0: smoke test, 3 dev scenes with the default parameters; the chain stops if the corrector did not run (detector frames, ALIGN ticks) or a trial is invalid
@@ -48,13 +49,13 @@ declare -A CFG=(
 )
 ORDER=${CONFIGS:-"c1_default c2_nodesc c3_posonly c4_yawonly c5_noauth c6_k5 c7_lam05 c8_tight"}
 export RUN_UNTIL_ATTEMPTS=${RUN_UNTIL_ATTEMPTS:-30} RUN_UNTIL_STALL_S=${RUN_UNTIL_STALL_S:-360}
-port=7601
+port=$((7601 + (SEED - 1000) / 10))
 for c in $ORDER; do
     port=$((port + 1))
-    out=runs/m4_dev_${c}_dev_c2_l05
+    out=runs/m4_dev_${c}_dev_c2_l05; [ "$SEED" != 1000 ] && out=runs/m4_dev_${c}_s${SEED}_dev_c2_l05
     if [ "${DRY:-}" = "1" ]; then echo "DRY $c: $(set -a; source m4/m4_vs.env; set +a; echo ${CFG[$c]}) -> $out"; continue; fi
     srv=$( (set -a; source m4/m4_vs.env; set +a; [ -n "${CFG[$c]}" ] && eval "export ${CFG[$c]}"
-        DP_CKPT=$CK DP_REPLAN=0 DP_STEPS=0 env -u PYTHONPATH "$LR_PY" remote_server.py --factory diffusion_vs:make_method --name "DPVS_${c}" \
+        DP_CKPT=$CK DP_REPLAN=0 DP_STEPS=0 env -u PYTHONPATH "$LR_PY" remote_server.py --factory diffusion_vs:make_method --name "DPVS_${c}_s${SEED}" \
             --port $port --path m4 --path . --path ../cl0 --repeat > "logs/$(date +%F_%H%M%S)_server_m4_${c}_$port.log" 2>&1 &
         echo $!) )
     for i in $(seq 1 90); do ss -ltn "sport = :$port" | grep -q LISTEN && break; sleep 2; done

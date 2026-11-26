@@ -1,0 +1,127 @@
+{
+ "trial_id": 2,
+ "method": "REMOTE:DPW_DEV2_S3000",
+ "cell": "dev_C2",
+ "arrangement_id": "dev_C2_023",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug24",
+   "a_mm": -150.0,
+   "b_mm": -181.1,
+   "yaw_deg": 285.9
+  },
+  {
+   "name": "cyl22",
+   "a_mm": -177.0,
+   "b_mm": -226.0,
+   "yaw_deg": 13.3
+  },
+  {
+   "name": "cyl26",
+   "a_mm": -218.3,
+   "b_mm": -208.8,
+   "yaw_deg": 166.7
+  },
+  {
+   "name": "l23",
+   "a_mm": -280.1,
+   "b_mm": -200.7,
+   "yaw_deg": 338.4
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "mug24",
+  "t_success_s": 4.74,
+  "t_detect_s": null,
+  "t_lift_s": 2.6,
+  "details": {
+   "moved_others_mm": {
+    "cyl22": 0.0,
+    "cyl26": 0.0,
+    "l23": 0.3
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s3000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.74,
+ "gt_success_obj": "mug24",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw",
+  "mug24.tilt",
+  "cyl22.a",
+  "cyl22.b",
+  "cyl22.z",
+  "cyl22.yaw",
+  "cyl22.tilt",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw",
+  "cyl26.tilt",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "l23.tilt"
+ ],
+ "ms_step_p50": 5.6271119974553585,
+ "ms_step_p95": 7.326446007937193,
+ "n_steps": 1001,
+ "wall_s": 122.89,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 45.98
+}

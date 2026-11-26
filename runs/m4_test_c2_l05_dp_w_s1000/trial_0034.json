@@ -1,0 +1,116 @@
+{
+ "trial_id": 34,
+ "method": "REMOTE:DP_W_S1000",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_035",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl36",
+   "a_mm": -212.3,
+   "b_mm": -196.2,
+   "yaw_deg": 158.5
+  },
+  {
+   "name": "cyl33",
+   "a_mm": -274.8,
+   "b_mm": -204.9,
+   "yaw_deg": 23.5
+  },
+  {
+   "name": "box35",
+   "a_mm": -150.0,
+   "b_mm": -208.8,
+   "yaw_deg": 291.9
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "other",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl36": 5.3,
+    "cyl33": 0.0,
+    "box35": 4.7
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s1000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.9,
+ "gt_success_obj": "box35",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt",
+  "cyl33.a",
+  "cyl33.b",
+  "cyl33.z",
+  "cyl33.yaw",
+  "cyl33.tilt",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt"
+ ],
+ "ms_step_p50": 5.6678790133446455,
+ "ms_step_p95": 7.436384097672999,
+ "n_steps": 1001,
+ "wall_s": 111.21,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 45.3
+}

@@ -1,0 +1,128 @@
+{
+ "trial_id": 6,
+ "method": "REMOTE:DPW_DEV2_S2000",
+ "cell": "dev_C2",
+ "arrangement_id": "dev_C2_027",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box21",
+   "a_mm": -357.7,
+   "b_mm": -198.7,
+   "yaw_deg": 130.3
+  },
+  {
+   "name": "l23",
+   "a_mm": -282.7,
+   "b_mm": -200.7,
+   "yaw_deg": 296.3
+  },
+  {
+   "name": "cyl26",
+   "a_mm": -214.39999999999998,
+   "b_mm": -200.3,
+   "yaw_deg": 73.2
+  },
+  {
+   "name": "box25",
+   "a_mm": -150.0,
+   "b_mm": -182.5,
+   "yaw_deg": 199.2
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "collision",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "box21": 0.0,
+    "l23": 0.6,
+    "cyl26": 0.0,
+    "box25": 32.2
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s2000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box21.a",
+  "box21.b",
+  "box21.z",
+  "box21.yaw",
+  "box21.tilt",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "l23.tilt",
+  "cyl26.a",
+  "cyl26.b",
+  "cyl26.z",
+  "cyl26.yaw",
+  "cyl26.tilt",
+  "box25.a",
+  "box25.b",
+  "box25.z",
+  "box25.yaw",
+  "box25.tilt"
+ ],
+ "ms_step_p50": 5.764261935837567,
+ "ms_step_p95": 7.627972983755171,
+ "n_steps": 1001,
+ "wall_s": 110.76,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 45.8
+}

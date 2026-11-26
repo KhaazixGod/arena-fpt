@@ -1,0 +1,127 @@
+{
+ "trial_id": 35,
+ "method": "REMOTE:DP_W_S1000",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_036",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t34",
+   "a_mm": -270.7,
+   "b_mm": -189.7,
+   "yaw_deg": 164.9
+  },
+  {
+   "name": "mug29",
+   "a_mm": -208.7,
+   "b_mm": -202.1,
+   "yaw_deg": 8.0
+  },
+  {
+   "name": "box32",
+   "a_mm": -150.0,
+   "b_mm": -199.6,
+   "yaw_deg": 287.4
+  },
+  {
+   "name": "box35",
+   "a_mm": -347.79999999999995,
+   "b_mm": -205.6,
+   "yaw_deg": 219.8
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "box32",
+  "t_success_s": 4.78,
+  "t_detect_s": null,
+  "t_lift_s": 2.64,
+  "details": {
+   "moved_others_mm": {
+    "t34": 0.5,
+    "mug29": 3.8,
+    "box35": 0.0
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s1000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.76,
+ "gt_success_obj": "box32",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt",
+  "box32.a",
+  "box32.b",
+  "box32.z",
+  "box32.yaw",
+  "box32.tilt",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt"
+ ],
+ "ms_step_p50": 5.637245951220393,
+ "ms_step_p95": 7.400403963401914,
+ "n_steps": 1001,
+ "wall_s": 118.73,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 46.14
+}

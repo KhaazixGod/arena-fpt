@@ -1,0 +1,165 @@
+{
+ "trial_id": 221,
+ "method": "ORACLE_W",
+ "cell": "train_C1",
+ "arrangement_id": "train_C1_004",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box03",
+   "a_mm": -237.2,
+   "b_mm": -219.0,
+   "yaw_deg": 169.2
+  },
+  {
+   "name": "box01",
+   "a_mm": -150.0,
+   "b_mm": -176.0,
+   "yaw_deg": 352.9
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "timing",
+  "target": "box01",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "box03": 0.0,
+    "box01": 0.0
+   },
+   "max_lift_target_mm": 0.0,
+   "select_err_mm": 0.0,
+   "estimate_err_mm": 0.1
+  }
+ },
+ "outcome": "late",
+ "finished": true,
+ "t_end_s": 3.34,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.22,
+   "RELEASE"
+  ],
+  [
+   1.82,
+   "RETURN"
+  ],
+  [
+   3.34,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -150.0001698732376,
+    "b": -176.00074410438538,
+    "theta": 82.86580213275259,
+    "width": 22.46,
+    "std": 0.012591668329158945
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "w1_branch",
+   "data": {
+    "k0": 0,
+    "k": 0,
+    "switched": false,
+    "at_risk": "False",
+    "m0": 0,
+    "th_plan": null,
+    "ttv": "{'-1': 0.5, '0': 4.2, '1': 0.0}",
+    "why": "{'-1': 'roll', '0': '', '1': 'roll'}",
+    "h5_min": "{'-1': -69.61, '0': 74.1, '1': -105.9}",
+    "q5_span": "{'-1': [-223.82, -94.31], '0': [-53.8, 85.69], '1': [136.18, 265.69]}",
+    "v_now": 8.09,
+    "v_cmd": 75.0,
+    "ms": 158.26
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.54,
+   "name": "freeze",
+   "data": {
+    "est": "(-149.9444566052437, -176.00274831056595, 82.86518281204329)"
+   }
+  },
+  {
+   "t": 1.22,
+   "name": "abort",
+   "data": {
+    "reason": "late: v\u1eadt s\u1eafp ra kh\u1ecfi v\u00f9ng v\u1edbi t\u1edbi tr\u01b0\u1edbc khi nh\u1ea5c xong"
+   }
+  },
+  {
+   "t": 1.22,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 1.82,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 3.34,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 34.0,
+  "reject_wide": 0.0,
+  "reject_other": 22.0,
+  "n_ok_dets": 46.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box03.a",
+  "box03.b",
+  "box03.z",
+  "box03.yaw",
+  "box03.tilt",
+  "box01.a",
+  "box01.b",
+  "box01.z",
+  "box01.yaw",
+  "box01.tilt"
+ ],
+ "ms_step_p50": 0.6092129915487021,
+ "ms_step_p95": 3.172906750114635,
+ "n_steps": 168,
+ "wall_s": 16.88,
+ "method_exception": null,
+ "renders": 100,
+ "render_wall_s": 6.75
+}

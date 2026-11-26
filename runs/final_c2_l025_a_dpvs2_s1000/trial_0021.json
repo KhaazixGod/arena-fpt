@@ -1,0 +1,186 @@
+{
+ "trial_id": 21,
+ "method": "REMOTE:DPVS2_S1000_l025a",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_022",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug29",
+   "a_mm": -150.0,
+   "b_mm": -207.6,
+   "yaw_deg": 22.4
+  },
+  {
+   "name": "box35",
+   "a_mm": -223.1,
+   "b_mm": -209.2,
+   "yaw_deg": 336.5
+  },
+  {
+   "name": "t34",
+   "a_mm": -295.3,
+   "b_mm": -184.3,
+   "yaw_deg": 268.1
+  },
+  {
+   "name": "plate31",
+   "a_mm": -375.1,
+   "b_mm": -210.4,
+   "yaw_deg": 155.3
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "mug29",
+  "t_success_s": 5.14,
+  "t_detect_s": null,
+  "t_lift_s": 2.98,
+  "details": {
+   "moved_others_mm": {
+    "box35": 0.0,
+    "t34": 0.4,
+    "plate31": 0.0
+   }
+  }
+ },
+ "outcome": "dpvs_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DPVS"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DPVS",
+   "data": {
+    "ckpt": "runs/dp_w_s1000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100,
+    "vs": "{'off': False, 'lam_max': 1.0, 'kxy': 3.0, 'kyaw': 3.0, 'use_yaw': True, 'yaw_aspect_min': 1.3, 'r_align': 40.0, 'ramp_s': 0.3, 'gate_mm': 25.0, 'grasp_z_margin': 15.0, 'desc': True, 'eps_desc_xy': 8.0, 'eps_desc_yaw': 30.0, 'n_hold_desc': 4, 't_desc_max': 1.0, 'vsat': 80.0, 'wsat': 90.0, 'cmax': 30.0, 'cpsimax': 60.0, 'auth': True, 'eps_xy': 3.0, 'eps_yaw': 15.0, 'n_hold': 6, 't_hold_max': 1.0, 'close_cmd_thr': 20.0, 'closed_meas_thr': 25.0}",
+    "vs2": "{'vdesc': 250.0, 'hold_open': True, 'mode': 'rate'}"
+   }
+  },
+  {
+   "t": 1.18,
+   "name": "vs_track",
+   "data": {
+    "tid": 2,
+    "d_ref": 11.3,
+    "xy": "[207.1, -146.7]"
+   }
+  },
+  {
+   "t": 1.18,
+   "name": "vs_phase:ALIGN",
+   "data": {
+    "e_xy": 10.08,
+    "e_psi": 81.4,
+    "iso": false
+   }
+  },
+  {
+   "t": 1.88,
+   "name": "vs_desc_ok",
+   "data": {
+    "waited": 0.7,
+    "exy": 2.19,
+    "epsi": 24.5
+   }
+  },
+  {
+   "t": 2.46,
+   "name": "vs_auth",
+   "data": {
+    "waited": 0.84,
+    "n_ok": 6
+   }
+  },
+  {
+   "t": 2.92,
+   "name": "vs_closed",
+   "data": {
+    "c": "[-0.41, 1.76, 18.49]",
+    "tid": 2
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 61.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 18.68,
+  "commit_t": -1.0,
+  "vs_hold_ticks": 35.0,
+  "vs_desc_timeout": 0.0,
+  "vs_frames": 85.0,
+  "vs_det_s": 2.9362048998009413,
+  "vs_fallback": 0.0,
+  "vs_wait_ticks": 42.0,
+  "vs_auth_timeout": 0.0,
+  "vs_align_ticks": 87.0,
+  "vs_blind_ticks": 54.0,
+  "v2_catch_ticks": 8.0,
+  "v2_catch_open_ticks": 7.0,
+  "v2_holds": 1.0,
+  "v2_pause_ticks": 0.0,
+  "ik_fail_first": "{'p': [177.2, -206.1, 59.2], 'yaw': -2.4, 'pos_err_mm': 0.0, 'q': [60.2, 23.8, -25.9, 92.1, 60.6], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 5.12,
+ "gt_success_obj": "mug29",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt",
+  "plate31.a",
+  "plate31.b",
+  "plate31.z",
+  "plate31.yaw",
+  "plate31.tilt"
+ ],
+ "ms_step_p50": 7.305701030418277,
+ "ms_step_p95": 74.33856278657913,
+ "n_steps": 1001,
+ "wall_s": 182.64,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 74.25
+}

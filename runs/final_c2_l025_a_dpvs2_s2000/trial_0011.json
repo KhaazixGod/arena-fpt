@@ -1,0 +1,190 @@
+{
+ "trial_id": 11,
+ "method": "REMOTE:DPVS2_S2000_l025a",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_012",
+ "speed_mm_s": 37.5,
+ "L": 0.25,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring28",
+   "a_mm": -150.0,
+   "b_mm": -235.7,
+   "yaw_deg": 48.6
+  },
+  {
+   "name": "plate30",
+   "a_mm": -210.2,
+   "b_mm": -213.4,
+   "yaw_deg": 29.7
+  },
+  {
+   "name": "plate31",
+   "a_mm": -293.0,
+   "b_mm": -205.7,
+   "yaw_deg": 229.7
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "ring28",
+  "t_success_s": 4.56,
+  "t_detect_s": null,
+  "t_lift_s": 2.42,
+  "details": {
+   "moved_others_mm": {
+    "plate30": 0.0,
+    "plate31": 0.0
+   }
+  }
+ },
+ "outcome": "dpvs_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DPVS"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DPVS",
+   "data": {
+    "ckpt": "runs/dp_w_s2000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100,
+    "vs": "{'off': False, 'lam_max': 1.0, 'kxy': 3.0, 'kyaw': 3.0, 'use_yaw': True, 'yaw_aspect_min': 1.3, 'r_align': 40.0, 'ramp_s': 0.3, 'gate_mm': 25.0, 'grasp_z_margin': 15.0, 'desc': True, 'eps_desc_xy': 8.0, 'eps_desc_yaw': 30.0, 'n_hold_desc': 4, 't_desc_max': 1.0, 'vsat': 80.0, 'wsat': 90.0, 'cmax': 30.0, 'cpsimax': 60.0, 'auth': True, 'eps_xy': 3.0, 'eps_yaw': 15.0, 'n_hold': 6, 't_hold_max': 1.0, 'close_cmd_thr': 20.0, 'closed_meas_thr': 25.0}",
+    "vs2": "{'vdesc': 250.0, 'hold_open': True, 'mode': 'rate'}"
+   }
+  },
+  {
+   "t": 1.18,
+   "name": "vs_track",
+   "data": {
+    "tid": 1,
+    "d_ref": 9.1,
+    "xy": "[235.6, -146.3]"
+   }
+  },
+  {
+   "t": 1.18,
+   "name": "vs_phase:ALIGN",
+   "data": {
+    "e_xy": 16.77,
+    "e_psi": -36.7,
+    "iso": true
+   }
+  },
+  {
+   "t": 1.48,
+   "name": "vs_desc_ok",
+   "data": {
+    "waited": 0.08,
+    "exy": 6.51,
+    "epsi": -36.6
+   }
+  },
+  {
+   "t": 2.0,
+   "name": "vs_auth",
+   "data": {
+    "waited": 0.1,
+    "n_ok": 6
+   }
+  },
+  {
+   "t": 17.04,
+   "name": "vs_closed",
+   "data": {
+    "c": "[0.0, 0.0, 0.0]",
+    "tid": 1
+   }
+  },
+  {
+   "t": 17.28,
+   "name": "vs_auth",
+   "data": {
+    "waited": 0.1,
+    "n_ok": 6
+   }
+  },
+  {
+   "t": 17.4,
+   "name": "vs_closed",
+   "data": {
+    "c": "[0.0, 0.0, 0.0]",
+    "tid": null
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 191.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": 16.18,
+  "commit_t": -1.0,
+  "vs_hold_ticks": 4.0,
+  "vs_desc_timeout": 0.0,
+  "vs_frames": 517.0,
+  "vs_det_s": 17.289007199229673,
+  "vs_fallback": 0.0,
+  "vs_wait_ticks": 10.0,
+  "vs_auth_timeout": 0.0,
+  "vs_align_ticks": 204.0,
+  "vs_blind_ticks": 67.0,
+  "v2_catch_ticks": 5.0,
+  "v2_catch_open_ticks": 0.0,
+  "v2_holds": 1.0,
+  "v2_pause_ticks": 0.0,
+  "ik_fail_first": "{'p': [177.9, -206.3, 58.8], 'yaw': -2.7, 'pos_err_mm': 0.0, 'q': [60.0, 24.1, -26.2, 92.1, 60.1], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.54,
+ "gt_success_obj": "ring28",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring28.a",
+  "ring28.b",
+  "ring28.z",
+  "ring28.yaw",
+  "ring28.tilt",
+  "plate30.a",
+  "plate30.b",
+  "plate30.z",
+  "plate30.yaw",
+  "plate30.tilt",
+  "plate31.a",
+  "plate31.b",
+  "plate31.z",
+  "plate31.yaw",
+  "plate31.tilt"
+ ],
+ "ms_step_p50": 42.38394182175398,
+ "ms_step_p95": 94.73185800015926,
+ "n_steps": 1001,
+ "wall_s": 213.23,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 73.84
+}

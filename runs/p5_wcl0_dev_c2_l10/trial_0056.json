@@ -1,0 +1,177 @@
+{
+ "trial_id": 56,
+ "method": "CL0_W",
+ "cell": "dev_C2",
+ "arrangement_id": "dev_C2_057",
+ "speed_mm_s": 150.0,
+ "L": 1.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box25",
+   "a_mm": -150.0,
+   "b_mm": -226.4,
+   "yaw_deg": 174.9
+  },
+  {
+   "name": "mug24",
+   "a_mm": -207.5,
+   "b_mm": -212.8,
+   "yaw_deg": 179.6
+  },
+  {
+   "name": "l23",
+   "a_mm": -274.9,
+   "b_mm": -192.8,
+   "yaw_deg": 34.4
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "timing",
+  "target": "box25",
+  "t_success_s": null,
+  "t_detect_s": 0.18,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "box25": 0.0,
+    "mug24": 0.0,
+    "l23": 0.7
+   },
+   "max_lift_target_mm": -0.0,
+   "select_err_mm": 1.7,
+   "estimate_err_mm": 1.4
+  }
+ },
+ "outcome": "late",
+ "finished": true,
+ "t_end_s": 3.48,
+ "phases": [
+  [
+   0.18,
+   "APPROACH"
+  ],
+  [
+   1.36,
+   "RELEASE"
+  ],
+  [
+   1.98,
+   "RETURN"
+  ],
+  [
+   3.48,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.18,
+   "name": "select",
+   "data": {
+    "tid": 1,
+    "a_b": -149.0,
+    "b": -225.0,
+    "theta": 88.45167887189535,
+    "width": 36.0,
+    "std": 0.0
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "w1_branch",
+   "data": {
+    "k0": -1,
+    "k": 0,
+    "switched": true,
+    "at_risk": true,
+    "m0": 0,
+    "th_plan": 88.45,
+    "ttv": "{'-2': 0.0, '-1': 0.5, '0': 2.5}",
+    "why": "{'-2': 'roll', '-1': 'roll', '0': 'joint'}",
+    "h5_min": "{'-2': -256.14, '-1': -64.98, '0': 68.51}",
+    "q5_span": "{'-2': [-410.35, -268.72], '-1': [-219.19, -88.72], '0': [-50.35, 91.28]}",
+    "v_now": 8.09,
+    "v_cmd": 150.0,
+    "ms": 1295.21
+   }
+  },
+  {
+   "t": 0.18,
+   "name": "phase:APPROACH",
+   "data": {}
+  },
+  {
+   "t": 0.7,
+   "name": "freeze",
+   "data": {
+    "est": "(-149.80328604854623, -225.0, 86.58335698335448)"
+   }
+  },
+  {
+   "t": 1.36,
+   "name": "abort",
+   "data": {
+    "reason": "late: v\u1eadt s\u1eafp ra kh\u1ecfi v\u00f9ng v\u1edbi t\u1edbi tr\u01b0\u1edbc khi nh\u1ea5c xong"
+   }
+  },
+  {
+   "t": 1.36,
+   "name": "phase:RELEASE",
+   "data": {}
+  },
+  {
+   "t": 1.98,
+   "name": "phase:RETURN",
+   "data": {}
+  },
+  {
+   "t": 3.48,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "frames": 38.0,
+  "reject_wide": 0.0,
+  "reject_other": 26.0,
+  "n_ok_dets": 63.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box25.a",
+  "box25.b",
+  "box25.z",
+  "box25.yaw",
+  "box25.tilt",
+  "mug24.a",
+  "mug24.b",
+  "mug24.z",
+  "mug24.yaw",
+  "mug24.tilt",
+  "l23.a",
+  "l23.b",
+  "l23.z",
+  "l23.yaw",
+  "l23.tilt"
+ ],
+ "ms_step_p50": 0.6472020177170634,
+ "ms_step_p95": 38.547480193665244,
+ "n_steps": 175,
+ "wall_s": 28.0,
+ "method_exception": null,
+ "renders": 104,
+ "render_wall_s": 11.09
+}

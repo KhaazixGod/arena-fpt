@@ -1,0 +1,127 @@
+{
+ "trial_id": 15,
+ "method": "REMOTE:DP_W_S2000_l05b",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_076",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "plate31",
+   "a_mm": -297.4,
+   "b_mm": -220.4,
+   "yaw_deg": 105.9
+  },
+  {
+   "name": "mug29",
+   "a_mm": -215.7,
+   "b_mm": -216.2,
+   "yaw_deg": 137.4
+  },
+  {
+   "name": "t34",
+   "a_mm": -149.99999999999997,
+   "b_mm": -200.0,
+   "yaw_deg": 70.7
+  },
+  {
+   "name": "ring28",
+   "a_mm": -360.59999999999997,
+   "b_mm": -224.2,
+   "yaw_deg": 135.1
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "t34",
+  "t_success_s": 5.0,
+  "t_detect_s": null,
+  "t_lift_s": 2.84,
+  "details": {
+   "moved_others_mm": {
+    "plate31": 0.0,
+    "mug29": 0.0,
+    "ring28": 0.3
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s2000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.98,
+ "gt_success_obj": "t34",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "plate31.a",
+  "plate31.b",
+  "plate31.z",
+  "plate31.yaw",
+  "plate31.tilt",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt",
+  "ring28.a",
+  "ring28.b",
+  "ring28.z",
+  "ring28.yaw",
+  "ring28.tilt"
+ ],
+ "ms_step_p50": 6.641371175646782,
+ "ms_step_p95": 19.205405144020915,
+ "n_steps": 1001,
+ "wall_s": 171.38,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 73.47
+}

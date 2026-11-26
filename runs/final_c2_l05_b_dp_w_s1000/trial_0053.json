@@ -1,0 +1,127 @@
+{
+ "trial_id": 53,
+ "method": "REMOTE:DP_W_S1000_l05b",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_114",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "box35",
+   "a_mm": -150.0,
+   "b_mm": -210.3,
+   "yaw_deg": 310.0
+  },
+  {
+   "name": "cyl36",
+   "a_mm": -207.1,
+   "b_mm": -238.6,
+   "yaw_deg": 327.9
+  },
+  {
+   "name": "t34",
+   "a_mm": -259.7,
+   "b_mm": -212.8,
+   "yaw_deg": 179.3
+  },
+  {
+   "name": "u27",
+   "a_mm": -341.4,
+   "b_mm": -219.6,
+   "yaw_deg": 236.2
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "box35",
+  "t_success_s": 4.86,
+  "t_detect_s": null,
+  "t_lift_s": 2.74,
+  "details": {
+   "moved_others_mm": {
+    "cyl36": 0.0,
+    "t34": 0.4,
+    "u27": 0.3
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s1000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.84,
+ "gt_success_obj": "box35",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt",
+  "u27.a",
+  "u27.b",
+  "u27.z",
+  "u27.yaw",
+  "u27.tilt"
+ ],
+ "ms_step_p50": 6.428955122828484,
+ "ms_step_p95": 18.838716903701425,
+ "n_steps": 1001,
+ "wall_s": 170.98,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 74.5
+}

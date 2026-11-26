@@ -1,0 +1,111 @@
+{
+ "trial_id": 257,
+ "method": "TASK_EXPERT",
+ "cell": "train_T",
+ "arrangement_id": "train_T_place_T_B_08",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t17",
+   "a_mm": -44.4,
+   "b_mm": -213.7,
+   "yaw_deg": 310.6
+  },
+  {
+   "name": "box01",
+   "a_mm": 13.8,
+   "b_mm": -176.7,
+   "yaw_deg": 188.7
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "T",
+  "param": "B",
+  "text": "put the T in zone B",
+  "id": "place:T:B",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   -1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "t17",
+  "t_success_s": 6.52,
+  "t_detect_s": null,
+  "t_lift_s": 2.72,
+  "details": {
+   "max_lift_mm": 43.5,
+   "max_tilt_deg": 1.5,
+   "final_disp_mm": 53.3,
+   "final_along_mm": 53.0,
+   "final_lateral_mm": 5.5,
+   "final_zone_err_mm": 16.1,
+   "moved_others_mm": {
+    "box01": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 7.1,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "place:T:B",
+    "target": "t17",
+    "n_seg": 9
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t17.a",
+  "t17.b",
+  "t17.z",
+  "t17.yaw",
+  "t17.tilt",
+  "box01.a",
+  "box01.b",
+  "box01.z",
+  "box01.yaw",
+  "box01.tilt"
+ ],
+ "ms_step_p50": 0.6584169459529221,
+ "ms_step_p95": 1.793952047592029,
+ "n_steps": 356,
+ "wall_s": 53.19,
+ "method_exception": null,
+ "renders": 213,
+ "render_wall_s": 24.37
+}

@@ -1,0 +1,111 @@
+{
+ "trial_id": 333,
+ "method": "TASK_EXPERT",
+ "cell": "train_T",
+ "arrangement_id": "train_T_place_ring_A_09",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "ring20",
+   "a_mm": -43.3,
+   "b_mm": -194.0,
+   "yaw_deg": 113.1
+  },
+  {
+   "name": "cyl08",
+   "a_mm": -108.8,
+   "b_mm": -176.2,
+   "yaw_deg": 358.1
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "ring",
+  "param": "A",
+  "text": "put the ring in zone A",
+  "id": "place:ring:A",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "knocked_over",
+  "target": "ring20",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": 2.82,
+  "details": {
+   "max_lift_mm": 49.1,
+   "max_tilt_deg": 97.9,
+   "final_disp_mm": 41.8,
+   "final_along_mm": 31.0,
+   "final_lateral_mm": 28.1,
+   "final_zone_err_mm": 54.0,
+   "moved_others_mm": {
+    "cyl08": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 7.38,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "place:ring:A",
+    "target": "ring20",
+    "n_seg": 9
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 5.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "ring20.a",
+  "ring20.b",
+  "ring20.z",
+  "ring20.yaw",
+  "ring20.tilt",
+  "cyl08.a",
+  "cyl08.b",
+  "cyl08.z",
+  "cyl08.yaw",
+  "cyl08.tilt"
+ ],
+ "ms_step_p50": 0.6464174948632717,
+ "ms_step_p95": 84.26038558245638,
+ "n_steps": 370,
+ "wall_s": 59.52,
+ "method_exception": null,
+ "renders": 221,
+ "render_wall_s": 24.61
+}

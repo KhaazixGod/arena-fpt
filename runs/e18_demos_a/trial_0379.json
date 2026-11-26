@@ -1,0 +1,110 @@
+{
+ "trial_id": 379,
+ "method": "TASK_EXPERT",
+ "cell": "train_T",
+ "arrangement_id": "train_T_pull_box_robot_05",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twbox38",
+   "a_mm": -29.6,
+   "b_mm": -234.4,
+   "yaw_deg": 323.6
+  },
+  {
+   "name": "l13",
+   "a_mm": 33.3,
+   "b_mm": -188.2,
+   "yaw_deg": 246.2
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "box",
+  "param": "robot",
+  "text": "drag the box toward the robot without lifting it",
+  "id": "pull:box:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "twbox38",
+  "t_success_s": 5.3,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.9,
+   "max_tilt_deg": 6.0,
+   "final_disp_mm": 66.0,
+   "final_along_mm": 65.2,
+   "final_lateral_mm": 10.5,
+   "moved_others_mm": {
+    "l13": 0.4
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.88,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:box:robot",
+    "target": "twbox38",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twbox38.a",
+  "twbox38.b",
+  "twbox38.z",
+  "twbox38.yaw",
+  "twbox38.tilt",
+  "l13.a",
+  "l13.b",
+  "l13.z",
+  "l13.yaw",
+  "l13.tilt"
+ ],
+ "ms_step_p50": 0.592131051234901,
+ "ms_step_p95": 1.8732492928393187,
+ "n_steps": 295,
+ "wall_s": 29.45,
+ "method_exception": null,
+ "renders": 176,
+ "render_wall_s": 12.34
+}

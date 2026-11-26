@@ -1,0 +1,110 @@
+{
+ "trial_id": 115,
+ "method": "TASK_EXPERT",
+ "cell": "train_T",
+ "arrangement_id": "train_T_pull_L_robot_16",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "l14",
+   "a_mm": -26.9,
+   "b_mm": -233.1,
+   "yaw_deg": 221.5
+  },
+  {
+   "name": "mug19",
+   "a_mm": -92.3,
+   "b_mm": -193.7,
+   "yaw_deg": 124.4
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "L",
+  "param": "robot",
+  "text": "drag the L toward the robot without lifting it",
+  "id": "pull:L:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "short",
+  "target": "l14",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.4,
+   "max_tilt_deg": 1.4,
+   "final_disp_mm": 36.0,
+   "final_along_mm": 34.3,
+   "final_lateral_mm": 11.1,
+   "moved_others_mm": {
+    "mug19": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.92,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:L:robot",
+    "target": "l14",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "l14.a",
+  "l14.b",
+  "l14.z",
+  "l14.yaw",
+  "l14.tilt",
+  "mug19.a",
+  "mug19.b",
+  "mug19.z",
+  "mug19.yaw",
+  "mug19.tilt"
+ ],
+ "ms_step_p50": 0.5755550228059292,
+ "ms_step_p95": 1.862861239351332,
+ "n_steps": 297,
+ "wall_s": 44.98,
+ "method_exception": null,
+ "renders": 177,
+ "render_wall_s": 19.34
+}

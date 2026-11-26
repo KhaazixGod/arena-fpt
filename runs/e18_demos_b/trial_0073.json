@@ -1,0 +1,110 @@
+{
+ "trial_id": 73,
+ "method": "TASK_EXPERT",
+ "cell": "train_T",
+ "arrangement_id": "train_T_pull_cyl_robot_24",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twcyl41",
+   "a_mm": -38.0,
+   "b_mm": -235.9,
+   "yaw_deg": 75.2
+  },
+  {
+   "name": "mug18",
+   "a_mm": 38.8,
+   "b_mm": -214.1,
+   "yaw_deg": 316.1
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "cyl",
+  "param": "robot",
+  "text": "drag the cyl toward the robot without lifting it",
+  "id": "pull:cyl:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "twcyl41",
+  "t_success_s": 5.3,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.9,
+   "max_tilt_deg": 4.1,
+   "final_disp_mm": 46.5,
+   "final_along_mm": 44.2,
+   "final_lateral_mm": 14.6,
+   "moved_others_mm": {
+    "mug18": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.9,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:cyl:robot",
+    "target": "twcyl41",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twcyl41.a",
+  "twcyl41.b",
+  "twcyl41.z",
+  "twcyl41.yaw",
+  "twcyl41.tilt",
+  "mug18.a",
+  "mug18.b",
+  "mug18.z",
+  "mug18.yaw",
+  "mug18.tilt"
+ ],
+ "ms_step_p50": 0.6240505026653409,
+ "ms_step_p95": 2.0427707640919834,
+ "n_steps": 296,
+ "wall_s": 46.96,
+ "method_exception": null,
+ "renders": 177,
+ "render_wall_s": 20.75
+}

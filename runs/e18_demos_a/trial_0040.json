@@ -1,0 +1,110 @@
+{
+ "trial_id": 40,
+ "method": "TASK_EXPERT",
+ "cell": "train_T",
+ "arrangement_id": "train_T_pick_cyl_16",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "twcyl42",
+   "a_mm": -39.1,
+   "b_mm": -197.1,
+   "yaw_deg": 144.9
+  },
+  {
+   "name": "mug19",
+   "a_mm": 37.1,
+   "b_mm": -222.5,
+   "yaw_deg": 62.0
+  }
+ ],
+ "task": {
+  "family": "pick",
+  "cat": "cyl",
+  "param": "",
+  "text": "pick up the cyl and hold it",
+  "id": "pick:cyl",
+  "vec": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "twcyl42",
+  "t_success_s": 4.44,
+  "t_detect_s": null,
+  "t_lift_s": 2.3,
+  "details": {
+   "max_lift_mm": 41.2,
+   "max_tilt_deg": 8.6,
+   "final_disp_mm": 19.8,
+   "final_along_mm": 0.0,
+   "final_lateral_mm": 0.0,
+   "moved_others_mm": {
+    "mug19": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.06,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pick:cyl",
+    "target": "twcyl42",
+    "n_seg": 5
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.42,
+ "gt_success_obj": "twcyl42",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "twcyl42.a",
+  "twcyl42.b",
+  "twcyl42.z",
+  "twcyl42.yaw",
+  "twcyl42.tilt",
+  "mug19.a",
+  "mug19.b",
+  "mug19.z",
+  "mug19.yaw",
+  "mug19.tilt"
+ ],
+ "ms_step_p50": 0.6079784943722188,
+ "ms_step_p95": 2.068627526750788,
+ "n_steps": 254,
+ "wall_s": 46.6,
+ "method_exception": null,
+ "renders": 151,
+ "render_wall_s": 21.32
+}

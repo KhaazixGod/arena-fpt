@@ -1,0 +1,111 @@
+{
+ "trial_id": 295,
+ "method": "TASK_EXPERT",
+ "cell": "train_T",
+ "arrangement_id": "train_T_place_mug_A_21",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug19",
+   "a_mm": -44.7,
+   "b_mm": -195.7,
+   "yaw_deg": 59.9
+  },
+  {
+   "name": "cyl10",
+   "a_mm": -108.4,
+   "b_mm": -220.7,
+   "yaw_deg": 27.7
+  }
+ ],
+ "task": {
+  "family": "place",
+  "cat": "mug",
+  "param": "A",
+  "text": "put the mug in zone A",
+  "id": "place:mug:A",
+  "vec": [
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "mug19",
+  "t_success_s": 6.32,
+  "t_detect_s": null,
+  "t_lift_s": 2.48,
+  "details": {
+   "max_lift_mm": 39.9,
+   "max_tilt_deg": 11.2,
+   "final_disp_mm": 79.0,
+   "final_along_mm": 77.6,
+   "final_lateral_mm": 14.6,
+   "final_zone_err_mm": 9.5,
+   "moved_others_mm": {
+    "cyl10": 0.0
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 6.9,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "place:mug:A",
+    "target": "mug19",
+    "n_seg": 9
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug19.a",
+  "mug19.b",
+  "mug19.z",
+  "mug19.yaw",
+  "mug19.tilt",
+  "cyl10.a",
+  "cyl10.b",
+  "cyl10.z",
+  "cyl10.yaw",
+  "cyl10.tilt"
+ ],
+ "ms_step_p50": 0.6839325069449842,
+ "ms_step_p95": 1.894651009934023,
+ "n_steps": 346,
+ "wall_s": 53.3,
+ "method_exception": null,
+ "renders": 207,
+ "render_wall_s": 24.97
+}

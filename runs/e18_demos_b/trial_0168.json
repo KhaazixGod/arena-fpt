@@ -1,0 +1,110 @@
+{
+ "trial_id": 168,
+ "method": "TASK_EXPERT",
+ "cell": "train_T",
+ "arrangement_id": "train_T_pull_T_robot_19",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t16",
+   "a_mm": -52.0,
+   "b_mm": -232.5,
+   "yaw_deg": 146.0
+  },
+  {
+   "name": "box02",
+   "a_mm": 36.3,
+   "b_mm": -223.5,
+   "yaw_deg": 89.9
+  }
+ ],
+ "task": {
+  "family": "pull",
+  "cat": "T",
+  "param": "robot",
+  "text": "drag the T toward the robot without lifting it",
+  "id": "pull:T:robot",
+  "vec": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "t16",
+  "t_success_s": 5.18,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "max_lift_mm": 0.9,
+   "max_tilt_deg": 2.8,
+   "final_disp_mm": 44.8,
+   "final_along_mm": 41.7,
+   "final_lateral_mm": 16.3,
+   "moved_others_mm": {
+    "box02": 0.1
+   }
+  }
+ },
+ "outcome": "done",
+ "finished": true,
+ "t_end_s": 5.76,
+ "phases": [],
+ "events": [
+  {
+   "t": 0.1,
+   "name": "plan",
+   "data": {
+    "task": "pull:T:robot",
+    "target": "t16",
+    "n_seg": 7
+   }
+  }
+ ],
+ "diag": {
+  "ik_fail_ticks": 0.0
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t16.a",
+  "t16.b",
+  "t16.z",
+  "t16.yaw",
+  "t16.tilt",
+  "box02.a",
+  "box02.b",
+  "box02.z",
+  "box02.yaw",
+  "box02.tilt"
+ ],
+ "ms_step_p50": 0.5937009118497372,
+ "ms_step_p95": 1.8650973215699196,
+ "n_steps": 289,
+ "wall_s": 43.76,
+ "method_exception": null,
+ "renders": 172,
+ "render_wall_s": 19.38
+}

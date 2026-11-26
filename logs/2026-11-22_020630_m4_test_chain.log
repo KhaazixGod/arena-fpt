@@ -1,0 +1,131 @@
+02:06:34 waiting for the GPU (arena.run_arena or another arena-* unit is running)
+02:06:34 GPU free
+2026-11-22 02:06:34 M4 TEST start: HEAD 65a263a31e60a81dad842b06d4246ef717b67d0a, lock 26a142909c69de4b038dc50bb7813ba68151112d
+02:06:36 m4_test_dp_w_s1000 attempt 1, have 0/60
+04:03:07 m4_test_dp_w_s1000 run_arena exit 0 now 60/60
+04:03:12 m4_test_dp_w_s1000 complete (60/60 valid)
+  valid=0 rows: 0/60
+04:03:17 m4_test_dpvs_s1000 attempt 1, have 0/60
+06:05:48 m4_test_dpvs_s1000 run_arena exit 0 now 60/60
+06:05:53 m4_test_dpvs_s1000 complete (60/60 valid)
+  valid=0 rows: 0/60
+06:05:58 m4_test_dp_w_s2000 attempt 1, have 0/60
+08:01:59 m4_test_dp_w_s2000 run_arena exit 0 now 60/60
+08:02:04 m4_test_dp_w_s2000 complete (60/60 valid)
+  valid=0 rows: 0/60
+08:02:09 m4_test_dpvs_s2000 attempt 1, have 0/60
+10:04:10 m4_test_dpvs_s2000 run_arena exit 0 now 60/60
+10:04:15 m4_test_dpvs_s2000 complete (60/60 valid)
+  valid=0 rows: 0/60
+10:04:20 m4_test_dp_w_s3000 attempt 1, have 0/60
+12:01:51 m4_test_dp_w_s3000 run_arena exit 0 now 60/60
+12:01:57 m4_test_dp_w_s3000 complete (60/60 valid)
+  valid=0 rows: 0/60
+12:02:02 m4_test_dpvs_s3000 attempt 1, have 0/60
+14:05:03 m4_test_dpvs_s3000 run_arena exit 0 now 60/60
+14:05:08 m4_test_dpvs_s3000 complete (60/60 valid)
+  valid=0 rows: 0/60
+{
+ "gain_required_points": 10.0,
+ "per_seed": {
+  "1000": {
+   "m3": 28,
+   "m4": 29,
+   "gained": 14,
+   "lost": 13,
+   "p_two_sided": 1.0,
+   "p_one_sided": 0.5
+  },
+  "2000": {
+   "m3": 28,
+   "m4": 35,
+   "gained": 17,
+   "lost": 10,
+   "p_two_sided": 0.24778856337070465,
+   "p_one_sided": 0.12389428168535233
+  },
+  "3000": {
+   "m3": 26,
+   "m4": 31,
+   "gained": 13,
+   "lost": 8,
+   "p_two_sided": 0.38331031799316406,
+   "p_one_sided": 0.19165515899658203
+  }
+ },
+ "pooled": {
+  "m3": 82,
+  "m4": 95,
+  "n": 180,
+  "m3_ci": [
+   38.4,
+   52.8
+  ],
+  "m4_ci": [
+   45.5,
+   59.9
+  ]
+ },
+ "H1": {
+  "mean_gain_points": 7.22,
+  "better": 24,
+  "worse": 15,
+  "ties": 21,
+  "p_one_sided": 0.10981890181098189,
+  "supported": false
+ },
+ "descriptive": {
+  "dp_w": {
+   "failures": {
+    "collision": 54,
+    "other": 44
+   },
+   "offset_med_success": 4.27,
+   "offset_med_failed": 4.85,
+   "n_success": 79,
+   "n_failed": 98,
+   "yaw_dev_med_success": 28.8,
+   "yaw_dev_med_failed": 52.86,
+   "yaw_n_success": 18,
+   "yaw_n_failed": 72
+  },
+  "dpvs": {
+   "failures": {
+    "collision": 66,
+    "other": 19
+   },
+   "offset_med_success": 3.43,
+   "offset_med_failed": 9.7,
+   "n_success": 94,
+   "n_failed": 84,
+   "yaw_dev_med_success": 7.36,
+   "yaw_dev_med_failed": 16.92,
+   "yaw_n_success": 45,
+   "yaw_n_failed": 43
+  }
+ },
+ "corrector_diag": {
+  "1000": {
+   "vs_align_ticks": 4536.0,
+   "vs_blind_ticks": 4075.0,
+   "vs_wait_ticks": 1069.0,
+   "vs_auth_timeout": 7.0,
+   "vs_fallback": 35.0
+  },
+  "2000": {
+   "vs_align_ticks": 4111.0,
+   "vs_blind_ticks": 4171.0,
+   "vs_wait_ticks": 650.0,
+   "vs_auth_timeout": 0.0,
+   "vs_fallback": 115.0
+  },
+  "3000": {
+   "vs_align_ticks": 4322.0,
+   "vs_blind_ticks": 4306.0,
+   "vs_wait_ticks": 957.0,
+   "vs_auth_timeout": 6.0,
+   "vs_fallback": 25.0
+  }
+ }
+}
+2026-11-22 14:05:11 M4 TEST chain done

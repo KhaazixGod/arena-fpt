@@ -1,0 +1,127 @@
+{
+ "trial_id": 10,
+ "method": "REMOTE:DP_W_S3000_l0a",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_011",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl36",
+   "a_mm": 8.899999999999999,
+   "b_mm": -177.0,
+   "yaw_deg": 193.2
+  },
+  {
+   "name": "cyl33",
+   "a_mm": -25.4,
+   "b_mm": -229.8,
+   "yaw_deg": 213.6
+  },
+  {
+   "name": "mug29",
+   "a_mm": -47.9,
+   "b_mm": -179.7,
+   "yaw_deg": 151.8
+  },
+  {
+   "name": "ring28",
+   "a_mm": -88.9,
+   "b_mm": -219.9,
+   "yaw_deg": 51.1
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 0,
+  "fail_cause_auto": "",
+  "target": "cyl36",
+  "t_success_s": 8.92,
+  "t_detect_s": null,
+  "t_lift_s": 6.78,
+  "details": {
+   "moved_others_mm": {
+    "cyl33": 33.0,
+    "mug29": 0.0,
+    "ring28": 0.5
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s3000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": true,
+ "gt_success_t": 8.9,
+ "gt_success_obj": "cyl36",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt",
+  "cyl33.a",
+  "cyl33.b",
+  "cyl33.z",
+  "cyl33.yaw",
+  "cyl33.tilt",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt",
+  "ring28.a",
+  "ring28.b",
+  "ring28.z",
+  "ring28.yaw",
+  "ring28.tilt"
+ ],
+ "ms_step_p50": 6.046760128811002,
+ "ms_step_p95": 18.382713897153735,
+ "n_steps": 1001,
+ "wall_s": 160.81,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 69.58
+}

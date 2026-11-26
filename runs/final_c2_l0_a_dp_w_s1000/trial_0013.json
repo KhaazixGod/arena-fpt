@@ -1,0 +1,116 @@
+{
+ "trial_id": 13,
+ "method": "REMOTE:DP_W_S1000_l0a",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_014",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "mug29",
+   "a_mm": -46.849999999999994,
+   "b_mm": -222.4,
+   "yaw_deg": 285.7
+  },
+  {
+   "name": "box32",
+   "a_mm": 13.550000000000004,
+   "b_mm": -198.1,
+   "yaw_deg": 209.4
+  },
+  {
+   "name": "cyl36",
+   "a_mm": -93.55,
+   "b_mm": -182.3,
+   "yaw_deg": 312.7
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "box32",
+  "t_success_s": 4.78,
+  "t_detect_s": null,
+  "t_lift_s": 2.64,
+  "details": {
+   "moved_others_mm": {
+    "mug29": 0.0,
+    "cyl36": 0.0
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s1000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 1.0,
+  "ik_fail_ticks_lt6s": 1.0,
+  "ik_fail_first_t": 0.34,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [40.5, -116.2, 59.9], 'yaw': 88.1, 'pos_err_mm': 0.0, 'q': [88.4, -51.0, 49.0, 92.0, -0.7], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.76,
+ "gt_success_obj": "box32",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "mug29.a",
+  "mug29.b",
+  "mug29.z",
+  "mug29.yaw",
+  "mug29.tilt",
+  "box32.a",
+  "box32.b",
+  "box32.z",
+  "box32.yaw",
+  "box32.tilt",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt"
+ ],
+ "ms_step_p50": 6.117407931014895,
+ "ms_step_p95": 18.712444929406047,
+ "n_steps": 1001,
+ "wall_s": 172.36,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 74.67
+}

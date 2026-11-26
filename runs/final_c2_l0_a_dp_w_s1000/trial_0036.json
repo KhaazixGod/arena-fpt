@@ -1,0 +1,128 @@
+{
+ "trial_id": 36,
+ "method": "REMOTE:DP_W_S1000_l0a",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_037",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t34",
+   "a_mm": -66.15,
+   "b_mm": -195.9,
+   "yaw_deg": 123.9
+  },
+  {
+   "name": "plate31",
+   "a_mm": 6.6499999999999915,
+   "b_mm": -216.0,
+   "yaw_deg": 272.4
+  },
+  {
+   "name": "box35",
+   "a_mm": -140.45,
+   "b_mm": -203.3,
+   "yaw_deg": 72.0
+  },
+  {
+   "name": "ring28",
+   "a_mm": 60.44999999999999,
+   "b_mm": -176.4,
+   "yaw_deg": 221.7
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "ring28",
+  "t_success_s": 4.72,
+  "t_detect_s": null,
+  "t_lift_s": 2.58,
+  "details": {
+   "moved_others_mm": {
+    "t34": 0.5,
+    "plate31": 0.0,
+    "box35": 0.0
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s1000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 2.0,
+  "ik_fail_ticks_lt6s": 2.0,
+  "ik_fail_first_t": 0.5,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [38.9, -116.3, 60.6], 'yaw': -89.5, 'pos_err_mm': 0.01, 'q': [89.8, -51.0, 48.7, 92.3, 3.1], 'ok': True}"
+ },
+ "gt_success": true,
+ "gt_success_t": 4.7,
+ "gt_success_obj": "ring28",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt",
+  "plate31.a",
+  "plate31.b",
+  "plate31.z",
+  "plate31.yaw",
+  "plate31.tilt",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt",
+  "ring28.a",
+  "ring28.b",
+  "ring28.z",
+  "ring28.yaw",
+  "ring28.tilt"
+ ],
+ "ms_step_p50": 6.338967941701412,
+ "ms_step_p95": 19.350016955286264,
+ "n_steps": 1001,
+ "wall_s": 184.45,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 75.91
+}

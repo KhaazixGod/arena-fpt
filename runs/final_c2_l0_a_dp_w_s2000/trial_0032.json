@@ -1,0 +1,129 @@
+{
+ "trial_id": 32,
+ "method": "REMOTE:DP_W_S2000_l0a",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_033",
+ "speed_mm_s": 0.0,
+ "L": 0.0,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "cyl36",
+   "a_mm": -7.799999999999997,
+   "b_mm": -207.2,
+   "yaw_deg": 146.4
+  },
+  {
+   "name": "plate30",
+   "a_mm": 56.60000000000001,
+   "b_mm": -213.6,
+   "yaw_deg": 95.4
+  },
+  {
+   "name": "t34",
+   "a_mm": -66.69999999999999,
+   "b_mm": -204.6,
+   "yaw_deg": 71.0
+  },
+  {
+   "name": "box35",
+   "a_mm": -136.60000000000002,
+   "b_mm": -193.5,
+   "yaw_deg": 144.5
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 0,
+  "clean": 0,
+  "fail_cause_auto": "other",
+  "target": "",
+  "t_success_s": null,
+  "t_detect_s": null,
+  "t_lift_s": null,
+  "details": {
+   "moved_before_close_mm": {
+    "cyl36": 9.8,
+    "plate30": 2.3,
+    "t34": 2.1,
+    "box35": 0.1
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s2000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 4.0,
+  "ik_fail_ticks_lt6s": 4.0,
+  "ik_fail_first_t": 0.1,
+  "commit_t": -1.0,
+  "ik_fail_first": "{'p': [41.5, -115.2, 60.3], 'yaw': 87.2, 'pos_err_mm': 0.0, 'q': [87.5, -51.5, 49.1, 92.4, -2.5], 'ok': True}"
+ },
+ "gt_success": false,
+ "gt_success_t": null,
+ "gt_success_obj": null,
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "cyl36.a",
+  "cyl36.b",
+  "cyl36.z",
+  "cyl36.yaw",
+  "cyl36.tilt",
+  "plate30.a",
+  "plate30.b",
+  "plate30.z",
+  "plate30.yaw",
+  "plate30.tilt",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt",
+  "box35.a",
+  "box35.b",
+  "box35.z",
+  "box35.yaw",
+  "box35.tilt"
+ ],
+ "ms_step_p50": 6.307859905064106,
+ "ms_step_p95": 19.339737948030233,
+ "n_steps": 1001,
+ "wall_s": 164.32,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 75.53
+}

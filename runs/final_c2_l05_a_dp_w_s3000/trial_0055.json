@@ -1,0 +1,127 @@
+{
+ "trial_id": 55,
+ "method": "REMOTE:DP_W_S3000_l05a",
+ "cell": "test_C2",
+ "arrangement_id": "test_C2_056",
+ "speed_mm_s": 75.0,
+ "L": 0.5,
+ "rep": 0,
+ "placements": [
+  {
+   "name": "t34",
+   "a_mm": -266.5,
+   "b_mm": -202.8,
+   "yaw_deg": 301.4
+  },
+  {
+   "name": "cyl33",
+   "a_mm": -208.0,
+   "b_mm": -178.1,
+   "yaw_deg": 351.0
+  },
+  {
+   "name": "u27",
+   "a_mm": -150.0,
+   "b_mm": -216.9,
+   "yaw_deg": 161.0
+  },
+  {
+   "name": "plate30",
+   "a_mm": -342.0,
+   "b_mm": -221.2,
+   "yaw_deg": 359.7
+  }
+ ],
+ "task": null,
+ "label": {
+  "success": 1,
+  "clean": 1,
+  "fail_cause_auto": "",
+  "target": "u27",
+  "t_success_s": 4.74,
+  "t_detect_s": null,
+  "t_lift_s": 2.6,
+  "details": {
+   "moved_others_mm": {
+    "t34": 0.4,
+    "cyl33": 0.0,
+    "plate30": 0.0
+   }
+  }
+ },
+ "outcome": "dp_timeout",
+ "finished": true,
+ "t_end_s": 20.0,
+ "phases": [
+  [
+   0.0,
+   "DP_I2"
+  ],
+  [
+   20.0,
+   "DONE"
+  ]
+ ],
+ "events": [
+  {
+   "t": 0.0,
+   "name": "phase:DP_I2",
+   "data": {
+    "ckpt": "runs/dp_w_s3000/checkpoints/last/pretrained_model",
+    "replan": 32,
+    "infer_steps": 100
+   }
+  },
+  {
+   "t": 20.0,
+   "name": "phase:DONE",
+   "data": {}
+  }
+ ],
+ "diag": {
+  "plans": 19.0,
+  "ik_fail_ticks": 0.0,
+  "ik_fail_ticks_lt6s": 0.0,
+  "ik_fail_first_t": -1.0,
+  "commit_t": -1.0
+ },
+ "gt_success": true,
+ "gt_success_t": 4.74,
+ "gt_success_obj": "u27",
+ "gt_columns": [
+  "t",
+  "belt_s_gt",
+  "tcp_x",
+  "tcp_y",
+  "tcp_z",
+  "jaw_yaw",
+  "grip_pos",
+  "t34.a",
+  "t34.b",
+  "t34.z",
+  "t34.yaw",
+  "t34.tilt",
+  "cyl33.a",
+  "cyl33.b",
+  "cyl33.z",
+  "cyl33.yaw",
+  "cyl33.tilt",
+  "u27.a",
+  "u27.b",
+  "u27.z",
+  "u27.yaw",
+  "u27.tilt",
+  "plate30.a",
+  "plate30.b",
+  "plate30.z",
+  "plate30.yaw",
+  "plate30.tilt"
+ ],
+ "ms_step_p50": 6.678725127130747,
+ "ms_step_p95": 22.118753055110574,
+ "n_steps": 1001,
+ "wall_s": 192.3,
+ "method_exception": null,
+ "renders": 600,
+ "render_wall_s": 81.26
+}
